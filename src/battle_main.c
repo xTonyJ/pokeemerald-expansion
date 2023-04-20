@@ -63,6 +63,8 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
+#include "constants/spreads.h"
+
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -121,6 +123,7 @@ static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
 static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMonCustomized *partyEntry);
+u16 HasLevelEvolution(u16 species, u8 level);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -254,6 +257,7 @@ u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
 u8 gBattleControllerData[MAX_BATTLERS_COUNT]; // Used by the battle controllers to store misc sprite/task IDs for each battler
+
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
@@ -1969,6 +1973,7 @@ static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct Trai
     }
 }
 
+/*
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags)
 {
     u32 personalityValue;
@@ -2120,22 +2125,316 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
     return trainer->partySize;
 }
+*/
+
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
-    u8 retVal;
+    u32 nameHash = 0;
+    u32 personalityValue;
+    u8 fixedIV;
+    s32 i, j;
+    u8 monsCount;
+
+	/*
+    Dynamic values are always in range (1,100)
+    They will only be used if the normal level of opponent's mons is less than the average user level.
+    Opponents who have both custom moves AND held items will have dynamic range (5,100)
+    otherwise the opponents will have dynamic range (1,96)
+    */
+
+    u16 dynamicLevel = 0;
+	
+	// This is used to hold the level's of the player's strongest[1] and weakest[0] Pokemon
+	u8 LevelSpread[] = {0, 0};
+	
+	// This will be used when assigning the level of the opponent's Pokemon
+	u16 PartyLevelAdjust;
+    
+    // Change stuff like this to get the levels you want
+    static const u8 minDynamicLevel = 5;
+    static const u8 maxDynamicLevel = 98;
+    static const u8 levelDifference = 2;
+
+    // Calculates Average of your party's levels
+    for(i = 0; i < PARTY_SIZE; i++)
+    {
+        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+        {
+            if(i != 0)
+				dynamicLevel /= i;
+            break;
+        }
+        dynamicLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+		if(i == 0)
+		{
+			LevelSpread[0], LevelSpread[1] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+		}
+		else
+		{
+			u8 LevelCheck = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			if(LevelCheck < LevelSpread[0])
+				LevelSpread[0] = LevelCheck;
+			else if(LevelCheck > LevelSpread[1])
+				LevelSpread[1] = LevelCheck;
+		}
+    }
+    if(i == PARTY_SIZE)
+		dynamicLevel /= i;
+
+	/* The following is used to account for a player having one or two very weak Pokemon
+	   along with some very strong Pokemon. It weights the averaged level more towards the
+	   player's strongest Pokemon
+	*/
+	
+	PartyLevelAdjust = LevelSpread[1] - LevelSpread[0];
+	
+	if(LevelSpread[1] - dynamicLevel < 10)
+	{
+		PartyLevelAdjust = 0;
+	}
+    else if(LevelSpread[1] - dynamicLevel < 20)
+	{
+		PartyLevelAdjust /= 10;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 30)
+	{
+		PartyLevelAdjust /= 5;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 40)
+	{
+		PartyLevelAdjust *= 3;
+		PartyLevelAdjust /= 10;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 50)
+	{
+		PartyLevelAdjust *= 2;
+		PartyLevelAdjust /= 5;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 60)
+	{
+		PartyLevelAdjust /= 2;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 70)
+	{
+		PartyLevelAdjust *= 3;
+		PartyLevelAdjust /= 5;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 80)
+	{
+		PartyLevelAdjust *= 7;
+		PartyLevelAdjust /= 10;
+	}
+	else if(LevelSpread[1] - dynamicLevel < 90)
+	{
+		PartyLevelAdjust *= 4;
+		PartyLevelAdjust /= 5;
+	}
+
+    //Handling values to be always be in the range,
+    // ( minDynamiclevel-levelDifference , maxDynamiclevel+levelDifference )
+    if(dynamicLevel < minDynamicLevel) dynamicLevel = minDynamicLevel;
+    else if(dynamicLevel > maxDynamicLevel) dynamicLevel = maxDynamicLevel;
+
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-    retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags);
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
     {
+        if (firstTrainer == TRUE)
+            ZeroEnemyPartyMons();
+
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        {
+            if (gTrainers[trainerNum].partySize > 3)
+                monsCount = 3;
+            else
+                monsCount = gTrainers[trainerNum].partySize;
+        }
+        else
+        {
+            monsCount = gTrainers[trainerNum].partySize;
+        }
+
+		for (i = 0; i < monsCount; i++)
+        {
+			int rand_diff = Random() % 5;
+			switch(rand_diff)
+			{
+				case 0:
+					rand_diff = 2;
+					break;
+				case 1:
+					rand_diff = 1;
+					break;
+				case 2:
+					rand_diff = 0;
+					break;
+				case 3:
+					rand_diff = -1;
+					break;
+				case 4:
+					rand_diff = -2;
+			}
+			
+			dynamicLevel += rand_diff + PartyLevelAdjust;
+
+            if (gTrainers[trainerNum].doubleBattle == TRUE)
+                personalityValue = 0x80;
+            else if (gTrainers[trainerNum].encounterMusic_gender & 0x80)
+                personalityValue = 0x78;
+            else
+                personalityValue = 0x88;
+
+            for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
+                nameHash += gTrainers[trainerNum].trainerName[j];
+
+            switch (gTrainers[trainerNum].partyFlags)
+            {
+            case 0:
+            {
+                const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                if (partyData[i].lvl >= dynamicLevel)
+                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+				else
+				{
+					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					else
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }
+				break;
+            }
+            case F_TRAINER_PARTY_CUSTOM_MOVESET:
+            {
+                const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                if (partyData[i].lvl >= dynamicLevel)
+                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+				else
+				{
+					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					else
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }
+
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                }
+                break;
+            }
+            case F_TRAINER_PARTY_HELD_ITEM:
+            {
+                const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+               if (partyData[i].lvl >= dynamicLevel)
+                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+				else
+				{
+					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					else
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }
+
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                break;
+            }
+            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM: //Scaling trainers may evolve pokemon during boss encounters, fix later
+            {
+                const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+
+                personalityValue += nameHash << 8;
+                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
+                if (dynamicLevel + partyData[i].lvl > 100)
+                {
+                    dynamicLevel = 100;
+                }
+				else if (dynamicLevel + partyData[i].lvl < 1)
+                {
+                    dynamicLevel = 1;
+                }
+                else
+                {
+                    dynamicLevel = dynamicLevel + partyData[i].lvl;
+                }
+				{
+					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					else
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }
+
+                SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
+
+                // Set IVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
+                for (j = 0; j < 6; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
+                }
+
+                // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
+                // Separate loops so that difficulty is not checked in each loop. Will implement later if I make a hard mode
+                /*if (difficultySetting > DIFFICULTY_NORMAL)
+                {
+                    for (j = 0; j < 6; j++)
+                    {
+                        SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
+                    }
+                }*/
+
+                CalculateMonStats(&party[i]);
+
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                }
+                // Set max friendship if trainer mon knows Return
+                /*if (MonKnowsMove(&party[i], MOVE_RETURN))
+                {
+                    friendship = MAX_FRIENDSHIP;
+                    SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
+                }
+                break;*/
+            }
+            }
+			dynamicLevel -= rand_diff + PartyLevelAdjust;
+        }
+
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
-    return retVal;
+
+    return gTrainers[trainerNum].partySize;
 }
+
+
 
 void VBlankCB_Battle(void)
 {
@@ -4669,14 +4968,6 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     speed *= gStatStageRatios[gBattleMons[battlerId].statStages[STAT_SPEED]][0];
     speed /= gStatStageRatios[gBattleMons[battlerId].statStages[STAT_SPEED]][1];
 
-    // player's badge boost
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
-        && ShouldGetStatBadgeBoost(FLAG_BADGE03_GET, battlerId)
-        && GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-    {
-        speed = (speed * 110) / 100;
-    }
-
     // item effects
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE || holdEffect == HOLD_EFFECT_POWER_ITEM)
         speed /= 2;
@@ -5725,4 +6016,16 @@ bool32 IsWildMonSmart(void)
 #else
     return FALSE;
 #endif
+}
+
+u16 HasLevelEvolution(u16 species, u8 level)
+{
+	if(gEvolutionTable[species][0].param && gEvolutionTable[species][0].param <= level)
+	{
+		if(HasLevelEvolution(gEvolutionTable[species][0].targetSpecies, level))
+			return HasLevelEvolution(gEvolutionTable[species][0].targetSpecies, level);
+		else
+			return gEvolutionTable[species][0].targetSpecies;
+	}
+	return 0;
 }

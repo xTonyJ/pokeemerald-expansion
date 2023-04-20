@@ -12,6 +12,26 @@ OldaleTown_Mart_EventScript_Clerk::
 	release
 	end
 
+OldaleTown_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart OldaleTown_Mart_Pokemart_2
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end	
+
+	.align 2
+OldaleTown_Mart_Pokemart_2:
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_LEAF_STONE
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_NONE
+	release
+	end
+	
 	.align 2
 OldaleTown_Mart_Pokemart_Basic:
 	.2byte ITEM_POTION

@@ -5090,8 +5090,7 @@ static void Task_LearnedMove(u8 taskId)
     if (move[1] == 0)
     {
         AdjustFriendship(mon, FRIENDSHIP_EVENT_LEARN_TMHM);
-        if (item < ITEM_HM01_CUT)
-            RemoveBagItem(item, 1);
+
     }
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move[0]]);
@@ -5285,18 +5284,25 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
+    u8 i;
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (sInitialLevel != MAX_LEVEL)
-    {
-        BufferMonStatsToTaskData(mon, arrayPtr);
-        cannotUseEffect = ExecuteTableBasedItemEffect(mon, gPartyMenu.slotId, *itemPtr, 0);
-        BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
-    }
-    else
-    {
-        cannotUseEffect = TRUE;
-    }
+    //for (i = 0; i < NUM_SOFT_CAPS; i++)
+    //{
+       // if (sInitialLevel < (!FlagGet(sLevelCapFlags[i]) && sInitialLevel < sLevelCaps[i]))
+       // {
+            BufferMonStatsToTaskData(mon, arrayPtr);
+            ExecuteTableBasedItemEffect(mon, gPartyMenu.slotId, *itemPtr, 0);
+            BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
+        //    break;
+       // }
+
+    
+       // else
+  //  {
+  //      cannotUseEffect = TRUE;
+   // }
+    //}
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {

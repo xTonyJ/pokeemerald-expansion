@@ -6,8 +6,11 @@
 #include "constants/region_map_sections.h"
 #include "constants/map_groups.h"
 
+
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 #define FORM_SPECIES_END (0xffff)
+#define DAY_START 4 //new day cycle
+#define NIGHT_START 18 //new night cycle, for time based stuff
 
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
@@ -100,6 +103,7 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
+    MON_DATA_NATURE,
 };
 
 struct PokemonSubstruct0
@@ -365,6 +369,13 @@ struct LevelUpMove
     u16 level;
 };
 
+struct TrainerMonSpread
+{
+    u8 EVs[6];
+    u8 IVs[6];
+    u8 nature; 
+};
+
 struct Evolution
 {
     u16 method;
@@ -399,6 +410,7 @@ extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
 
 extern const struct BattleMove gBattleMoves[];
+extern const struct TrainerMonSpread gSets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
