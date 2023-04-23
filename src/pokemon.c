@@ -4416,6 +4416,32 @@ u8 GetDefaultMoveTarget(u8 battlerId)
     }
 }
 
+u8 GetDefaultMoveTarget2(u8 battlerId)//Function to fix move color effectiveness from showing in double battles when 1 pokemon remained
+{
+    u8 opposing = BATTLE_OPPOSITE(GET_BATTLER_SIDE(battlerId));
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        return GetBattlerAtPosition(opposing);
+    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) == 1)
+    {
+        u8 position;
+
+        if ((Random() & 1) == 0)
+            position = BATTLE_PARTNER(opposing);
+        else
+            position = opposing;
+
+        return GetBattlerAtPosition(position);
+    }
+    else
+    {
+        if ((gAbsentBattlerFlags & gBitTable[opposing]))
+            return GetBattlerAtPosition(BATTLE_PARTNER(opposing));
+        else
+            return GetBattlerAtPosition(opposing);
+    }
+}
+
 u8 GetMonGender(struct Pokemon *mon)
 {
     return GetBoxMonGender(&mon->box);
@@ -8521,4 +8547,40 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
     *new3 = *old3;
     boxMon->checksum = CalculateBoxMonChecksum(boxMon);
     EncryptBoxMon(boxMon);
+}
+
+// Get the latest badge the player has earned (unless they skipped Winona)
+// League is counted as badge 9 for simplicity
+static u16 getHighestBadge(void)
+{
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
+        return 9;
+    if (FlagGet(FLAG_BADGE08_GET))
+        return 8;
+    if (FlagGet(FLAG_BADGE07_GET))
+        return 7;
+    if (FlagGet(FLAG_BADGE06_GET))
+        return 6;
+    if (FlagGet(FLAG_BADGE05_GET))
+        return 5;
+    if (FlagGet(FLAG_BADGE04_GET))
+        return 4;
+    if (FlagGet(FLAG_BADGE03_GET))
+        return 3;
+    if (FlagGet(FLAG_BADGE02_GET))
+        return 2;
+    if (FlagGet(FLAG_BADGE01_GET))
+        return 1;
+
+    return 0;
+}
+
+u8 GetLevelCap(void)
+{
+    u8 currentLevelCap;
+    u16 currentBadge = getHighestBadge();
+
+    static const u16 sLevelCaps[] = { 16, 25, 35, 45, 55, 65, 75, 85, 100};
+    currentLevelCap = sLevelCaps[currentBadge];
+    return currentLevelCap;
 }

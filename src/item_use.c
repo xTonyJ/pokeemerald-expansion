@@ -982,9 +982,9 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
     Overworld_ResetStateAfterDigEscRope();
     #if I_KEY_ESCAPE_ROPE < GEN_8
         RemoveUsedItem();
-    #else
-        CopyItemName(gSpecialVar_ItemId, gStringVar2);
-        StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
+    //#else
+    //    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    //    StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
     #endif
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
@@ -1229,10 +1229,11 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveUsedItem();
-        if (!InBattlePyramid())
+        Task_FadeAndCloseBagMenu(taskId);
+        /*if (!InBattlePyramid()) //This code just displays the "Used the" text while in the bag during battle
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FadeAndCloseBagMenu);
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);
+            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, CloseBattlePyramidBag);*/
     }
 }
 

@@ -1180,7 +1180,7 @@ void BtlController_EmitChooseItem(u8 bufferId, u8 *battlePartyOrder)
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_OPENBAG;
-    for (i = 0; i < PARTY_SIZE / 2; i++)
+    for (i = 0; i < 3; i++)
         sBattleBuffersTransferData[1 + i] = battlePartyOrder[i];
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }

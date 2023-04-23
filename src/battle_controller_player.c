@@ -266,7 +266,6 @@ static void CompleteOnBankSpritePosX_0(void)
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
-
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
 
@@ -456,7 +455,6 @@ static void HandleInputChooseTarget(void)
 
                 i = 0;
                 switch (GetBattlerPosition(gMultiUsePlayerCursor))
-                
                 {
                 case B_POSITION_PLAYER_LEFT:
                 case B_POSITION_PLAYER_RIGHT:
@@ -636,6 +634,7 @@ static void HandleInputChooseMove(void)
 
     if (JOY_NEW(A_BUTTON))
     {
+        MoveSelectionDestroyCursorAt(gMoveSelectionCursor[gActiveBattler]);
         PlaySE(SE_SELECT);
         if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_CURSE)
         {
@@ -646,7 +645,7 @@ static void HandleInputChooseMove(void)
         }
         else
         {
-            moveTarget = GetBattlerMoveTargetType(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
+            moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
         }
 
         if (gBattleStruct->zmove.viewing)
@@ -764,7 +763,8 @@ static void HandleInputChooseMove(void)
             PlaySE(SE_SELECT);
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
-            MoveSelectionDisplayMoveType();
+            gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
+            MoveSelectionDisplayMoveTypeDoubles(GetBattlerPosition(gMultiUsePlayerCursor));
             TryChangeZIndicator(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         }
     }
@@ -778,7 +778,8 @@ static void HandleInputChooseMove(void)
             PlaySE(SE_SELECT);
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
-            MoveSelectionDisplayMoveType();
+            gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
+            MoveSelectionDisplayMoveTypeDoubles(GetBattlerPosition(gMultiUsePlayerCursor));
             TryChangeZIndicator(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         }
     }
@@ -791,7 +792,8 @@ static void HandleInputChooseMove(void)
             PlaySE(SE_SELECT);
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
-            MoveSelectionDisplayMoveType();
+            gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
+            MoveSelectionDisplayMoveTypeDoubles(GetBattlerPosition(gMultiUsePlayerCursor));
             TryChangeZIndicator(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         }
     }
@@ -805,7 +807,8 @@ static void HandleInputChooseMove(void)
             PlaySE(SE_SELECT);
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
-            MoveSelectionDisplayMoveType();
+            gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
+            MoveSelectionDisplayMoveTypeDoubles(GetBattlerPosition(gMultiUsePlayerCursor));
             TryChangeZIndicator(gActiveBattler, gMoveSelectionCursor[gActiveBattler]);
         }
     }
@@ -2992,12 +2995,13 @@ static void PlayerHandleChooseMove(void)
 void InitMoveSelectionsVarsAndStrings(void)
 {
     MoveSelectionDisplayMoveNames();
-    gMultiUsePlayerCursor = 0xFF;
+    //gMultiUsePlayerCursor = 0xFF;
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
     MoveSelectionDisplayPpString();
     MoveSelectionDisplayPpNumber();
-    MoveSelectionDisplayMoveType();
-}
+    gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
+    MoveSelectionDisplayMoveTypeDoubles(GetBattlerPosition(gMultiUsePlayerCursor));
+}//the very very first turn will always be wrong unless this is changed
 
 static void PlayerHandleChooseItem(void)
 {
