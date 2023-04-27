@@ -199,8 +199,8 @@ gText_RainDance::
 gText_Rage::
 	.string "RAGE$"
 
-gText_FocusEnergy::
-	.string "FOCUS ENERGY$"
+@gText_FocusEnergy::
+@	.string "FOCUS ENERGY$"
 
 gText_Hypnosis::
 	.string "HYPNOSIS$"
@@ -226,8 +226,8 @@ gText_Rest2::
 gText_Vicegrip::
 	.string "VICEGRIP$"
 
-gText_DefenseCurl::
-	.string "DEFENSE CURL$"
+@gText_DefenseCurl::
+@	.string "DEFENSE CURL$"
 
 gText_LockOn::
 	.string "LOCK-ON$"

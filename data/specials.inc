@@ -536,3 +536,8 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SetTotemBoost
 	def_special TrySpecialOverworldEvo
+	def_special ScriptMenu_CreatePKMNCenterMoveTutorMultichoice
+	def_special GetPKMNCenterMoveListMultichoice
+	def_special GetBattleFrontierTutorMoveIndex
+	@def_special ChangePokemonNature
+	@def_special BufferChosenMonNature

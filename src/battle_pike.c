@@ -844,7 +844,7 @@ static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
 static bool8 DoesTypePreventStatus(u16 species, u32 status)
 {
     bool8 ret = FALSE;
-
+//this is a map gSpeciesInfo[species]
     switch (status)
     {
     case STATUS1_TOXIC_POISON:

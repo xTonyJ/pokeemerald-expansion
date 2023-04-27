@@ -2194,12 +2194,12 @@ Route116_Text_JoeyPostBattle:
 	.string "I've got another one!$"
 
 Route116_Text_JoseIntro:
-	.string "My BUG POKéMON are tough!\n"
-	.string "Let's battle!$"
+	.string "My BUG Pokémon are undefeated!\n"
+	.string "You don't stand a chance!$"
 
 Route116_Text_JoseDefeat:
-	.string "I lost!\n"
-	.string "I thought I had you!$"
+	.string "What? How?!\n"
+	.string "I am the bug master!$"
 
 Route116_Text_JosePostBattle:
 	.string "BUG POKéMON evolve quickly.\n"

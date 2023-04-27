@@ -271,6 +271,7 @@ static void DisplayPartyPokemonHPBarCheck(struct Pokemon *, struct PartyMenuBox 
 static void DisplayPartyPokemonDescriptionText(u8, struct PartyMenuBox *, u8);
 static bool8 IsMonAllowedInMinigame(u8);
 static void DisplayPartyPokemonDataToTeachMove(u8, u16);
+static u8 CanMonLearnTMTutor(struct Pokemon *, u8);
 static u8 CanTeachMove(struct Pokemon *, u16);
 static void DisplayPartyPokemonBarDetail(u8, const u8 *, u8, const u8 *);
 static void DisplayPartyPokemonLevel(u8, struct PartyMenuBox *);
@@ -332,6 +333,7 @@ static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *);
 static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
 static bool8 ShouldUseChooseMonText(void);
+static u16 GetTutorMove(u8);
 static void SetPartyMonFieldSelectionActions(struct Pokemon *, u8);
 static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon *);
 static u8 GetPartySlotEntryStatus(s8);
@@ -485,6 +487,7 @@ static void Task_HandleWhichMoveInput(u8 taskId);
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon);
 
 // static const data
+#include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
 // code
@@ -1004,7 +1007,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
 
 static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move)
 {
-    switch (CanTeachMove(&gPlayerParty[slot], move))
+    switch (CanMonLearnTMTutor(&gPlayerParty[slot], move))
     {
     case CANNOT_LEARN_MOVE:
     case CANNOT_LEARN_MOVE_IS_EGG:
@@ -2063,6 +2066,68 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return ALREADY_KNOWS_MOVE;
     else
         return CAN_LEARN_MOVE;
+}
+
+static u8 CanMonLearnTMTutor(struct Pokemon *mon, u8 tutor)
+{
+    u16 move;
+
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+        return CANNOT_LEARN_MOVE_IS_EGG;
+
+    else
+    {
+        if (!CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor))
+            return CANNOT_LEARN_MOVE;
+        else
+            move = GetTutorMove(tutor);
+    }
+
+    if (MonKnowsMove(mon, move) == TRUE)
+        return ALREADY_KNOWS_MOVE;
+    else
+        return CAN_LEARN_MOVE;
+}
+
+static u16 GetTutorMove(u8 tutor)
+{
+    return gTutorMoves[tutor];
+}
+
+bool32 CanLearnTutorMove(u16 species, u8 tutor) // note the change to bool32
+{
+    if (tutor < 32)
+    {
+        u32 mask = 1 << tutor;
+
+        return sTutorLearnsets[species][0] & mask;
+    }
+
+    else if (tutor < 64)
+    {
+        u32 mask = 1 << (tutor - 32);
+
+        return sTutorLearnsets[species][1] & mask;
+    }
+    else if (tutor < 96)
+    {
+        u32 mask = 1 << (tutor - 64);
+
+        return sTutorLearnsets[species][2] & mask;
+    }
+ 
+    else if (tutor < 128)
+    {
+        u32 mask = 1 << (tutor - 96);
+
+        return sTutorLearnsets[species][3] & mask;
+    }
+    else
+    {
+        u32 mask = 1 << (tutor - 128);
+
+        return sTutorLearnsets[species][4] & mask;
+    }
 }
 
 static void InitPartyMenuWindows(u8 layout)
@@ -5875,10 +5940,11 @@ static void TryTutorSelectedMon(u8 taskId)
         mon = &gPlayerParty[gPartyMenu.slotId];
         move = &gPartyMenu.data1;
         GetMonNickname(mon, gStringVar1);
-        gPartyMenu.data1 = gSpecialVar_0x8005;
+        gPartyMenu.data1 = GetTutorMove(gSpecialVar_0x8005);
         StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
         move[1] = 2;
-        switch (CanTeachMove(mon, gPartyMenu.data1))
+        
+        switch (CanMonLearnTMTutor(mon, gSpecialVar_0x8005))
         {
         case CANNOT_LEARN_MOVE:
             DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);

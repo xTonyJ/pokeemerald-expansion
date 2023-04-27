@@ -681,7 +681,7 @@ static void HandleInputChooseMove(void)
             }
             else if (!(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED)) && CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) <= 1)
             {
-                gMultiUsePlayerCursor = GetDefaultMoveTarget(gActiveBattler);
+                gMultiUsePlayerCursor = GetDefaultMoveTarget2(gActiveBattler);
                 canSelectTarget = 0;
             }
 

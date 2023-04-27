@@ -265,6 +265,8 @@
 
 // battle placeholders are located in battle_message.h
 
+#define TEXT_SPEED_FF 0xFF
+
 // Hiragana from 0x1-0x50, Katakana from 0x51-0xA0.
 // This excludes Japanese punctuation, which end at 0xB0
 #define JAPANESE_CHAR_END 0xA0

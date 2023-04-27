@@ -7375,6 +7375,35 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     }
 }
 
+/*u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    if (species == SPECIES_EGG)
+    {
+        return 0;
+    }
+    else if (tm < 32)
+    {
+        u32 mask = 1 << tm;
+        return gTMHMLearnsets[species][0] & mask;
+    }
+    else if (tm > 31 && tm < 64)
+    {
+        u32 mask = 1 << (tm - 32);
+        return gTMHMLearnsets[species][1] & mask;
+    }
+	else if (tm > 63 && tm < 96)
+    {
+        u32 mask = 1 << (tm - 64);
+        return gTMHMLearnsets[species][2] & mask;
+    }
+	else
+    {
+        u32 mask = 1 << (tm - 96);
+        return gTMHMLearnsets[species][3] & mask;
+    }
+}/**/
+
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[4];

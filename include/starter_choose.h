@@ -7,7 +7,13 @@ extern const u32 gBirchGrassTilemap[];
 extern const u32 gBirchBagGrass_Gfx[];
 extern const u32 gPokeballSelection_Gfx[];
 
-u16 GetStarterPokemon(u16 chosenStarterId);
+//user defined type that I designed for selecting 2 pokemon
+typedef struct {
+    u16 pokemon1;
+    u16 pokemon2;
+} sStarterPair;
+
+sStarterPair GetStarterPokemon(u16 chosenStarterId);
 void CB2_ChooseStarter(void);
 
 #endif // GUARD_STARTER_CHOOSE_H
