@@ -92,11 +92,15 @@ Route103_EventScript_StartBrendanBattleMudkip::
 
 Route103_EventScript_AfterMayBattle::
 	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
+	giveitem ITEM_EXP_SHARE	
+	setflag FLAG_RECEIVED_EXP_SHARE
 	goto Route103_EventScript_RivalExit
 	end
 
 Route103_EventScript_AfterBrendanBattle::
 	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
+	giveitem ITEM_EXP_SHARE
+	setflag FLAG_RECEIVED_EXP_SHARE
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -312,8 +316,11 @@ Route103_Text_MayTimeToHeadBack:
 	.string "but it already likes you.\p"
 	.string "You might be able to befriend any\n"
 	.string "kind of POKéMON easily.\p"
+	.string "He wanted me to give you this\n"
+	.string "EXP Share. It will allow your entire party\p"
+	.string "to get EXP from battle by toggling it on.\n"
 	.string "Well, it's time to head back to\n"
-	.string "the LAB.$"
+	.string "the LAB. Race you there!$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "BRENDAN: Okay, so it's this one and\n"
@@ -334,6 +341,9 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "BRENDAN: I think I get it.\n"
 	.string "I think I know why my dad has his eye\l"
 	.string "out for you now.\p"
+	.string "He wanted me to give you this\n"
+	.string "EXP Share. It will allow your entire party\p"
+	.string "to get EXP from battle by toggling it on.\n"
 	.string "Look, your POKéMON already likes you,\n"
 	.string "even though you just got it.\p"
 	.string "{PLAYER}, I get the feeling that you\n"

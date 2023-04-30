@@ -29,8 +29,8 @@
 // Position of the sprite of the selected starter Pokemon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
 #define STARTER_PKMN_POS_Y 64
-#define STARTER_PKMN_POS_X2 105
-#define STARTER_PKMN_POS_X3 135
+#define STARTER_PKMN_POS_X2 104
+#define STARTER_PKMN_POS_X3 136
 
 
 #define TAG_POKEBALL_SELECT 0x1000
@@ -47,6 +47,7 @@ static void Task_DeclineStarter(u8 taskId);
 static void Task_MoveStarterChooseCursor(u8 taskId);
 static void Task_CreateStarterLabel(u8 taskId);
 static void CreateStarterPokemonLabel(u8 selection);
+static void CreateStarterPokemonLabel2(u8 selection);
 static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
 static u8 CreatePokemonFrontSprite2(u16 species, u8 x, u8 y);
 static void SpriteCB_SelectionHand(struct Sprite *sprite);
@@ -56,6 +57,7 @@ static void SpriteCB_StarterPokemon2(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon3(struct Sprite *sprite);
 
 static u16 sStarterLabelWindowId;
+static u16 sStarterLabelWindowId2;
 
 const u16 gBirchBagGrass_Pal[] = INCBIN_U16("graphics/starter_choose/tiles.gbapal");
 static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
@@ -101,12 +103,32 @@ static const struct WindowTemplate sWindowTemplate_StarterLabel =
     .paletteNum = 14,
     .baseBlock = 0x0274
 };
+static const struct WindowTemplate sWindowTemplate_StarterLabel2 =
+{
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 0,
+    .width = 13,
+    .height = 4,
+    .paletteNum = 14,
+    .baseBlock = 0x0274
+};
 
 static const u8 sPokeballCoords[STARTER_MON_COUNT][2] =
 {
     {60, 64},
     {120, 88},
     {180, 64},
+};
+
+static const u8 sPokeballCoords2[6][2] =
+{
+    {56, 64},
+    {78, 70},
+    {109, 88},
+    {131, 88},
+    {182, 64},
+    {160, 70},
 };
 
 static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
@@ -463,16 +485,28 @@ void CB2_ChooseStarter(void)
     spriteId = CreateSprite(&sSpriteTemplate_Hand, 120, 56, 2);
     gSprites[spriteId].data[0] = taskId;
 
-    // Create three Pokeball sprites
-    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[0][0], sPokeballCoords[0][1], 2);
+    // Create six Pokeball sprites
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[0][0], sPokeballCoords2[0][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 0;
 
-    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[1][0], sPokeballCoords[1][1], 2);
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[1][0], sPokeballCoords2[1][1], 2);
+    gSprites[spriteId].sTaskId = taskId;
+    gSprites[spriteId].sBallId = 0;
+
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[2][0], sPokeballCoords2[2][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 1;
 
-    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[2][0], sPokeballCoords[2][1], 2);
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[3][0], sPokeballCoords2[3][1], 2);
+    gSprites[spriteId].sTaskId = taskId;
+    gSprites[spriteId].sBallId = 1;
+
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[4][0], sPokeballCoords2[4][1], 2);
+    gSprites[spriteId].sTaskId = taskId;
+    gSprites[spriteId].sBallId = 2;
+
+    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords2[5][0], sPokeballCoords2[5][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
 
@@ -506,7 +540,6 @@ static void Task_HandleStarterChooseInput(u8 taskId)
     {
         u8 spriteId;
         u8 spriteId2;
-        u8 spriteId3;
 
         ClearStarterLabel();
         
@@ -519,7 +552,7 @@ static void Task_HandleStarterChooseInput(u8 taskId)
         gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
         gSprites[spriteId].callback = SpriteCB_StarterPokemon2;
         
-        spriteId2 = CreatePokemonFrontSprite2(GetStarterPokemon(gTasks[taskId].tStarterSelection).pokemon2, 0, 0);
+        spriteId2 = CreatePokemonFrontSprite2(GetStarterPokemon(gTasks[taskId].tStarterSelection).pokemon2, sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
         gSprites[spriteId2].affineAnims = &sAffineAnims_StarterPokemon;
         gSprites[spriteId2].callback = SpriteCB_StarterPokemon3;
 
@@ -600,16 +633,55 @@ static void CreateStarterPokemonLabel(u8 selection)
     u8 categoryText[32];
     struct WindowTemplate winTemplate;
     const u8 *speciesName;
+    const u8 *speciesName2;
     s32 width;
     u8 labelLeft, labelRight, labelTop, labelBottom;
 
     u16 species = GetStarterPokemon(selection).pokemon1;
+    u16 species2 = GetStarterPokemon(selection).pokemon2;
+    //CopyMonCategoryText(SpeciesToNationalPokedexNum(species), categoryText);
+    speciesName = gSpeciesNames[species];
+    speciesName2 = gSpeciesNames[species2];
+
+    winTemplate = sWindowTemplate_StarterLabel;
+    winTemplate.tilemapLeft = 1;
+    winTemplate.tilemapTop = 10;
+
+    sStarterLabelWindowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
+
+    width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 0x68);
+    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 1, sTextColors, 0, speciesName);
+
+    width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName2, 0x68);
+    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName2);
+
+    PutWindowTilemap(sStarterLabelWindowId);
+    ScheduleBgCopyTilemapToVram(0);
+
+    labelLeft = 1 * 8 - 4;
+    labelRight = (1 + 13) * 8 + 4;
+    labelTop = 10 * 8;
+    labelBottom = (10 + 4) * 8;
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(labelLeft, labelRight));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
+}
+
+static void CreateStarterPokemonLabel2(u8 selection)
+{
+    u8 categoryText[32];
+    struct WindowTemplate winTemplate;
+    const u8 *speciesName;
+    s32 width;
+    u8 labelLeft, labelRight, labelTop, labelBottom;
+
+    u16 species = GetStarterPokemon(selection).pokemon2;
     CopyMonCategoryText(SpeciesToNationalPokedexNum(species), categoryText);
     speciesName = gSpeciesNames[species];
 
     winTemplate = sWindowTemplate_StarterLabel;
-    winTemplate.tilemapLeft = sStarterLabelCoords[selection][0];
-    winTemplate.tilemapTop = sStarterLabelCoords[selection][1];
+    winTemplate.tilemapLeft = 16;
+    winTemplate.tilemapTop = 10;
 
     sStarterLabelWindowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
@@ -623,14 +695,13 @@ static void CreateStarterPokemonLabel(u8 selection)
     PutWindowTilemap(sStarterLabelWindowId);
     ScheduleBgCopyTilemapToVram(0);
 
-    labelLeft = sStarterLabelCoords[selection][0] * 8 - 4;
-    labelRight = (sStarterLabelCoords[selection][0] + 13) * 8 + 4;
-    labelTop = sStarterLabelCoords[selection][1] * 8;
-    labelBottom = (sStarterLabelCoords[selection][1] + 4) * 8;
+    labelLeft = 16 * 8 - 4;
+    labelRight = (16 + 13) * 8 + 4;
+    labelTop = 16 * 8;
+    labelBottom = (16 + 4) * 8;
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(labelLeft, labelRight));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
 }
-
 static void ClearStarterLabel(void)
 {
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
@@ -707,9 +778,9 @@ static void SpriteCB_StarterPokemon2(struct Sprite *sprite)
 {
     // Move sprite to upper center of screen
     if (sprite->x > STARTER_PKMN_POS_X2)
-        sprite->x -= 2;
+        sprite->x -= 4;
     if (sprite->x < STARTER_PKMN_POS_X2)
-        sprite->x += 2;
+        sprite->x += 4;
     if (sprite->y > STARTER_PKMN_POS_Y)
         sprite->y -= 2;
     if (sprite->y < STARTER_PKMN_POS_Y)
@@ -720,9 +791,9 @@ static void SpriteCB_StarterPokemon3(struct Sprite *sprite)
 {
     // Move sprite to upper center of screen
     if (sprite->x > STARTER_PKMN_POS_X3)
-        sprite->x -= 2;
+        sprite->x -= 4;
     if (sprite->x < STARTER_PKMN_POS_X3)
-        sprite->x += 2;
+        sprite->x += 4;
     if (sprite->y > STARTER_PKMN_POS_Y)
         sprite->y -= 2;
     if (sprite->y < STARTER_PKMN_POS_Y)

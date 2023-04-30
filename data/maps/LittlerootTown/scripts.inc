@@ -900,9 +900,10 @@ LittlerootTown_EventScript_SetReceivedRunningShoes::
 LittlerootTown_EventScript_GiveRunningShoes::
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_Text_SwitchShoesWithRunningShoes
+	@message LittlerootTown_Text_SwitchShoesWithRunningShoes
 	waitfanfare
-	setflag FLAG_RECEIVED_RUNNING_SHOES
+	giveitem ITEM_OLD_ROD
+	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
@@ -927,19 +928,21 @@ LittlerootTown_Text_WaitPlayer:
 LittlerootTown_Text_WearTheseRunningShoes:
 	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
 	.string "introduce yourself to PROF. BIRCH?\p"
-	.string "Oh! What an adorable POKéMON!\n"
-	.string "You got it from PROF. BIRCH. How nice!\p"
+	.string "Oh! What adorable POKéMON!\n"
+	.string "You got them from PROF. BIRCH. How nice!\p"
 	.string "You're your father's child, all right.\n"
 	.string "You look good together with POKéMON!\p"
-	.string "Glad to see you already found your\n"
-	.string "running shoes.\p"
-	.string "They'll put a zip in your step!$"
+	.string "Here! Take this with you, it was\n"
+	.string "your father's old fishing rod.\p"
+	.string "Hope you catch some good Pokémon!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "{PLAYER} did not need to switch shoes\n"
-	.string "with the running shoes...$"
+	.string "Press R to toggle Auto Run\n"
+	.string "It'll put a zip in your step!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
+	.string "Press R to toggle Auto Run\n"
+	.string "It'll put a zip in your step!\p"
 	.string "MOM: {PLAYER}, those shoes came with\n"
 	.string "instructions.\p"
 	.string "“Press the B Button while wearing these\n"

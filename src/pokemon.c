@@ -1948,6 +1948,7 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
     [NATURE_QUIRKY]  = {    0,      0,      0,      0,      0   },
 };
 
+#include "data/pokemon/tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/species_info.h"
@@ -7375,7 +7376,7 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     }
 }
 
-/*u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
+u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     if (species == SPECIES_EGG)
@@ -7402,7 +7403,7 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
         u32 mask = 1 << (tm - 96);
         return gTMHMLearnsets[species][3] & mask;
     }
-}/**/
+}
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {

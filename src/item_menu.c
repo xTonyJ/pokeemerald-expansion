@@ -310,6 +310,10 @@ static const u8 sContextMenuItems_BerriesPocket[] = {
     ACTION_TOSS,        ACTION_CANCEL
 };
 
+/*static const u8 sContextMenuItems_MegaStonesPocket[] = {
+    ACTION_GIVE,        ACTION_CANCEL,
+};*/
+
 static const u8 sContextMenuItems_BattleUse[] = {
     ACTION_BATTLE_USE,  ACTION_CANCEL
 };
@@ -1625,6 +1629,11 @@ static void OpenContextMenu(u8 taskId)
                         gBagMenu->contextMenuItemsBuffer[0] = ACTION_WALK;
                 }
                 break;
+            /*case MEGA_STONES_POCKET:
+                gBagMenu->contextMenuItemsPtr = sContextMenuItems_MegaStonesPocket;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_MegaStonesPocket);
+                memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ItemsPocket, sizeof(sContextMenuItems_ItemsPocket));
+                break;*/
             case BALLS_POCKET:
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BallsPocket);

@@ -2,6 +2,7 @@ RustboroCity_Gym_MapScripts::
 	.byte 0
 
 RustboroCity_Gym_EventScript_Roxanne::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
@@ -201,8 +202,8 @@ RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "from ROXANNE.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE heightens the ATTACK\n"
-	.string "power of your POKéMON.\p"
+	.string "The STONE BADGE raises the level limit\n"
+	.string "of your POKéMON to 25.\p"
 	.string "It also enables them to use the HM move\n"
 	.string "CUT outside of battle.\p"
 	.string "Please take this with you, too.$"
@@ -214,8 +215,8 @@ RustboroCity_Gym_Text_ExplainRockTomb:
 	.string "rocks, it also lowers SPEED.\p"
 	.string "If you use a TM, it instantly teaches\n"
 	.string "the move to a POKéMON.\p"
-	.string "Remember, a TM can be used only once,\n"
-	.string "so think before you use it.$"
+	.string "Remember, a TM can be used infinitely,\n"
+	.string "so, use it.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
 	.string "Since you are so strong, you should\n"

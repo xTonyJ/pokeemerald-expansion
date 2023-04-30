@@ -468,7 +468,7 @@ static void PlayerPC_Mailbox(u8 taskId)
         SetPlayerPCListCount(taskId);
         if (MailboxMenu_Alloc(gPlayerPCItemPageInfo.count) == TRUE)
         {
-            ClearDialogWindowAndFrame(0, FALSE);
+            ClearDialogWindowAndFrame(0, 0);
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
@@ -678,7 +678,7 @@ static void Mailbox_CompactMailList(void)
     struct Mail temp;
     u8 i, j;
 
-    for (i = PARTY_SIZE; i < MAIL_COUNT - 1; i++)
+    if (gSaveBlock1Ptr->mail[0].itemId == 0)
     {
         for (j = i + 1; j < MAIL_COUNT; j++)
         {

@@ -75,7 +75,7 @@ OldaleTown_EventScript_GoToMartEast::
 
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
-	giveitem ITEM_POTION
+	giveitem ITEM_FOCUS_SASH
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
@@ -344,11 +344,10 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "I want to take a rest, so I'm saving my\n"
-	.string "progress.$"
+	.string "Make sure to save often in case of BUGS...$"
 
 OldaleTown_Text_IWorkAtPokemonMart:
-	.string "Hi!\n"
+	.string "Yo, kid!\n"
 	.string "I work at a POKéMON MART.\p"
 	.string "Can I get you to come with me?$"
 
@@ -361,27 +360,27 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "A POTION can be used anytime, so it's\n"
-	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "Look for items that Pokémon can hold.\n"
+	.string "Some have special effects during battle,\l"
+	.string "they can give you an edge!$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "Aaaaah! Wait!\n"
 	.string "Please don't come in here.\p"
 	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
+	.string "a super rare POKéMON!\p"
 	.string "Wait until I finish sketching\n"
 	.string "them, okay?$"
 
 OldaleTown_Text_DiscoveredFootprints:
 	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
+	.string "a super rare POKéMON!\p"
 	.string "Wait until I finish sketching\n"
 	.string "them, okay?$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
 	.string "I finished sketching the footprints of\n"
-	.string "a rare POKéMON.\p"
+	.string "the super rare POKéMON.\p"
 	.string "But it turns out they were only my\n"
 	.string "own footprints…$"
 

@@ -162,7 +162,7 @@ static u8 WriteSaveSectorOrSlot(u16 sectorId, const struct SaveSectorLocation *l
         for (i = 0; i < NUM_SECTORS_PER_SLOT; i++)
             HandleWriteSector(i, locations);
 
-        if (gDamagedSaveSectors)
+        if (gDamagedSaveSectors !=0) //Skip
         {
             // At least one sector save failed
             status = SAVE_STATUS_ERROR;

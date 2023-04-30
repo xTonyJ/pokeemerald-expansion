@@ -114,6 +114,7 @@ LittlerootTown_ProfessorBirchsLab_OnFrame:
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
 	bufferleadmonspeciesname STR_VAR_1
+	bufferpartymonnick STR_VAR_2, 1
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
 	playfanfare MUS_OBTAIN_ITEM
@@ -532,7 +533,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
+	giveitem ITEM_POKE_BALL, 30
 	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
@@ -540,7 +541,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
+	giveitem ITEM_POKE_BALL, 30
 	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
@@ -699,9 +700,9 @@ LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 	.string "I guess you have your father's blood\n"
 	.string "in your veins after all!\p"
 	.string "Oh, yes. As thanks for rescuing me,\n"
-	.string "I'd like you to have the POKéMON you\l"
+	.string "I'd like you to have the two POKéMON you\l"
 	.string "used earlier.\p"
-	.string "{PLAYER} received the {STR_VAR_1}!$"
+	.string "{PLAYER} received {STR_VAR_1} and {STR_VAR_2}!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "PROF. BIRCH: While you're at it, why not\n"
@@ -723,8 +724,8 @@ LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
 	.string "means to be a TRAINER.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
-	.string "PROF. BIRCH: Oh, don't be that way.\n"
-	.string "You should go meet my kid.$"
+	.string "PROF. BIRCH: Oh, don't be rude!\n"
+	.string "You MUST go meet my kid.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
 	.string "PROF. BIRCH: {RIVAL}?\n"
@@ -788,9 +789,9 @@ LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext:
 	.string "for POKéMON next?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
-	.string "BRENDAN: Huh…\n"
+	.string "BRENDAN: Huh?\n"
 	.string "So you got a POKéDEX, too.\p"
-	.string "Well then, here.\n"
+	.string "That's poggers, here.\n"
 	.string "I'll give you these.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
@@ -799,7 +800,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
 	.string "I'm going to explore all over the place\n"
 	.string "to find different POKéMON.\p"
 	.string "If I find any cool POKéMON, you bet\n"
-	.string "I'll try to get them with POKé BALLS.$"
+	.string "I'll try to catch them.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
 	.string "Hey, your BAG's full.$"
@@ -820,7 +821,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CrammedWithBooksOnPokemon:
 	.string "It's crammed with books on POKéMON.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead:
-	.string "It's a book that's too hard to read.$"
+	.string "It's a book on C++ that's too hard to read.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational:
 	.string "PROF. BIRCH: Now…\p"

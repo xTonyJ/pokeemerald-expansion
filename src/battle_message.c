@@ -57,6 +57,7 @@ EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
 static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p");
+static const u8 sText_PkmnGainedEXPAll[] = _("All others in party gained at least\n{B_BUFF3} EXP due to EXP SHARE.\p");
 static const u8 sText_EmptyString4[] = _("");
 static const u8 sText_ABoosted[] = _(" a boosted");
 static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p");
@@ -1428,6 +1429,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_TARGETTOOHEAVY - BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
     [STRINGID_ATTACKERLOSTELECTRICTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostElectricType,
     [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
+    [STRINGID_PKMNGAINEDEXPALL - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXPAll,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

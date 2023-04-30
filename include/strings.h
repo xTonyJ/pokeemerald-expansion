@@ -53,6 +53,7 @@ extern const u8 gText_Key_Items[];
 extern const u8 gText_Poke_Balls[];
 extern const u8 gText_TMs_Hms[];
 extern const u8 gText_Berries2[];
+//xtern const u8 gText_Mega_Stones[];
 
 extern const u8 gText_Single2[];
 extern const u8 gText_Double2[];
@@ -926,6 +927,8 @@ extern const u8 gText_Roy[];
 extern const u8 gText_Gabby[];
 extern const u8 gText_Anna[];
 
+extern const u8 gText_ExpShareTurnOn[];
+extern const u8 gText_ExpShareTurnOff[];
 extern const u8 gText_DadsAdvice[];
 extern const u8 gText_CantDismountBike[];
 extern const u8 gText_ItemFinderNothing[];

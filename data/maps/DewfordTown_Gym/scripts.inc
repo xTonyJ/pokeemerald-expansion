@@ -133,6 +133,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
@@ -400,9 +401,8 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge:
 	.string "from BRAWLY.$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "The KNUCKLE BADGE makes all POKéMON\n"
-	.string "up to Level 30, even those you get in\l"
-	.string "trades, obey without question.\p"
+	.string "The KNUCKLE BADGE allows POKéMON\n"
+	.string "to reach Level 35\p"
 	.string "And, you'll be able to use the HM move\n"
 	.string "FLASH outside of battle.\p"
 	.string "If you'd like, use this TECHNICAL\n"

@@ -174,8 +174,8 @@ const u8 gText_Level[] = _("Lv. ");
 const u8 gText_IdNumberSlash[] = _("IDNo. /"); // Unused
 const u8 gText_Name[] = _("NAME");
 const u8 gText_IDNumber[] = _("IDNo.");
-const u8 gText_BirchInTrouble[] = _("PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!");
-const u8 gText_ConfirmStarterChoice[] = _("Do you choose this POKéMON?");
+const u8 gText_BirchInTrouble[] = _("Prof. Birch is in trouble!\nRelease two POKéMON and rescue him!");
+const u8 gText_ConfirmStarterChoice[] = _("Do you choose these POKéMON?");
 const u8 gText_Pokemon4[] = _("POKéMON"); // Unused
 const u8 gText_FlyToWhere[] = _("FLY to where?");
 const u8 gMenuText_Use[] = _("USE");
@@ -234,6 +234,8 @@ const u8 gText_TossHowManyVar1s[] = _("Toss out how many\n{STR_VAR_1}(s)?");
 const u8 gText_ThrewAwayVar2Var1s[] = _("Threw away {STR_VAR_2}\n{STR_VAR_1}(s).");
 const u8 gText_ConfirmTossItems[] = _("Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?");
 const u8 gText_DadsAdvice[] = _("DAD's advice…\n{PLAYER}, there's a time and place for\leverything!{PAUSE_UNTIL_PRESS}");
+const u8 gText_ExpShareTurnOn[] = _("Turned on the Exp. Share.\pParty will now gain a portion\nof the Experience Points.{PAUSE_UNTIL_PRESS}");
+const u8 gText_ExpShareTurnOff[] = _("Turned off the Exp. Share.\pParty will no longer gain a portion\nof any Experience Points.{PAUSE_UNTIL_PRESS}");
 const u8 gText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
 const u8 gText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}");
@@ -285,6 +287,7 @@ const u8 gText_PokeBallsPocket[] = _("POKé BALLS");
 const u8 gText_TMHMPocket[] = _("TMs & HMs");
 const u8 gText_BerriesPocket[] = _("BERRIES");
 const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
+//const u8 gText_Mega_StonesPocket[] = _("Mega Stones");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
@@ -292,7 +295,8 @@ const u8 *const gPocketNamesStringsTable[] =
     [BALLS_POCKET] = gText_PokeBallsPocket,
     [TMHM_POCKET]  = gText_TMHMPocket,
     [BERRIES_POCKET] = gText_BerriesPocket,
-    [KEYITEMS_POCKET] = gText_KeyItemsPocket
+    [KEYITEMS_POCKET] = gText_KeyItemsPocket,
+    //[MEGA_STONES_POCKET] = gText_Mega_StonesPocket
 };
 
 const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
@@ -710,6 +714,7 @@ const u8 gText_Key_Items[] = _("KEY ITEMS");
 const u8 gText_Poke_Balls[] = _("POKé BALLS");
 const u8 gText_TMs_Hms[] = _("TMs & HMs");
 const u8 gText_Berries2[] = _("BERRIES");
+//const u8 gText_Mega_Stones[] = _("Mega Stones");
 const u8 gText_SomeonesPC[] = _("SOMEONE'S PC");
 const u8 gText_LanettesPC[] = _("LANETTE'S PC");
 const u8 gText_PlayersPC[] = _("{PLAYER}'s PC");

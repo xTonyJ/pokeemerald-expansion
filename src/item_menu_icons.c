@@ -91,6 +91,12 @@ static const union AnimCmd sSpriteAnim_Bag_Berries[] =
     ANIMCMD_END
 };
 
+/*static const union AnimCmd sSpriteAnim_Bag_MegaStones[] =
+{
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END
+};*/
+
 static const union AnimCmd *const sBagSpriteAnimTable[] =
 {
     [POCKET_NONE]       = sSpriteAnim_Bag_Closed,
@@ -99,6 +105,7 @@ static const union AnimCmd *const sBagSpriteAnimTable[] =
     [POCKET_TM_HM]      = sSpriteAnim_Bag_TMsHMs,
     [POCKET_BERRIES]    = sSpriteAnim_Bag_Berries,
     [POCKET_KEY_ITEMS]  = sSpriteAnim_Bag_KeyItems,
+    //[POCKET_MEGA_STONES] = sSpriteAnim_Bag_MegaStones,
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_BagNormal[] =
