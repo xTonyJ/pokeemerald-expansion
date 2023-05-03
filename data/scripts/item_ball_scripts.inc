@@ -10,24 +10,24 @@ Route103_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end
 
-Route104_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+Route104_EventScript_ItemCharizarditeX::
+	finditem ITEM_CHARIZARDITE_X
 	end
 
-Route104_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+Route104_EventScript_ItemTM10::
+	finditem ITEM_TM10
 	end
 
-Route104_EventScript_ItemXAccuracy::
-	finditem ITEM_X_ACCURACY
+Route104_EventScript_ItemTM09::
+	finditem ITEM_TM09
 	end
 
-Route104_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route104_EventScript_ItemSootheBell::
+	finditem ITEM_SOOTHE_BELL
 	end
 
-Route105_EventScript_ItemIron::
-	finditem ITEM_IRON
+Route105_EventScript_ItemSwampertite::
+	finditem ITEM_SWAMPERTITE
 	end
 
 Route106_EventScript_ItemProtein::
@@ -102,8 +102,8 @@ Route114_EventScript_ItemEnergyPowder::
 	finditem ITEM_ENERGY_POWDER
 	end
 
-Route115_EventScript_ItemSuperPotion::
-	finditem ITEM_SUPER_POTION
+Route115_EventScript_ItemSoftSand::
+	finditem ITEM_SOFT_SAND
 	end
 
 Route115_EventScript_ItemTM01::
@@ -126,8 +126,8 @@ Route115_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end
 
-Route116_EventScript_ItemXSpecial::
-	finditem ITEM_X_SP_ATK
+Route116_EventScript_ItemMoonStone::
+	finditem ITEM_MOON_STONE
 	end
 
 Route116_EventScript_ItemEther::
@@ -142,8 +142,8 @@ Route116_EventScript_ItemHPUp::
 	finditem ITEM_HP_UP
 	end
 
-Route116_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route116_EventScript_ItemTM67::
+	finditem ITEM_TM67
 	end
 
 Route117_EventScript_ItemGreatBall::
@@ -306,16 +306,16 @@ PetalburgCity_EventScript_ItemMaxRevive::
 	finditem ITEM_MAX_REVIVE
 	end
 
-PetalburgCity_EventScript_ItemEther::
-	finditem ITEM_ETHER
+PetalburgCity_EventScript_ItemVenusaurite:: @ 82910C1
+	finditem ITEM_VENUSAURITE
 	end
 
 MauvilleCity_EventScript_ItemXSpeed::
 	finditem ITEM_X_SPEED
 	end
 
-RustboroCity_EventScript_ItemXDefend::
-	finditem ITEM_X_DEFENSE
+RustboroCity_EventScript_ItemNugget::
+	finditem ITEM_NUGGET
 	end
 
 LilycoveCity_EventScript_ItemMaxRepel::
@@ -338,12 +338,12 @@ PetalburgWoods_EventScript_ItemEther::
 	finditem ITEM_ETHER
 	end
 
-PetalburgWoods_EventScript_ItemParalyzeHeal::
-	finditem ITEM_PARALYZE_HEAL
+PetalburgWoods_EventScript_ItemInsectPlate::
+	finditem ITEM_INSECT_PLATE
 	end
 
 RusturfTunnel_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+	finditem ITEM_FRIEND_BALL
 	end
 
 RusturfTunnel_EventScript_ItemMaxEther::
@@ -355,11 +355,11 @@ GraniteCave_1F_EventScript_ItemEscapeRope::
 	end
 
 GraniteCave_B1F_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+	finditem ITEM_DREAM_BALL
 	end
 
-GraniteCave_B2F_EventScript_ItemRepel::
-	finditem ITEM_REPEL
+GraniteCave_B2F_EventScript_ItemMawilite::
+	finditem ITEM_MAWILITE
 	end
 
 GraniteCave_B2F_EventScript_ItemRareCandy::
@@ -656,4 +656,12 @@ MagmaHideout_4F_EventScript_ItemMaxRevive::
 
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope::
 	finditem ITEM_ESCAPE_ROPE
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ItemTM61::
+	finditem ITEM_TM61
+	end
+
+GraniteCave_B2F_EventScript_ItemTM28::
+	finditem ITEM_TM28
 	end

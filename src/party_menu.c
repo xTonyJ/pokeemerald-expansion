@@ -4477,6 +4477,20 @@ static bool8 IsItemFlute(u16 item)
     return FALSE;
 }
 
+static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMoveIndex)
+{
+    if (gMain.inBattle)
+    {
+        if ((partyMonIndex == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
+          || (partyMonIndex == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
+            return TRUE;    // cannot use on this mon
+        else
+            return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, GetPartyIdFromBattleSlot(partyMonIndex), monMoveIndex);
+    }
+    else
+        return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, partyMonIndex, monMoveIndex);
+}
+
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)
 {
     u8 i;
@@ -5368,24 +5382,19 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     bool8 cannotUseEffect;
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
     u8 i;
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    //for (i = 0; i < NUM_SOFT_CAPS; i++)
-    //{
-       // if (sInitialLevel < (!FlagGet(sLevelCapFlags[i]) && sInitialLevel < sLevelCaps[i]))
-       // {
-            BufferMonStatsToTaskData(mon, arrayPtr);
-            ExecuteTableBasedItemEffect(mon, gPartyMenu.slotId, *itemPtr, 0);
-            BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
-        //    break;
-       // }
-
-    
-       // else
-  //  {
-  //      cannotUseEffect = TRUE;
-   // }
-    //}
+    if (level != MAX_LEVEL && (level < GetLevelCap()))
+    {
+        BufferMonStatsToTaskData(mon, arrayPtr);
+        cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, *itemPtr, 0);
+        BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
+    }
+    else
+    {
+        cannotUseEffect = TRUE;
+    }
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {

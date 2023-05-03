@@ -2048,7 +2048,7 @@ enum
     ENDTURN_FIELD_COUNT,
 };
 
-static bool32 EndTurnTerrain(u32 terrainFlag, u32 stringTableId)
+/*static bool32 EndTurnTerrain(u32 terrainFlag, u32 stringTableId)
 {
     if (gFieldStatuses & terrainFlag)
     {
@@ -2067,7 +2067,7 @@ static bool32 EndTurnTerrain(u32 terrainFlag, u32 stringTableId)
         return TRUE;
     }
     return FALSE;
-}
+}*/
 
 u8 DoFieldEndTurnEffects(void)
 {
@@ -2420,19 +2420,50 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_ELECTRIC_TERRAIN:
-            effect = EndTurnTerrain(STATUS_FIELD_ELECTRIC_TERRAIN, B_MSG_TERRAINENDS_ELECTRIC);
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN
+              && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.terrainTimer == 0))
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
+                TryToRevertMimicry();
+                BattleScriptExecute(BattleScript_TerrainEnds);
+                effect++;
+            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_MISTY_TERRAIN:
-            effect = EndTurnTerrain(STATUS_FIELD_MISTY_TERRAIN, B_MSG_TERRAINENDS_MISTY);
+            if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN
+              && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.terrainTimer == 0))
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
+                TryToRevertMimicry();
+                BattleScriptExecute(BattleScript_TerrainEnds);
+                effect++;
+            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_GRASSY_TERRAIN:
-            effect = EndTurnTerrain(STATUS_FIELD_GRASSY_TERRAIN, B_MSG_TERRAINENDS_GRASS);
+            if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
+            {
+                if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT)
+                  && (gFieldTimers.terrainTimer == 0 || --gFieldTimers.terrainTimer == 0))
+                {
+                    gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
+                    TryToRevertMimicry();
+                }
+                BattleScriptExecute(BattleScript_GrassyTerrainHeals);
+                effect++;
+            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_PSYCHIC_TERRAIN:
-            effect = EndTurnTerrain(STATUS_FIELD_PSYCHIC_TERRAIN, B_MSG_TERRAINENDS_PSYCHIC);
+            if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN
+              && (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.terrainTimer == 0))
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
+                TryToRevertMimicry();
+                BattleScriptExecute(BattleScript_TerrainEnds);
+                effect++;
+            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_WATER_SPORT:

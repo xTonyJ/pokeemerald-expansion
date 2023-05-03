@@ -15392,7 +15392,7 @@ bool32 CanCamouflage(u8 battlerId)
 
 static void Cmd_settypetoterrain(void)
 {
-    CMD_ARGS(const u8 *failInstr);
+    //CMD_ARGS(const u8 *failInstr);
 
     u8 terrainType;
     switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
@@ -15419,11 +15419,11 @@ static void Cmd_settypetoterrain(void)
         SET_BATTLER_TYPE(gBattlerAttacker, terrainType);
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
 
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr += 5;
     }
     else
     {
-        gBattlescriptCurrInstr = cmd->failInstr;
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
 

@@ -26,7 +26,7 @@
 
 struct PikeRoomNPC
 {
-    u16 graphicsId;
+    u8 graphicsId;
     u8 speechId1;
     u8 speechId2;
     u8 speechId3;

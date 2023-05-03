@@ -1798,7 +1798,7 @@ static const struct LevelUpMove sHaunterLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sGengarLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_SHADOW_PUNCH),
+    LEVEL_UP_MOVE( 0, MOVE_SHADOW_BALL),
     LEVEL_UP_MOVE( 1, MOVE_SHADOW_PUNCH),
     LEVEL_UP_MOVE( 1, MOVE_SMOG),
     LEVEL_UP_MOVE( 1, MOVE_HYPNOSIS),
@@ -7547,6 +7547,7 @@ static const struct LevelUpMove sKirliaLevelUpLearnset[] = {
     LEVEL_UP_MOVE(14, MOVE_LUCKY_CHANT),
     LEVEL_UP_MOVE(16, MOVE_MAGICAL_LEAF),
     LEVEL_UP_MOVE(19, MOVE_HEAL_PULSE),
+    LEVEL_UP_MOVE(24, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(26, MOVE_CALM_MIND),
     LEVEL_UP_MOVE(30, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(33, MOVE_IMPRISON),

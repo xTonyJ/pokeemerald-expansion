@@ -1442,62 +1442,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldM
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedNatuDoll = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
-    .width = 16,
-    .height = 16,
-    .paletteSlot = PALSLOT_NPC_3,
-    .shadowSize = SHADOW_SIZE_S,
-    .inanimate = TRUE,
-    .disableReflectionPaletteLoad = FALSE,
-    .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
-    .anims = sAnimTable_Inanimate,
-    .images = sPicTable_UnusedNatuDoll,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
+//new items
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMagnemiteDoll = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
-    .width = 16,
-    .height = 16,
-    .paletteSlot = PALSLOT_NPC_3,
-    .shadowSize = SHADOW_SIZE_S,
-    .inanimate = TRUE,
-    .disableReflectionPaletteLoad = FALSE,
-    .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
-    .anims = sAnimTable_Inanimate,
-    .images = sPicTable_UnusedMagnemiteDoll,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
-
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedSquirtleDoll = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
-    .width = 16,
-    .height = 16,
-    .paletteSlot = PALSLOT_NPC_1,
-    .shadowSize = SHADOW_SIZE_S,
-    .inanimate = TRUE,
-    .disableReflectionPaletteLoad = FALSE,
-    .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
-    .anims = sAnimTable_Inanimate,
-    .images = sPicTable_UnusedSquirtleDoll,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GoldItemBall = {0xFFFF, OBJ_EVENT_PAL_TAG_NPC_2, OBJ_EVENT_PAL_TAG_NONE, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gObjectEventBaseOam_16x16, sOamTables_16x16, sAnimTable_Inanimate, sPicTable_GoldItemBall, gDummySpriteAffineAnimTable};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MegaStone = {0xFFFF, OBJ_EVENT_PAL_TAG_NPC_3, OBJ_EVENT_PAL_TAG_NONE, 128, 16, 16, 4, SHADOW_SIZE_S, FALSE, FALSE, TRACKS_NONE, &gObjectEventBaseOam_16x16, sOamTables_16x16, sAnimTable_Standard, sPicTable_MegaStone, gDummySpriteAffineAnimTable};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PurpleItemBall = {0xFFFF, OBJ_EVENT_PAL_TAG_NPC_3, OBJ_EVENT_PAL_TAG_NONE, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gObjectEventBaseOam_16x16, sOamTables_16x16, sAnimTable_Inanimate, sPicTable_PurpleItemBall, gDummySpriteAffineAnimTable};
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWooperDoll = {
     .tileTag = TAG_NONE,
