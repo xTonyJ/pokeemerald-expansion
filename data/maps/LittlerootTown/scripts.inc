@@ -910,6 +910,49 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	delay 30
 	return
 
+EventScript_MultichoiceTests::
+	lock
+	faceplayer
+	msgbox LittlerootTown_Text_CanUsePCToStoreItems, MSGBOX_DEFAULT
+	random ITEMS_COUNT
+	bufferitemname STR_VAR_1, VAR_RESULT
+	dynmultipush EventScript_MultichoiceTests_Text_0, VAR_RESULT
+	random ITEMS_COUNT
+	bufferitemname STR_VAR_2, VAR_RESULT
+	dynmultipush EventScript_MultichoiceTests_Text_1, VAR_RESULT
+	random ITEMS_COUNT
+	bufferitemname STR_VAR_3, VAR_RESULT
+	dynmultipush EventScript_MultichoiceTests_Text_2, VAR_RESULT
+	dynmultistack 0, 0, TRUE, 6, FALSE, VAR_0x800A, DYN_MULTICHOICE_CB_SHOW_ITEM
+	giveitem VAR_RESULT
+	buffernumberstring STR_VAR_1, VAR_RESULT
+	msgbox EventScript_MultichoiceTests_Text_0, MSGBOX_DEFAULT
+	closemessage
+	release
+	end
+
+
+EventScript_MultichoiceTests_Text_0:
+	.string "{STR_VAR_1}$"
+
+EventScript_MultichoiceTests_Text_1:
+	.string "{STR_VAR_2}$"
+
+EventScript_MultichoiceTests_Text_2:
+	.string "{STR_VAR_3}$"
+
+EventScript_MultichoiceTests_Text_3:
+	.string "Option 1$"
+
+EventScript_MultichoiceTests_Text_4:
+	.string "Option 2$"
+
+EventScript_MultichoiceTests_Text_5:
+	.string "Option 3$"
+
+EventScript_MultichoiceTests_Text_6:
+	.string "Option 4$"
+
 LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "MOM: {PLAYER}, we're here, honey!\p"
 	.string "Why were you riding in\n"
@@ -937,18 +980,15 @@ LittlerootTown_Text_WearTheseRunningShoes:
 	.string "Hope you catch some good Pokémon!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "Press R to toggle Auto Run\n"
+	.string "Auto Run added to the Secret Menu!\n"
 	.string "It'll put a zip in your step!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "Press R to toggle Auto Run\n"
-	.string "It'll put a zip in your step!\p"
-	.string "MOM: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
-	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "“Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!”$"
+	.string "MOM: Press L to open the Secret Menu\n"
+	.string "It comes with a variety of enhancements!\p"
+	.string "{PLAYER}, I'm so happy for you and\n"
+	.string "your upcoming adventure.\p"
+	.string "I hope you have fun.$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"

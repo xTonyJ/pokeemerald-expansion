@@ -123,6 +123,7 @@
 #define MULTI_FALLARBOR_TENT_RULES         112
 #define MULTI_TAG_MATCH_TYPE               113
 #define MULTI_PKMN_CENTER_TUTOR_SETS       114
+#define MULTI_GRASS_FIRE_WATER             116
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -177,5 +178,11 @@
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
 #define STDSTRING_MEGASTONE        30
+
+// Dynamic Multichoice Callbacks - Credit to SBird
+
+#define DYN_MULTICHOICE_CB_DEBUG      0
+#define DYN_MULTICHOICE_CB_SHOW_ITEM  1
+#define DYN_MULTICHOICE_CB_NONE       255
 
 #endif //GUARD_SCRIPT_MENU_CONSTANTS_H

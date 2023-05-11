@@ -29,6 +29,10 @@ LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
 	.2byte ITEM_TM25  @ Thunder
 	.2byte ITEM_TM14  @ Blizzard
 	.2byte ITEM_TM15  @ Hyper Beam
+	.2byte ITEM_TM06  @ Toxic
+	.2byte ITEM_TM07  @ Hail
+	.2byte ITEM_TM02  @ Dragon Claw
+	.2byte ITEM_TM99  @ Dazzling Gleam
 	.2byte ITEM_NONE
 	release
 	end
@@ -49,6 +53,8 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	.2byte ITEM_TM20  @ Safeguard
 	.2byte ITEM_TM33  @ Reflect
 	.2byte ITEM_TM16  @ Light Screen
+	.2byte ITEM_TM90  @ SUBSTITUTE
+	.2byte ITEM_TM70  @ Aurora Veil
 	.2byte ITEM_NONE
 	release
 	end

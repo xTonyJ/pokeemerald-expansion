@@ -13,18 +13,15 @@ MauvilleCity_Mart_EventScript_Clerk::
 
 	.align 2
 MauvilleCity_Mart_Pokemart:
-	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_MAGNET
+	.2byte ITEM_POWER_ANKLET
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_LINKING_CORD
 	.2byte ITEM_NONE
 	release
 	end

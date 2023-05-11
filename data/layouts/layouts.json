@@ -704,7 +704,7 @@
     {
       "id": "LAYOUT_LAVARIDGE_TOWN_POKEMON_CENTER_1F",
       "name": "LavaridgeTown_PokemonCenter_1F_Layout",
-      "width": 14,
+      "width": 15,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_PokemonCenter",
@@ -4410,6 +4410,16 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_GARDENS",
+      "name": "DewfordGardens_Layout",
+      "width": 15,
+      "height": 23,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Dewford",
+      "border_filepath": "data/layouts/DewfordGardens/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordGardens/map.bin"
     }
   ]
 }

@@ -299,3 +299,16 @@ EventScript_EnableAutoRun::
     end
 AutoRunEnabled:
     .string "Auto Run {COLOR GREEN}Enabled{COLOR DARK_GRAY}.$"
+
+EventScript_DisableRepel::
+    msgbox RepelDisabled MSGBOX_SIGN
+    end
+RepelDisabled:
+    .string "Infinite Repel {COLOR RED}Disabled{COLOR DARK_GRAY}.$"
+    
+EventScript_EnableRepel::
+    msgbox RepelEnabled MSGBOX_SIGN
+    end
+RepelEnabled:
+    .string "Infinite Repel {COLOR GREEN}Enabled{COLOR DARK_GRAY}.\n"
+	.string "Resets when entering new map.$"

@@ -1051,8 +1051,8 @@
 #define FLAG_ITEM_ROUTE_105_SWAMPERTITE                             0x3EB
 #define FLAG_ITEM_ROUTE_106_PROTEIN                                 0x3EC
 #define FLAG_ITEM_ROUTE_109_PP_UP                                   0x3ED
-#define FLAG_ITEM_ROUTE_110_RARE_CANDY                              0x3EE
-#define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF
+#define FLAG_ITEM_ROUTE_110_ZAP_PLATE                               0x3EE
+#define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF // Roost
 #define FLAG_ITEM_ROUTE_111_TM37                                    0x3F0
 #define FLAG_ITEM_ROUTE_111_STARDUST                                0x3F1
 #define FLAG_ITEM_ROUTE_111_HP_UP                                   0x3F2
@@ -1062,7 +1062,7 @@
 #define FLAG_ITEM_ROUTE_114_RARE_CANDY                              0x3F6
 #define FLAG_ITEM_ROUTE_114_PROTEIN                                 0x3F7
 #define FLAG_ITEM_ROUTE_115_SOFT_SAND                               0x3F8
-#define FLAG_ITEM_ROUTE_115_TM01                                    0x3F9
+#define FLAG_ITEM_ROUTE_115_TM01                                    0x3F9 //Focus Punch
 #define FLAG_ITEM_ROUTE_115_IRON                                    0x3FA
 #define FLAG_ITEM_ROUTE_116_ETHER                                   0x3FB
 #define FLAG_ITEM_ROUTE_116_REPEL                                   0x3FC
@@ -1094,11 +1094,11 @@
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE                     0x416
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_PP_UP                          0x417
 #define FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL                          0x418
-#define FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER                          0x419
+#define FLAG_ITEM_RUSTURF_TUNNEL_TM63                               0x419 //Rock Slide
 #define FLAG_ITEM_GRANITE_CAVE_1F_ESCAPE_ROPE                       0x41A
 #define FLAG_ITEM_GRANITE_CAVE_B1F_POKE_BALL                        0x41B
 #define FLAG_ITEM_MT_PYRE_5F_LAX_INCENSE                            0x41C
-#define FLAG_ITEM_GRANITE_CAVE_B2F_MAWILITE                            0x41D
+#define FLAG_ITEM_GRANITE_CAVE_B2F_MAWILITE                         0x41D
 #define FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY                       0x41E
 #define FLAG_ITEM_PETALBURG_WOODS_X_ATTACK                          0x41F
 #define FLAG_ITEM_PETALBURG_WOODS_GREAT_BALL                        0x420
@@ -1218,11 +1218,11 @@
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
 #define FLAG_ITEM_RUSTBOROCITY_DEVONCORP_2F_TM61                    0x493 //Will-o-Wisp
-#define FLAG_ITEM_GRANITECAVE_B2F_TM28                              0x494 // Unused Flag
-#define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
+#define FLAG_ITEM_GRANITECAVE_B2F_TM28                              0x494 //DIG
+#define FLAG_ITEM_DEWFORDGARDENS_TM78                               0x495 //Bulldoze
+#define FLAG_ITEM_ROUTE110_MANECTITE                                0x496
+#define FLAG_ITEM_ROUTE117_METRONOME                                0x497
+#define FLAG_ITEM_ROUTE111_ABSOLITE                                 0x498
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag

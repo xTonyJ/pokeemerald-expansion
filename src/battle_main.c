@@ -2137,107 +2137,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     s32 i, j;
     u8 monsCount;
     u8 friendship;
-
-	/*
-    Dynamic values are always in range (1,100)
-    They will only be used if the normal level of opponent's mons is less than the average user level.
-    Opponents who have both custom moves AND held items will have dynamic range (5,100)
-    otherwise the opponents will have dynamic range (1,96)
-    */
-
     u16 dynamicLevel = 0;
-	
-	// This is used to hold the level's of the player's strongest[1] and weakest[0] Pokemon
-	u8 LevelSpread[] = {0, 0};
-	
-	// This will be used when assigning the level of the opponent's Pokemon
-	u16 PartyLevelAdjust;
-    
-    // Change stuff like this to get the levels you want
-    static const u8 minDynamicLevel = 5;
-    static const u8 maxDynamicLevel = 98;
-    static const u8 levelDifference = 2;
-
-    // Calculates Average of your party's levels
-    for(i = 0; i < PARTY_SIZE; i++)
-    {
-        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
-        {
-            if(i != 0)
-				dynamicLevel /= i;
-            break;
-        }
-        dynamicLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-		if(i == 0)
-		{
-			LevelSpread[0], LevelSpread[1] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-		}
-		else
-		{
-			u8 LevelCheck = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-			if(LevelCheck < LevelSpread[0])
-				LevelSpread[0] = LevelCheck;
-			else if(LevelCheck > LevelSpread[1])
-				LevelSpread[1] = LevelCheck;
-		}
-    }
-    if(i == PARTY_SIZE)
-		dynamicLevel /= i;
-
-	/* The following is used to account for a player having one or two very weak Pokemon
-	   along with some very strong Pokemon. It weights the averaged level more towards the
-	   player's strongest Pokemon
-	*/
-	
-	PartyLevelAdjust = LevelSpread[1] - LevelSpread[0];
-	
-	if(LevelSpread[1] - dynamicLevel < 10)
-	{
-		PartyLevelAdjust = 0;
-	}
-    else if(LevelSpread[1] - dynamicLevel < 20)
-	{
-		PartyLevelAdjust /= 10;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 30)
-	{
-		PartyLevelAdjust /= 5;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 40)
-	{
-		PartyLevelAdjust *= 3;
-		PartyLevelAdjust /= 10;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 50)
-	{
-		PartyLevelAdjust *= 2;
-		PartyLevelAdjust /= 5;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 60)
-	{
-		PartyLevelAdjust /= 2;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 70)
-	{
-		PartyLevelAdjust *= 3;
-		PartyLevelAdjust /= 5;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 80)
-	{
-		PartyLevelAdjust *= 7;
-		PartyLevelAdjust /= 10;
-	}
-	else if(LevelSpread[1] - dynamicLevel < 90)
-	{
-		PartyLevelAdjust *= 4;
-		PartyLevelAdjust /= 5;
-	}
-
-    //Handling values to be always be in the range,
-    // ( minDynamiclevel-levelDifference , maxDynamiclevel+levelDifference )
-    if(dynamicLevel < minDynamicLevel) dynamicLevel = minDynamicLevel;
-    else if(dynamicLevel > maxDynamicLevel) dynamicLevel = maxDynamicLevel;
-
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
 
@@ -2260,28 +2160,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             monsCount = gTrainers[trainerNum].partySize;
         }
 
-		for (i = 0; i < monsCount; i++)
+        for (i = 0; i < monsCount; i++)
         {
-			int rand_diff = Random() % 5;
-			switch(rand_diff)
-			{
-				case 0:
-					rand_diff = 2;
-					break;
-				case 1:
-					rand_diff = 1;
-					break;
-				case 2:
-					rand_diff = 0;
-					break;
-				case 3:
-					rand_diff = -1;
-					break;
-				case 4:
-					rand_diff = -2;
-			}
-			
-			dynamicLevel += rand_diff + PartyLevelAdjust;
 
             if (gTrainers[trainerNum].doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -2304,9 +2184,19 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                if (partyData[i].lvl >= dynamicLevel)
-                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-				else
+                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
+                if (dynamicLevel + partyData[i].lvl > 100)
+                {
+                    dynamicLevel = 100;
+                }
+				else if (dynamicLevel + partyData[i].lvl < 1)
+                {
+                    dynamicLevel = 1;
+                }
+                else
+                {
+                    dynamicLevel = dynamicLevel + partyData[i].lvl;
+                }
 				{
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
@@ -2324,9 +2214,19 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                if (partyData[i].lvl >= dynamicLevel)
-                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-				else
+                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
+                if (dynamicLevel + partyData[i].lvl > 100)
+                {
+                    dynamicLevel = 100;
+                }
+				else if (dynamicLevel + partyData[i].lvl < 1)
+                {
+                    dynamicLevel = 1;
+                }
+                else
+                {
+                    dynamicLevel = dynamicLevel + partyData[i].lvl;
+                }
 				{
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
@@ -2350,9 +2250,19 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-               if (partyData[i].lvl >= dynamicLevel)
-                    CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-				else
+                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
+                if (dynamicLevel + partyData[i].lvl > 100)
+                {
+                    dynamicLevel = 100;
+                }
+				else if (dynamicLevel + partyData[i].lvl < 1)
+                {
+                    dynamicLevel = 1;
+                }
+                else
+                {
+                    dynamicLevel = dynamicLevel + partyData[i].lvl;
+                }
 				{
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
@@ -2427,12 +2337,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 break;
             }
             }
-			dynamicLevel -= rand_diff + PartyLevelAdjust;
         }
-
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
-
     return gTrainers[trainerNum].partySize;
 }
 

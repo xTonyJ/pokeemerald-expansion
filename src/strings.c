@@ -186,7 +186,8 @@ const u8 gMenuText_CheckTag[] = _("CHECK TAG");
 const u8 gMenuText_Confirm[] = _("CONFIRM");
 const u8 gMenuText_Walk[] = _("WALK");
 const u8 gText_Cancel[] = _("CANCEL");
-const u8 gText_Cancel2[] = _("CANCEL");
+const u8 gText_Cancel2[] = _("Cancel");
+const u8 gText_LREVIV[] = _("L/R = EV/IV");
 const u8 gMenuText_Show[] = _("SHOW");
 const u8 gText_EmptyString2[] = _("");
 const u8 gText_Cancel7[] = _("CANCEL"); // Unused
@@ -525,8 +526,8 @@ const u8 gText_EggWillTakeSomeTime[] = _("What will hatch from this?\nIt will ta
 const u8 gText_EggWillHatchSoon[] = _("It moves occasionally.\nIt should hatch soon.");
 const u8 gText_EggAboutToHatch[] = _("It's making sounds.\nIt's about to hatch!");
 const u8 gText_HMMovesCantBeForgotten2[] = _("HM moves can't be\nforgotten now.");
-const u8 gText_XNatureMetAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNatureHatchedAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+const u8 gText_XNatureMetAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature, \nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}, friendship: {DYNAMIC 0}{DYNAMIC 6}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+const u8 gText_XNatureHatchedAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1} friendship: {DYNAMIC 0}{DYNAMIC 6}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
 const u8 gText_XNatureObtainedInTrade[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.");
 const u8 gText_XNatureFatefulEncounter[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
 const u8 gText_XNatureProbablyMetAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
@@ -679,8 +680,10 @@ const u8 gText_GlassDesk[] = _("GLASS DESK");
 const u8 gText_TreeckoDollAndPrice[] = _("TREECKO DOLL 1,000 COINS");
 const u8 gText_TorchicDollAndPrice[] = _("TORCHIC DOLL 1,000 COINS");
 const u8 gText_MudkipDollAndPrice[] = _("MUDKIP DOLL   1,000 COINS");
-const u8 gText_50CoinsAndPrice[] = _("  50 COINS    ¥1,000");
-const u8 gText_500CoinsAndPrice[] = _("500 COINS  ¥10,000");
+const u8 gText_50CoinsAndPrice[] =   _("  50 COINS    ¥500");
+const u8 gText_500CoinsAndPrice[] =  _("500 COINS    ¥5,000");
+const u8 gText_2500CoinsAndPrice[] = _("2500 COINS  ¥25,000");
+const u8 gText_5000CoinsAndPrice[] = _("5000 COINS  ¥50,000");
 const u8 gText_Excellent2[] = _("Excellent");
 const u8 gText_NotSoGood[] = _("Not so good");
 const u8 gText_RedShard[] = _("RED SHARD");
@@ -1993,6 +1996,52 @@ const u8 gText_LearnANewMove[] = _("Learn a new move");
 const u8 gText_RateANickname[] = _("Rate a nickname");
 const u8 gText_TrainEXP[] = _("Train Exp.");
 const u8 gText_ResetEvents[] = _("Reset Events");
+
+// Game Corner Pokemon prizes
+// Rare Pokemon
+const u8 gText_GameCornerMunchlax[] = 	_("Munchlax{CLEAR_TO 0x48}4000 Coins");
+const u8 gText_GameCornerGastly[] = 	_("Gastly {CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerHoundour[] = 	_("Houndour{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerRiolu[] =  	_("Riolu{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerRalts[] =  	_("Ralts{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerAron[] = 	    _("Aron{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerGible[] = 	    _("Gible{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerDitto[] =  	_("Ditto{CLEAR_TO 0x48}3000 Coins");
+const u8 gText_GameCornerCubone[] = 	_("Cubone{CLEAR_TO 0x48}3500 Coins");
+const u8 gText_GameCornerHonedge[] = 	_("Honedge{CLEAR_TO 0x48}5000 Coins");
+const u8 gText_GameCornerSpiritomb[] = 	_("Spiritomb{CLEAR_TO 0x48}4500 Coins");
+const u8 gText_GameCornerBagon[] = 	    _("Bagon{CLEAR_TO 0x48}5000 Coins");
+// Grass Starters
+const u8 gText_GameCornerBulbasaur[] = 	_("Bulbasaur{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerChikorita[] = 	_("Chikorita{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerTreecko[] = 	_("Treecko{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerTurtwig[] = 	_("Turtwig{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerSnivy[] = 		_("Snivy{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerChespin[] = 	_("Chespin{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerRowlet[] = 	_("Rowlet{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerGrookey[] = 	_("Grookey{CLEAR_TO 0x48}2500 Coins");
+// Fire Starters
+const u8 gText_GameCornerCharmander[] = _("Charmander{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerCyndaquil[] = 	_("Cyndaquil{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerTorchic[] = 	_("Torchic{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerChimchar[] = 	_("Chimchar{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerTepig[] = 		_("Tepig{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerFennekin[] = 	_("Fennekin{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerLitten[] = 	_("Litten{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerScorbunny[] = 	_("Scorbunny{CLEAR_TO 0x48}2500 Coins");
+// Water Starters
+const u8 gText_GameCornerSquirtle[] = 	_("Squirtle{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerTotodile[] = 	_("Totodile{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerMudkip[] = 	_("Mudkip{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerPiplup[] = 	_("Piplup{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerOshawott[] = 	_("Oshawott{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerFroakie[] = 	_("Froakie{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerPopplio[] = 	_("Popplio{CLEAR_TO 0x48}2500 Coins");
+const u8 gText_GameCornerSobble[] = 	_("Sobble{CLEAR_TO 0x48}2500 Coins");
+// Starter type selection
+const u8 gText_GrassType[] = _("Grass-type");
+const u8 gText_FireType[] = _("Fire-type");
+const u8 gText_WaterType[] = _("Water-type");
 
 // Starter Tutor Moves
 const u8 gText_GrassPledge[] = _("Grass Pledge");

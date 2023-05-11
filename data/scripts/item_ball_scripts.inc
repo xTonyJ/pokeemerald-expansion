@@ -18,8 +18,8 @@ Route104_EventScript_ItemTM10::
 	finditem ITEM_TM10
 	end
 
-Route104_EventScript_ItemTM09::
-	finditem ITEM_TM09
+Route104_EventScript_ItemTM09:: @StruggleBug
+	finditem ITEM_TM77
 	end
 
 Route104_EventScript_ItemSootheBell::
@@ -46,12 +46,12 @@ Route109_EventScript_ItemPotion::
 	finditem ITEM_POTION
 	end
 
-Route110_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+Route110_EventScript_ItemZapPlate::
+	finditem ITEM_ZAP_PLATE
 	end
 
-Route110_EventScript_ItemDireHit::
-	finditem ITEM_DIRE_HIT
+Route110_EventScript_ItemTM51::
+	finditem ITEM_TM51
 	end
 
 Route110_EventScript_ItemElixir::
@@ -147,11 +147,11 @@ Route116_EventScript_ItemTM67::
 	end
 
 Route117_EventScript_ItemGreatBall::
-	finditem ITEM_GREAT_BALL
+	finditem ITEM_DREAM_BALL
 	end
 
 Route117_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+	finditem ITEM_ELECTRIC_SEED
 	end
 
 Route118_EventScript_ItemHyperPotion::
@@ -346,8 +346,8 @@ RusturfTunnel_EventScript_ItemPokeBall::
 	finditem ITEM_FRIEND_BALL
 	end
 
-RusturfTunnel_EventScript_ItemMaxEther::
-	finditem ITEM_MAX_ETHER
+RusturfTunnel_EventScript_ItemTM63::
+	finditem ITEM_TM63
 	end
 
 GraniteCave_1F_EventScript_ItemEscapeRope::
@@ -664,4 +664,20 @@ RustboroCity_DevonCorp_2F_EventScript_ItemTM61::
 
 GraniteCave_B2F_EventScript_ItemTM28::
 	finditem ITEM_TM28
+	end
+
+DewfordGardens_EventScript_ItemTM78::
+	finditem ITEM_TM78
+	end
+
+Route110_EventScript_ItemManectite::
+	finditem ITEM_MANECTITE
+	end
+
+Route117_EventScript_ItemMetronome::
+	finditem ITEM_METRONOME
+	end
+
+Route117_EventScript_ItemAbsolite::
+	finditem ITEM_ABSOLITE
 	end

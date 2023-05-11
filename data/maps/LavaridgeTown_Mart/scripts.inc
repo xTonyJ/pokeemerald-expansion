@@ -13,15 +13,14 @@ LavaridgeTown_Mart_EventScript_Clerk::
 
 	.align 2
 LavaridgeTown_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_BURN_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_X_SPEED
+	.2byte ITEM_PROTECTOR
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_RAZOR_FANG
+	.2byte ITEM_RAZOR_CLAW
+	.2byte ITEM_DUBIOUS_DISC
+	.2byte ITEM_REAPER_CLOTH
+	.2byte ITEM_DRAGON_SCALE
 	.2byte ITEM_NONE
 	release
 	end

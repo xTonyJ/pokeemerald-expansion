@@ -28,6 +28,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 
 RustboroCity_Gym_EventScript_GiveRockTomb::
 	giveitem ITEM_TM39
+	giveitem ITEM_TM76
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
@@ -206,15 +207,15 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "of your POKéMON to 25.\p"
 	.string "It also enables them to use the HM move\n"
 	.string "CUT outside of battle.\p"
-	.string "Please take this with you, too.$"
+	.string "Please take these with you, too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb:
-	.string "That TECHNICAL MACHINE, TM39,\n"
-	.string "contains ROCK TOMB.\p"
+	.string "TM39 contains ROCK TOMB.\n"
 	.string "It not only inflicts damage by dropping\n"
 	.string "rocks, it also lowers SPEED.\p"
-	.string "If you use a TM, it instantly teaches\n"
-	.string "the move to a POKéMON.\p"
+	.string "TM76 contains STEALTH ROCK.\n"
+	.string "It's a valuable starting move that\n"
+	.string "damages enemies when they switch in.\p"
 	.string "Remember, a TM can be used infinitely,\n"
 	.string "so, use it.$"
 

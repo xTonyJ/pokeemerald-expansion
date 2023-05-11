@@ -242,6 +242,7 @@ gSpecials::
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
+	def_special GetLeadMonFriendshipScore2
 	def_special CallFrontierUtilFunc
 	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
@@ -541,3 +542,5 @@ gSpecials::
 	def_special GetBattleFrontierTutorMoveIndex
 	@def_special ChangePokemonNature
 	@def_special BufferChosenMonNature
+	def_special DebugAction_Flags_EncounterOnOff
+	def_special AutoRun

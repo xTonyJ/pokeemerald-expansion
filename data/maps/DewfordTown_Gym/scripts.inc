@@ -170,6 +170,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 
 DewfordTown_Gym_EventScript_GiveBulkUp::
 	giveitem ITEM_TM08
+	giveitem ITEM_TM60
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
@@ -177,6 +178,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp::
 
 DewfordTown_Gym_EventScript_GiveBulkUp2:
 	giveitem ITEM_TM08
+	giveitem ITEM_TM60
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
@@ -405,14 +407,15 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
 	.string "to reach Level 35\p"
 	.string "And, you'll be able to use the HM move\n"
 	.string "FLASH outside of battle.\p"
-	.string "If you'd like, use this TECHNICAL\n"
-	.string "MACHINE, too.$"
+	.string "Also, try out my favorite Technical\n"
+	.string "Machines, too.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp:
-	.string "That TM08 contains BULK UP.\p"
+	.string "TM08 contains BULK UP.\p"
 	.string "It's a move that raises both ATTACK\n"
 	.string "and DEFENSE stats.\p"
-	.string "… … … … … …$"
+	.string "and TM60 contains DRAIN PUNCH.\p"
+	.string "It siphons enemy hp with a strong punch!$"
 
 DewfordTown_Gym_Text_RegisteredBrawly:
 	.string "Registered GYM LEADER BRAWLY\n"

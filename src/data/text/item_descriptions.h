@@ -109,9 +109,9 @@ static const u8 sHeavyBallDesc[] = _(
 
 static const u8 sDreamBallDesc[] = _(
 #if B_DREAM_BALL_MODIFIER >= GEN_8
-    "A Ball that works\n"
-    "well on sleeping\n"
-    "Pokémon.");
+    "A Ball that gives\n"
+    "Pokémon their\n"
+    "hidden ability.");
 #else
     "A Poké Ball used in\n"
     "the Entree Forest.");

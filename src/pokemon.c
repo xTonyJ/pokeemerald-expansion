@@ -8550,6 +8550,12 @@ u32 GetMonFriendshipScore(struct Pokemon *pokemon)
     return FRIENDSHIP_NONE;
 }
 
+u32 GetMonFriendshipScore2(struct Pokemon *pokemon)
+{
+    u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
+    return friendshipScore;
+}
+
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 {
     struct PokemonSubstruct0 *old0, *new0;

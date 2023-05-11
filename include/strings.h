@@ -1210,6 +1210,8 @@ extern const u8 gText_TM24AndPrice[];
 extern const u8 gText_TM13AndPrice[];
 extern const u8 gText_50CoinsAndPrice[];
 extern const u8 gText_500CoinsAndPrice[];
+extern const u8 gText_2500CoinsAndPrice[];
+extern const u8 gText_5000CoinsAndPrice[];
 extern const u8 gText_Excellent2[];
 extern const u8 gText_NotSoGood[];
 extern const u8 gText_LilycoveCity[];
@@ -2150,6 +2152,7 @@ extern const u8 gText_Mail[];
 extern const u8 gText_Take2[];
 extern const u8 gText_Read2[];
 extern const u8 gText_Cancel2[];
+extern const u8 gText_LREVIV[];
 extern const u8 gText_Shift[];
 extern const u8 gText_SendOut[];
 extern const u8 gText_Enter[];
@@ -3319,5 +3322,50 @@ extern const u8 gText_LearnANewMove[];
 extern const u8 gText_RateANickname[];
 extern const u8 gText_TrainEXP[];
 extern const u8 gText_ResetEvents[];
+
+// Mauville Game Corner prizes
+extern const u8 gText_GameCornerMunchlax[];
+extern const u8 gText_GameCornerGastly[];
+extern const u8 gText_GameCornerHoundour[];
+extern const u8 gText_GameCornerRiolu[];
+extern const u8 gText_GameCornerRalts[];
+extern const u8 gText_GameCornerAron[];
+extern const u8 gText_GameCornerGible[];
+extern const u8 gText_GameCornerDitto[];
+extern const u8 gText_GameCornerCubone[];
+extern const u8 gText_GameCornerHonedge[];
+extern const u8 gText_GameCornerSpiritomb[];
+extern const u8 gText_GameCornerBagon[];
+
+extern const u8 gText_GameCornerBulbasaur[];
+extern const u8 gText_GameCornerChikorita[];
+extern const u8 gText_GameCornerTreecko[];
+extern const u8 gText_GameCornerTurtwig[];
+extern const u8 gText_GameCornerSnivy[];
+extern const u8 gText_GameCornerChespin[];
+extern const u8 gText_GameCornerRowlet[];
+extern const u8 gText_GameCornerGrookey[];
+
+extern const u8 gText_GameCornerCharmander[];
+extern const u8 gText_GameCornerCyndaquil[];
+extern const u8 gText_GameCornerTorchic[];
+extern const u8 gText_GameCornerChimchar[];
+extern const u8 gText_GameCornerTepig[];
+extern const u8 gText_GameCornerFennekin[];
+extern const u8 gText_GameCornerLitten[];
+extern const u8 gText_GameCornerScorbunny[];
+
+extern const u8 gText_GameCornerSquirtle[];
+extern const u8 gText_GameCornerTotodile[];
+extern const u8 gText_GameCornerMudkip[];
+extern const u8 gText_GameCornerPiplup[];
+extern const u8 gText_GameCornerOshawott[];
+extern const u8 gText_GameCornerFroakie[];
+extern const u8 gText_GameCornerPopplio[];
+extern const u8 gText_GameCornerSobble[];
+
+extern const u8 gText_GrassType[];
+extern const u8 gText_FireType[];
+extern const u8 gText_WaterType[];
 
 #endif // GUARD_STRINGS_H

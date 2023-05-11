@@ -4,6 +4,9 @@ VerdanturfTown_FriendshipRatersHouse_MapScripts::
 VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater::
 	lock
 	faceplayer
+	@specialvar VAR_RESULT, GetLeadMonFriendshipScore
+	@buffernumberstring STR_VAR_1, VAR_RESULT
+	@setvar VAR_0x8004, VAR_RESULT
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	switch VAR_RESULT
@@ -63,7 +66,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	end
 
 VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou:
-	.string "Let me see your POKéMON.\n"
+	.string "Hey {PLAYER}, let me see your POKéMON.\n"
 	.string "I'll check to see how much it likes you.\p"
 	.string "Oh.\n"
 	.string "Your POKéMON…$"

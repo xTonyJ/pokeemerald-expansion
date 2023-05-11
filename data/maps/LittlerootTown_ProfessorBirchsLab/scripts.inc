@@ -759,7 +759,9 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
 	.string "Whenever my kid catches a rare POKéMON\n"
 	.string "and records its data in the POKéDEX,\l"
 	.string "why, {RIVAL} looks for me while I'm out\l"
-	.string "doing fieldwork, and shows me.$"
+	.string "doing fieldwork, and shows me.\p"
+	.string "Also! Let me enable a new Secret Menu\n"
+	.string "option for you, the Infinite Repel!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
 	.string "PROF. BIRCH: Countless POKéMON\n"

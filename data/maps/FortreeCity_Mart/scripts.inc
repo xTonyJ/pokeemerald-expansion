@@ -13,16 +13,19 @@ FortreeCity_Mart_EventScript_Clerk::
 
 	.align 2
 FortreeCity_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_REVIVE
-	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_WOOD_MAIL
+	.2byte ITEM_UPGRADE
+	.2byte ITEM_METAL_POWDER
+	.2byte ITEM_LEEK
+	.2byte ITEM_LIGHT_BALL
+	.2byte ITEM_THICK_CLUB
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_PRISM_SCALE
+	.2byte ITEM_SACHET
+	.2byte ITEM_WHIPPED_DREAM
 	.2byte ITEM_NONE
 	release
 	end

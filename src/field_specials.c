@@ -86,7 +86,6 @@ static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
-static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
 static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
 static EWRAM_DATA u8 sBattlePointsWindowId = 0;
@@ -95,7 +94,7 @@ static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
-
+EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
@@ -949,6 +948,11 @@ u16 GetWeekCount(void)
 }
 
 u8 GetLeadMonFriendshipScore(void)
+{
+    return GetMonFriendshipScore(&gPlayerParty[GetLeadMonIndex()]);
+}
+
+u8 GetLeadMonFriendshipScore2(void)
 {
     return GetMonFriendshipScore(&gPlayerParty[GetLeadMonIndex()]);
 }
@@ -2441,6 +2445,28 @@ void ShowScrollableMultichoice(void)
             task->tKeepOpenAfterSelect = FALSE;
             task->tTaskId = taskId;
             break;
+    case SCROLL_MULTI_GAMECORNER_POKEMON:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 12;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_GAMECORNER_GRASS_STARTERS:
+        case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
+        case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 8;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
@@ -2767,6 +2793,58 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_TutorMoveSet7,
         gText_Exit
     },
+    [SCROLL_MULTI_GAMECORNER_POKEMON] =
+    {
+        gText_GameCornerMunchlax,
+        gText_GameCornerGastly,
+        gText_GameCornerHoundour,
+        gText_GameCornerRiolu,
+        gText_GameCornerRalts,
+        gText_GameCornerAron,
+        gText_GameCornerGible,
+        gText_GameCornerDitto,
+        gText_GameCornerCubone,
+        gText_GameCornerHonedge,
+        gText_GameCornerSpiritomb,
+        gText_GameCornerBagon,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
+    {
+        gText_GameCornerBulbasaur,
+        gText_GameCornerChikorita,
+        gText_GameCornerTreecko,
+        gText_GameCornerTurtwig,
+        gText_GameCornerSnivy,
+        gText_GameCornerChespin,
+        gText_GameCornerRowlet,
+        gText_GameCornerGrookey,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
+    {
+        gText_GameCornerCharmander,
+        gText_GameCornerCyndaquil,
+        gText_GameCornerTorchic,
+        gText_GameCornerChimchar,
+        gText_GameCornerTepig,
+        gText_GameCornerFennekin,
+        gText_GameCornerLitten,
+        gText_GameCornerScorbunny,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
+    {
+        gText_GameCornerSquirtle,
+        gText_GameCornerTotodile,
+        gText_GameCornerMudkip,
+        gText_GameCornerPiplup,
+        gText_GameCornerOshawott,
+        gText_GameCornerFroakie,
+        gText_GameCornerPopplio,
+        gText_GameCornerSobble,
+        gText_Exit
+    },
     [SCROLL_MULTI_POKE_CENTER_TUTOR] = 
     {
         gText_RememberAMove,
@@ -2784,7 +2862,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     struct WindowTemplate template;
     struct Task *task = &gTasks[taskId];
 
-    sScrollableMultichoice_ScrollOffset = 0;
+    gScrollableMultichoice_ScrollOffset = 0;
     sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0);
     ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
@@ -2862,7 +2940,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
         u16 selection;
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &selection, NULL);
-        sScrollableMultichoice_ScrollOffset = selection;
+        gScrollableMultichoice_ScrollOffset = selection;
         ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
         HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sFrontierExchangeCorner_NeverRead);
         FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection);
@@ -2983,7 +3061,7 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         template.secondY = task->tHeight * 8 + 10;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->tNumItems - task->tMaxItemsOnScreen;
-        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
+        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
     }
 }
 

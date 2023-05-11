@@ -4237,8 +4237,8 @@ static void Cmd_getexp(void)
         else
         {
             // Print Exp gain message once, only after KO, and only if something can gain Exp
-            /*if (!PartyIsMaxLevel())
-                PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);*/
+            //if (!PartyIsMaxLevel())
+                //PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
             
             gBattleScripting.getexpState++;
             gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
@@ -7437,13 +7437,13 @@ static void Cmd_yesnoboxlearnmove(void)
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
-                if (IsHMMove2(moveId))
+                /*if (IsHMMove2(moveId))
                 {
                     PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
                     gBattleScripting.learnMoveState = 6;
-                }
-                else
-                {
+                }*/
+                //else
+                //{
                     gBattlescriptCurrInstr = cmd->forgotMovePtr;
 
                     PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
@@ -7463,7 +7463,7 @@ static void Cmd_yesnoboxlearnmove(void)
                         RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
                         SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
                     }
-                }
+                //}
             }
         }
         break;
@@ -15768,6 +15768,16 @@ static void Cmd_handleballthrow(void)
                 gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
             }
+            else if (gLastUsedItem == ITEM_DREAM_BALL) // Give Pokemon their Hidden Ability when caught in a Dream Ball
+            {   
+                u8 Ability = 2;
+                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_ABILITY_NUM, &Ability);
+            }
+            if (gLastUsedItem == ITEM_FRIEND_BALL)
+            {   
+                u8 Friendship= 200;
+                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_FRIENDSHIP, &Friendship);
+            }    
         }
         else // mon may be caught, calculate shakes
         {
@@ -15821,6 +15831,16 @@ static void Cmd_handleballthrow(void)
                     HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], gBattlerPartyIndexes[gBattlerTarget], STATUS1_ANY, gBattlerTarget);
                     gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
                     SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
+                }
+                else if (gLastUsedItem == ITEM_DREAM_BALL) // Give Pokemon their Hidden Ability when caught in a Dream Ball
+                {
+                    u8 Ability = 2;
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_ABILITY_NUM, &Ability);
+                }
+                else if (gLastUsedItem == ITEM_FRIEND_BALL)
+                {
+                    u8 Friendship= 200;
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_FRIENDSHIP, &Friendship);
                 }
             }
             else // not caught
