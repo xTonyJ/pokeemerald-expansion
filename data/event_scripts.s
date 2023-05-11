@@ -1008,43 +1008,60 @@ Common_EventScript_LegendaryFlewAway::
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 EventScript_QOLMenu::
-	dynmultipush EventScript_MultichoiceTests_Text_9, 0
-	dynmultipush EventScript_MultichoiceTests_Text_10, 1
-	goto_if_set FLAG_ADVENTURE_STARTED, EventScript_MultichoiceTests_3
-EventScript_MultichoiceTests_1:
+	dynmultipush EventScript_MultichoiceTests_Text_0, 0
+	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_MultichoiceTests_1
+	call_if_set FLAG_ADVENTURE_STARTED, EventScript_MultichoiceTests_2
+	call_if_set FLAG_RIVAL_ROUTE_110, EventScript_MultichoiceTests_3
+@EventScript_MultichoiceTests:
 	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
 	switch VAR_RESULT
 	case 0, EventScript_AutoRun
-	@case 1, EventScript_PokeVial
+	case 1, EventScript_PokeVial
 	case 2, EventScript_InfiniteRepel
-	@case 3, EventScript_StartMenu_PCAccess
+	case 3, EventScript_Fly
 	@case 4, EventScript_StartMenu_PokenavAccess
 	end
 	return
 
-EventScript_MultichoiceTests_3:
-	dynmultipush EventScript_MultichoiceTests_Text_12, 2
-	goto EventScript_MultichoiceTests_1
+EventScript_MultichoiceTests_1:
+	dynmultipush EventScript_MultichoiceTests_Text_1, 1
+	return
 
-EventScript_MultichoiceTests_Text_9:
+EventScript_MultichoiceTests_2:
+	dynmultipush EventScript_MultichoiceTests_Text_2, 2
+	return
+
+EventScript_MultichoiceTests_3:
+	dynmultipush EventScript_MultichoiceTests_Text_3, 3
+	return
+
+EventScript_MultichoiceTests_Text_0:
 	.string "Auto Run$"
 
-EventScript_MultichoiceTests_Text_10:
-	.string "Poke Vial$"
+EventScript_MultichoiceTests_Text_1:
+	.string "Poké Vial$"
 
-EventScript_MultichoiceTests_Text_12:
+EventScript_MultichoiceTests_Text_2:
 	.string "Infinite Repel$"
 
-EventScript_MultichoiceTests_Text_11:
-	.string "Secret option$"
+EventScript_MultichoiceTests_Text_3:
+	.string "Fly$"
 
 EventScript_AutoRun::
 	special AutoRun
 	end
 
+EventScript_PokeVial::
+	special SecretMenu_PokeVial
+	end
+
 EventScript_InfiniteRepel::
 	special DebugAction_Flags_EncounterOnOff
-	end	
+	end
+
+EventScript_Fly::
+	special SecretMenu_Fly
+	end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

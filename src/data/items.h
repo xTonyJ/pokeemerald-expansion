@@ -10049,15 +10049,17 @@ const struct Item gItems[] =
         .flingPower = 30,
     },
 
-    [ITEM_BUG_TERA_SHARD] =
+    [ITEM_POKE_VIAL] =
     {
-        .name = _("Bug TeraShard"),
-        .itemId = ITEM_BUG_TERA_SHARD,
+        .name = _("Poké Vial"),
+        .itemId = ITEM_POKE_VIAL,
         .price = 0,
-        .description = sTeraShardDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffectParam = 0,
+        .description = sPokeVialDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_PokeVial,
     },
 
     [ITEM_DARK_TERA_SHARD] =

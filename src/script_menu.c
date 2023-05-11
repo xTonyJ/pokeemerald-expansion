@@ -4,8 +4,10 @@
 #include "field_effect.h"
 #include "field_specials.h"
 #include "item.h"
+#include "item_use.h"
 #include "menu.h"
 #include "palette.h"
+#include "region_map.h"
 #include "script.h"
 #include "script_menu.h"
 #include "sound.h"
@@ -1095,6 +1097,8 @@ void GetPKMNCenterMoveListMultichoice(void)
         gSpecialVar_Result = sPKMNCenterMoveTutorLists[gSpecialVar_Result];
     }
 }
+
+//Secret menu functions
 extern const u8 EventScript_DisableRepel[];
 extern const u8 EventScript_EnableRepel[];
 void DebugAction_Flags_EncounterOnOff(void)
@@ -1133,6 +1137,11 @@ void AutoRun(void)
         gSaveBlock2Ptr->autoRun = TRUE;
         ScriptContext_SetupScript(EventScript_EnableAutoRun);
     }
+}
+
+void SecretMenu_Fly(void)
+{
+    SetMainCallback2(CB2_OpenFlyMap);
 }
 
 #define tState       data[0]

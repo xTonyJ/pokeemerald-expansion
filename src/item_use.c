@@ -35,6 +35,7 @@
 #include "script.h"
 #include "sound.h"
 #include "strings.h"
+#include "script_pokemon_util.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
@@ -70,6 +71,7 @@ static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
 static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
+static void ItemUseOnFieldCB_PokeVial(u8 taskId);
 static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
@@ -1038,6 +1040,49 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 {
     gItemUseCB = ItemUseCB_EvolutionStone;
     SetUpItemUseCallback(taskId);
+}
+//Poke Vial in the bag menu
+void ItemUseOutOfBattle_PokeVial(u8 taskId)
+{
+    if (VarGet(VAR_POKE_VIAL_CHARGES) == 0)
+    {
+        if (!gTasks[taskId].tUsingRegisteredKeyItem)
+        {
+            DisplayItemMessage(taskId, 1, gText_PokeVialEmpty, CloseItemMessage);
+        }
+        else
+        {
+            DisplayItemMessageOnField(taskId, gText_PokeVialEmpty, Task_CloseCantUseKeyItemMessage);
+        }
+    }
+    else
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_PokeVial;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+}
+//Poke Vial in the bag menu
+static void ItemUseOnFieldCB_PokeVial(u8 taskId)
+{
+    PlaySE(SE_USE_ITEM);
+    HealPlayerParty();
+    VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+    DisplayItemMessageOnField(taskId, gText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
+}
+//Poke Vial in the secret menu
+extern const u8 EventScript_PokeVialNoCharges[];
+void SecretMenu_PokeVial(void)
+{
+    if (VarGet(VAR_POKE_VIAL_CHARGES) == 0)
+    {
+        ScriptContext_SetupScript(EventScript_PokeVialNoCharges); //No charges message if empty
+    }
+    else
+    {
+        PlaySE(SE_USE_ITEM);
+        HealPlayerParty();
+        VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+    }
 }
 
 static u32 GetBallThrowableState(void)

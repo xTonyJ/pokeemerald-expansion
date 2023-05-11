@@ -544,3 +544,5 @@ gSpecials::
 	@def_special BufferChosenMonNature
 	def_special DebugAction_Flags_EncounterOnOff
 	def_special AutoRun
+	def_special SecretMenu_PokeVial
+	def_special SecretMenu_Fly

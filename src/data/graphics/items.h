@@ -1789,6 +1789,9 @@ const u32 gItemIconPalette_DynamaxBand[] = INCBIN_U32("graphics/items/icon_palet
 
 // Misc. Key Items
 
+const u32 gItemIcon_PokeVial[] = INCBIN_U32("graphics/items/icons/poke_vial.4bpp.lz");
+const u32 gItemIconPalette_PokeVial[] = INCBIN_U32("graphics/items/icon_palettes/poke_vial.gbapal.lz");
+
 const u32 gItemIcon_Bicycle[] = INCBIN_U32("graphics/items/icons/bicycle.4bpp.lz");
 const u32 gItemIconPalette_Bicycle[] = INCBIN_U32("graphics/items/icon_palettes/bicycle.gbapal.lz");
 

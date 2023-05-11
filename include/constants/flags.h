@@ -167,7 +167,7 @@
 #define FLAG_MR_BRINEY_SAILING_INTRO         0x93
 #define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
 #define FLAG_DELIVERED_DEVON_GOODS           0x95
-#define FLAG_RECEIVED_CONTEST_PASS           0x96 // Unused, leftover from R/S
+#define FLAG_RECEIVED_POKE_VIAL              0x96 //Flag to enable Poke Vial on Secret Menu
 #define FLAG_RECEIVED_CASTFORM               0x97
 #define FLAG_RECEIVED_SUPER_ROD              0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
@@ -651,7 +651,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
+#define FLAG_RIVAL_ROUTE_110  0x264 // Unlocks Fly
 #define B_FLAG_NO_BAG_USE  0x265 // No Bag use
 #define FLAG_UNUSED_0x266  0x266 // Unused Flag
 #define FLAG_UNUSED_0x267  0x267 // Unused Flag

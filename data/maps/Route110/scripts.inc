@@ -464,6 +464,7 @@ Route110_EventScript_BrendanDefeated::
 
 Route110_EventScript_GiveItemfinder::
 	giveitem ITEM_DOWSING_MACHINE
+	setflag FLAG_RIVAL_ROUTE_110
 	return
 
 Route110_EventScript_RivalExit::
@@ -780,6 +781,9 @@ Route110_Text_MayExplainItemfinder:
 	.string "MAY: That's an ITEMFINDER.\p"
 	.string "Try it out. If there is an item that's\n"
 	.string "not visible, it emits a sound.\p"
+	.string "Also, check out your Secret Menu!\p"
+	.string "My dad enabled this for me,\n"
+	.string "it'll let you visit previous towns.\p"
 	.string "Okay, {PLAYER}{KUN}, let's meet again!\p"
 	.string "I know it's a little silly coming from\n"
 	.string "me, but I think you should train a lot\l"
@@ -787,7 +791,7 @@ Route110_Text_MayExplainItemfinder:
 
 Route110_Text_BrendanLetsBattle:
 	.string "BRENDAN: Hey, {PLAYER}.\n"
-	.string "So this is where you were.\l"
+	.string "Figured you'd get here eventually.\l"
 	.string "How's it going?\p"
 	.string "Have you been raising your POKéMON?\n"
 	.string "I'll check for you.$"
@@ -808,8 +812,11 @@ Route110_Text_BrendanExplainItemfinder:
 	.string "aren't visible.\p"
 	.string "If it senses something, it emits\n"
 	.string "a sound.\p"
+	.string "Also, check out your Secret Menu.\p"
+	.string "My dad enabled this for me,\n"
+	.string "it'll let you visit previous towns.\p"
 	.string "Anyway, I'm off to look for new\n"
-	.string "POKéMON.$"
+	.string "POKéMON. See ya soon.$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a BIKE\n"

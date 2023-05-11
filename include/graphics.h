@@ -8741,6 +8741,8 @@ extern const u32 gItemIconPalette_ZPowerRing[];
 extern const u32 gItemIcon_DynamaxBand[];
 extern const u32 gItemIconPalette_DynamaxBand[];
 // Misc. Key Items
+extern const u32 gItemIcon_PokeVial[];
+extern const u32 gItemIconPalette_PokeVial[];
 extern const u32 gItemIcon_Bicycle[];
 extern const u32 gItemIconPalette_Bicycle[];
 extern const u32 gItemIcon_MachBike[];

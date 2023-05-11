@@ -312,3 +312,10 @@ EventScript_EnableRepel::
 RepelEnabled:
     .string "Infinite Repel {COLOR GREEN}Enabled{COLOR DARK_GRAY}.\n"
 	.string "Resets when entering new map.$"
+
+EventScript_PokeVialNoCharges::
+    msgbox NoCharges MSGBOX_SIGN
+    end
+NoCharges:
+    .string "The Poké Vial is empty.\n"
+	.string "Refill it at a Pokémon Center.$"
