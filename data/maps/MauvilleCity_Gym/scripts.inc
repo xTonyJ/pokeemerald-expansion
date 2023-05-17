@@ -113,6 +113,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 
 MauvilleCity_Gym_EventScript_GiveShockWave2::
 	giveitem ITEM_TM34
+	giveitem ITEM_TM72
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
@@ -120,7 +121,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2::
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave::
-	giveitem ITEM_TM34
+	giveitem ITEM_TM16
 	giveitem ITEM_TM72
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
@@ -365,9 +366,9 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "You should take these, too!$"
 
 MauvilleCity_Gym_Text_ExplainShockWave:
-	.string "That TM34 there contains SHOCK WAVE.\p"
-	.string "It never misses!\p"
-	.string "Also, TM72 contains VOLT SWITCH.\p"
+	.string "That TM16 there contains Light Screen.\p"
+	.string "It raises your team's SP DEF!\p"
+	.string "Also, TM72 contains Volt Switch.\p"
 	.string "your POKéMON will retreat to the\n"
 	.string "party after using it.$"
 

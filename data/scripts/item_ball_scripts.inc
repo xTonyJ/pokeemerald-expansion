@@ -82,8 +82,8 @@ Route113_EventScript_ItemMaxEther::
 	finditem ITEM_MAX_ETHER
 	end
 
-Route113_EventScript_ItemSuperRepel::
-	finditem ITEM_SUPER_REPEL
+Route113_EventScript_ItemTM91::
+	finditem ITEM_TM91
 	end
 
 Route113_EventScript_ItemHyperPotion::
@@ -110,12 +110,12 @@ Route115_EventScript_ItemTM01::
 	finditem ITEM_TM01
 	end
 
-Route115_EventScript_ItemIron::
-	finditem ITEM_IRON
+Route115_EventScript_ItemCharizarditeY::
+	finditem ITEM_CHARIZARDITE_Y
 	end
 
-Route115_EventScript_ItemGreatBall::
-	finditem ITEM_GREAT_BALL
+Route115_EventScript_ItemDragonFang::
+	finditem ITEM_DRAGON_FANG
 	end
 
 Route115_EventScript_ItemHealPowder::
@@ -366,12 +366,12 @@ GraniteCave_B2F_EventScript_ItemRareCandy::
 	finditem ITEM_RARE_CANDY
 	end
 
-JaggedPass_EventScript_ItemBurnHeal::
-	finditem ITEM_BURN_HEAL
+JaggedPass_EventScript_ItemTM11::
+	finditem ITEM_TM11
 	end
 
 FieryPath_EventScript_ItemFireStone::
-	finditem ITEM_FIRE_STONE
+	finditem ITEM_BLAZIKENITE
 	end
 
 FieryPath_EventScript_ItemTM06::
@@ -386,8 +386,8 @@ MeteorFalls_1F_1R_EventScript_ItemFullHeal::
 	finditem ITEM_FULL_HEAL
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemMoonStone::
-	finditem ITEM_MOON_STONE
+MeteorFalls_1F_1R_EventScript_ItemTM82::
+	finditem ITEM_TM82
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemPPUP::

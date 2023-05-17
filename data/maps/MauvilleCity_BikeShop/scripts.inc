@@ -210,9 +210,10 @@ MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
 	.string "to feel the wind with their bodies!\p"
 	.string "And an ACRO BIKE is for those who\n"
 	.string "prefer technical rides!\p"
-	.string "I'm a real sweetheart, so you can\n"
-	.string "have whichever one you like!\p"
-	.string "Which one will you choose?$"
+	.string "I'm a real sweetheart, so I'll allow\n"
+	.string "you to have both at the same time!\p"
+	.string "No matter your choice, press R while\p"
+	.string "riding to switch bikes$"
 
 MauvilleCity_BikeShop_Text_ChoseMachBike:
 	.string "{PLAYER} chose the MACH BIKE.$"

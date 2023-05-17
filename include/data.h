@@ -55,14 +55,14 @@ struct TrainerMonCustomized
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
-    u8 lvl;
+    s8 lvl;
     u16 species;
 };
 
 struct TrainerMonItemDefaultMoves
 {
     u16 iv;
-    u8 lvl;
+    s8 lvl;
     u16 species;
     u16 heldItem;
 };
@@ -70,7 +70,7 @@ struct TrainerMonItemDefaultMoves
 struct TrainerMonNoItemCustomMoves
 {
     u16 iv;
-    u8 lvl;
+    s8 lvl;
     u16 species;
     u16 moves[MAX_MON_MOVES];
 };
