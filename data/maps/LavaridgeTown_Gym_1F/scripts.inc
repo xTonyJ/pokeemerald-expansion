@@ -85,6 +85,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	giveitem ITEM_TM50
+	giveitem ITEM_TM35
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
@@ -93,6 +94,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
 	giveitem ITEM_TM50
+	giveitem ITEM_TM35
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
@@ -336,13 +338,11 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "If you have a HEAT BADGE, all POKéMON\n"
-	.string "up to Level 50, even those you get in\l"
-	.string "trades from other people, will obey\l"
-	.string "you completely.\p"
+	.string "can now reach level 55.\p"
 	.string "And, it lets POKéMON use the HM move\n"
 	.string "STRENGTH outside of battle.\p"
-	.string "This is a token of my appreciation.\n"
-	.string "Don't be shy about taking it!$"
+	.string "Here, a token of my appreciation.\n"
+	.string "Don't be shy about taking them!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat:
 	.string "That TM50 contains OVERHEAT.\p"
@@ -350,7 +350,10 @@ LavaridgeTown_Gym_1F_Text_ExplainOverheat:
 	.string "the opponent.\p"
 	.string "But it also sharply cuts the SP. ATK\n"
 	.string "of the POKéMON using it. It might not\l"
-	.string "be suitable for longer battles.$"
+	.string "be suitable for longer battles.\p"
+	.string "Also, TM35 contains Flamethrower.\p"
+	.string "This move deals high damage and\n"
+	.string "it's one of my favorites!$"
 
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "Registered GYM LEADER FLANNERY\n"
