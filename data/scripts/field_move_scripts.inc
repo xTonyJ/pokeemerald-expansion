@@ -28,6 +28,117 @@ EventScript_CutTreeDown::
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
+	random 3
+	switch VAR_RESULT
+	case 0, EventScript_CutTreeEncounter
+	case 1, EventScript_CutTreeItem
+	case 2, EventScript_CancelCut
+	releaseall
+	end
+
+EventScript_CutTreeEncounter:: @Inclement Emerald
+	compare VAR_REPEL_STEP_COUNT, 0
+	goto_if_gt EventScript_CancelCut
+	special RockSmashWildEncounter
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_CancelCut
+	waitstate
+	releaseall
+	end
+
+EventScript_CutTreeItem:: @Inclement Emerald
+	random 14
+	switch VAR_RESULT
+	case 0, EventScript_CutTreeMiracleSeed
+	case 1, EventScript_CutTreeCharcoal
+	case 2, EventScript_CutTreeMentalHerb
+	case 3, EventScript_CutTreePowerHerb
+	case 4, EventScript_CutTreeWhiteHerb
+	case 5, EventScript_CutTreeRevivalHerb
+	case 6, EventScript_CutTreeEnergyRoot
+	case 7, EventScript_CutTreeTerrainSeed
+	case 8, EventScript_CutTreeTinyMushroom
+	case 9, EventScript_CutTreeBigMushroom
+	case 10, EventScript_CutTreeTypeBerry
+	case 11, EventScript_CutTreeEVBerry
+	case 12, EventScript_CutTreeStick
+	case 13, EventScript_CutTreeBigRoot
+	releaseall
+	end
+
+EventScript_CutTreeMiracleSeed::
+	finditem ITEM_MIRACLE_SEED
+	releaseall
+	end
+
+EventScript_CutTreeCharcoal::
+	finditem ITEM_CHARCOAL
+	releaseall
+	end
+
+EventScript_CutTreeMentalHerb::
+	finditem ITEM_MENTAL_HERB
+	releaseall
+	end
+	
+EventScript_CutTreePowerHerb::
+	finditem ITEM_POWER_HERB
+	releaseall
+	end
+	
+EventScript_CutTreeWhiteHerb::
+	finditem ITEM_WHITE_HERB
+	releaseall
+	end
+	
+EventScript_CutTreeRevivalHerb::
+	finditem ITEM_REVIVAL_HERB
+	releaseall
+	end
+	
+EventScript_CutTreeEnergyRoot::
+	finditem ITEM_ENERGY_ROOT
+	releaseall
+	end
+	
+EventScript_CutTreeTerrainSeed::
+	random 4
+	addvar VAR_RESULT, ITEM_ELECTRIC_SEED
+	finditem VAR_RESULT
+	releaseall
+	end
+	
+EventScript_CutTreeTinyMushroom::
+	finditem ITEM_TINY_MUSHROOM
+	releaseall
+	end
+	
+EventScript_CutTreeBigMushroom::
+	finditem ITEM_BIG_MUSHROOM
+	releaseall
+	end
+	
+EventScript_CutTreeTypeBerry::
+	random 18
+	addvar VAR_RESULT, ITEM_OCCA_BERRY
+	finditem VAR_RESULT
+	releaseall
+	end
+
+EventScript_CutTreeEVBerry::
+	random 6
+	addvar VAR_RESULT, ITEM_POMEG_BERRY
+	finditem VAR_RESULT
+	releaseall
+	end
+
+EventScript_CutTreeStick::
+	finditem ITEM_LEEK
+	releaseall
+	end
+
+EventScript_CutTreeBigRoot::
+	finditem ITEM_BIG_ROOT
 	releaseall
 	end
 
@@ -88,10 +199,76 @@ EventScript_SmashRock::
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
-	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_EndSmash
+	random 3
+	switch VAR_RESULT
+	case 0, EventScript_EndSmash
+	case 1, EventScript_RockSmashItem
+	case 2, EventScript_RockSmashEncounter
+	releaseall
+	end
+
+EventScript_RockSmashEncounter::
+	compare VAR_REPEL_STEP_COUNT, 0
+	goto_if_gt EventScript_EndSmash
 	special RockSmashWildEncounter
-	goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_EndSmash
 	waitstate
+	releaseall
+	end
+
+EventScript_RockSmashItem::
+	random 6
+	switch VAR_RESULT
+	case 0, EventScript_RockSmashPearl
+	case 1, EventScript_RockSmashBigPearl
+	case 2, EventScript_RockSmashHardStone
+	case 3, EventScript_RockSmashStarPiece
+	case 4, EventScript_RockSmashGem
+	case 5, EventScript_RockSmashFossil
+	releaseall
+	end
+
+EventScript_RockSmashPearl::
+	finditem ITEM_PEARL
+	releaseall
+	end
+
+EventScript_RockSmashBigPearl::
+	finditem ITEM_BIG_PEARL
+	releaseall
+	end
+
+EventScript_RockSmashHardStone::
+	finditem ITEM_HARD_STONE
+	releaseall
+	end
+	
+EventScript_RockSmashStarPiece::
+	finditem ITEM_STAR_PIECE
+	releaseall
+	end
+	
+EventScript_RockSmashGem::
+	random 19
+	addvar VAR_RESULT, ITEM_BUG_GEM
+	finditem VAR_RESULT
+	releaseall
+	end
+	
+EventScript_RockSmashFossil::
+	random 12
+	compare VAR_RESULT, 11
+	goto_if_eq EventScript_RockSmashOldAmber
+	addvar VAR_RESULT, ITEM_ARMOR_FOSSIL
+	finditem VAR_RESULT
+	releaseall
+	end
+
+EventScript_RockSmashOldAmber::
+	finditem ITEM_OLD_AMBER
 	releaseall
 	end
 

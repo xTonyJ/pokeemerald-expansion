@@ -211,10 +211,10 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 
 RustboroCity_Gym_Text_ExplainRockTomb:
 	.string "TM39 contains ROCK TOMB.\n"
-	.string "It not only inflicts damage by dropping\n"
+	.string "It not only inflicts damage by dropping\p"
 	.string "rocks, it also lowers SPEED.\p"
 	.string "TM76 contains STEALTH ROCK.\n"
-	.string "It's a valuable starting move that\n"
+	.string "It's a valuable starting move that\p"
 	.string "damages enemies when they switch in.\p"
 	.string "Remember, a TM can be used infinitely,\n"
 	.string "so, use it.$"

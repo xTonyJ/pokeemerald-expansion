@@ -770,15 +770,12 @@ void RockSmashWildEncounter(void)
         {
             gSpecialVar_Result = FALSE;
         }
-        else if (WildEncounterCheck(wildPokemonInfo->encounterRate, TRUE) == TRUE
-         && TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
-        {
-            BattleSetup_StartWildBattle();
-            gSpecialVar_Result = TRUE;
-        }
+        // Encounter chance now determined in script
         else
         {
-            gSpecialVar_Result = FALSE;
+            TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, 0);
+            BattleSetup_StartWildBattle();
+            gSpecialVar_Result = TRUE;
         }
     }
     else

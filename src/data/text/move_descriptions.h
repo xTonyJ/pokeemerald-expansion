@@ -422,7 +422,7 @@ static const u8 sScreechDescription[] = _(
 
 static const u8 sDoubleTeamDescription[] = _(
     "Creates illusory copies to\n"
-    "raise evasiveness.");
+    "sharply raise evasiveness.");
 
 static const u8 sRecoverDescription[] = _(
     "Recovers up to half the\n"

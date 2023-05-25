@@ -394,6 +394,19 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	delay 30
 	msgbox PetalburgCity_Gym_Text_DadHappyAndSad, MSGBOX_DEFAULT
 	closemessage
+	giveitem ITEM_MEGA_RING
+	waitmessage
+	giveitem ITEM_HOUNDOOMINITE
+	waitmessage
+	giveitem ITEM_GENGARITE
+	waitmessage
+	giveitem ITEM_GARDEVOIRITE
+	waitmessage
+	giveitem ITEM_LUCARIONITE
+	waitmessage
+	giveitem ITEM_AGGRONITE
+	waitmessage
+	giveitem ITEM_GARCHOMPITE
 	delay 40
 	playse SE_DOOR
 	delay 10
@@ -406,6 +419,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 
 PetalburgCity_Gym_EventScript_GiveFacade::
 	giveitem ITEM_TM42
+	giveitem ITEM_TM15
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT
@@ -1280,29 +1294,44 @@ PetalburgCity_Gym_Text_NormanDefeat:
 
 PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "{PLAYER} received the BALANCE BADGE\n"
-	.string "from DAD!$"
+	.string "from Dad!$"
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
-	.string "DAD: With that BADGE, the DEFENSE\n"
-	.string "of all your POKéMON will increase.\p"
+	.string "DAD: With that BADGE, the level limit\n"
+	.string "of all your POKéMON will be 65.\p"
 	.string "POKéMON that know the HM move SURF\n"
 	.string "will be able to travel over water.\p"
+	.string "I am so unbelievably proud.\p"
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
 
 PetalburgCity_Gym_Text_ExplainFacade:
-	.string "DAD: TM42 contains FACADE.\p"
+	.string "DAD: TM42 contains Facade.\p"
 	.string "It doubles the power of moves if\n"
 	.string "the POKéMON is poisoned, paralyzed,\l"
 	.string "or burned.\p"
 	.string "It might be able to turn a bad\n"
-	.string "situation into an advantage.$"
+	.string "situation into an advantage.\p"
+	.string "and TM15 contains Hyper Beam\p"
+	.string "It's one of the most powerful\n"
+	.string "moves, but your POKéMON will\l"
+	.string "need to recharge for a turn.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad:
 	.string "DAD: As the GYM LEADER, I can't\n"
 	.string "express how upset I am…\p"
 	.string "But as a father, it makes me both\n"
-	.string "happy and a little sad. It's odd…$"
+	.string "happy and a little sad. It's odd…\p"
+	.string "I think you're ready for\n"
+	.string "this, the Mega Ring.\p"
+	.string "This will allow you to Mega Evolve\n"
+	.string "your POKéMON. Press Start\p"
+	.string "just before choosing a move.\p"
+	.string "Take these, too.\p"
+	.string "These held items are necessary for\n"
+	.string "certain POKéMON to Mega Evolve.\p"
+	.string "Be on the lookout for them!$"
+
 
 PetalburgCity_Gym_Text_PleaseComeWithMe:
 	.string "Ah, there you are, {PLAYER}{KUN}!\p"
@@ -1319,8 +1348,8 @@ PetalburgCity_Gym_Text_DadGoingToKeepTraining:
 	.string "your mother every so often.\p"
 	.string "I'm going to stay here and redouble\n"
 	.string "my training.\p"
-	.string "It would bother me as a TRAINER to\n"
-	.string "not avenge my loss to you, {PLAYER}!$"
+	.string "It would bother me as a father to\n"
+	.string "give up after losing to you, {PLAYER}!$"
 
 PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough:
 	.string "DAD: {PLAYER}, how are things going?\p"
@@ -1336,7 +1365,7 @@ PetalburgCity_Gym_Text_GymGuideAdvice:
 	.string "Whoops! The doors in this room are\n"
 	.string "already open, so don't attack me!\p"
 	.string "The TRAINERS of PETALBURG GYM\n"
-	.string "use all kinds of items.\p"
+	.string "use all kinds of strategies.\p"
 	.string "The door at the left leads to\n"
 	.string "the SPEED ROOM.\p"
 	.string "The door at the right leads to\n"
@@ -1443,11 +1472,11 @@ PetalburgCity_Gym_Text_BerkePostBadge:
 PetalburgCity_Gym_Text_MaryIntro:
 	.string "Giggle…\n"
 	.string "This is the ACCURACY ROOM.\p"
-	.string "It's pretty nasty when every attack\n"
-	.string "lands without fail.$"
+	.string "It's pretty nasty when every\n"
+	.string "attack of yours misses.$"
 
 PetalburgCity_Gym_Text_MaryDefeat:
-	.string "You were a cut above me…$"
+	.string "What!? How did you hit me…?$"
 
 PetalburgCity_Gym_Text_MaryPostBattle:
 	.string "There are some even stronger\n"

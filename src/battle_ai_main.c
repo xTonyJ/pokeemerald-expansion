@@ -431,7 +431,7 @@ static u8 ChooseMoveOrAction_Singles(void)
     gActiveBattler = sBattler_AI;
 
     // If can switch.
-    if (CountUsablePartyMons(sBattler_AI) > 0
+    if ((AI_THINKING_STRUCT->aiFlags & ~(AI_SCRIPT_DO_NOT_SWITCH | AI_SCRIPT_PRESERVE_ORDER)) && CountUsablePartyMons(sBattler_AI) > 0
         && !IsAbilityPreventingEscape(sBattler_AI)
         && !(gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         && !(gStatuses3[gActiveBattler] & STATUS3_ROOTED)
@@ -3044,7 +3044,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_SKILL_SWAP:
             if (AI_DATA->abilities[battlerAtk] == ABILITY_TRUANT)
                 score += 5;
-            else if (IsAbilityOfRating(AI_DATA->abilities[battlerAtk], 0) || IsAbilityOfRating(AI_DATA->abilities[battlerDef], 10))
+            else if (IsAbilityOfRating(AI_DATA->abilities[battlerDef], 5))
                 score += 2; // we want to transfer our bad ability or take their awesome ability
             break;
         case EFFECT_EARTHQUAKE:
@@ -3493,7 +3493,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SYNTHESIS:
     case EFFECT_MOONLIGHT:
         if (ShouldRecover(battlerAtk, battlerDef, move, 50))
-            score += 3;
+            score += 6;
         if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT)
             score++;
         break;
@@ -3661,8 +3661,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (CountUsablePartyMons(battlerAtk) == 0)
                 break; // Can't switch
 
-            //if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
-                //score += 7;
+            /*if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
+                score += 7;*/
         }
         break;
     case EFFECT_BATON_PASS:
@@ -4690,7 +4690,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_TAILWIND:
         if (GetBattlerSideSpeedAverage(battlerAtk) < GetBattlerSideSpeedAverage(battlerDef))
-            score += 2;
+            score += 4;
         break;
     case EFFECT_LUCKY_CHANT:
         if (!isDoubleBattle)

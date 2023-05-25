@@ -615,7 +615,8 @@ bool32 ShouldSwitch(void)
     s32 i;
     s32 availableToSwitch;
     bool32 hasAceMon = FALSE;
-
+    if(gBattleResources->ai->aiFlags & ~(AI_SCRIPT_DO_NOT_SWITCH | AI_SCRIPT_PRESERVE_ORDER))
+    {
     if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         return FALSE;
     if (gStatuses3[gActiveBattler] & STATUS3_ROOTED)
@@ -710,7 +711,7 @@ bool32 ShouldSwitch(void)
     if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2)
         || FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
         return TRUE;
-
+}
     return FALSE;
 }
 
@@ -924,6 +925,9 @@ u8 GetMostSuitableMonToSwitchInto(void)
         return *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return gBattlerPartyIndexes[gActiveBattler] + 1;
+    
+    if(gBattleResources->ai->aiFlags & AI_SCRIPT_PRESERVE_ORDER)
+        return 7;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {

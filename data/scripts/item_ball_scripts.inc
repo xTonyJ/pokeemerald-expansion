@@ -2,8 +2,8 @@ Route102_EventScript_ItemPotion::
 	finditem ITEM_POTION
 	end
 
-Route103_EventScript_ItemGuardSpec::
-	finditem ITEM_GUARD_SPEC
+Route103_EventScript_ItemTM81::
+	finditem ITEM_TM81
 	end
 
 Route103_EventScript_ItemPPUp::
@@ -327,11 +327,11 @@ MossdeepCity_EventScript_ItemNetBall::
 	end
 
 PetalburgWoods_EventScript_ItemXAttack::
-	finditem ITEM_X_ATTACK
+	finditem ITEM_LEAF_STONE
 	end
 
 PetalburgWoods_EventScript_ItemGreatBall::
-	finditem ITEM_GREAT_BALL
+	finditem ITEM_NET_BALL
 	end
 
 PetalburgWoods_EventScript_ItemEther::
@@ -678,6 +678,10 @@ Route117_EventScript_ItemMetronome::
 	finditem ITEM_METRONOME
 	end
 
-Route117_EventScript_ItemAbsolite::
+Route111_EventScript_ItemAbsolite::
 	finditem ITEM_ABSOLITE
+	end
+
+MirageTower_2F_EventScript_ItemTM33::
+	finditem ITEM_TM33
 	end

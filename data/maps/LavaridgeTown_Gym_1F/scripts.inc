@@ -360,7 +360,7 @@ LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "in the POKéNAV.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
-	.string "Your power reminds me of someone…\p"
+	.string "Your power… it reminds me of someone…\p"
 	.string "Oh! I know! You battle like NORMAN,\n"
 	.string "the GYM LEADER of PETALBURG.$"
 

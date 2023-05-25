@@ -1717,6 +1717,21 @@ static void OpponentHandleChoosePokemon(void)
                 }
             }
         }
+        if (chosenMonId == 7) //Function for the Flag to preserve trainer order       
+        {
+            u8 playerMonIdentity = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            u8 selfIdentity = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+
+            for (chosenMonId = 0; chosenMonId < PARTY_SIZE; chosenMonId++)
+            {
+                if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
+                    && chosenMonId != gBattlerPartyIndexes[playerMonIdentity]
+                    && chosenMonId != gBattlerPartyIndexes[selfIdentity])
+                {
+                    break;
+                }
+            }
+        }
         *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
     }
     else

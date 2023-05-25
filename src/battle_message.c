@@ -506,6 +506,10 @@ static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nu
 const u8 gText_EmptyString3[] = _("");
 static const u8 sText_YouThrowABallNowRight[] = _("You throw a BALL now, right?\nI… I'll do my best!");
 
+// Slide In messages
+static const u8 sText_NormanNotBad[] = _("Impressive! Keep it up\p");
+static const u8 sText_NormanGetReady[] = _("Now, let's see if you can handle this.\p");
+
 // early declaration of strings
 static const u8 sText_PkmnIncapableOfPower[];
 static const u8 sText_GlintAppearsInEye[];
@@ -1430,6 +1434,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ATTACKERLOSTELECTRICTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostElectricType,
     [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
     [STRINGID_PKMNGAINEDEXPALL - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXPAll,
+    [STRINGID_NORMANNOTBAD - BATTLESTRINGS_TABLE_START] = sText_NormanNotBad,
+    [STRINGID_NORMANGETREADY - BATTLESTRINGS_TABLE_START] = sText_NormanGetReady,
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -3944,6 +3950,11 @@ static const struct TrainerSlide sTrainerSlides[] =
         .msgFirstDown = sText_123Poof,
     },
     */
+   {
+        .trainerId = TRAINER_NORMAN_1,
+        .msgLastSwitchIn = sText_NormanGetReady,
+        .msgFirstDown = sText_NormanNotBad,
+   }
 };
 
 static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)

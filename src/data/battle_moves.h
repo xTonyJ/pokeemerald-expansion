@@ -1739,7 +1739,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DOUBLE_TEAM] =
     {
-        .effect = EFFECT_EVASION_UP,
+        .effect = EFFECT_EVASION_UP_2,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

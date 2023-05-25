@@ -2028,15 +2028,14 @@ Route115_Text_TimothyPostRematch:
 	.string "effort!$"
 
 Route115_Text_KoichiIntro:
-	.string "You!\p"
-	.string "My MACHOP!\p"
-	.string "Demand a battle!$"
+	.string "Hey! I saw that Mega Stone first!\n"
+	.string "Battle me for it?$"
 
 Route115_Text_KoichiDefeat:
-	.string "Ouch, ouch, ouch!$"
+	.string "Ouch, the stone is all yours!$"
 
 Route115_Text_KoichiPostBattle:
-	.string "My MACHOP crew!\p"
+	.string "My Fighting type crew!\p"
 	.string "So long as they seek power, I will\n"
 	.string "grow strong with them!$"
 

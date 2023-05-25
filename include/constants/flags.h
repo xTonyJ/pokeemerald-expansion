@@ -1159,7 +1159,7 @@
 #define FLAG_ITEM_FIERY_PATH_FIRE_STONE                             0x457 //Blazikenite
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM07                          0x458
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_NEVER_MELT_ICE                0x459
-#define FLAG_ITEM_ROUTE_103_GUARD_SPEC                              0x45A
+#define FLAG_ITEM_ROUTE_103_TM81                                    0x45A //X Scissor
 #define FLAG_ITEM_ROUTE_104_TM09                                    0x45B //Bullet Seed
 #define FLAG_ITEM_MAUVILLE_CITY_X_SPEED                             0x45C
 #define FLAG_ITEM_PETALBURG_WOODS_INSECT_PLATE                      0x45D
@@ -1223,7 +1223,7 @@
 #define FLAG_ITEM_ROUTE110_MANECTITE                                0x496
 #define FLAG_ITEM_ROUTE117_METRONOME                                0x497
 #define FLAG_ITEM_ROUTE111_ABSOLITE                                 0x498
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
+#define FLAG_ITEM_MIRAGETOWER_2F_TM33                               0x499 // Reflect
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
