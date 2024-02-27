@@ -15,6 +15,16 @@ struct YesNoFuncTable
     TaskFunc noFunc;
 };
 
+struct RotomFuncTable
+{
+    TaskFunc microwave;
+    TaskFunc washingMachine;
+    TaskFunc refrigerator;
+    TaskFunc electricFan;
+    TaskFunc lawnMower;
+    TaskFunc lightbulb;
+};
+
 void ResetVramOamAndBgCntRegs(void);
 void ResetAllBgsCoordinates(void);
 void SetVBlankHBlankCallbacksToNull(void);

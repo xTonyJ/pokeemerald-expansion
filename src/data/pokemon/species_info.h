@@ -1381,7 +1381,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         #else
             .baseAttack    = 85,
         #endif
-        .types = { TYPE_POISON, TYPE_POISON},
+        .types = { TYPE_POISON, TYPE_DARK},
         .catchRate = 90,
         .expYield = 157,
         .evYield_Attack    = 2,
@@ -4388,7 +4388,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_MEGANIUM] =
+    [SPECIES_MEGANIUM] = //Swapped Leaf Guard with Triage, added Fairy typing
     {
         .baseHP        = 80,
         .baseAttack    = 82,
@@ -4396,7 +4396,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 83,
         .baseSpDefense = 100,
-        .types = { TYPE_GRASS, TYPE_GRASS },
+        .types = { TYPE_GRASS, TYPE_FAIRY },
         .catchRate = 45,
         .expYield = 236,
         .evYield_Defense   = 1,
@@ -4406,7 +4406,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_GRASS},
-        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_LEAF_GUARD},
+        .abilities = {ABILITY_OVERGROW, ABILITY_LEAF_GUARD, ABILITY_TRIAGE},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -5270,7 +5270,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 30,
         .baseSpAttack  = 105,
         .baseSpDefense = 85,
-        .types = { TYPE_GRASS, TYPE_GRASS },
+        .types = { TYPE_GRASS, TYPE_FIRE },
         .catchRate = 120,
         .expYield = 149,
         .evYield_SpAttack  = 2,

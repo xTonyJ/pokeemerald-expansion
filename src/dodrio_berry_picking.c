@@ -551,7 +551,7 @@ static const u8 sUnsharedColumns[MAX_RFU_PLAYERS][MAX_RFU_PLAYERS] =
 #endif
 };
 
-// Duplicate and unused gfx. Feel free to remove.
+/* Duplicate and unused gfx. Feel free to remove.
 static const u32 sDuplicateGfx[] = INCBIN_U32("graphics/dodrio_berry_picking/bg.gbapal",
                                      "graphics/dodrio_berry_picking/tree_border.gbapal",
                                      "graphics/dodrio_berry_picking/dodrio.gbapal",
@@ -568,7 +568,7 @@ static const u32 sDuplicateGfx[] = INCBIN_U32("graphics/dodrio_berry_picking/bg.
                                      "graphics/dodrio_berry_picking/bg.bin.lz",
                                      "graphics/dodrio_berry_picking/tree_border_right.bin.lz",
                                      "graphics/dodrio_berry_picking/tree_border_left.bin.lz");
-
+*/
 
 static const u8 sBerryFallDelays[][3] =
 {

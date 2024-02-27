@@ -18,11 +18,11 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_VICTORIA
-	goto_if_set FLAG_RECEIVED_MACHO_BRACE, Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace
+	goto_if_set FLAG_RECEIVED_LIFE_ORB, Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace
 	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace, MSGBOX_DEFAULT
 	giveitem ITEM_LIFE_ORB
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MACHO_BRACE
+	setflag FLAG_RECEIVED_LIFE_ORB
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
@@ -70,12 +70,12 @@ Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "challenge, I'll have you know.$"
 
 Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
-	.string "We use this LIFE ORB to more\n"
+	.string "We use this Life Orb to more\n"
 	.string "effectively strengthen our POKéMON\l"
 	.string "in battle.\p"
 	.string "Since you've beaten all of us here,\n"
-	.string "I don't know if you need it, but we\l"
-	.string "would like you to have our LIFE ORB.$"
+	.string "I don't know if you'll use it, but we\l"
+	.string "would like you to have our Life Orb.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
 	.string "When it comes to POKéMON battles,\n"

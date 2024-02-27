@@ -2425,7 +2425,7 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
                 TryToRevertMimicry();
-                BattleScriptExecute(BattleScript_TerrainEnds);
+                BattleScriptExecute(BattleScript_ElectricTerrainEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -2436,7 +2436,7 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
                 TryToRevertMimicry();
-                BattleScriptExecute(BattleScript_TerrainEnds);
+                BattleScriptExecute(BattleScript_MistyTerrainEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -2444,14 +2444,17 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_GRASSY_TERRAIN:
             if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
             {
+                BattleScriptExecute(BattleScript_GrassyTerrainHeals);
                 if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT)
                   && (gFieldTimers.terrainTimer == 0 || --gFieldTimers.terrainTimer == 0))
                 {
                     gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
                     TryToRevertMimicry();
+                    BattleScriptExecute(BattleScript_GrassyTerrainEnds2);
+                    effect++;
                 }
-                BattleScriptExecute(BattleScript_GrassyTerrainHeals);
-                effect++;
+                
+                //effect++;
             }
             gBattleStruct->turnCountersTracker++;
             break;
@@ -2461,7 +2464,7 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
                 TryToRevertMimicry();
-                BattleScriptExecute(BattleScript_TerrainEnds);
+                BattleScriptExecute(BattleScript_PsychicTerrainEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -3435,25 +3438,25 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
-        case CANCELLER_FROZEN: // check being frozen
+        /*case CANCELLER_FROZEN: // check being frozen
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE && !(gBattleMoves[gCurrentMove].flags & FLAG_THAW_USER))
             {
                 if (!RandomPercentage(RNG_FROZEN, 20))
-                {
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
-                }
-                else // unfreeze
-                {
+                //{
+                //    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+                //    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                //}
+                //else // unfreeze
+                //{
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
-                }
+                
                 effect = 2;
             }
             gBattleStruct->atkCancellerTracker++;
-            break;
+            break;*/
         case CANCELLER_TRUANT: // truant
             if (GetBattlerAbility(gBattlerAttacker) == ABILITY_TRUANT && gDisableStructs[gBattlerAttacker].truantCounter)
             {
@@ -3648,7 +3651,8 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_THAW: // move thawing
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
             {
-                if (!(gBattleMoves[gCurrentMove].effect == EFFECT_BURN_UP && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                // Any fire type move used by the attacker will unthaw, removing Brittle
+                if ((gBattleMoves[gCurrentMove].type == TYPE_FIRE))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
                     BattleScriptPushCursor();
@@ -5657,7 +5661,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && RandomWeighted(RNG_CUTE_CHARM, 2, 1)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL)
-             && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != GetGenderFromSpeciesAndPersonality(speciesDef, pidDef)
+             /*&& GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != GetGenderFromSpeciesAndPersonality(speciesDef, pidDef)*/
              && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
              && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != MON_GENDERLESS
              && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != MON_GENDERLESS)
@@ -7625,8 +7629,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         {
         case HOLD_EFFECT_SHELL_BELL:
             if (gSpecialStatuses[gBattlerAttacker].damagedMons  // Need to have done damage
-                && gBattlerAttacker != gBattlerTarget
-                && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP
+                && gBattlerAttacker != gBattlerTarget           // Attacker is not the target
+                && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP // HP is less than max
 #if B_HEAL_BLOCKING >= GEN_5
                 && gBattleMons[gBattlerAttacker].hp != 0 && !(gStatuses3[battlerId] & STATUS3_HEAL_BLOCK))
 #else
@@ -9364,6 +9368,10 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
     if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && gBattleWeather & B_WEATHER_SANDSTORM && WEATHER_HAS_EFFECT && !usesDefStat)
         MulModifier(&modifier, UQ_4_12(1.5));
 
+    /* Hail 30% def and sp.def boost for ice types
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && gBattleWeather & B_WEATHER_HAIL && WEATHER_HAS_EFFECT)
+        MulModifier(&modifier, UQ_4_12(1.3));*/
+
     // The defensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 5th badge and 7th badges.
     // Having the 5th badge boosts physical defense while having the 7th badge boosts special defense.
     //if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerDef) && IS_MOVE_PHYSICAL(move))
@@ -9402,6 +9410,9 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         dmg = ApplyModifier(UQ_4_12(2.0), dmg);
     #endif
 
+    //Test to make all damage crits
+    //iscrit = TRUE;
+
     // check burn
     if (gBattleMons[battlerAtk].status1 & STATUS1_BURN && IS_MOVE_PHYSICAL(move)
     #if B_BURN_FACADE_DMG >= GEN_6
@@ -9410,7 +9421,7 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         && abilityAtk != ABILITY_GUTS)
         dmg = ApplyModifier(UQ_4_12(0.5), dmg);
 
-    // check sunny/rain weather
+    // check sunny/rain/hail weather
     if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_RAIN))
     {
         if (moveType == TYPE_FIRE)
@@ -9424,6 +9435,12 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
             dmg = ApplyModifier(UQ_4_12(1.5), dmg);
         else if (moveType == TYPE_WATER)
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);
+    }
+    // Hail provides 25% damage boost to all moves, if the user is Ice type
+    else if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_HAIL))
+    {
+        if(IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ICE))
+            dmg = ApplyModifier(UQ_4_12(1.25), dmg);
     }
 
     // check stab

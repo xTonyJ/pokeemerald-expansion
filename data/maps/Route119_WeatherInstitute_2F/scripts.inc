@@ -89,7 +89,9 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated::
 Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, SPECIES_CASTFORM
-	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	givemon SPECIES_CASTFORM, VAR_0x800A, ITEM_MYSTIC_WATER
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
 	goto Common_EventScript_NoMoreRoomForPokemon
@@ -128,6 +130,7 @@ Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare::
 Route119_WeatherInstitute_2F_EventScript_ExplainCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_CASTFORM
+	giveitem ITEM_SHELL_BELL
 	release
 	end
 
@@ -296,13 +299,15 @@ Route119_WeatherInstitute_2F_Text_NoRoomForPokemon:
 	.string "for this POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform:
-	.string "{PLAYER} received CASTFORM!$"
+	.string "{PLAYER} received Castform!$"
 
 Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
-	.string "That POKéMON changes shape according\n"
+	.string "That POKéMON changes form\n"
 	.string "to the weather conditions.\p"
 	.string "There're plenty of them in the\n"
-	.string "INSTITUTE--go ahead and take it.$"
+	.string "INSTITUTE--go ahead and take it.\p"
+	.string "...Oh? Looks like Shelly dropped this\n"
+	.string "while running away, it's all yours!$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
 	.string "I've been researching rain for many\n"

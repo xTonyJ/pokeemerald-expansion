@@ -244,6 +244,7 @@ const u8 gText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no respons
 const u8 gText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 const u8 gText_BootedUpTM[] = _("Booted up a TM.");
 const u8 gText_BootedUpHM[] = _("Booted up an HM.");
+const u8 gText_RotomCatalog[] = _("Select a motor for\nRotom to imitate");
 const u8 gText_TMHMContainedVar1[] = _("It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?");
 const u8 gText_PlayerUsedVar2[] = _("{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
@@ -2052,3 +2053,11 @@ const u8 gText_WaterPledge[] = _("Water Pledge");
 const u8 gText_FrenzyPlant[] = _("Frenzy Plant");
 const u8 gText_BlastBurn[] = _("Blast Burn");
 const u8 gText_HydroCannon[] = _("Hydro Cannon");
+
+// Rotom Form Options
+const u8 gText_MicrowaveOven[] = _("Microwave Oven");
+const u8 gText_WashingMachine[] = _("Washing Machine");
+const u8 gText_Refrigerator[] = _("Refrigerator");
+const u8 gText_ElectricFan[] = _("Electric Fan");
+const u8 gText_Lawnmower[] = _("Lawnmower");
+const u8 gText_Recall[] = _("Recall");

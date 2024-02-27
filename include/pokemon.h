@@ -5,6 +5,8 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 #include "constants/map_groups.h"
+#include "constants/pokemon.h"
+#include "constants/species.h"
 
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
@@ -426,6 +428,8 @@ extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
 extern const u16 *const gFormSpeciesIdTables[NUM_SPECIES];
+extern const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1];
+extern const u16 gSpeciesToNationalPokedexNum[NUM_SPECIES];
 extern const u32 sExpCandyExperienceTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);

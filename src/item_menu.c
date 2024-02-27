@@ -546,6 +546,15 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0x231,
     },
+    [ITEMWIN_ROTOM] = {
+        .bg = 1,
+        .tilemapLeft = 21,
+        .tilemapTop = 9,
+        .width = 5,
+        .height = 10,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
 };
 
 EWRAM_DATA struct BagMenu *gBagMenu = 0;
@@ -2539,6 +2548,11 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTa
 {
     CreateYesNoMenuWithCallbacks(taskId, &sContextMenuWindowTemplates[windowType], 1, 0, 2, 1, 14, funcTable);
 }
+
+/*void BagMenu_Rotom(u8 taskId, u8 windowType, const struct RotomFuncTable *funcTable)
+{
+    CreateYesNoMenuWithCallbacks(taskId, &sContextMenuWindowTemplates[windowType], 1, 0, 2, 1, 14, funcTable);
+}*/
 
 static void DisplayCurrentMoneyWindow(void)
 {

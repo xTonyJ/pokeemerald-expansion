@@ -938,6 +938,7 @@ extern const u8 gText_CoinCase[];
 extern const u8 gText_PowderQty[];
 extern const u8 gText_BootedUpHM[];
 extern const u8 gText_BootedUpTM[];
+extern const u8 gText_RotomCatalog[];
 extern const u8 gText_TMHMContainedVar1[];
 extern const u8 gText_PlayerUsedVar2[];
 extern const u8 gText_RepelEffectsLingered[];
@@ -3369,5 +3370,12 @@ extern const u8 gText_GameCornerSobble[];
 extern const u8 gText_GrassType[];
 extern const u8 gText_FireType[];
 extern const u8 gText_WaterType[];
+
+extern const u8 gText_MicrowaveOven[];
+extern const u8 gText_WashingMachine[];
+extern const u8 gText_Refrigerator[];
+extern const u8 gText_ElectricFan[];
+extern const u8 gText_Lawnmower[];
+extern const u8 gText_Recall[];
 
 #endif // GUARD_STRINGS_H

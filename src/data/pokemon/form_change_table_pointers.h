@@ -27,6 +27,12 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ARCEUS_DRAGON] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_DARK] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_FAIRY] = sArceusFormChangeTable,
+    [SPECIES_ROTOM] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_FAN] = sRotomFanFormChangeTable,
+    [SPECIES_ROTOM_FROST] = sRotomFrostFormChangeTable,
+    [SPECIES_ROTOM_HEAT] = sRotomHeatFormChangeTable,
+    [SPECIES_ROTOM_MOW] = sRotomMowFormChangeTable,
+    [SPECIES_ROTOM_WASH] = sRotomWashFormChangeTable,
 #endif
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_TORNADUS] = sTornadusFormChangeTable,

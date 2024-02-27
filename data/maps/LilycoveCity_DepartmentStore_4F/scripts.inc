@@ -51,7 +51,6 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	.2byte ITEM_TM17  @ Protect
 	.2byte ITEM_TM20  @ Safeguard
-	.2byte ITEM_TM33  @ Reflect
 	.2byte ITEM_TM16  @ Light Screen
 	.2byte ITEM_TM90  @ SUBSTITUTE
 	.2byte ITEM_TM70  @ Aurora Veil

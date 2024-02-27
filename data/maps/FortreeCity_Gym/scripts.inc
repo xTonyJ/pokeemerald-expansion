@@ -49,6 +49,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 
 FortreeCity_Gym_EventScript_GiveAerialAce2::
 	giveitem ITEM_TM40
+	giveitem ITEM_TM51
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
@@ -57,6 +58,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2::
 
 FortreeCity_Gym_EventScript_GiveAerialAce::
 	giveitem ITEM_TM40
+	giveitem ITEM_TM51
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
@@ -112,12 +114,14 @@ FortreeCity_Gym_EventScript_GymGuidePostVictory::
 
 FortreeCity_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_GymStatueCertified
 	goto FortreeCity_Gym_EventScript_GymStatue
 	end
 
 FortreeCity_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_GymStatueCertified
 	goto FortreeCity_Gym_EventScript_GymStatue
 	end
@@ -252,18 +256,20 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "from WINONA.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
-	.string "With the FEATHER BADGE, all POKéMON up\n"
-	.string "to LV 70, even those received through\l"
-	.string "trades, will obey your every command.\p"
+	.string "With the Feather Badge, all Pokémon\n"
+	.string "can reach level 75.\p"
 	.string "You will also be able to use\n"
 	.string "the HM move FLY outside of battle.\p"
 	.string "And this…\n"
-	.string "This is a gift from me.$"
+	.string "These are a gift from me.$"
 
 FortreeCity_Gym_Text_ExplainAerialAce:
-	.string "TM40 contains AERIAL ACE.\p"
+	.string "TM40 contains Aerial Ace.\p"
 	.string "Its speed…\n"
-	.string "No POKéMON should be able to avoid it.\p"
+	.string "No Pokémon should be able to avoid it.\p"
+	.string "and TM51 contains Roost.\p"
+	.string "It will restore 50% health\n"
+	.string "while removing Flying type for the turn.\p"
 	.string "… … … … … …$"
 
 FortreeCity_Gym_Text_RegisteredWinona:
@@ -275,9 +281,11 @@ FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "devoted to BIRD POKéMON.$"
 
 FortreeCity_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "FORTREE CITY POKéMON GYM$"
 
 FortreeCity_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "FORTREE CITY POKéMON GYM\p"
 	.string "WINONA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

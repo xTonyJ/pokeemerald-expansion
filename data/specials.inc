@@ -546,3 +546,14 @@ gSpecials::
 	def_special AutoRun
 	def_special SecretMenu_PokeVial
 	def_special SecretMenu_Fly
+	def_special GetLevelCap
+	def_special GetLevelCap2
+	def_special CountRotomInParty
+	def_special GetRotomState
+	def_special RotomForgetSpecialMove
+	def_special ChangeRotomForm
+	def_special TeachRotomMove
+	def_special IsSelectedMonRotom
+	def_special DoesRotomKnowSpecialMove
+	def_special GetRotomNewSpecialMove
+	def_special GetHighestLevelInPlayerParty

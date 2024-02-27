@@ -427,17 +427,17 @@ Route104_Text_DarianPostBattle:
 	.string "to your name, do you?$"
 
 Route105_Text_FosterIntro:
-	.string "There's supposed to be a mystical\n"
-	.string "rock around here.\l"
-	.string "Do you know anything about it?$"
+	.string "I'm convinced that the sea keeps\n"
+	.string "secrets from us.$"
 
 Route105_Text_FosterDefeated:
-	.string "I was thinking too much about that\n"
-	.string "rock, while my POKéMON remained weak…$"
+	.string "Yes…\n"
+	.string "I am no good at battling…$"
 
 Route105_Text_FosterPostBattle:
-	.string "I can spend hours and hours staring\n"
-	.string "at a nice rock without growing bored.$"
+	.string "I'm sure there are many secrets to be\n"
+	.string "discovered in the world's seas.\p"
+	.string "I mean to find them all!$"
 
 Route105_Text_LuisIntro:
 	.string "Whew! I was worried that a kid was\n"
@@ -491,17 +491,17 @@ Route105_Text_ImaniPostBattle:
 	.string "with. Giggle.$"
 
 Route105_Text_AndresIntro:
-	.string "I'm convinced that the sea keeps\n"
-	.string "secrets from us.$"
+	.string "There's supposed to be a mystical\n"
+	.string "rock around here.\l"
+	.string "Do you know anything about it?$"
 
 Route105_Text_AndresDefeated:
-	.string "Yes…\n"
-	.string "I am no good at battling…$"
+	.string "I was thinking too much about that\n"
+	.string "rock, while my POKéMON remained weak…$"
 
 Route105_Text_AndresPostBattle:
-	.string "I'm sure there are many secrets to be\n"
-	.string "discovered in the world's seas.\p"
-	.string "I mean to find them all!$"
+	.string "I can spend hours and hours staring\n"
+	.string "at a nice rock without growing bored.$"
 
 Route105_Text_AndresRegister:
 	.string "Huh? I'm so weak, but you're willing\n"
@@ -693,8 +693,8 @@ Route107_Text_RayDefeated:
 
 Route107_Text_RayPostBattle:
 	.string "RAY: My sister gave me my POKéMON.\n"
-	.string "I raised it, and now it's my important\l"
-	.string "partner!$"
+	.string "I raised them, and now they're \l"
+	.string "my important partners!$"
 
 Route107_Text_RayNotEnoughPokemon:
 	.string "RAY: If you want to battle us,\n"
@@ -2913,18 +2913,18 @@ Route119_Text_FabianPostBattle:
 	.string "Your win you have to atone!$"
 
 Route119_Text_DaytonIntro:
-	.string "Hohoho!\n"
-	.string "I like kid TRAINERS!\l"
-	.string "Let's have a good one!$"
+	.string "Not so fast, kid!\n"
+	.string "Prepare to face my grass team!\l"
+	.string "Let's have a good battle!$"
 
 Route119_Text_DaytonDefeat:
 	.string "You're pretty amazing!\n"
-	.string "Hohoho!$"
+	.string "Holy crap!$"
 
 Route119_Text_DaytonPostBattle:
 	.string "Hohoho!\n"
 	.string "I'll try emulating the pep of kid\l"
-	.string "TRAINERS like you!$"
+	.string "trainer like you!$"
 
 Route119_Text_RachelIntro:
 	.string "Wherever and whenever I may be,\n"

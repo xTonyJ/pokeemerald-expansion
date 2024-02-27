@@ -14,6 +14,10 @@ FortreeCity_Mart_EventScript_Clerk::
 	.align 2
 FortreeCity_Mart_Pokemart:
 	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_RED_NECTAR
+	.2byte ITEM_YELLOW_NECTAR
+	.2byte ITEM_PINK_NECTAR
+	.2byte ITEM_PURPLE_NECTAR
 	.2byte ITEM_UPGRADE
 	.2byte ITEM_METAL_POWDER
 	.2byte ITEM_LEEK

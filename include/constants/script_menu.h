@@ -124,6 +124,7 @@
 #define MULTI_TAG_MATCH_TYPE               113
 #define MULTI_PKMN_CENTER_TUTOR_SETS       114
 #define MULTI_GRASS_FIRE_WATER             116
+#define MULTI_ROTOM_APPLIANCES             117
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0

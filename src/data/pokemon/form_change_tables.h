@@ -106,6 +106,43 @@ static const struct FormChange sArceusFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_ARCEUS_FAIRY,    ITEM_FAIRIUM_Z,    ABILITY_MULTITYPE},
     {FORM_CHANGE_END},
 };
+
+static const struct FormChange sRotomFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM, ITEM_ROTOM_CATALOG},
+    {FORM_ITEM_USE, SPECIES_ROTOM_FAN, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sRotomFanFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM_FAN, ITEM_ROTOM_CATALOG},
+    {FORM_ITEM_USE, SPECIES_ROTOM_FROST, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sRotomFrostFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM_FROST, ITEM_ROTOM_CATALOG},
+    {FORM_ITEM_USE, SPECIES_ROTOM_HEAT, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sRotomHeatFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM_HEAT, ITEM_ROTOM_CATALOG},
+    {FORM_ITEM_USE, SPECIES_ROTOM_MOW, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sRotomMowFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM_MOW, ITEM_ROTOM_CATALOG},
+    {FORM_ITEM_USE, SPECIES_ROTOM_WASH, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
+static const struct FormChange sRotomWashFormChangeTable[] = {
+    {FORM_ITEM_USE, SPECIES_ROTOM_WASH, ITEM_ROTOM_CATALOG},    
+    {FORM_ITEM_USE, SPECIES_ROTOM, ITEM_ROTOM_CATALOG},
+    {FORM_CHANGE_END},
+};
+
 #endif
 
 #if P_GEN_5_POKEMON == TRUE

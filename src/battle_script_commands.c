@@ -2075,6 +2075,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
              || gBattleMoves[move].effect == EFFECT_ALWAYS_CRIT
              || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+             || gBattleMons[battlerDef].status1 & STATUS1_FREEZE // Always crit if opponent is Brittle
              || move == MOVE_SURGING_STRIKES)
     {
         critChance = -2;
@@ -3820,7 +3821,12 @@ static void Cmd_seteffectwithchance(void)
 
     u32 percentChance;
 
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
+    // Hail will double the chance of ice type moves inflicting secondary effects
+    // similar to Serene Grace
+    if ((GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
+    || (IsBattlerWeatherAffected(gBattlerAttacker, B_WEATHER_HAIL)
+    && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+    && gBattleMoves[gCurrentMove].type == TYPE_ICE))
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
@@ -7644,7 +7650,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
             {
                 const struct TrainerMonCustomized *party = gTrainers[trainerId].party.EverythingCustomized;
-                lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
+                lastMonLevel = GetHighestLevelInPlayerParty();
             }
             break;
         }
@@ -12848,6 +12854,7 @@ static void Cmd_weatherdamage(void)
         }
         if (gBattleWeather & B_WEATHER_HAIL)
         {
+            // Hail no longer deals damage, but still will heal pokemon with Ice Body
             if (ability == ABILITY_ICE_BODY
                 && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
                 && !BATTLER_MAX_HP(gBattlerAttacker)
@@ -12859,7 +12866,8 @@ static void Cmd_weatherdamage(void)
                     gBattleMoveDamage = 1;
                 gBattleMoveDamage *= -1;
             }
-            else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+            
+            /*else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
                 && ability != ABILITY_SNOW_CLOAK
                 && ability != ABILITY_OVERCOAT
                 && ability != ABILITY_ICE_BODY
@@ -12869,7 +12877,7 @@ static void Cmd_weatherdamage(void)
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
-            }
+            }*/
         }
     }
 

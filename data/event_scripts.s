@@ -1009,7 +1009,7 @@ Common_EventScript_LegendaryFlewAway::
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_QOLMenu::
+EventScript_SecretMenu::
 	dynmultipush EventScript_MultichoiceTests_Text_0, 0
 	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_MultichoiceTests_1
 	call_if_set FLAG_ADVENTURE_STARTED, EventScript_MultichoiceTests_2
@@ -1064,6 +1064,66 @@ EventScript_InfiniteRepel::
 EventScript_Fly::
 	special SecretMenu_Fly
 	end
+
+EventScript_Rotom::	
+	dynmultipush EventScript_Multichoice_Rotom_0, 0
+	dynmultipush EventScript_Multichoice_Rotom_1, 1
+	dynmultipush EventScript_Multichoice_Rotom_2, 2
+	dynmultipush EventScript_Multichoice_Rotom_3, 3
+	dynmultipush EventScript_Multichoice_Rotom_4, 4
+	dynmultipush EventScript_Multichoice_Rotom_5, 5
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+	@switch VAR_RESULT
+	@case 0, EventScript_MicrowaveOven
+	@case 1, EventScript_WashingMachine
+	@case 2, EventScript_Refrigerator
+	@case 3, EventScript_ElectricFan
+	@case 4, EventScript_Lawnmower
+	@case 5, EventScript_LightBulb
+	end
+	return
+
+EventScript_Multichoice_Rotom_0:
+	.string "Microwave Oven$"
+
+EventScript_Multichoice_Rotom_1:
+	.string "Washing Machine$"
+
+EventScript_Multichoice_Rotom_2:
+	.string "Refrigerator$"
+
+EventScript_Multichoice_Rotom_3:
+	.string "Electric Fan$"
+
+EventScript_Multichoice_Rotom_4:
+	.string "Lawnmower$"
+
+EventScript_Multichoice_Rotom_5:
+	.string "Light bulb$"
+
+@EventScript_MicrowaveOven::
+	@special RotomMicrowaveOven
+	@end
+
+@EventScript_WashingMachine::
+	@special RotomWashingMachine
+	@end
+
+@EventScript_Refrigerator::
+	@special RotomRefrigerator
+	@end
+
+@EventScript_ElectricFan::
+	@special RotomElectricFan
+	@end
+
+@EventScript_Lawnmower::
+	@special RotomLawnmower
+	@end
+
+@EventScript_LightBulb::
+	@special RotomLightbulb
+	@end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -1122,5 +1182,6 @@ EventScript_Fly::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+	.include "data/scripts/rotom.inc"
 
 	.include "data/maps/DewfordGardens/scripts.inc"

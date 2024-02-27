@@ -209,7 +209,7 @@ if (input->pressedLButton)
     {
         PlaySE(SE_WIN_OPEN);
         FreezeObjectEvents();
-        ScriptContext_SetupScript(EventScript_QOLMenu);
+        ScriptContext_SetupScript(EventScript_SecretMenu);
         return TRUE;
     }
 

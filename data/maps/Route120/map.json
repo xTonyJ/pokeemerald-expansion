@@ -456,14 +456,14 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
-      "x": 10,
-      "y": 72,
+      "x": 2,
+      "y": 73,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_MOUNTAIN_DISGUISE",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "Route120_EventScript_Keigo",
       "flag": "0"
     },
@@ -596,6 +596,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route120_EventScript_ItemRevive",
       "flag": "FLAG_ITEM_ROUTE_120_REVIVE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 0,
+      "y": 74,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route120_EventScript_Item_Pidgeotite",
+      "flag": "FLAG_ITEM_ROUTE120_PIDGEOTITE"
     }
   ],
   "warp_events": [
@@ -820,7 +833,7 @@
       "x": 9,
       "y": 1,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
+      "item": "ITEM_PP_UP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1"
     },
     {
@@ -828,7 +841,7 @@
       "x": 31,
       "y": 11,
       "elevation": 3,
-      "item": "ITEM_REVIVE",
+      "item": "ITEM_PP_UP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_REVIVE"
     },
     {
@@ -836,7 +849,7 @@
       "x": 0,
       "y": 86,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
+      "item": "ITEM_PP_UP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2"
     },
     {

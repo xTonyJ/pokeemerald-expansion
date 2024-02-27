@@ -2128,7 +2128,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 }
 */
 
-
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
     u32 nameHash = 0;
@@ -2299,6 +2298,56 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 					else
 						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }
+
+                SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
+
+                // Set IVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
+                for (j = 0; j < 6; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
+                }
+
+                // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
+                // Separate loops so that difficulty is not checked in each loop. Will implement later if I make a hard mode
+                /*if (difficultySetting > DIFFICULTY_NORMAL)
+                {
+                    for (j = 0; j < 6; j++)
+                    {
+                        SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
+                    }
+                }*/
+
+                CalculateMonStats(&party[i]);
+
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                }
+                // Set max friendship if trainer mon knows Return
+                if (MonKnowsMove(&party[i], MOVE_RETURN))
+                {
+                    friendship = MAX_FRIENDSHIP;
+                    SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
+                }
+                break;
+            }
+            case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED: //Bosses use static levels
+            {
+                const struct TrainerMonCustomized *partyData = gTrainers[trainerNum].party.EverythingCustomized;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+
+                personalityValue += nameHash << 8;
+				{
+					if(HasLevelEvolution(partyData[i].species, partyData[i].lvl))
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, partyData[i].lvl), partyData[i].lvl, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					else
+						CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
 
                 SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);

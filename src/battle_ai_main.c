@@ -4358,6 +4358,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SKILL_SWAP:
         if (GetAbilityRating(AI_DATA->abilities[battlerDef]) > GetAbilityRating(AI_DATA->abilities[battlerAtk]))
             score++;
+        else if (GetAbilityRating(AI_DATA->abilities[battlerDef]) < GetAbilityRating(AI_DATA->abilities[battlerAtk])) // If player ability is worse, don't swap
+            score--;
         break;
     case EFFECT_WORRY_SEED:
     case EFFECT_GASTRO_ACID:

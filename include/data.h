@@ -40,11 +40,12 @@ struct TrainerMonCustomized
     const u8 *nickname;
     const u8 *ev;
     u32 iv;
+    u8 spread;
+    s8 lvl;
     u16 moves[4];
     u16 species;
     u16 heldItem;
     u16 ability;
-    u8 lvl;
     u8 ball;
     u8 friendship;
     u8 nature : 5;

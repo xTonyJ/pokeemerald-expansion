@@ -611,7 +611,10 @@ extern const u8 EventScript_TradeCenter_Chair1[];
 extern const u8 EventScript_TradeCenter_Chair0[];
 extern const u8 EventScript_ConfirmLeaveCableClubRoom[];
 extern const u8 EventScript_TerminateLink[];
-//QOL Menu
-extern const u8 EventScript_QOLMenu[];
+// QOL Menu
+extern const u8 EventScript_SecretMenu[];
+// Rotom Menu
+extern const u8 EventScript_Rotom[];
+extern const u8 Rotom_Appliances_CheckForSpecialMove[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

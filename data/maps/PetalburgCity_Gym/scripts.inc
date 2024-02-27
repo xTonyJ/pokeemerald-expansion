@@ -402,6 +402,8 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	waitmessage
 	giveitem ITEM_GARDEVOIRITE
 	waitmessage
+	giveitem ITEM_GALLADITE
+	waitmessage
 	giveitem ITEM_LUCARIONITE
 	waitmessage
 	giveitem ITEM_AGGRONITE
@@ -1135,12 +1137,14 @@ PetalburgCity_Gym_EventScript_GymGuidePostVictory::
 
 PetalburgCity_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Gym_EventScript_GymStatueCertified
 	goto PetalburgCity_Gym_EventScript_GymStatue
 	end
 
 PetalburgCity_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Gym_EventScript_GymStatueCertified
 	goto PetalburgCity_Gym_EventScript_GymStatue
 	end
@@ -1578,9 +1582,11 @@ PetalburgCity_Gym_Text_EnterGymLeadersRoom:
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "PETALBURG CITY POKéMON GYM$"
 
 PetalburgCity_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "PETALBURG CITY POKéMON GYM\p"
 	.string "NORMAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

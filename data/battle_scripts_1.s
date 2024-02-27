@@ -6951,7 +6951,31 @@ BattleScript_TerrainEnds_Ret::
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	return
-	
+
+BattleScript_ElectricTerrainEnds::
+	printstring STRINGID_ELECTRICTERRAINENDS
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG, NULL
+	end2
+
+BattleScript_MistyTerrainEnds::
+	printstring STRINGID_MISTYTERRAINENDS
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG, NULL
+	end2
+
+BattleScript_GrassyTerrainEnds2::
+	printstring STRINGID_GRASSYTERRAINENDS
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG, NULL
+	end2
+
+BattleScript_PsychicTerrainEnds::
+	printstring STRINGID_PSYCHICTERRAINENDS
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG, NULL
+	end2
+
 BattleScript_TerrainEnds::
 	call BattleScript_TerrainEnds_Ret
 	end2

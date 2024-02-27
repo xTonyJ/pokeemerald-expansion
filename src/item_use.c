@@ -35,6 +35,7 @@
 #include "script.h"
 #include "sound.h"
 #include "strings.h"
+#include "script.h"
 #include "script_pokemon_util.h"
 #include "string_util.h"
 #include "task.h"
@@ -102,6 +103,16 @@ static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
     .yesFunc = UseTMHM,
     .noFunc = CloseItemMessage,
 };
+
+/*static const struct RotomFuncTable sRotomFuncTable =
+{
+    .microwave = UseTMHM,
+    .washingMachine = CloseItemMessage,
+    .refrigerator =
+    .electricFan = 
+    .lawnMower = 
+    .lightbulb = 
+};*/
 
 #define tEnigmaBerryType data[4]
 static void SetUpItemUseCallback(u8 taskId)
@@ -186,6 +197,14 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
         else
             DisplayItemMessage(taskId, 1, gText_ExpShareTurnOff, CloseItemMessage);
     }
+}
+
+void ItemUseOutOfBattle_RotomCatalog(u8 taskId)
+{
+    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+    Task_FadeAndCloseBagMenu(taskId);
+    ScriptContext_SetupScript(EventScript_Rotom);
+    FreezeObjectEvents();
 }
 
 static void DisplayCannotDismountBikeMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField)
@@ -823,6 +842,12 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+/*void ItemUseOutOfBattle_InfiniteCandy(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_RareCandy;
+    SetUpItemUseCallback(taskId);
+}*/
+
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
@@ -836,6 +861,12 @@ static void BootUpSoundTMHM(u8 taskId)
     PlaySE(SE_PC_LOGIN);
     gTasks[taskId].func = Task_ShowTMHMContainedMessage;
 }
+
+/*static void BootUpSoundRotom(u8 taskId)
+{
+    PlaySE(SE_PC_LOGIN);
+    BagMenu_Rotom(taskId, ITEMWIN_ROTOM, &sRotomFuncTable);
+}*/
 
 static void Task_ShowTMHMContainedMessage(u8 taskId)
 {
@@ -857,6 +888,11 @@ static void UseTMHM(u8 taskId)
     gItemUseCB = ItemUseCB_TMHM;
     SetUpItemUseCallback(taskId);
 }
+
+/*void ItemUseOutOfBattle_Rotom(u8 taskId)
+{
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_RotomCatalog, BootUpSoundRotom);
+}*/
 
 static void RemoveUsedItem(void)
 {

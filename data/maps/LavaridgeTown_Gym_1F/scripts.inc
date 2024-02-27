@@ -167,12 +167,14 @@ LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory::
 
 LavaridgeTown_Gym_1F_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE04_GET, LavaridgeTown_Gym_1F_EventScript_GymStatueCertified
 	goto LavaridgeTown_Gym_1F_EventScript_GymStatue
 	end
 
 LavaridgeTown_Gym_1F_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE04_GET, LavaridgeTown_Gym_1F_EventScript_GymStatueCertified
 	goto LavaridgeTown_Gym_1F_EventScript_GymStatue
 	end
@@ -365,9 +367,11 @@ LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
 	.string "the GYM LEADER of PETALBURG.$"
 
 LavaridgeTown_Gym_1F_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "LAVARIDGE TOWN POKéMON GYM$"
 
 LavaridgeTown_Gym_1F_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "LAVARIDGE TOWN POKéMON GYM\p"
 	.string "FLANNERY'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

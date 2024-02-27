@@ -19,6 +19,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
 	setvar VAR_RUSTBORO_CITY_STATE, 1
+	setvar VAR_BIRCH_AIDES, 1
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	setvar VAR_0x8008, 1
 	call Common_EventScript_SetGymTrainers
@@ -70,12 +71,14 @@ RustboroCity_Gym_EventScript_GymGuidePostVictory::
 
 RustboroCity_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE01_GET, RustboroCity_Gym_EventScript_GymStatueCertified
 	goto RustboroCity_Gym_EventScript_GymStatue
 	end
 
 RustboroCity_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE01_GET, RustboroCity_Gym_EventScript_GymStatueCertified
 	goto RustboroCity_Gym_EventScript_GymStatue
 	end
@@ -226,9 +229,11 @@ RustboroCity_Gym_Text_RoxannePostBattle:
 	.string "learn many things.$"
 
 RustboroCity_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "RUSTBORO CITY POKéMON GYM$"
 
 RustboroCity_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "RUSTBORO CITY POKéMON GYM\p"
 	.string "ROXANNE'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

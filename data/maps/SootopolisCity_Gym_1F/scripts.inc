@@ -155,12 +155,14 @@ SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory::
 
 SootopolisCity_Gym_1F_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
 	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
 
 SootopolisCity_Gym_1F_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
 	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
@@ -275,9 +277,11 @@ SootopolisCity_Gym_1F_Text_GoGetFortreeBadge:
 	.string "BADGE from the GYM in FORTREE.$"
 
 SootopolisCity_Gym_1F_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "SOOTOPOLIS CITY POKéMON GYM$"
 
 SootopolisCity_Gym_1F_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "SOOTOPOLIS CITY POKéMON GYM\p"
 	.string "JUAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

@@ -4,6 +4,7 @@
 .set LOCALID_GRUNT, 10
 .set LOCALID_RIVAL, 14
 .set LOCALID_SCIENTIST, 15
+.set LOCALID_BIRCHAIDE, 17
 
 RustboroCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
@@ -248,6 +249,59 @@ RustboroCity_EventScript_Man2::
 	release
 	end
 
+RustboroCity_EventScript_BoundlessCandy0::
+	lockall
+	setobjectxyperm LOCALID_BIRCHAIDE, 18, 20
+	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	goto RustboroCity_EventScript_GiveBoundlessCandy
+	end
+
+RustboroCity_EventScript_BoundlessCandy1::
+	lockall
+	setobjectxyperm LOCALID_BIRCHAIDE, 19, 21
+	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	goto RustboroCity_EventScript_GiveBoundlessCandy
+	end
+
+RustboroCity_EventScript_BoundlessCandy2::
+	lockall
+	setobjectxyperm LOCALID_BIRCHAIDE, 20, 20
+	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	goto RustboroCity_EventScript_GiveBoundlessCandy2
+	end
+
+RustboroCity_EventScript_GiveBoundlessCandy::
+	playbgm MUS_BIRCH_LAB, FALSE
+	addobject LOCALID_BIRCHAIDE
+	applymovement LOCALID_BIRCHAIDE, RustboroCity_Movement_AideApproachPlayer
+	waitmovement 0
+	msgbox RustboroCity_Text_ExplainCandy, MSGBOX_DEFAULT
+	closemessage
+	giveitem ITEM_EXP_CANDY_L
+	applymovement LOCALID_BIRCHAIDE, RustboroCity_Movement_AideLeavePlayer
+	waitmovement 0
+	fadedefaultbgm
+	removeobject LOCALID_BIRCHAIDE
+	setvar VAR_BIRCH_AIDES, 2
+	releaseall
+	end
+
+RustboroCity_EventScript_GiveBoundlessCandy2::
+	playbgm MUS_BIRCH_LAB, FALSE
+	addobject LOCALID_BIRCHAIDE
+	applymovement LOCALID_BIRCHAIDE, RustboroCity_Movement_AideApproachPlayer
+	waitmovement 0
+	msgbox RustboroCity_Text_ExplainCandy, MSGBOX_DEFAULT
+	closemessage
+	giveitem ITEM_EXP_CANDY_L
+	applymovement LOCALID_BIRCHAIDE, RustboroCity_Movement_AideLeavePlayer2
+	waitmovement 0
+	fadedefaultbgm
+	removeobject LOCALID_BIRCHAIDE
+	setvar VAR_BIRCH_AIDES, 2
+	releaseall
+	end
+
 RustboroCity_EventScript_StolenGoodsTrigger0::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
@@ -463,6 +517,45 @@ RustboroCity_Movement_EmployeeApproachPlayerFar:
 	walk_right
 	walk_in_place_faster_down
 	step_end
+
+RustboroCity_Movement_AideApproachPlayer:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+RustboroCity_Movement_AideLeavePlayer:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+RustboroCity_Movement_AideLeavePlayer2:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end	
 
 RustboroCity_EventScript_DevonEmployee1::
 	lock
@@ -1297,3 +1390,14 @@ RustboroCity_Text_YouCanHave2On2Battle:
 	.string "they'll both challenge you.\p"
 	.string "Don't you think it'd be cool if you\n"
 	.string "could beat two TRAINERS by yourself?$"
+
+RustboroCity_Text_ExplainCandy:
+	.string "Hey! I'm one of Birch's aides, glad\n"
+	.string "I caught up to you.\p"
+	.string "Did you defeat Roxanne already?!\n"
+	.string "... WOW! Congrats.\p"
+	.string "Anyway, here, this is from Birch.\p"
+	.string "It's a new technology we've been\n"
+	.string "working on, it makes leveling up\l"
+	.string "much easier, and has limitless uses.\p"
+	.string "Good luck with your adventure!$"

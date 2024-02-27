@@ -283,6 +283,7 @@ static const struct LevelUpMove sPidgeottoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(52, MOVE_MIRROR_MOVE),
     LEVEL_UP_MOVE(57, MOVE_AIR_SLASH),
     LEVEL_UP_MOVE(62, MOVE_HURRICANE),
+    LEVEL_UP_MOVE(65, MOVE_BOOMBURST),
     LEVEL_UP_END
 };
 
@@ -3041,6 +3042,7 @@ static const struct LevelUpMove sMeganiumLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_LIGHT_SCREEN),
     LEVEL_UP_MOVE(46, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(54, MOVE_SAFEGUARD),
+    LEVEL_UP_MOVE(58, MOVE_DAZZLING_GLEAM),
     LEVEL_UP_MOVE(60, MOVE_AROMATHERAPY),
     LEVEL_UP_MOVE(66, MOVE_SOLAR_BEAM),
     LEVEL_UP_MOVE(70, MOVE_PETAL_BLIZZARD),
@@ -3826,6 +3828,7 @@ static const struct LevelUpMove sSunkernLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSunfloraLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 0, MOVE_INCINERATE),
     LEVEL_UP_MOVE( 1, MOVE_FLOWER_SHIELD),
     LEVEL_UP_MOVE( 1, MOVE_ABSORB),
     LEVEL_UP_MOVE( 1, MOVE_POUND),
@@ -3844,7 +3847,9 @@ static const struct LevelUpMove sSunfloraLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(40, MOVE_SUNNY_DAY),
     LEVEL_UP_MOVE(43, MOVE_LEAF_STORM),
+    LEVEL_UP_MOVE(47, MOVE_FLAMETHROWER),
     LEVEL_UP_MOVE(50, MOVE_PETAL_BLIZZARD),
+    LEVEL_UP_MOVE(55, MOVE_FIRE_BLAST),
     LEVEL_UP_END
 };
 

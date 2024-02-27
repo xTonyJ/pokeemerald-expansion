@@ -2,7 +2,8 @@ AbandonedShip_Rooms2_1F_MapScripts::
 	.byte 0
 
 AbandonedShip_Rooms2_1F_EventScript_Dan::
-	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan
+	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan, AbandonedShip_Rooms2_1F_EventScript_GiveChoiceBand
+	goto_if_unset FLAG_RECEIVED_CHOICE_BAND, AbandonedShip_Rooms2_1F_EventScript_GiveChoiceBand
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_Rooms2_1F_EventScript_DanRematch
 	msgbox AbandonedShip_Rooms2_1F_Text_DanPostBattle, MSGBOX_DEFAULT
@@ -21,7 +22,8 @@ AbandonedShip_Rooms2_1F_EventScript_DanRematch::
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_Kira::
-	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraIntro, AbandonedShip_Rooms2_1F_Text_KiraDefeat, AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterKira
+	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraIntro, AbandonedShip_Rooms2_1F_Text_KiraDefeat, AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterKira, AbandonedShip_Rooms2_1F_EventScript_GiveChoiceBand
+	goto_if_unset FLAG_RECEIVED_CHOICE_BAND, AbandonedShip_Rooms2_1F_EventScript_GiveChoiceBand
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_Rooms2_1F_EventScript_KiraRematch
 	msgbox AbandonedShip_Rooms2_1F_Text_KiraPostBattle, MSGBOX_DEFAULT
@@ -47,6 +49,13 @@ AbandonedShip_Rooms2_1F_EventScript_Jani::
 AbandonedShip_Rooms2_1F_EventScript_Garrison::
 	trainerbattle_single TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat
 	msgbox AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+AbandonedShip_Rooms2_1F_EventScript_GiveChoiceBand::
+	msgbox AbandonedShip_Rooms2_1F_Text_GiveChoiceBand, MSGBOX_DEFAULT
+	giveitem ITEM_CHOICE_BAND
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_CHOICE_BAND
 	end
 
 AbandonedShip_Rooms2_1F_Text_DanIntro:
@@ -147,3 +156,11 @@ AbandonedShip_Rooms2_1F_Text_GarrisonDefeat:
 AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle:
 	.string "In a cabin somewhere on board,\n"
 	.string "I saw something sparkle.$"
+
+AbandonedShip_Rooms2_1F_Text_GiveChoiceBand::
+	.string "Wow! What an incredible battle.\n"
+	.string "Take this, it's our favorite item.\p"
+	.string "The Choice Band. It powers up physical\n"
+	.string "moves, but will restrict your Pokémon\p"
+	.string "from only using a single move.\n"
+	.string "Try it out!$"

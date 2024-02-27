@@ -989,7 +989,7 @@
 	.macro givemon species:req, level:req, item=ITEM_NONE
 	.byte 0x79
 	.2byte \species
-	.byte \level
+	.2byte \level
 	.2byte \item
 	.4byte 0
 	.4byte 0
@@ -1438,10 +1438,10 @@
 	.macro setwildbattle species:req, level:req, item=ITEM_NONE, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
 	.byte 0xb6
 	.2byte \species
-	.byte \level
+	.2byte \level
 	.2byte \item
 	.2byte \species2
-	.byte \level2
+	.2byte \level2
 	.2byte \item2
 	.endm
 
@@ -1765,6 +1765,16 @@
 
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
+	.endm
+
+	.macro checkPartyHasSpecies species:req
+	.byte 0xe3
+	.2byte \species
+	.endm
+
+	.macro isChosenMonSpecies species:req
+	.byte 0xe4
+	.2byte \species
 	.endm
 
 @ Supplementary

@@ -1807,7 +1807,7 @@ void ObjectEventInteractionPickBerryTree(void)
     u8 id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     u8 berry = GetBerryTypeByBerryTreeId(id);
 
-    gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+    gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), 5);
 }
 
 void ObjectEventInteractionRemoveBerryTree(void)

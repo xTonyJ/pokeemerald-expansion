@@ -284,12 +284,14 @@ MossdeepCity_Gym_Movement_WaitAfterSwitchUse:
 
 MossdeepCity_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_GymStatueCertified
 	goto MossdeepCity_Gym_EventScript_GymStatue
 	end
 
 MossdeepCity_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_GymStatueCertified
 	goto MossdeepCity_Gym_EventScript_GymStatue
 	end
@@ -606,9 +608,11 @@ MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons:
 	.string "bring some more POKéMON.$"
 
 MossdeepCity_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "MOSSDEEP CITY POKéMON GYM$"
 
 MossdeepCity_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "MOSSDEEP CITY POKéMON GYM\p"
 	.string "LIZA AND TATE'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

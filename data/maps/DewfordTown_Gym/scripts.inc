@@ -265,12 +265,14 @@ DewfordTown_Gym_EventScript_GymGuidePostVictory::
 
 DewfordTown_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_GymStatueCertified
 	goto DewfordTown_Gym_EventScript_GymStatue
 	end
 
 DewfordTown_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_GymStatueCertified
 	goto DewfordTown_Gym_EventScript_GymStatue
 	end
@@ -427,9 +429,11 @@ DewfordTown_Gym_Text_BrawlyPostBattle:
 	.string "among TRAINERS one day!$"
 
 DewfordTown_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "DEWFORD TOWN POKéMON GYM$"
 
 DewfordTown_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "DEWFORD TOWN POKéMON GYM\p"
 	.string "BRAWLY'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

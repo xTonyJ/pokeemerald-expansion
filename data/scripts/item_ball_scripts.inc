@@ -30,16 +30,20 @@ Route105_EventScript_ItemSwampertite::
 	finditem ITEM_SWAMPERTITE
 	end
 
-Route106_EventScript_ItemProtein::
-	finditem ITEM_PROTEIN
+Route105_EventScript_ItemTM55::
+	finditem ITEM_TM55
+	end	
+
+Route106_EventScript_ItemTM03:: @Water Pulse
+	finditem ITEM_TM03
 	end
 
-Route108_EventScript_ItemStarPiece::
-	finditem ITEM_STAR_PIECE
+Route108_EventScript_ItemBlastoisinite::
+	finditem ITEM_BLASTOISINITE
 	end
 
-Route109_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+Route109_EventScript_ItemTM98::
+	finditem ITEM_TM98
 	end
 
 Route109_EventScript_ItemPotion::
@@ -86,12 +90,12 @@ Route113_EventScript_ItemTM91::
 	finditem ITEM_TM91
 	end
 
-Route113_EventScript_ItemHyperPotion::
-	finditem ITEM_HYPER_POTION
+Route113_EventScript_ItemDreamBall::
+	finditem ITEM_DREAM_BALL
 	end
 
 Route114_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route114_EventScript_ItemProtein::
@@ -158,36 +162,36 @@ Route118_EventScript_ItemHyperPotion::
 	finditem ITEM_HYPER_POTION
 	end
 
-Route119_EventScript_ItemSuperRepel::
-	finditem ITEM_SUPER_REPEL
+Route119_EventScript_ItemGrassySeed::
+	finditem ITEM_GRASSY_SEED
 	end
 
-Route119_EventScript_ItemZinc::
-	finditem ITEM_ZINC
+Route119_EventScript_ItemTM22::
+	finditem ITEM_TM22
 	end
 
 Route119_EventScript_ItemElixir::
-	finditem ITEM_ELIXIR
+	finditem ITEM_PP_UP
 	end
 
-Route119_EventScript_ItemLeafStone::
-	finditem ITEM_LEAF_STONE
+Route119_EventScript_ItemSceptilite::
+	finditem ITEM_SCEPTILITE
 	end
 
 Route119_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
-Route119_EventScript_ItemHyperPotion::
-	finditem ITEM_HYPER_POTION
+Route119_EventScript_ItemWhiteHerb::
+	finditem ITEM_WHITE_HERB
 	end
 
-Route119_EventScript_ItemHyperPotion2::
-	finditem ITEM_HYPER_POTION
+Route119_EventScript_ItemGrassGem::
+	finditem ITEM_GRASS_GEM
 	end
 
 Route119_EventScript_ItemElixir2::
-	finditem ITEM_ELIXIR
+	finditem ITEM_PP_UP
 	end
 
 Route120_EventScript_ItemNugget::
@@ -210,36 +214,40 @@ Route120_EventScript_ItemRevive::
 	finditem ITEM_REVIVE
 	end
 
-Route121_EventScript_ItemCarbos::
-	finditem ITEM_CARBOS
+Route121_EventScript_ItemTM53EnergyBall::
+	finditem ITEM_TM53_ENERGY_BALL
 	end
 
-Route121_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+Route121_EventScript_ItemBeedrillite::
+	finditem ITEM_BEEDRILLITE
+	end	
+
+Route121_EventScript_ItemMeadowPlate::
+	finditem ITEM_MEADOW_PLATE
 	end
 
-Route121_EventScript_ItemZinc::
-	finditem ITEM_ZINC
+Route121_EventScript_ItemPowerBracer::
+	finditem ITEM_POWER_BRACER
 	end
 
-Route123_EventScript_ItemCalcium::
-	finditem ITEM_CALCIUM
+Route123_EventScript_ItemTM56::
+	finditem ITEM_TM56
 	end
 
 Route123_EventScript_ItemUltraBall::
 	finditem ITEM_ULTRA_BALL
 	end
 
-Route123_EventScript_ItemElixir::
-	finditem ITEM_ELIXIR
+Route123_EventScript_ItemLeek::
+	finditem ITEM_LEEK
 	end
 
 Route123_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
-Route123_EventScript_ItemRevivalHerb::
-	finditem ITEM_REVIVAL_HERB
+Route123_EventScript_ItemLopunnite::
+	finditem ITEM_LOPUNNITE
 	end
 
 Route124_EventScript_ItemRedShard::
@@ -271,11 +279,11 @@ Route127_EventScript_ItemCarbos::
 	end
 
 Route127_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route132_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route132_EventScript_ItemProtein::
@@ -351,7 +359,7 @@ RusturfTunnel_EventScript_ItemTM63::
 	end
 
 GraniteCave_1F_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+	finditem ITEM_STARDUST
 	end
 
 GraniteCave_B1F_EventScript_ItemPokeBall::
@@ -362,8 +370,8 @@ GraniteCave_B2F_EventScript_ItemMawilite::
 	finditem ITEM_MAWILITE
 	end
 
-GraniteCave_B2F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+GraniteCave_B2F_EventScript_ItemIronBall::
+	finditem ITEM_IRON_BALL
 	end
 
 JaggedPass_EventScript_ItemTM11::
@@ -398,12 +406,12 @@ MeteorFalls_B1F_2R_EventScript_ItemTM02::
 	finditem ITEM_TM02
 	end
 
-NewMauville_Inside_EventScript_ItemUltraBall::
-	finditem ITEM_ULTRA_BALL
+NewMauville_Inside_EventScript_ItemManectite::
+	finditem ITEM_MANECTITE
 	end
 
 NewMauville_Inside_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+	finditem ITEM_ELECTRIC_SEED
 	end
 
 NewMauville_Inside_EventScript_ItemThunderStone::
@@ -411,19 +419,19 @@ NewMauville_Inside_EventScript_ItemThunderStone::
 	end
 
 NewMauville_Inside_EventScript_ItemFullHeal::
-	finditem ITEM_FULL_HEAL
+	finditem ITEM_ELECTIRIZER
 	end
 
 NewMauville_Inside_EventScript_ItemParalyzeHeal::
-	finditem ITEM_PARALYZE_HEAL
+	finditem ITEM_ELECTRIC_GEM
 	end
 
 AbandonedShip_Rooms_1F_EventScript_ItemHarborMail::
 	finditem ITEM_HARBOR_MAIL
 	end
 
-AbandonedShip_Rooms_B1F_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+AbandonedShip_Rooms_B1F_EventScript_ItemSeaIncense::
+	finditem ITEM_SEA_INCENSE
 	end
 
 AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall::
@@ -434,36 +442,36 @@ AbandonedShip_Room_B1F_EventScript_ItemTM13::
 	finditem ITEM_TM13
 	end
 
-AbandonedShip_Rooms2_1F_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+AbandonedShip_Rooms2_1F_EventScript_ItemRoomService::
+	finditem ITEM_ROOM_SERVICE
 	end
 
 AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey::
 	finditem ITEM_STORAGE_KEY
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall::
-	finditem ITEM_LUXURY_BALL
+AbandonedShip_HiddenFloorRooms_EventScript_ItemSharpedonite::
+	finditem ITEM_SHARPEDONITE
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner::
 	finditem ITEM_SCANNER
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone::
-	finditem ITEM_WATER_STONE
+AbandonedShip_HiddenFloorRooms_EventScript_ItemTM79::
+	finditem ITEM_TM79
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18::
 	finditem ITEM_TM18
 	end
 
-ScorchedSlab_EventScript_ItemTM11::
-	finditem ITEM_TM11
+ScorchedSlab_EventScript_ItemTM64::
+	finditem ITEM_TM64
 	end
 
-SafariZone_Northwest_EventScript_ItemTM22::
-	finditem ITEM_TM22
+SafariZone_Northwest_EventScript_ItemTM86::
+	finditem ITEM_TM86
 	end
 
 SafariZone_North_EventScript_ItemCalcium::
@@ -482,8 +490,8 @@ SafariZone_Southeast_EventScript_ItemBigPearl::
 	finditem ITEM_BIG_PEARL
 	end
 
-MtPyre_2F_EventScript_ItemUltraBall::
-	finditem ITEM_ULTRA_BALL
+MtPyre_2F_EventScript_ItemSpookyPlate::
+	finditem ITEM_SPOOKY_PLATE
 	end
 
 MtPyre_3F_EventScript_ItemSuperRepel::
@@ -508,6 +516,10 @@ MtPyre_Exterior_EventScript_ItemMaxPotion::
 
 MtPyre_Exterior_EventScript_ItemTM48::
 	finditem ITEM_TM48
+	end
+
+MtPyre_Summit_EventScript_ItemBanettite::
+	giveitem ITEM_BANETTITE
 	end
 
 AquaHideout_B1F_EventScript_ItemMasterBall::
@@ -547,7 +559,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl::
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal::
@@ -631,15 +643,15 @@ ArtisanCave_1F_EventScript_ItemCarbos::
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
-MagmaHideout_2F_2R_EventScript_ItemMaxElixir::
-	finditem ITEM_MAX_ELIXIR
+MagmaHideout_2F_2R_EventScript_ItemTM83::
+	finditem ITEM_TM83
 	end
 
-MagmaHideout_2F_2R_EventScript_ItemFullRestore::
-	finditem ITEM_FULL_RESTORE
+MagmaHideout_2F_2R_EventScript_ItemTerrainExtender::
+	finditem ITEM_TERRAIN_EXTENDER
 	end
 
 MagmaHideout_3F_1R_EventScript_ItemNugget::
@@ -655,7 +667,7 @@ MagmaHideout_4F_EventScript_ItemMaxRevive::
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+	finditem ITEM_STARDUST
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_ItemTM61::
@@ -670,8 +682,8 @@ DewfordGardens_EventScript_ItemTM78::
 	finditem ITEM_TM78
 	end
 
-Route110_EventScript_ItemManectite::
-	finditem ITEM_MANECTITE
+Route110_EventScript_ItemTM73::
+	finditem ITEM_TM73
 	end
 
 Route117_EventScript_ItemMetronome::
@@ -684,4 +696,8 @@ Route111_EventScript_ItemAbsolite::
 
 MirageTower_2F_EventScript_ItemTM33::
 	finditem ITEM_TM33
+	end
+
+Route120_EventScript_Item_Pidgeotite::
+	finditem ITEM_PIDGEOTITE
 	end

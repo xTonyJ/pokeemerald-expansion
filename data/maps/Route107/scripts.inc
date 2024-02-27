@@ -38,13 +38,22 @@ Route107_EventScript_Beth::
 	end
 
 Route107_EventScript_Lisa::
-	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_LisaIntro, Route107_Text_LisaDefeated, Route107_Text_LisaNotEnoughPokemon
+	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_LisaIntro, Route107_Text_LisaDefeated, Route107_Text_LisaNotEnoughPokemon, Route107_GiveDampRock
+	goto_if_unset FLAG_RECEIVED_DAMP_ROCK, Route107_GiveDampRock
 	msgbox Route107_Text_LisaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route107_EventScript_Ray::
-	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_RayIntro, Route107_Text_RayDefeated, Route107_Text_RayNotEnoughPokemon
+	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_RayIntro, Route107_Text_RayDefeated, Route107_Text_RayNotEnoughPokemon, Route107_GiveDampRock
+	goto_if_unset FLAG_RECEIVED_DAMP_ROCK, Route107_GiveDampRock
 	msgbox Route107_Text_RayPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route107_GiveDampRock::
+	msgbox Route107_Text_GiveDampRock, MSGBOX_DEFAULT
+	giveitem ITEM_DAMP_ROCK
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_DAMP_ROCK
 	end
 
 Route107_EventScript_Camron::
@@ -52,3 +61,9 @@ Route107_EventScript_Camron::
 	msgbox Route107_Text_CamronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route107_Text_GiveDampRock::
+	.string "Amazing strategy! You're very strong.\n"
+	.string "We'd like to give you this.\p"
+	.string "This Damp Rock extends Rain by 2 turns\n"
+	.string "when held, for a total of 7 turns.\p"
+	.string "It's great for long battles!$"

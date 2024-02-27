@@ -238,9 +238,9 @@ RustboroCity_PokemonSchool_Text_ExplainBurn:
 	.string "Cure a burn using a BURN HEAL.$"
 
 RustboroCity_PokemonSchool_Text_ExplainFreeze:
-	.string "If a POKéMON is frozen, it becomes\n"
-	.string "completely helpless.\p"
-	.string "It will remain frozen after battle.\n"
+	.string "If a POKéMON is brittle, it will\n"
+	.string "always be critically struck.\p"
+	.string "It will remain brittle after battle.\n"
 	.string "Thaw it out using an ICE HEAL.$"
 
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:

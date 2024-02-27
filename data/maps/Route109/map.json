@@ -143,24 +143,24 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 27,
-      "y": 46,
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "x": 28,
+      "y": 52,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_ItemPPUp",
-      "flag": "FLAG_ITEM_ROUTE_109_PP_UP"
+      "script": "Route109_EventScript_ItemTM98",
+      "flag": "FLAG_ITEM_ROUTE_109_TM98"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
       "x": 29,
       "y": 32,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -372,7 +372,7 @@
       "x": 16,
       "y": 23,
       "elevation": 3,
-      "item": "ITEM_REVIVE",
+      "item": "ITEM_DREAM_BALL",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_REVIVE"
     },
     {
@@ -409,8 +409,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 8,
-      "y": 42,
+      "x": 7,
+      "y": 41,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_3"

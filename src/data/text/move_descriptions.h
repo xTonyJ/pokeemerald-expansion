@@ -38,7 +38,7 @@ static const u8 sFirePunchDescription[] = _(
 
 static const u8 sIcePunchDescription[] = _(
     "An icy punch that may\n"
-    "freeze the foe.");
+    "inflict brittle.");
 
 static const u8 sThunderPunchDescription[] = _(
     "An electrified punch that\n"
@@ -238,11 +238,11 @@ static const u8 sSurfDescription[] = _(
 
 static const u8 sIceBeamDescription[] = _(
     "Blasts the foe with an icy\n"
-    "beam that may freeze it.");
+    "beam that may inflict brittle.");
 
 static const u8 sBlizzardDescription[] = _(
     "Hits the foe with an icy\n"
-    "storm that may freeze it.");
+    "storm that may inflict brittle.");
 
 static const u8 sPsybeamDescription[] = _(
     "Fires a peculiar ray that\n"
@@ -730,7 +730,7 @@ static const u8 sSpiteDescription[] = _(
 
 static const u8 sPowderSnowDescription[] = _(
     "Blasts the foe with a snowy\n"
-    "gust. May cause freezing.");
+    "gust. May cause brittle.");
 
 static const u8 sProtectDescription[] = _(
     "Evades attack, but may fail\n"
@@ -1042,7 +1042,7 @@ static const u8 sHeatWaveDescription[] = _(
 
 static const u8 sHailDescription[] = _(
     "Summons a hailstorm that\n"
-    "strikes every turn.");
+    "raises damage of Ice types.");
 
 static const u8 sTormentDescription[] = _(
     "Torments the foe and stops\n"
@@ -1690,7 +1690,7 @@ static const u8 sThunderFangDescription[] = _(
 
 static const u8 sIceFangDescription[] = _(
     "May cause flinching or\n"
-    "leave the foe frozen.");
+    "leave the foe brittle.");
 
 static const u8 sFireFangDescription[] = _(
     "May cause flinching or\n"
@@ -2230,7 +2230,7 @@ static const u8 sPetalBlizzardDescription[] = _(
 
 static const u8 sFreezeDryDescription[] = _(
     "Super effective on Water-\n"
-    "types. May cause freezing.");
+    "types. May cause brittle.");
 
 static const u8 sDisarmingVoiceDescription[] = _(
     "Lets out a charming cry\n"
@@ -2931,7 +2931,7 @@ static const u8 sDragonEnergyDescription[] = _(
 
 static const u8 sFreezingGlareDescription[] = _(
     "Shoots psychic power from\n"
-    "the eyes. May freeze the foe.");
+    "the eyes. May inflict brittle.");
 
 static const u8 sFieryWrathDescription[] = _(
     "An attack fueled by your\n"

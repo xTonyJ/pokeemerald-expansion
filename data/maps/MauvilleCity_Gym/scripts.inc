@@ -78,7 +78,7 @@ MauvilleCity_Gym_EventScript_Wattson::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_GiveShockWave2
-	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
+	goto_if_eq VAR_NEW_MAUVILLE_STATE, 6, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -238,12 +238,14 @@ MauvilleCity_Gym_EventScript_GymGuidePostVictory::
 
 MauvilleCity_Gym_EventScript_LeftGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
 	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
 
 MauvilleCity_Gym_EventScript_RightGymStatue::
 	lockall
+	special GetLevelCap2
 	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
 	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
@@ -385,9 +387,11 @@ MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Go forth and endeavor, youngster!$"
 
 MauvilleCity_Gym_Text_GymStatue:
+	.string "Current level cap is: {STR_VAR_2}\p"
 	.string "MAUVILLE CITY POKéMON GYM$"
 
 MauvilleCity_Gym_Text_GymStatueCertified:
+	.string "Current level cap is: {STR_VAR_2}\n"
 	.string "MAUVILLE CITY POKéMON GYM\p"
 	.string "WATTSON'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

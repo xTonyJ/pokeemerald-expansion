@@ -69,7 +69,7 @@ enum
     CANCELLER_FLAGS,
     CANCELLER_SKY_DROP,
     CANCELLER_ASLEEP,
-    CANCELLER_FROZEN,
+    
     CANCELLER_TRUANT,
     CANCELLER_RECHARGE,
     CANCELLER_FLINCH,
@@ -92,7 +92,7 @@ enum
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
 };
-
+//CANCELLER_FROZEN,
 extern const struct TypePower gNaturalGiftTable[];
 
 void HandleAction_ThrowBall(void);

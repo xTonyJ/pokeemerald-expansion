@@ -143,15 +143,19 @@
       "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",
       "x": 31,
       "y": 35,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
+      "item": "ITEM_NUGGET",
       "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY"
     },
     {

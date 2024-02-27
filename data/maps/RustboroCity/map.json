@@ -237,6 +237,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RustboroCity_EventScript_Boy1",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "x": 18,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_RUSTBORO_CITY_BIRCH_AIDE"
     }
   ],
   "warp_events": [
@@ -514,6 +527,33 @@
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_RivalTrigger7"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_BIRCH_AIDES",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_BoundlessCandy0"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_BIRCH_AIDES",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_BoundlessCandy1"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_BIRCH_AIDES",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_BoundlessCandy2"
     }
   ],
   "bg_events": [
