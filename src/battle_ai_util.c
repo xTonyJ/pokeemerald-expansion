@@ -2767,6 +2767,18 @@ bool32 AI_CanSleep(u8 battler, u16 ability)
     if (ability == ABILITY_INSOMNIA
       || ability == ABILITY_VITAL_SPIRIT
       || gBattleMons[battler].status1 & STATUS1_ANY
+      /*|| gPlayerParty[0].status & STATUS1_SLEEP
+      || gPlayerParty[1].status & STATUS1_SLEEP
+      || gPlayerParty[2].status & STATUS1_SLEEP
+      || gPlayerParty[3].status & STATUS1_SLEEP
+      || gPlayerParty[4].status & STATUS1_SLEEP
+      || gPlayerParty[5].status & STATUS1_SLEEP*/
+      || gEnemyParty[0].status & STATUS1_SLEEP
+      || gEnemyParty[1].status & STATUS1_SLEEP
+      || gEnemyParty[2].status & STATUS1_SLEEP
+      || gEnemyParty[3].status & STATUS1_SLEEP
+      || gEnemyParty[4].status & STATUS1_SLEEP
+      || gEnemyParty[5].status & STATUS1_SLEEP
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
       || (gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN))
       || IsAbilityStatusProtected(battler))
