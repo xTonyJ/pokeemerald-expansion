@@ -2878,6 +2878,16 @@ bool32 AI_CanBeConfused(u8 battler, u16 ability)
     return TRUE;
 }
 
+bool32 AI_CanBeSapped(u8 battler, u16 ability)
+{
+    if ((gBattleMons[battler].status2 & STATUS2_SAP)
+      || (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+      || (IS_BATTLER_OF_TYPE(battler, TYPE_BUG))
+      || (IsBattlerGrounded(battler) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)))
+        return FALSE;
+    return TRUE;
+}
+
 bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
     if (!AI_CanBeConfused(battlerDef, defAbility)

@@ -913,6 +913,7 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
     [MOVE_EFFECT_PREVENT_ESCAPE] = STATUS2_ESCAPE_PREVENTION,
     [MOVE_EFFECT_NIGHTMARE]      = STATUS2_NIGHTMARE,
     [MOVE_EFFECT_THRASH]         = STATUS2_LOCK_CONFUSE,
+    [MOVE_EFFECT_SAP]            = STATUS2_SAP,
 };
 
 static const u8 *const sMoveEffectBS_Ptrs[] =
@@ -927,6 +928,7 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
     [MOVE_EFFECT_UPROAR]           = BattleScript_MoveEffectUproar,
     [MOVE_EFFECT_PAYDAY]           = BattleScript_MoveEffectPayDay,
     [MOVE_EFFECT_WRAP]             = BattleScript_MoveEffectWrap,
+    [MOVE_EFFECT_SAP]              = BattleScript_MoveEffectSap,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate =
@@ -3076,8 +3078,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
         case STATUS1_FREEZE:
             if (!CanBeFrozen(gEffectBattler))
                 break;
-
-            CancelMultiTurnMoves(gEffectBattler);
+            // No longer needed since Brittle does not prevent attacking
+            //CancelMultiTurnMoves(gEffectBattler); 
             statusChanged = TRUE;
             break;
         case STATUS1_PARALYSIS:
@@ -3251,6 +3253,18 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
                     }
+                }
+                break;
+            case MOVE_EFFECT_SAP:
+                if (!CanBeSapped(gEffectBattler))
+                {
+                    gBattlescriptCurrInstr++;
+                }
+                else
+                {
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_SAP;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
@@ -3830,7 +3844,7 @@ static void Cmd_seteffectwithchance(void)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
-
+    
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
      && gBattleScripting.moveEffect)
     {
@@ -3840,11 +3854,16 @@ static void Cmd_seteffectwithchance(void)
             gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
             SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
         }
+        /*else if (gBattleMons[gBattlerTarget].status2 & STATUS2_SAP)
+        {
+            BattleScripting.moveEffect &= ~MOVE_EFFECT_ABSORB;
+            SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
+        }*/
         else if (RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
         {
             SetMoveEffect(FALSE, 0);
         }
-        else
+        else 
         {
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
@@ -3853,6 +3872,7 @@ static void Cmd_seteffectwithchance(void)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+        
 
     gBattleScripting.moveEffect = 0;
     gBattleScripting.multihitMoveEffect = 0;
@@ -5480,6 +5500,7 @@ static void Cmd_moveend(void)
     u32 endMode, endState;
     u32 originallyUsedMove;
 
+
     if (gChosenMove == MOVE_UNAVAILABLE)
         originallyUsedMove = MOVE_NONE;
     else
@@ -6184,8 +6205,10 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_LIFEORB_SHELLBELL:
-            if (ItemBattleEffects(ITEMEFFECT_LIFEORB_SHELLBELL, 0, FALSE))
-                effect = TRUE;
+                if (ItemBattleEffects(ITEMEFFECT_LIFEORB_SHELLBELL, 0, FALSE))
+                    effect = TRUE;
+                if (ItemBattleEffects(ITEMEFFECT_SAP, 0, FALSE))
+                    effect = TRUE;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_PICKPOCKET:
@@ -10071,6 +10094,9 @@ static void Cmd_various(void)
         case STATUS1_TOXIC_POISON:
             gBattleScripting.moveEffect = MOVE_EFFECT_TOXIC;
             break;
+        case MOVE_EFFECT_SAP: //TOXIC_POISON uses the same value as STATUS2_SAP
+            gBattleScripting.moveEffect = MOVE_EFFECT_SAP;
+            break;   
         default:
             gBattleScripting.moveEffect = 0;
             break;

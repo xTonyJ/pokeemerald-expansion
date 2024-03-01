@@ -9958,16 +9958,16 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Marcel[] = {
     .species = SPECIES_SHIFTRY,
     }
 };
-
+//dont forget to change these levels
 static const struct TrainerMonNoItemDefaultMoves sParty_Cristin1[] = {
     {
     .iv = 100,
-    .lvl = -3,
+    .lvl = -30,
     .species = SPECIES_LOUDRED,
     },
     {
     .iv = 100,
-    .lvl = -3,
+    .lvl = -30,
     .species = SPECIES_VILEPLUME,
     }
 };

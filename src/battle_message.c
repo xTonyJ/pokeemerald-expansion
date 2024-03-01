@@ -791,6 +791,7 @@ static const u8 sText_PkmnRevivedReadyToFight[] = _("{B_BUFF1} was revived and\n
 static const u8 sText_ItemRestoredSpeciesHealth[] = _("{B_LAST_ITEM} restored\n{B_BUFF1}'s health!");
 static const u8 sText_ItemCuredSpeciesStatus[] = _("{B_LAST_ITEM} cured\n{B_BUFF1}'s status!");
 static const u8 sText_ItemRestoredSpeciesPP[] = _("{B_LAST_ITEM} restored\n{B_BUFF1}'s PP!");
+static const s8 sText_PkmnWasSapped[] = _("{B_EFF_NAME_WITH_PREFIX} was sapped! Attackers\nwill leech a bit of health");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1436,6 +1437,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNGAINEDEXPALL - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXPAll,
     [STRINGID_NORMANNOTBAD - BATTLESTRINGS_TABLE_START] = sText_NormanNotBad,
     [STRINGID_NORMANGETREADY - BATTLESTRINGS_TABLE_START] = sText_NormanGetReady,
+    [STRINGID_PKMNWASSAPPED - BATTLESTRINGS_TABLE_START] =sText_PkmnWasSapped,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

@@ -93,8 +93,8 @@ static const u8 sSlamDescription[] = _(
     "tail, vine, etc.");
 
 static const u8 sVineWhipDescription[] = _(
-    "Strikes the foe with\n"
-    "slender, whiplike vines.");
+    "Strikes the foe with vines\n"
+    "30% chance to sap on hit");
 
 static const u8 sStompDescription[] = _(
     "Stomps the enemy with a big\n"
@@ -169,12 +169,12 @@ static const u8 sPoisonStingDescription[] = _(
     "etc., that may poison.");
 
 static const u8 sTwineedleDescription[] = _(
-    "Stingers on the forelegs\n"
-    "jab the foe twice.");
+    "Sharp needles quickly sting twice\n"
+    "20% sap chance");
 
 static const u8 sPinMissileDescription[] = _(
-    "Sharp pins are fired to\n"
-    "strike 2 to 5 times.");
+    "2-5 multihit attack\n"
+    "10% sap chance");
 
 static const u8 sLeerDescription[] = _(
     "Frightens the foe with a\n"
@@ -253,8 +253,8 @@ static const u8 sBubbleBeamDescription[] = _(
     "that may lower Speed.");
 
 static const u8 sAuroraBeamDescription[] = _(
-    "Fires a rainbow-colored\n"
-    "beam that may lower Attack.");
+    "Fires a rainbow beam :D\n"
+    "10% atk-1 / brittle chance");
 
 static const u8 sHyperBeamDescription[] = _(
     "Powerful, but leaves the\n"
@@ -306,7 +306,7 @@ static const u8 sGrowthDescription[] = _(
 
 static const u8 sRazorLeafDescription[] = _(
     "Cuts the enemy with leaves.\n"
-    "High critical-hit ratio.");
+    "High crit, 20% sap chance.");
 
 static const u8 sSolarBeamDescription[] = _(
     "Absorbs light in one turn,\n"
@@ -330,7 +330,7 @@ static const u8 sPetalDanceDescription[] = _(
 
 static const u8 sStringShotDescription[] = _(
     "Binds the foe with string\n"
-    "to reduce its Speed.");
+    "-1 speed, inflicts sap");
 
 static const u8 sDragonRageDescription[] = _(
     "Launches shock waves that\n"
@@ -681,8 +681,8 @@ static const u8 sThiefDescription[] = _(
     "steal the foe's held item.");
 
 static const u8 sSpiderWebDescription[] = _(
-    "Ensnares the foe to stop it\n"
-    "from fleeing or switching.");
+    "Ensnares the foe in a sticky web.\n"
+    "Can't escape and inflicts sap");
 
 static const u8 sMindReaderDescription[] = _(
     "Senses the foe's action to\n"
@@ -730,7 +730,7 @@ static const u8 sSpiteDescription[] = _(
 
 static const u8 sPowderSnowDescription[] = _(
     "Blasts the foe with a snowy\n"
-    "gust. May cause brittle.");
+    "gust. 20% brittle chance.");
 
 static const u8 sProtectDescription[] = _(
     "Evades attack, but may fail\n"
@@ -845,8 +845,8 @@ static const u8 sSparkDescription[] = _(
     "may paralyze the foe.");
 
 static const u8 sFuryCutterDescription[] = _(
-    "An attack that intensifies\n"
-    "on each successive hit.");
+    "An attack that successively\n"
+    "intensifies. 20% sap chance");
 
 static const u8 sSteelWingDescription[] = _(
     "Strikes the foe with hard\n"
@@ -901,8 +901,8 @@ static const u8 sDynamicPunchDescription[] = _(
     "confusion, but inaccurate.");
 
 static const u8 sMegahornDescription[] = _(
-    "A brutal ramming attack\n"
-    "using out-thrust horns.");
+    "A brutal horn ramming attack\n"
+    "10% sap chance");
 
 static const u8 sDragonBreathDescription[] = _(
     "Strikes the foe with an\n"
@@ -1213,8 +1213,8 @@ static const u8 sMudSportDescription[] = _(
     "raise electrical resistance.");
 
 static const u8 sIceBallDescription[] = _(
-    "A 5-turn attack that gains\n"
-    "power on successive hits.");
+    "5-turn atk, gains power\n"
+    "successively. 20% brittle chance");
 
 static const u8 sNeedleArmDescription[] = _(
     "Attacks with thorny arms.\n"
@@ -1305,8 +1305,8 @@ static const u8 sWaterSpoutDescription[] = _(
     "user's HP is high.");
 
 static const u8 sSignalBeamDescription[] = _(
-    "A strange beam attack that\n"
-    "may confuse the foe.");
+    "A strange beam attack\n"
+    "10% confuse / sap chance");
 
 static const u8 sShadowPunchDescription[] = _(
     "An unavoidable punch that\n"
@@ -1333,16 +1333,16 @@ static const u8 sMuddyWaterDescription[] = _(
     "May lower accuracy.");
 
 static const u8 sBulletSeedDescription[] = _(
-    "Shoots 2 to 5 seeds in a row\n"
-    "to strike the foe.");
+    "Shoots 2 to 5 seeds in a row.\n"
+    "5% chance to sap on hit");
 
 static const u8 sAerialAceDescription[] = _(
     "An extremely speedy and\n"
     "unavoidable attack.");
 
 static const u8 sIcicleSpearDescription[] = _(
-    "Attacks the foe by firing\n"
-    "2 to 5 icicles in a row.");
+    "2-5 Icicle multihit attack\n"
+    "5% brittle chance");
 
 static const u8 sIronDefenseDescription[] = _(
     "Hardens the body's surface\n"
@@ -1389,8 +1389,8 @@ static const u8 sVoltTackleDescription[] = _(
     "slightly hurts the user.");
 
 static const u8 sMagicalLeafDescription[] = _(
-    "Attacks with a strange leaf\n"
-    "that cannot be evaded.");
+    "Attacks with a strange leaf.\n"
+    "15% chance to sap on hit");
 
 static const u8 sWaterSportDescription[] = _(
     "The user becomes soaked to\n"
@@ -1402,7 +1402,7 @@ static const u8 sCalmMindDescription[] = _(
 
 static const u8 sLeafBladeDescription[] = _(
     "Slashes with a sharp leaf.\n"
-    "High critical-hit ratio.");
+    "High crit, 10% sap chance.");
 
 static const u8 sDragonDanceDescription[] = _(
     "A mystical dance that ups\n"
@@ -1485,8 +1485,8 @@ static const u8 sMetalBurstDescription[] = _(
     "greater power.");
 
 static const u8 sUTurnDescription[] = _(
-    "Does damage then switches\n"
-    "out the user.");
+    "Does damage then switches the\n"
+    "user out. 20% sap chance");
 
 static const u8 sCloseCombatDescription[] = _(
     "A strong attack but lowers\n"
@@ -1617,16 +1617,16 @@ static const u8 sAquaTailDescription[] = _(
     "like a wave to attack.");
 
 static const u8 sSeedBombDescription[] = _(
-    "A barrage of hard seeds\n"
-    "is fired at the foe.");
+    "A barrage of hard seeds.\n"
+    "10% chance to sap on hit. ");
 
 static const u8 sAirSlashDescription[] = _(
     "Attacks with a blade of\n"
     "air. May cause flinching.");
 
 static const u8 sXScissorDescription[] = _(
-    "Slashes the foe with crossed\n"
-    "scythes, claws, etc.");
+    "Precisely slashes foe with claws\n"
+    "High crit, 10% sap chance");
 
 static const u8 sBugBuzzDescription[] = _(
     "A damaging sound wave that\n"
@@ -1677,24 +1677,24 @@ static const u8 sBulletPunchDescription[] = _(
     "let. It always hits first.");
 
 static const u8 sIceShardDescription[] = _(
-    "Hurls a chunk of ice that\n"
-    "always strike first.");
+    "Priority 1 ice chunk attack\n"
+    "20% brittle chance");
 
 static const u8 sShadowClawDescription[] = _(
     "Strikes with a shadow claw.\n"
     "High critical-hit ratio.");
 
 static const u8 sThunderFangDescription[] = _(
-    "May cause flinching or\n"
-    "leave the foe paralyzed.");
+    "An electrocuting crunch\n"
+    "10% flinch / paralysis chance");
 
 static const u8 sIceFangDescription[] = _(
-    "May cause flinching or\n"
-    "leave the foe brittle.");
+    "A blisteringly cold chomp\n"
+    "10% flinch / brittle chance");
 
 static const u8 sFireFangDescription[] = _(
-    "May cause flinching or\n"
-    "leave the foe with a burn.");
+    "A scorching nibble\n"
+    "10% flinch / burn chance");
 
 static const u8 sShadowSneakDescription[] = _(
     "Extends the user's shadow\n"
@@ -1742,7 +1742,7 @@ static const u8 sDischargeDescription[] = _(
 
 static const u8 sPowerWhipDescription[] = _(
     "Violently lashes the foe\n"
-    "with vines or tentacles.");
+    "10% chance to sap on hit.");
 
 static const u8 sCrossPoisonDescription[] = _(
     "A slash that may poison a\n"
@@ -1773,8 +1773,8 @@ static const u8 sStealthRockDescription[] = _(
     "hurt a foe switching in.");
 
 static const u8 sGrassKnotDescription[] = _(
-    "A snare attack that does\n"
-    "more damage to heavier foes.");
+    "More damage to heavier foes.\n"
+    "10% chance to sap on hit");
 
 static const u8 sChatterDescription[] = _(
     "Attacks with a sound wave\n"
@@ -1798,7 +1798,7 @@ static const u8 sAquaJetDescription[] = _(
 
 static const u8 sAttackOrderDescription[] = _(
     "Underlings pummel the foe.\n"
-    "High critical-hit ratio.");
+    "High crit, 10% sap chance");
 
 static const u8 sDefendOrderDescription[] = _(
     "Raises Defense and Sp. Def\n"
@@ -2061,8 +2061,8 @@ static const u8 sGrassPledgeDescription[] = _(
     "grass. May create a swamp.");
 
 static const u8 sStruggleBugDescription[] = _(
-    "Resisting, the user attacks\n"
-    "the foe. Lowers Sp. Atk.");
+    "Hits all foes in desperation\n"
+    "Foe Sp.Atk -1, inflicts sap");
 
 static const u8 sBulldozeDescription[] = _(
     "Stomps down on the ground.\n"
@@ -2102,7 +2102,7 @@ static const u8 sLeafTornadoDescription[] = _(
 
 static const u8 sSteamrollerDescription[] = _(
     "Crushes the foe with its\n"
-    "body. May cause flinching.");
+    "body. 30% flinch / sap chance");
 
 static const u8 sCottonGuardDescription[] = _(
     "Wraps its body in cotton.\n"
@@ -2201,8 +2201,8 @@ static const u8 sStickyWebDescription[] = _(
     "slows foes switching in.");
 
 static const u8 sFellStingerDescription[] = _(
-    "If it knocks out a foe\n"
-    "the Attack stat is raised.");
+    "Raises Attack by 1 on fainting\n"
+    "foe. 30% sap chance");
 
 static const u8 sTrickOrTreatDescription[] = _(
     "Goes trick-or-treating\n"
@@ -2377,7 +2377,7 @@ static const u8 sNuzzleDescription[] = _(
     "the foe, paralyzing it.");
 
 static const u8 sInfestationDescription[] = _(
-    "The foe is infested and\n"
+    "Inflicts sap. Foe infested &\n"
     "attacked for "BINDING_TURNS" turns.");
 
 static const u8 sPowerUpPunchDescription[] = _(
@@ -2414,7 +2414,7 @@ static const u8 sLavaPlumeDescription[] = _(
 
 static const u8 sLeafStormDescription[] = _(
     "Whips up a storm of leaves.\n"
-    "Harshly lowers the Sp. Atk.");
+    "Sp.Atk -2. 100% sap chance");
 
 static const u8 sShoreUpDescription[] = _(
     "Restores the user's HP.\n"
@@ -2462,7 +2462,7 @@ static const u8 sSolarBladeDescription[] = _(
 
 static const u8 sLeafageDescription[] = _(
     "Attacks with a flurry of\n"
-    "small leaves.");
+    "small leaves. 30% sap chance.");
 
 static const u8 sSpotlightDescription[] = _(
     "Makes the foe attack the\n"
@@ -2673,8 +2673,8 @@ static const u8 sBaddyBadDescription[] = _(
     "wall, lowering Attack damage.");
 
 static const u8 sSappySeedDescription[] = _(
-    "Giant stalk scatters seeds\n"
-    "that drain HP every turn.");
+    "Inflicts leech seed to drain\n"
+    "HP every turn. 15% sap chance.");
 
 static const u8 sFreezyFrostDescription[] = _(
     "Crystal from cold haze hits.\n"
@@ -2786,8 +2786,8 @@ static const u8 sBreakingSwipeDescription[] = _(
     "Lowers the Atk of those hit.");
 
 static const u8 sBranchPokeDescription[] = _(
-    "The user pokes the target\n"
-    "with a pointed branch.");
+    "A fearsome branch stab\n"
+    "30% chance to sap on hit.");
 
 static const u8 sOverdriveDescription[] = _(
     "The user twangs its guitar,\n"
@@ -3174,8 +3174,8 @@ static const u8 sSnowscapeDescription[] = _(
     "lasts for five turns.");
 
 static const u8 sPounceDescription[] = _(
-    "The user pounces on the foe,\n"
-    "lowering its Speed.");
+    "The user pounces on the foe\n"
+    "Foe Speed -1, inflicts sap");
 
 static const u8 sTrailblazeDescription[] = _(
     "The user attacks suddenly,\n"

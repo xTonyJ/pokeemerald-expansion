@@ -424,6 +424,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectRevivalBlessing         @ EFFECT_REVIVAL_BLESSING
+	.4byte BattleScript_EffectSapHit 				  @ EFFECT_SAP_HIT
+	.4byte BattleScript_EffectSap 				  	  @ EFFECT_SAP
 
 BattleScript_EffectRevivalBlessing::
 	attackcanceler
@@ -1181,6 +1183,7 @@ BattleScript_EffectSappySeed:
 	setseeded
 	printfromtable gLeechSeedStringIds
 	waitmessage B_WAIT_TIME_LONG
+	argumentstatuseffect
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBaddyBad:
@@ -3160,6 +3163,7 @@ BattleScript_EffectHitEscape:
 	jumpifmovehadnoeffect BattleScript_MoveEnd
 	jumpifability BS_TARGET, ABILITY_GUARD_DOG, BattleScript_MoveEnd
 	seteffectwithchance
+	argumentstatuseffect
 	tryfaintmon BS_TARGET
 	moveendto MOVEEND_ATTACKER_VISIBLE
 	moveendfrom MOVEEND_TARGET_VISIBLE
@@ -3222,6 +3226,7 @@ BattleScript_HitFromAtkAnimation::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
+	argumentstatuseffect
 	seteffectwithchance
 	tryfaintmon BS_TARGET
 BattleScript_MoveEnd::
@@ -3472,6 +3477,10 @@ BattleScript_EffectFreezeHit::
 	setmoveeffect MOVE_EFFECT_FREEZE
 	goto BattleScript_EffectHit
 
+BattleScript_EffectSapHit::
+	setmoveeffect MOVE_EFFECT_SAP
+	goto BattleScript_EffectHit
+	
 BattleScript_EffectParalyzeHit::
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 	goto BattleScript_EffectHit
@@ -3706,7 +3715,9 @@ BattleScript_StatDownDoAnim::
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 BattleScript_StatDownPrintString::
 	printfromtable gStatDownStringIds
+	argumentstatuseffect
 	waitmessage B_WAIT_TIME_LONG
+	
 BattleScript_StatDownEnd::
 	goto BattleScript_MoveEnd
 
@@ -3833,11 +3844,13 @@ BattleScript_MultiHitPrintStrings::
 	jumpifmovehadnoeffect BattleScript_MultiHitEnd
 	copyarray gBattleTextBuff1, sMULTIHIT_STRING, 6
 	printstring STRINGID_HITXTIMES
+	argumentstatuseffect
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_MultiHitEnd::
 	seteffectwithchance
+	argumentstatuseffect
 	tryfaintmon BS_TARGET
 	moveendcase MOVEEND_SYNCHRONIZE_TARGET
 	moveendfrom MOVEEND_STATUS_IMMUNITY_ABILITIES
@@ -4137,6 +4150,22 @@ BattleScript_EffectConfuse:
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_CONFUSION
+	seteffectprimary
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectSap:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_MISTY_TERRAIN, BattleScript_MistyTerrainPrevents
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsafeguard BattleScript_SafeguardProtected
+	attackanimation
+	waitanimation
+	setmoveeffect MOVE_EFFECT_SAP
 	seteffectprimary
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
@@ -8423,6 +8452,11 @@ BattleScript_MoveEffectConfusion::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_MoveEffectSap::
+	printstring STRINGID_PKMNWASSAPPED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_MoveEffectRecoilWithStatus::
 	argumentstatuseffect
 BattleScript_MoveEffectRecoil::
@@ -9742,6 +9776,15 @@ BattleScript_ItemHurtEnd2::
 BattleScript_ItemHealHP_Ret::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
 	printstring STRINGID_PKMNSITEMRESTOREDHPALITTLE
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	return
+
+BattleScript_SapHealHP_Ret::
+	playanimation BS_ATTACKER, B_ANIM_INGRAIN_HEAL
+	printstring STRINGID_PKMNENERGYDRAINED
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER

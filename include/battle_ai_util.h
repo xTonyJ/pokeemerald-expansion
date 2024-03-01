@@ -131,6 +131,7 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 // status checks
 bool32 AI_CanBeBurned(u8 battler, u16 ability);
 bool32 AI_CanBeConfused(u8 battler, u16 ability);
+bool32 AI_CanBeSapped(u8 battler, u16 ability);
 bool32 AI_CanSleep(u8 battler, u16 ability);
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
 bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove);

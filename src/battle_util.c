@@ -2549,6 +2549,7 @@ u8 DoFieldEndTurnEffects(void)
 
 enum
 {
+    //ENDTURN_SAP,
     ENDTURN_INGRAIN,
     ENDTURN_AQUA_RING,
     ENDTURN_ABILITIES,
@@ -2612,6 +2613,7 @@ u8 DoBattlerEndTurnEffects(void)
     u32 ability, i, effect = 0;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_SKIP_DMG_TRACK);
+
     while (gBattleStruct->turnEffectsBattlerId < gBattlersCount && gBattleStruct->turnEffectsTracker <= ENDTURN_BATTLER_COUNT)
     {
         gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->turnEffectsBattlerId];
@@ -2624,6 +2626,13 @@ u8 DoBattlerEndTurnEffects(void)
         ability = GetBattlerAbility(gActiveBattler);
         switch (gBattleStruct->turnEffectsTracker)
         {
+        /*case ENDTURN_SAP:  // Sap life leech
+                BattleScriptExecute(BattleScript_SapHealHP_Ret);
+                effect++;
+            /*if (SapEffects(ITEMEFFECT_NORMAL, gActiveBattler, FALSE))
+                effect++;
+            gBattleStruct->turnEffectsTracker++;
+            break;*/   
         case ENDTURN_INGRAIN:  // ingrain
             if ((gStatuses3[gActiveBattler] & STATUS3_ROOTED)
              && !BATTLER_MAX_HP(gActiveBattler)
@@ -6528,6 +6537,16 @@ bool32 CanBeConfused(u8 battlerId)
     return TRUE;
 }
 
+bool32 CanBeSapped(u8 battlerId)
+{
+    if ((gBattleMons[battlerId].status2 & STATUS2_SAP)
+      || (IS_BATTLER_OF_TYPE(battlerId, TYPE_GRASS))
+      || (IS_BATTLER_OF_TYPE(battlerId, TYPE_BUG))
+      || (IsBattlerGrounded(battlerId) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)))
+        return FALSE;
+    return TRUE;
+}
+
 // second argument is 1/X of current hp compared to max hp
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
 {
@@ -7048,7 +7067,6 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     atkItem = gBattleMons[gBattlerAttacker].item;
     atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
     atkHoldEffectParam = GetBattlerHoldEffectParam(gBattlerAttacker);
-
     switch (caseID)
     {
     case ITEMEFFECT_ON_SWITCH_IN:
@@ -7693,6 +7711,31 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             break;
         }
         break;
+    case ITEMEFFECT_SAP:
+        // For use with the Sap status effect. Attacher leeches 1/8th of damage as health
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_SAP 
+                        && gSpecialStatuses[gBattlerAttacker].damagedMons  // Need to have done damage
+                        && gBattlerAttacker != gBattlerTarget           // Attacker is not the target
+                        && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP // HP is less than max
+        #if B_HEAL_BLOCKING >= GEN_5
+                        && gBattleMons[gBattlerAttacker].hp != 0 && !(gStatuses3[battlerId] & STATUS3_HEAL_BLOCK))
+        #else
+                        && gBattleMons[gBattlerAttacker].hp != 0)
+        #endif
+                    {
+                        //gLastUsedItem = atkItem;
+                        gBattleScripting.battler = gBattlerAttacker;
+                        gBattleMoveDamage = (gSpecialStatuses[gBattlerTarget].dmg / 8) * -1;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = -1;
+                        gSpecialStatuses[gBattlerTarget].dmg = 0;
+                        BattleScriptPushCursor();
+                        //BattleScriptExecute(BattleScript_SapHealHP_Ret);
+                        gBattlescriptCurrInstr = BattleScript_SapHealHP_Ret;
+                        effect = ITEM_HP_CHANGE;
+                    }
+    return effect;
+    break;
     case ITEMEFFECT_TARGET:
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
@@ -7894,6 +7937,39 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     if (effect && (gLastUsedItem >= FIRST_BERRY_INDEX && gLastUsedItem <= LAST_BERRY_INDEX))
         gBattleStruct->ateBerry[battlerId & BIT_SIDE] |= gBitTable[gBattlerPartyIndexes[battlerId]];
 
+    return effect;
+}
+
+u8 SapEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
+{
+    int i = 0, moveType;
+    u8 effect = ITEM_NO_EFFECT;
+    u8 changedPP = 0;
+    u8 battlerHoldEffect, atkHoldEffect;
+    u8 atkHoldEffectParam;
+    u16 atkItem;
+        // Sap mechanics go here, I guess
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_SAP 
+                        && gSpecialStatuses[gBattlerAttacker].damagedMons  // Need to have done damage
+                        && gBattlerAttacker != gBattlerTarget           // Attacker is not the target
+                        && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP // HP is less than max
+        #if B_HEAL_BLOCKING >= GEN_5
+                        && gBattleMons[gBattlerAttacker].hp != 0 && !(gStatuses3[battlerId] & STATUS3_HEAL_BLOCK))
+        #else
+                        && gBattleMons[gBattlerAttacker].hp != 0)
+        #endif
+                    {
+                        //gLastUsedItem = atkItem;
+                        gBattleScripting.battler = gBattlerAttacker;
+                        gBattleMoveDamage = (gSpecialStatuses[gBattlerTarget].dmg / 8) * -1;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = -1;
+                        gSpecialStatuses[gBattlerTarget].dmg = 0;
+                        BattleScriptPushCursor();
+                        BattleScriptExecute(BattleScript_SapHealHP_Ret);
+                        gBattlescriptCurrInstr = BattleScript_SapHealHP_Ret;
+                        effect = ITEM_HP_CHANGE;
+                    }
     return effect;
 }
 
