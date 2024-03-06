@@ -191,6 +191,11 @@ const struct SpritePalette sSpritePalette_Arrow =
     sArrow_Pal, PALTAG_ARROW
 };
 
+const struct SpritePalette gSpritePalette_Arrow =
+{
+    sArrow_Pal, PALTAG_ARROW
+};
+
 static const union AnimCmd sAnim_Arrow_Down[] =
 {
     ANIMCMD_FRAME(0, 30),
