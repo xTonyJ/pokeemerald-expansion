@@ -1647,6 +1647,14 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
+    else if (gSpecialStatuses[gBattlerTarget].flashFireRedirected)
+    {
+        gSpecialStatuses[gBattlerTarget].flashFireRedirected = FALSE;
+        gLastUsedAbility = ABILITY_FLASH_FIRE;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_TookAttack;
+        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+    }
     else if (IsBattlerProtected(gBattlerTarget, gCurrentMove)
      && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
      && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)))

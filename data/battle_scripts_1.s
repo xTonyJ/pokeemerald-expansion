@@ -3226,8 +3226,8 @@ BattleScript_HitFromAtkAnimation::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	argumentstatuseffect
 	seteffectwithchance
+	argumenttomoveeffect
 	tryfaintmon BS_TARGET
 BattleScript_MoveEnd::
 	moveendall
@@ -5448,18 +5448,10 @@ BattleScript_EffectTeleportNew:
 BattleScript_EffectTeleportNewEnd:
 	goto BattleScript_MoveEnd
 
+.if B_BEAT_UP < GEN_5
 BattleScript_EffectBeatUp::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-.if B_BEAT_UP >= GEN_5
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	trydobeatup
-	goto BattleScript_HitFromAtkAnimation
-.else
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	ppreduce
@@ -5484,11 +5476,17 @@ BattleScript_BeatUpAttack::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
+	tryfaintmon BS_TARGET, FALSE, NULL
 	moveendto MOVEEND_NEXT_TARGET
 	goto BattleScript_BeatUpLoop
 BattleScript_BeatUpEnd::
 	end
+.else
+BattleScript_EffectBeatUp::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	addbyte gBattleCommunication, 1
+	goto BattleScript_HitFromAtkString
 .endif
 
 BattleScript_EffectSemiInvulnerable::

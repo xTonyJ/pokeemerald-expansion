@@ -3917,7 +3917,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpAttack  = 45,
         .baseSpDefense = 65,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
-        .catchRate = 45,
+        .catchRate = 150,
         .expYield = 65,
         .evYield_SpDefense = 1,
         .genderRatio = PERCENT_FEMALE(12.5),
@@ -4388,7 +4388,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_MEGANIUM] = //Swapped Leaf Guard with Triage, added Fairy typing
+    [SPECIES_MEGANIUM] = // Swapped Leaf Guard with Triage, added Fairy typing
     {
         .baseHP        = 80,
         .baseAttack    = 82,
@@ -6469,7 +6469,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .flags = SPECIES_FLAG_LEGENDARY,
     },
 
-    [SPECIES_SUICUNE] =
+    [SPECIES_SUICUNE] = // Added ice typing
     {
         .baseHP        = 100,
         .baseAttack    = 75,
@@ -6477,7 +6477,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 90,
         .baseSpDefense = 115,
-        .types = { TYPE_WATER, TYPE_WATER },
+        .types = { TYPE_WATER, TYPE_ICE },
         .catchRate = 3,
         .expYield = 261,
         .evYield_Defense   = 1,
@@ -9039,8 +9039,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_DUSKULL] =
     {
-        .baseHP        = 20,
-        .baseAttack    = 40,
+        .baseHP        = 25, // 20
+        .baseAttack    = 50, // 40
         .baseDefense   = 90,
         .baseSpeed     = 25,
         .baseSpAttack  = 30,
@@ -9062,11 +9062,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_DUSCLOPS] =
     {
-        .baseHP        = 40,
+        .baseHP        = 50, // 40
         .baseAttack    = 70,
         .baseDefense   = 130,
         .baseSpeed     = 25,
-        .baseSpAttack  = 60,
+        .baseSpAttack  = 70, // 60
         .baseSpDefense = 130,
         .types = { TYPE_GHOST, TYPE_GHOST},
         .catchRate = 90,
@@ -11759,12 +11759,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_DUSKNOIR] =
     {
-        .baseHP        = 45,
+        .baseHP        = 60, // was 45
         .baseAttack    = 100,
-        .baseDefense   = 135,
+        .baseDefense   = 140, // was 135
         .baseSpeed     = 45,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 135,
+        .baseSpAttack  = 75, // was 65
+        .baseSpDefense = 140, // was 135
         .types = { TYPE_GHOST, TYPE_GHOST},
         .catchRate = 45,
         .expYield = 236,
@@ -15822,7 +15822,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpAttack  = 62,
         .baseSpDefense = 44,
         .types = { TYPE_WATER, TYPE_WATER},
-        .catchRate = 45,
+        .catchRate = 125,
         .expYield = 63,
         .evYield_Speed     = 1,
         .genderRatio = PERCENT_FEMALE(12.5),
@@ -18064,7 +18064,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpAttack  = 82,
         .baseSpDefense = 110,
         .types = { TYPE_FAIRY, TYPE_FAIRY},
-        .catchRate = 60,
+        .catchRate = 200,
         .expYield = 170,
         .evYield_SpDefense = 2,
         .itemRare = ITEM_MISTY_SEED,

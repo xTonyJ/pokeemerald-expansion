@@ -5756,7 +5756,7 @@ u8 GetDefaultMoveTarget(u8 battlerId)
     }
 }
 
-u8 GetDefaultMoveTarget2(u8 battlerId)//Function to fix move color effectiveness from showing in double battles when 1 pokemon remained
+u8 GetDefaultMoveTarget2(u8 battlerId)// Function to fix move color effectiveness from showing in double battles when 1 pokemon remained
 {
     u8 opposing = BATTLE_OPPOSITE(GET_BATTLER_SIDE(battlerId));
 

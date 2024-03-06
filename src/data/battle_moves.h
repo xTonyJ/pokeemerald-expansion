@@ -2865,7 +2865,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_STATUS,
         .zMoveEffect = Z_EFFECT_DEF_UP_1,
-        .argument = STATUS1_PARALYSIS,
+        .argument = STATUS2_SAP,
     },
 
     [MOVE_MIND_READER] =
@@ -7127,7 +7127,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .secondaryEffectChance = 10,
         .target = MOVE_TARGET_BOTH,
         .priority = -4,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .argument = STATUS1_FREEZE,
@@ -8839,7 +8839,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #endif
         .effect = EFFECT_FREEZE_HIT,
         .type = TYPE_ICE,
-        .accuracy = 90,
+        .accuracy = 100,
         .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
