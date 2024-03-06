@@ -333,6 +333,8 @@ static bool16 IsMonAllowedInPokemonJump(struct Pokemon *);
 static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *);
 static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
+// static bool8 CanLearnTutorMove(u16, u8);
+static u16 GetTutorMove(u8);
 static bool8 ShouldUseChooseMonText(void);
 static u16 GetTutorMove(u8);
 static void SetPartyMonFieldSelectionActions(struct Pokemon *, u8);
@@ -7135,4 +7137,9 @@ void IsLastMonThatKnowsSurf(void)
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
     }
+}
+
+u16 GetTMHMMoves(u16 position)
+{
+    return sTMHMMoves[position];
 }
