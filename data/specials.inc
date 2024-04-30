@@ -542,10 +542,22 @@ gSpecials::
 	def_special GetBattleFrontierTutorMoveIndex
 	@def_special ChangePokemonNature
 	@def_special BufferChosenMonNature
+	def_special ChangeChosenMonIVs
+	def_special IncreaseChosenMonEVs
+	def_special BufferChosenMonIV
+	def_special BufferChosenMonEV
+	def_special BufferChosenMonAllIVs
+	def_special BufferChosenMonAllEVs
+	def_special ResetChosenMonEVs
+	def_special ChangeChosenMonHiddenPower
+	def_special CheckChosenMonCanGainEVs
 	def_special DebugAction_Flags_EncounterOnOff
 	def_special AutoRun
 	def_special SecretMenu_PokeVial
 	def_special SecretMenu_Fly
+	def_special SecretMenu_PC
+	def_special SecretMenu_Difficulty
+	def_special SecretMenu_Grinding
 	def_special GetLevelCap
 	def_special GetLevelCap2
 	def_special CountRotomInParty

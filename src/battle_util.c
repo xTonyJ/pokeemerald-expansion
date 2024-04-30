@@ -1806,6 +1806,21 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
+    //Sleep Clause
+    if(IsSleepClauseDisablingMove(gActiveBattler, move))
+    {
+        gCurrentMove = move;
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
+        }
+        else
+        {
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingSleepClauseNotAllowed;
+            limitations++;
+        }
+    }
+
     gPotentialItemEffectBattler = gActiveBattler;
     if (HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
     {
@@ -1941,6 +1956,9 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u16 check)
             unusableMoves |= gBitTable[i];
         // Gorilla Tactics
         else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battlerId) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != gBattleMons[battlerId].moves[i])
+            unusableMoves |= gBitTable[i];
+        // Sleep Clause
+        else if (IsSleepClauseDisablingMove(battlerId, gBattleMons[battlerId].moves[i]))
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -6440,6 +6458,73 @@ bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag)
     return IsBattlerGrounded(battlerId);
 }
 
+bool8 IsSleepDisabled(u8 battlerId){
+    //Sleep Clause
+    struct Pokemon *party;
+    u8 asleepmons = 0;
+    u8 i;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if ((GetMonData(&party[i], MON_DATA_STATUS) & (STATUS1_SLEEP)) &&   
+            GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG  &&
+            GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE)
+            asleepmons++;
+    }
+
+    if(asleepmons != 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsSleepClauseDisablingMove(u8 battlerId, u16 move)
+{
+    u32 target = BATTLE_OPPOSITE(battlerId);
+    u16 moveEffect = gBattleMoves[move].effect;
+    bool8 isSleepingMove = FALSE;
+    u16 partnerchosenmove = gChosenMoveByBattler[BATTLE_PARTNER(battlerId)];
+    bool8 IsDoubleBattle = FALSE;
+    bool8 partnerChoseSleepMove = FALSE;
+
+    if((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        IsDoubleBattle = TRUE;
+
+    if(!IsBattlerAlive(BATTLE_PARTNER(battlerId)) || !IsDoubleBattle)
+        partnerchosenmove = MOVE_NONE;
+
+    switch(moveEffect){
+        case EFFECT_SLEEP:
+        case EFFECT_YAWN:
+            isSleepingMove = TRUE;
+        break;
+        default:
+            return FALSE;
+        break;
+    }
+
+    if(IsDoubleBattle){
+        switch(gBattleMoves[partnerchosenmove].effect){
+            case EFFECT_SLEEP:
+            case EFFECT_YAWN:
+                partnerChoseSleepMove = TRUE;
+            break;
+        }
+    }
+
+    if(partnerChoseSleepMove && isSleepingMove && IsDoubleBattle) //To speed up things
+        return TRUE;
+    else if(IsSleepDisabled(target) && isSleepingMove)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool32 CanSleep(u8 battlerId)
 {
     u16 ability = GetBattlerAbility(battlerId);
@@ -6448,18 +6533,6 @@ bool32 CanSleep(u8 battlerId)
       || ability == ABILITY_COMATOSE
       || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD
       || gBattleMons[battlerId].status1 & STATUS1_ANY
-      /*|| gPlayerParty[0].status & STATUS1_SLEEP
-      || gPlayerParty[1].status & STATUS1_SLEEP
-      || gPlayerParty[2].status & STATUS1_SLEEP
-      || gPlayerParty[3].status & STATUS1_SLEEP
-      || gPlayerParty[4].status & STATUS1_SLEEP
-      || gPlayerParty[5].status & STATUS1_SLEEP*/
-      || gEnemyParty[0].status & STATUS1_SLEEP
-      || gEnemyParty[1].status & STATUS1_SLEEP
-      || gEnemyParty[2].status & STATUS1_SLEEP
-      || gEnemyParty[3].status & STATUS1_SLEEP
-      || gEnemyParty[4].status & STATUS1_SLEEP
-      || gEnemyParty[5].status & STATUS1_SLEEP
       || IsAbilityOnSide(battlerId, ABILITY_SWEET_VEIL)
       || IsAbilityStatusProtected(battlerId)
       || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
@@ -6633,9 +6706,9 @@ static u8 StatRaiseBerry(u32 battlerId, u32 itemId, u32 statId, bool32 end2)
         BufferStatChange(battlerId, statId, STRINGID_STATROSE);
         gEffectBattler = battlerId;
         if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
-            SET_STATCHANGER(statId, 2, FALSE);
+            SET_STATCHANGER(statId, 3, FALSE);
         else
-            SET_STATCHANGER(statId, 1, FALSE);
+            SET_STATCHANGER(statId, 2, FALSE);
 
         gBattleScripting.animArg1 = 14 + statId;
         gBattleScripting.animArg2 = 0;
@@ -8251,6 +8324,8 @@ static bool32 IsBattlerGrounded2(u8 battlerId, bool32 considerInverse)
         return FALSE;
     if (GetBattlerAbility(battlerId) == ABILITY_LEVITATE)
         return FALSE;
+    if (BattlerHasInnate(battlerId, ABILITY_LEVITATE)) //&& !DoesBattlerIgnoreAbilityorInnateChecks(gBattlerAttacker)) //Levitate Innate Effect
+        return FALSE;
     if (IS_BATTLER_OF_TYPE(battlerId, TYPE_FLYING) && (!considerInverse || !FlagGet(B_FLAG_INVERSE_BATTLE)))
         return FALSE;
     return TRUE;
@@ -9096,6 +9171,8 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         MulModifier(&modifier, UQ_4_12(1.5));
     if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && moveType == TYPE_GRASS && IsBattlerGrounded(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_SEMI_INVULNERABLE))
         MulModifier(&modifier, TERRAIN_TYPE_BOOST);
+    if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && moveType == TYPE_BUG && IsBattlerGrounded(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_SEMI_INVULNERABLE))
+        MulModifier(&modifier, TERRAIN_TYPE_BOOST);
     if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && moveType == TYPE_DRAGON && IsBattlerGrounded(battlerDef) && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
         MulModifier(&modifier, UQ_4_12(0.5));
     if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && moveType == TYPE_ELECTRIC && IsBattlerGrounded(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_SEMI_INVULNERABLE))
@@ -9273,7 +9350,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         switch (GetBattlerAbility(BATTLE_PARTNER(battlerAtk)))
         {
         case ABILITY_FLOWER_GIFT:
-            if (gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerAtk), B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
+            if (gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(BATTLE_PARTNER(battlerAtk), B_WEATHER_SUN) && IS_MOVE_SPECIAL(move))
                 MulModifier(&modifier, UQ_4_12(1.5));
             break;
         }
@@ -9749,8 +9826,8 @@ static void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, u8 batt
 
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
-    if (gBattleMoves[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_WATER)
-        mod = UQ_4_12(2.0);
+    /*if (gBattleMoves[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_FIRE)
+        mod = UQ_4_12(2.0);*/
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
     if (moveType == TYPE_FIRE && gDisableStructs[battlerDef].tarShot)
@@ -9837,6 +9914,16 @@ static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 bat
             gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
             RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
         }
+        else if(BattlerHasInnate(battlerDef, ABILITY_LEVITATE)) //Defender has Levitate as Innate
+            //if(!DoesBattlerIgnoreAbilityorInnateChecks(gBattlerAttacker))
+            { //Mold Breaker Check
+                modifier = UQ_4_12(0.0);
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_LEVITATE;
+                gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+                gLastLandedMoves[battlerDef] = 0;
+                gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
+                RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
+            }
     }
 #if B_SHEER_COLD_IMMUNITY >= GEN_7
     else if (move == MOVE_SHEER_COLD && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE))
@@ -9877,7 +9964,10 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
         modifier = CalcTypeEffectivenessMultiplierInternal(move, moveType, battlerAtk, battlerDef, recordAbilities, modifier);
-        if (gBattleMoves[move].effect == EFFECT_TWO_TYPED_MOVE)
+        // added to check for certain multi type moves
+        if (gBattleMoves[move].effect == EFFECT_TWO_TYPED_MOVE 
+        || gBattleMoves[move].effect == EFFECT_DREAM_EATER 
+        || gBattleMoves[move].effect == EFFECT_BURN_HIT)
             modifier = CalcTypeEffectivenessMultiplierInternal(move, gBattleMoves[move].argument, battlerAtk, battlerDef, recordAbilities, modifier);
     }
 
@@ -10553,6 +10643,9 @@ void TryRestoreStolenItems(void)
             if (stolenItem != ITEM_NONE && ItemId_GetPocket(stolenItem) != POCKET_BERRIES)
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  // Restore stolen non-berry items
         }
+        stolenItem = gBattleStruct->storedItems[i].originalItem2;
+        if (stolenItem != ITEM_NONE)
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);
     }
 }
 
@@ -10861,4 +10954,14 @@ static void SetRandomMultiHitCounter()
         // If roll 4 or 5 Loaded Dice doesn't do anything. Otherwise it rolls the number of hits as 5 minus a random integer from 0 to 1 inclusive.
         gMultiHitCounter = 5 - (Random() & 1);
     }
+}
+
+u8 BattlerHasInnateOrAbility(u8 battler, u16 ability)
+{
+    if(BattlerHasInnate(battler, ability))
+        return BATTLER_INNATE;
+    else if(GetBattlerAbility(battler) == ability)
+        return BATTLER_ABILITY;
+    else
+        return BATTLER_NONE;
 }

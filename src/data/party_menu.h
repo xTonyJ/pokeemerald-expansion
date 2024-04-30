@@ -493,6 +493,17 @@ static const struct WindowTemplate sItemGiveTakeWindowTemplate =
     .baseBlock = 0x39D,
 };
 
+static const struct WindowTemplate sChangeBallWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 23,
+    .tilemapTop = 13,
+    .width = 10,
+    .height = 10,
+    .paletteNum = 14,
+    .baseBlock = 0x39D,
+};
+
 static const struct WindowTemplate sMailReadTakeWindowTemplate =
 {
     .bg = 2,
@@ -739,7 +750,7 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_REGISTER]      = ARRAY_COUNT(sPartyMenuAction_RegisterSummaryCancel),
     [ACTIONS_TRADE]         = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel1),
     [ACTIONS_SPIN_TRADE]    = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel2),
-    [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel)
+    [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel),
 };
 
 static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =

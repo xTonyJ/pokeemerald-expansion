@@ -55,6 +55,7 @@
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/quests.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1010,44 +1011,57 @@ Common_EventScript_LegendaryFlewAway::
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 EventScript_SecretMenu::
-	dynmultipush EventScript_MultichoiceTests_Text_0, 0
-	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_MultichoiceTests_1
-	call_if_set FLAG_ADVENTURE_STARTED, EventScript_MultichoiceTests_2
-	call_if_set FLAG_RIVAL_ROUTE_110, EventScript_MultichoiceTests_3
+	dynmultipush EventScript_Secret_AutoRun_Text_0, 0
+	dynmultipush EventScript_Secret_Options_Text_5, 5
+	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_Secret_PokeVial_1
+	call_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, EventScript_Secret_Repel_2
+	call_if_set FLAG_RIVAL_ROUTE_110, EventScript_Secret_Fly_3
+	call_if_set FLAG_SYS_PC_LANETTE, EventScript_Secret_PC_4
 @EventScript_MultichoiceTests:
-	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
 	switch VAR_RESULT
 	case 0, EventScript_AutoRun
 	case 1, EventScript_PokeVial
 	case 2, EventScript_InfiniteRepel
 	case 3, EventScript_Fly
-	@case 4, EventScript_StartMenu_PokenavAccess
+	case 4, EventScript_PC2
+	case 5, EventScript_SecretOptions
 	end
 	return
 
-EventScript_MultichoiceTests_1:
-	dynmultipush EventScript_MultichoiceTests_Text_1, 1
+EventScript_Secret_PokeVial_1:
+	dynmultipush EventScript_Secret_PokeVial_Text_1, 1
 	return
 
-EventScript_MultichoiceTests_2:
-	dynmultipush EventScript_MultichoiceTests_Text_2, 2
+EventScript_Secret_Repel_2:
+	dynmultipush EventScript_Secret_Repel_Text_2, 2
 	return
 
-EventScript_MultichoiceTests_3:
-	dynmultipush EventScript_MultichoiceTests_Text_3, 3
+EventScript_Secret_Fly_3:
+	dynmultipush EventScript_Secret_Fly_Text_3, 3
 	return
 
-EventScript_MultichoiceTests_Text_0:
+EventScript_Secret_PC_4:
+	dynmultipush EventScript_Secret_PC_Text_4, 4
+	return
+
+EventScript_Secret_AutoRun_Text_0:
 	.string "Auto Run$"
 
-EventScript_MultichoiceTests_Text_1:
+EventScript_Secret_PokeVial_Text_1:
 	.string "Poké Vial$"
 
-EventScript_MultichoiceTests_Text_2:
+EventScript_Secret_Repel_Text_2:
 	.string "Infinite Repel$"
 
-EventScript_MultichoiceTests_Text_3:
+EventScript_Secret_Fly_Text_3:
 	.string "Fly$"
+
+EventScript_Secret_PC_Text_4:
+	.string "PC$"
+
+EventScript_Secret_Options_Text_5:
+	.string "Options 2$"
 
 EventScript_AutoRun::
 	special AutoRun
@@ -1063,6 +1077,66 @@ EventScript_InfiniteRepel::
 
 EventScript_Fly::
 	special SecretMenu_Fly
+	end
+
+EventScript_PC2::
+	special SecretMenu_PC
+	end
+
+EventScript_SecretOptions::
+	dynmultipush EventScript_MultichoiceDifficulty_Text_0, 0
+	dynmultipush EventScript_MultichoiceDifficulty_Text_1, 1
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+	switch VAR_RESULT
+	case 0, EventScript_DifficultyChange
+	case 1, EventScript_GrindingModeChange
+	end
+	return
+
+EventScript_MultichoiceDifficulty_Text_0:
+	.string "Difficulty$"
+
+EventScript_MultichoiceDifficulty_Text_1:
+	.string "Min. Grinding$"
+
+EventScript_DifficultyChange::
+	dynmultipush EventScript_Normal_Text_0, 0
+	dynmultipush EventScript_Hard_Text_1, 1
+	dynmultipush EventScript_Impossible_Text_1, 2
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+	switch VAR_RESULT
+	case 0, EventScript_DifficultyChangeNormal
+	case 1, EventScript_DifficultyChangeHard
+	case 2, EventScript_DifficultyChangeImpossible
+	end
+
+EventScript_Normal_Text_0:
+	.string "Normal$"
+
+EventScript_Hard_Text_1:
+	.string "Hard$"
+
+EventScript_Impossible_Text_1:
+	.string "Impossible$"
+
+EventScript_DifficultyChangeNormal::
+	setvar VAR_0x8006, 0
+	goto EventScript_DifficultyChangeFinal
+
+EventScript_DifficultyChangeHard::
+	setvar VAR_0x8006, 1
+	goto EventScript_DifficultyChangeFinal
+
+EventScript_DifficultyChangeImpossible::
+	setvar VAR_0x8006, 2
+	goto EventScript_DifficultyChangeFinal
+	
+EventScript_DifficultyChangeFinal::
+	special SecretMenu_Difficulty
+	end
+
+EventScript_GrindingModeChange::
+	special SecretMenu_Grinding
 	end
 
 EventScript_Rotom::	

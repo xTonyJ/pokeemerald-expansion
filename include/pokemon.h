@@ -338,6 +338,7 @@ struct SpeciesInfo /*0x24*/
  /* 0x1F */ u8 bodyColor : 7;
             u8 noFlip : 1;
  /* 0x20 */ u16 flags;
+ /* 0x16 */ u16 innates[NUM_INNATE_PER_SPECIES];
 };
 
 struct BattleMove
@@ -590,5 +591,9 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 GetLevelCap(void);
+bool8 MonHasInnate(struct Pokemon *mon, u16 ability, bool8 disableRandomizer);
+bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability, bool8 disableRandomizer);
+bool8 SpeciesHasInnate(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer, bool8 isEnemyMon);
+u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer);
 
 #endif // GUARD_POKEMON_H

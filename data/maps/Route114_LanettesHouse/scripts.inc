@@ -50,8 +50,12 @@ Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
 	.string "I'm sorry everything is so cluttered…\n"
 	.string "When I get engrossed in research,\l"
 	.string "things end up this way…\p"
-	.string "This is embarrassing… Please keep\n"
-	.string "this a secret in exchange for this.$"
+	.string "This is embarrassing…\p"
+	.string "Ah! I've been working on a new\n"
+	.string "prototype storage solution.\p"
+	.string "I'll add it to your secret menu.\n"
+	.string "You can access the PC almost anywhere!\p"
+	.string "Also, take this doll as a gift.$"
 
 Route114_LanettesHouse_Text_OrganizeYourBoxes:
 	.string "May I offer advice about my POKéMON\n"

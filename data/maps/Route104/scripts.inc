@@ -1125,7 +1125,10 @@ Route104_Text_MayPostBattle:
 	.string "But instead of only making them\n"
 	.string "battle, you should be like MR. BRINEY.\p"
 	.string "It's important to become friends with\n"
-	.string "POKéMON, too.$"
+	.string "POKéMON, too.\p"
+	.string "Oh! I almost forgot! My dad finished\n"
+	.string "his latest tech upgrade, infinite repel.\p"
+	.string "I'll add it to your secret menu!$"
 
 Route104_Text_BrendanWeShouldRegister:
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
@@ -1169,4 +1172,7 @@ Route104_Text_BrendanPostBattle:
 	.string "But, you know, you shouldn't just be\n"
 	.string "making POKéMON battle.\p"
 	.string "Like MR. BRINEY, it's important to\n"
-	.string "become friends with your POKéMON.$"
+	.string "become friends with your POKéMON.\p"
+	.string "Oh! I almost forgot! My dad finished\n"
+	.string "his latest tech upgrade, infinite repel.\p"
+	.string "I'll add it to your secret menu!$"

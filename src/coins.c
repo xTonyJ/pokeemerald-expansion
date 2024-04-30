@@ -14,7 +14,7 @@ void PrintCoinsString(u32 coinAmount)
 {
     u32 xAlign;
 
-    ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS);
+    ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS2);
     StringExpandPlaceholders(gStringVar4, gText_Coins);
 
     xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x40);
@@ -52,18 +52,18 @@ bool8 AddCoins(u16 toAdd)
 {
     u16 newAmount;
     u16 ownedCoins = GetCoins();
-    if (ownedCoins >= MAX_COINS)
+    if (ownedCoins >= MAX_COINS2)
         return FALSE;
     // check overflow, can't have less coins than previously
     if (ownedCoins > ownedCoins + toAdd)
     {
-        newAmount = MAX_COINS;
+        newAmount = MAX_COINS2;
     }
     else
     {
         ownedCoins += toAdd;
-        if (ownedCoins > MAX_COINS)
-            ownedCoins = MAX_COINS;
+        if (ownedCoins > MAX_COINS2)
+            ownedCoins = MAX_COINS2;
         newAmount = ownedCoins;
     }
     SetCoins(newAmount);

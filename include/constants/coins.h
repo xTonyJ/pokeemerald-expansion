@@ -3,5 +3,7 @@
 
 #define MAX_COINS 9999
 #define MAX_COIN_DIGITS 4
+#define MAX_COINS2 65535
+#define MAX_COIN_DIGITS2 5
 
 #endif // GUARD_CONSTANTS_COINS_H

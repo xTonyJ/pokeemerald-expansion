@@ -46,8 +46,8 @@ Route109_EventScript_ItemTM98::
 	finditem ITEM_TM98
 	end
 
-Route109_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route109_EventScript_ItemBottleCap::
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route110_EventScript_ItemZapPlate::
@@ -75,11 +75,11 @@ Route111_EventScript_ItemHPUp::
 	end
 
 Route111_EventScript_ItemElixir::
-	finditem ITEM_ELIXIR
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route112_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route113_EventScript_ItemMaxEther::
@@ -95,11 +95,11 @@ Route113_EventScript_ItemDreamBall::
 	end
 
 Route114_EventScript_ItemRareCandy::
-	finditem ITEM_NUGGET
+	finditem ITEM_BIG_NUGGET
 	end
 
 Route114_EventScript_ItemProtein::
-	finditem ITEM_PROTEIN
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route114_EventScript_ItemEnergyPowder::
@@ -139,7 +139,7 @@ Route116_EventScript_ItemEther::
 	end
 
 Route116_EventScript_ItemRepel::
-	finditem ITEM_REPEL
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route116_EventScript_ItemHPUp::
@@ -150,11 +150,11 @@ Route116_EventScript_ItemTM67::
 	finditem ITEM_TM67
 	end
 
-Route117_EventScript_ItemGreatBall::
-	finditem ITEM_DREAM_BALL
+Route117_EventScript_ItemDreamBall::
+	finditem ITEM_DREAM_BALL, 3
 	end
 
-Route117_EventScript_ItemRevive::
+Route117_EventScript_ItemElectricSeed::
 	finditem ITEM_ELECTRIC_SEED
 	end
 
@@ -178,8 +178,8 @@ Route119_EventScript_ItemSceptilite::
 	finditem ITEM_SCEPTILITE
 	end
 
-Route119_EventScript_ItemRareCandy::
-	finditem ITEM_NUGGET
+Route119_EventScript_ItemGoldBottleCap::
+	finditem ITEM_GOLD_BOTTLE_CAP
 	end
 
 Route119_EventScript_ItemWhiteHerb::
@@ -195,7 +195,7 @@ Route119_EventScript_ItemElixir2::
 	end
 
 Route120_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route120_EventScript_ItemFullHeal::
@@ -207,7 +207,7 @@ Route120_EventScript_ItemHyperPotion::
 	end
 
 Route120_EventScript_ItemNestBall::
-	finditem ITEM_NEST_BALL
+	finditem ITEM_NEST_BALL, 3
 	end
 
 Route120_EventScript_ItemRevive::
@@ -310,8 +310,8 @@ Route134_EventScript_ItemStarPiece::
 	finditem ITEM_STAR_PIECE
 	end
 
-PetalburgCity_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+PetalburgCity_EventScript_ItemBottleCap::
+	finditem ITEM_BOTTLE_CAP
 	end
 
 PetalburgCity_EventScript_ItemVenusaurite:: @ 82910C1
@@ -322,8 +322,8 @@ MauvilleCity_EventScript_ItemXSpeed::
 	finditem ITEM_X_SPEED
 	end
 
-RustboroCity_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+RustboroCity_EventScript_ItemBottleCap::
+	finditem ITEM_BOTTLE_CAP
 	end
 
 LilycoveCity_EventScript_ItemMaxRepel::
@@ -339,7 +339,7 @@ PetalburgWoods_EventScript_ItemXAttack::
 	end
 
 PetalburgWoods_EventScript_ItemGreatBall::
-	finditem ITEM_NET_BALL
+	finditem ITEM_NET_BALL, 3
 	end
 
 PetalburgWoods_EventScript_ItemEther::
@@ -351,7 +351,7 @@ PetalburgWoods_EventScript_ItemInsectPlate::
 	end
 
 RusturfTunnel_EventScript_ItemPokeBall::
-	finditem ITEM_FRIEND_BALL
+	finditem ITEM_FRIEND_BALL, 3
 	end
 
 RusturfTunnel_EventScript_ItemTM63::
@@ -359,7 +359,7 @@ RusturfTunnel_EventScript_ItemTM63::
 	end
 
 GraniteCave_1F_EventScript_ItemEscapeRope::
-	finditem ITEM_STARDUST
+	finditem ITEM_BOTTLE_CAP
 	end
 
 GraniteCave_B1F_EventScript_ItemPokeBall::
@@ -391,7 +391,7 @@ MeteorFalls_1F_1R_EventScript_ItemTM23::
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemFullHeal::
-	finditem ITEM_FULL_HEAL
+	finditem ITEM_BOTTLE_CAP
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemTM82::
@@ -527,7 +527,7 @@ AquaHideout_B1F_EventScript_ItemMasterBall::
 	end
 
 AquaHideout_B1F_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+	finditem ITEM_BOTTLE_CAP
 	end
 
 AquaHideout_B1F_EventScript_ItemMaxElixir::
@@ -542,8 +542,8 @@ AquaHideout_B2F_EventScript_ItemMasterBall::
 	finditem ITEM_MASTER_BALL      // Unused
 	end
 
-Route119_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+Route119_EventScript_ItemBigNugget::
+	finditem ITEM_BIG_NUGGET
 	end
 
 Route119_EventScript_ItemMaxElixir::
@@ -643,7 +643,7 @@ ArtisanCave_1F_EventScript_ItemCarbos::
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy::
-	finditem ITEM_NUGGET
+	finditem ITEM_BOTTLE_CAP
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemTM83::
@@ -655,7 +655,7 @@ MagmaHideout_2F_2R_EventScript_ItemTerrainExtender::
 	end
 
 MagmaHideout_3F_1R_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+	finditem ITEM_BOTTLE_CAP
 	end
 
 MagmaHideout_3F_2R_EventScript_ItemPPMax::

@@ -68,12 +68,17 @@ Debug_FlagsNotSetBattleConfigMessage_Text:
 	.string "'include/config/battle.h'!$"
 
 Debug_Script_1::
+	startquest QUEST_1
+	startquest QUEST_2
+	startquest QUEST_3
 	end
 
 Debug_Script_2::
+	startquest SUB_QUEST_1
 	end
 
 Debug_Script_3::
+	startquest QUEST_5
 	end
 
 Debug_Script_4::

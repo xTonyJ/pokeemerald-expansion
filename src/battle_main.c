@@ -426,6 +426,68 @@ static const u16 sTrainerBallTable[TRAINER_CLASS_COUNT] =
 };
 #endif
 
+// Determines which Poke Ball type is used by each trainer class
+const struct TrainerBall gTrainerBallTable[] =
+{
+    {TRAINER_CLASS_PKMN_TRAINER_1, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_TEAM_AQUA, ITEM_NET_BALL},
+    {TRAINER_CLASS_AQUA_ADMIN, ITEM_NET_BALL},
+    {TRAINER_CLASS_AQUA_LEADER, ITEM_MASTER_BALL},
+    {TRAINER_CLASS_AROMA_LADY, ITEM_FRIEND_BALL},
+    {TRAINER_CLASS_RUIN_MANIAC, ITEM_DUSK_BALL},
+    {TRAINER_CLASS_INTERVIEWER, ITEM_REPEAT_BALL},
+    {TRAINER_CLASS_TUBER_F, ITEM_DIVE_BALL},
+    {TRAINER_CLASS_TUBER_M, ITEM_DIVE_BALL},
+    {TRAINER_CLASS_SIS_AND_BRO, ITEM_POKE_BALL},
+    {TRAINER_CLASS_COOLTRAINER, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_HEX_MANIAC, ITEM_DUSK_BALL},
+    {TRAINER_CLASS_LADY, ITEM_LUXURY_BALL},
+    {TRAINER_CLASS_BEAUTY, ITEM_LOVE_BALL},
+    {TRAINER_CLASS_RICH_BOY, ITEM_LUXURY_BALL},
+    {TRAINER_CLASS_POKEMANIAC, ITEM_MOON_BALL},
+    {TRAINER_CLASS_SWIMMER_M, ITEM_DIVE_BALL},
+    {TRAINER_CLASS_BLACK_BELT, ITEM_HEAVY_BALL},
+    {TRAINER_CLASS_GUITARIST, ITEM_FAST_BALL},
+    {TRAINER_CLASS_KINDLER, ITEM_POKE_BALL},
+    {TRAINER_CLASS_CAMPER, ITEM_NEST_BALL},
+    {TRAINER_CLASS_OLD_COUPLE, ITEM_TIMER_BALL},
+    {TRAINER_CLASS_BUG_MANIAC, ITEM_NET_BALL},
+    {TRAINER_CLASS_PSYCHIC, ITEM_DREAM_BALL},
+    {TRAINER_CLASS_GENTLEMAN, ITEM_LUXURY_BALL},
+    {TRAINER_CLASS_ELITE_FOUR, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_LEADER, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_SCHOOL_KID, ITEM_POKE_BALL},
+    {TRAINER_CLASS_SR_AND_JR, ITEM_POKE_BALL},
+    {TRAINER_CLASS_POKEFAN, ITEM_POKE_BALL},
+    {TRAINER_CLASS_EXPERT, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_YOUNGSTER, ITEM_POKE_BALL},
+    {TRAINER_CLASS_CHAMPION, ITEM_CHERISH_BALL},
+    {TRAINER_CLASS_FISHERMAN, ITEM_LURE_BALL},
+    {TRAINER_CLASS_TRIATHLETE, ITEM_FAST_BALL},
+    {TRAINER_CLASS_DRAGON_TAMER, ITEM_ULTRA_BALL},
+    {TRAINER_CLASS_BIRD_KEEPER, ITEM_QUICK_BALL},
+    {TRAINER_CLASS_NINJA_BOY, ITEM_QUICK_BALL},
+    {TRAINER_CLASS_BATTLE_GIRL, ITEM_HEAVY_BALL},
+    {TRAINER_CLASS_PARASOL_LADY, ITEM_POKE_BALL},
+    {TRAINER_CLASS_SWIMMER_F, ITEM_DIVE_BALL},
+    {TRAINER_CLASS_PICNICKER, ITEM_FRIEND_BALL},
+    {TRAINER_CLASS_TWINS, ITEM_POKE_BALL},
+    {TRAINER_CLASS_SAILOR, ITEM_DIVE_BALL},
+    {TRAINER_CLASS_COLLECTOR, ITEM_REPEAT_BALL},
+    {TRAINER_CLASS_PKMN_BREEDER, ITEM_FRIEND_BALL},
+    {TRAINER_CLASS_PKMN_RANGER, ITEM_SAFARI_BALL},
+    {TRAINER_CLASS_TEAM_MAGMA, ITEM_NEST_BALL},
+    {TRAINER_CLASS_MAGMA_ADMIN, ITEM_NEST_BALL},
+    {TRAINER_CLASS_MAGMA_LEADER, ITEM_MASTER_BALL},
+    {TRAINER_CLASS_LASS, ITEM_POKE_BALL},
+    {TRAINER_CLASS_BUG_CATCHER, ITEM_NET_BALL},
+    {TRAINER_CLASS_HIKER, ITEM_HEAVY_BALL},
+    {TRAINER_CLASS_YOUNG_COUPLE, ITEM_LOVE_BALL},
+    {TRAINER_CLASS_WINSTRATE, ITEM_FRIEND_BALL},
+    {TRAINER_CLASS_PKMN_TRAINER_2, ITEM_HEAVY_BALL},
+    {0xFF, ITEM_POKE_BALL},
+};
+
 #include "data/text/abilities.h"
 
 static void (* const sTurnActionsFuncsTable[])(void) =
@@ -2137,6 +2199,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 monsCount;
     u8 friendship;
     u16 dynamicLevel = 0;
+    u8 difficultySetting = gSaveBlock2Ptr->gameDifficulty;
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
 
@@ -2200,7 +2263,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
                 }
 				break;
             }
@@ -2228,9 +2291,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
 				{
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
 					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
                 }
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -2266,7 +2329,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
 						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
                 }
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -2295,9 +2358,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
 				{
 					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 31, TRUE, personalityValue, OT_ID_PRESET, 0);
 					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_PRESET, 0);
                 }
 
                 SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
@@ -2311,14 +2374,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
 
                 // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                // Separate loops so that difficulty is not checked in each loop. Will implement later if I make a hard mode
-                /*if (difficultySetting > DIFFICULTY_NORMAL)
+                // Separate loops so that difficulty is not checked in each loop
+                if (difficultySetting > DIFFICULTY_NORMAL)
                 {
                     for (j = 0; j < 6; j++)
                     {
                         SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
                     }
-                }*/
+                }
 
                 CalculateMonStats(&party[i]);
 
@@ -2338,18 +2401,25 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED: //Bosses use static levels
             {
                 const struct TrainerMonCustomized *partyData = gTrainers[trainerNum].party.EverythingCustomized;
-
+                u32 otIdType = OT_ID_RANDOM_NO_SHINY;
+                u32 fixedOtId = 0;
+                
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
-
+                
                 personalityValue += nameHash << 8;
 				{
+                    if (partyData[i].isShiny)
+                    {
+                        otIdType = OT_ID_PRESET;
+                        fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
+                    }
 					if(HasLevelEvolution(partyData[i].species, partyData[i].lvl))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, partyData[i].lvl), partyData[i].lvl, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, partyData[i].lvl), partyData[i].lvl, 31, TRUE, personalityValue, otIdType, fixedOtId);
 					else
-						CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+						CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 31, TRUE, personalityValue, otIdType, fixedOtId);
                 }
-
+                
                 SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
@@ -2361,14 +2431,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
 
                 // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                // Separate loops so that difficulty is not checked in each loop. Will implement later if I make a hard mode
-                /*if (difficultySetting > DIFFICULTY_NORMAL)
+                // Separate loops so that difficulty is not checked in each loop. 
+                if (difficultySetting > DIFFICULTY_NORMAL)
                 {
                     for (j = 0; j < 6; j++)
                     {
                         SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
                     }
-                }*/
+                }
 
                 CalculateMonStats(&party[i]);
 
@@ -2386,6 +2456,12 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 break;
             }
             }
+            for (j = 0; gTrainerBallTable[j].classId != 0xFF; j++)
+            {
+                if (gTrainerBallTable[j].classId == gTrainers[trainerNum].trainerClass)
+                    break;
+            }
+            SetMonData(&party[i], MON_DATA_POKEBALL, &gTrainerBallTable[j].Ball);
         }
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
@@ -3447,6 +3523,7 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][B_SIDE_PLAYER] = 0;
         gBattleStruct->usedHeldItems[i][B_SIDE_OPPONENT] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gBattleStruct->storedItems[i].originalItem2 = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gPartyCriticalHits[i] = 0;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_PLAYER] = FALSE;
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_OPPONENT] = FALSE;
@@ -5477,6 +5554,7 @@ static void HandleEndTurn_BattleWon(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         BattleStopLowHpSound();
+        ReturnBattleItems();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
 
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
@@ -5640,10 +5718,10 @@ static void HandleEndTurn_FinishBattle(void)
             TestRunner_Battle_AfterLastTurn();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    /*#if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)*/
             TryRestoreStolenItems();
-    #endif
+    //#endif
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);

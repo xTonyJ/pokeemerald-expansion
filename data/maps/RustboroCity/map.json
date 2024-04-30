@@ -183,7 +183,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_EventScript_ItemNugget",
+      "script": "RustboroCity_EventScript_ItemBottleCap",
       "flag": "FLAG_ITEM_RUSTBORO_CITY_NUGGET"
     },
     {

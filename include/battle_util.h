@@ -54,6 +54,10 @@
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
+#define BATTLER_NONE       0
+#define BATTLER_ABILITY    1
+#define BATTLER_INNATE     2
+
 #define IS_WHOLE_SIDE_ALIVE(battler)((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
 
 // for Natural Gift and Fling
@@ -112,6 +116,8 @@ void HandleAction_NothingIsFainted(void);
 void HandleAction_ActionFinished(void);
 u16 HasLevelEvolution(u16 species, u8 level);
 u8 GetBattlerForBattleScript(u8 caseId);
+bool8 IsSleepDisabled(u8 battlerId);
+bool8 IsSleepClauseDisablingMove(u8 battlerId, u16 move);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
@@ -235,5 +241,7 @@ u32 GetBattlerFriendshipScore(u8 battlerId);
 u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool8 ChangeTypeBasedOnTerrain(u8 battlerId);
+
+u8 BattlerHasInnateOrAbility(u8 battler, u16 ability);// for Weather, and such
 
 #endif // GUARD_BATTLE_UTIL_H

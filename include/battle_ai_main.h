@@ -28,6 +28,10 @@ void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);
 void GetAiLogicData(void);
+void ReturnBattleItems(void);
+
+bool8 BattlerHasInnate(u8 battlerId, u16 ability);
+bool8 GetBattlerInnateNum(u8 battlerId, u16 ability);
 
 extern u8 sBattler_AI;
 

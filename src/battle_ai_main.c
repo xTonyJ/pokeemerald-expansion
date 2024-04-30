@@ -397,6 +397,21 @@ void GetAiLogicData(void)
     }
 }
 
+void ReturnBattleItems(void)
+{
+    u8 y;
+    u16 heldItem;
+    for (y = 0; y < PARTY_SIZE; y++)
+        {
+            heldItem = GetBoxMonData(&gPlayerParty[y], MON_DATA_HELD_ITEM);
+
+            SetMonData(&gPlayerParty[y],
+                    MON_DATA_HELD_ITEM,
+                    &heldItem);
+        }
+
+}
+
 static u8 ChooseMoveOrAction_Singles(void)
 {
     u8 currentMoveArray[MAX_MON_MOVES];
@@ -5285,4 +5300,21 @@ static s16 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         AI_Flee();
 
     return score;
+}
+
+bool8 BattlerHasInnate(u8 battlerId, u16 ability){
+    bool8 isEnemyMon = GetBattlerSide(battlerId) == B_SIDE_OPPONENT;
+
+    /*if(BattlerIgnoresAbility(gBattlerAttacker, battlerId, ability) && B_MOLD_BREAKER_WORKS_ON_INNATES == TRUE)
+        return FALSE;
+    else if(BattlerAbilityWasRemoved(battlerId, ability) && B_NEUTRALIZING_GAS_WORKS_ON_INNATES == TRUE)
+        return FALSE;
+    else*/
+        return SpeciesHasInnate(gBattleMons[battlerId].species, ability, gBattleMons[battlerId].level, gBattleMons[battlerId].personality, isEnemyMon, isEnemyMon);
+}
+
+bool8 GetBattlerInnateNum(u8 battlerId, u16 ability){
+    bool8 isEnemyMon = GetBattlerSide(battlerId) == B_SIDE_OPPONENT;
+
+    return GetSpeciesInnateNum(gBattleMons[battlerId].species, ability, gBattleMons[battlerId].level, gBattleMons[battlerId].personality, isEnemyMon);
 }

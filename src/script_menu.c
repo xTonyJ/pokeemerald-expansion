@@ -1,6 +1,8 @@
 #include "global.h"
 #include "main.h"
+#include "constants/layouts.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "field_effect.h"
 #include "field_specials.h"
 #include "item.h"
@@ -71,6 +73,7 @@ static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventAr
 static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static bool8 InEliteFour(void);
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
@@ -1098,6 +1101,16 @@ void GetPKMNCenterMoveListMultichoice(void)
     }
 }
 
+static bool8 InEliteFour(void)
+{
+    return gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_SIDNEYS_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_PHOEBES_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_GLACIAS_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_DRAKES_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_SHORT_HALL
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_CHAMPIONS_ROOM;
+}
+
 //Secret menu functions
 extern const u8 EventScript_DisableRepel[];
 extern const u8 EventScript_EnableRepel[];
@@ -1124,6 +1137,12 @@ void DebugAction_Flags_EncounterOnOff(void)
 
 extern const u8 EventScript_DisableAutoRun[];
 extern const u8 EventScript_EnableAutoRun[];
+extern const u8 EventScript_Normal[];
+extern const u8 EventScript_Hard[];
+extern const u8 EventScript_Impossible[];
+extern const u8 EventScript_GrindModeMinimum[];
+extern const u8 EventScript_GrindModeDefault[];
+
 void AutoRun(void)
 {
     PlaySE(SE_SELECT);
@@ -1142,6 +1161,57 @@ void AutoRun(void)
 void SecretMenu_Fly(void)
 {
     SetMainCallback2(CB2_OpenFlyMap);
+}
+
+void SecretMenu_Difficulty(void)
+{
+    u8 difficultySetting = 0;
+    difficultySetting = gSpecialVar_0x8006;
+    switch (difficultySetting)
+    {
+    case 0:
+            PlaySE(SE_SELECT);
+            gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_NORMAL;
+            ScriptContext_SetupScript(EventScript_Normal);
+            break;
+    case 1:
+            PlaySE(SE_SELECT);
+            gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_HARD;
+            ScriptContext_SetupScript(EventScript_Hard);
+            break;
+    case 2:
+            PlaySE(SE_SELECT);
+            gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_IMPOSSIBLE;
+            ScriptContext_SetupScript(EventScript_Impossible);
+            break;
+    default:
+        break;
+    }
+}
+
+void SecretMenu_Grinding(void)
+{
+    u8 grindMode = 0;
+    grindMode = gSaveBlock2Ptr->grindingMode;
+    if(grindMode == 0)
+    {
+        gSaveBlock2Ptr->grindingMode = GRINDING_MINIMUM;
+        ScriptContext_SetupScript(EventScript_GrindModeMinimum);
+    }
+    else
+    {
+        gSaveBlock2Ptr->grindingMode = GRINDING_DEFAULT;
+        ScriptContext_SetupScript(EventScript_GrindModeDefault);
+    }
+}
+
+void SecretMenu_PC(void)
+{   
+    if (!InEliteFour())
+    {
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_PC);
+    }
 }
 
 #define tState       data[0]

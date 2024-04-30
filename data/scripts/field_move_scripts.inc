@@ -496,3 +496,38 @@ EventScript_PokeVialNoCharges::
 NoCharges:
     .string "The Poké Vial is empty.\n"
 	.string "Refill it at a Pokémon Center.$"
+
+EventScript_Normal::
+    msgbox NormalMode MSGBOX_SIGN
+    end
+NormalMode: 
+	.string "{COLOR GREEN}Normal Mode {COLOR DARK_GRAY}enabled.\n"
+	.string "Trainers will no longer have EVs.$"
+
+EventScript_Hard::
+    msgbox HardMode MSGBOX_SIGN
+    end
+HardMode: 
+	.string "{COLOR BLUE}Hard Mode {COLOR DARK_GRAY}enabled.\n"
+	.string "Trainers will now have EVs.$"
+
+EventScript_Impossible::
+    msgbox ImpossibleMode MSGBOX_SIGN
+    end
+ImpossibleMode: 
+	.string "{COLOR RED}{SHADOW LIGHT_RED}Impossible Mode {COLOR DARK_GRAY}enabled.\n"
+	.string "Good luck...$"
+
+EventScript_GrindModeMinimum::
+    msgbox GrindModeMinimum MSGBOX_SIGN
+    end
+GrindModeMinimum:
+    .string "Minimum grinding mode {COLOR GREEN}Enabled{COLOR DARK_GRAY}.\n"
+	.string "Found Pokemon will have perfect IVs.$"
+    
+EventScript_GrindModeDefault::
+    msgbox GrindModeDefault MSGBOX_SIGN
+    end
+GrindModeDefault:
+    .string "Minimum grinding mode {COLOR RED}Disabled{COLOR DARK_GRAY}.\n"
+	.string "Found Pokemon will have random IVs.$"

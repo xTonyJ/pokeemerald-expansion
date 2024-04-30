@@ -159,6 +159,13 @@
 #define DIR_NORTHWEST   7
 #define DIR_NORTHEAST   8
 
+#define DIFFICULTY_NORMAL      0
+#define DIFFICULTY_HARD        1
+#define DIFFICULTY_IMPOSSIBLE  2
+
+#define GRINDING_DEFAULT     0
+#define GRINDING_MINIMUM     1
+
 #define CONNECTION_INVALID -1
 #define CONNECTION_NONE     0
 #define CONNECTION_SOUTH    1

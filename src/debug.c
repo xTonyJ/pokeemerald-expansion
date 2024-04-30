@@ -2763,7 +2763,7 @@ static void DebugAction_Give_MaxMoney(u8 taskId)
 
 static void DebugAction_Give_MaxCoins(u8 taskId)
 {
-    SetCoins(9999);
+    SetCoins(65535);
 }
 
 static void DebugAction_Give_MaxBattlePoints(u8 taskId)

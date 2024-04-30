@@ -524,6 +524,11 @@ struct StolenItem
     u16 stolen:1;
 };
 
+struct ItemStorage
+{
+    u16 originalItem2:15;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -662,6 +667,7 @@ struct BattleStruct
     u8 storedLunarDance:4; // Each battler as a bit.
     u16 supremeOverlordModifier[MAX_BATTLERS_COUNT];
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
+    struct ItemStorage storedItems[PARTY_SIZE]; //for returning consumable items
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

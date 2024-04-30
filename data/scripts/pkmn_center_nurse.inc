@@ -1,6 +1,7 @@
 Common_EventScript_PkmnCenterNurse::
     lock
     faceplayer
+	goto_if_set FLAG_BADGE04_GET, EventScript_UpgradePokeVial
     checkitem ITEM_POKE_VIAL, 1
     compare VAR_RESULT, 1
     goto_if_eq EventScript_PkmnCenterNurseHasVial
@@ -22,6 +23,17 @@ EventScript_PkmnCenterNurseHasVial::
     compare VAR_RESULT, 4
     goto_if_eq EventScript_PkmnCenterNurse_GoldCard
 	goto EventScript_PkmnCenterNurse_HealPkmn
+	end
+
+EventScript_UpgradePokeVial::
+	goto_if_eq VAR_POKE_VIAL_MAX_CHARGES, 6, EventScript_PkmnCenterNurseHasVial
+	setvar VAR_POKE_VIAL_MAX_CHARGES, 6
+    setvar VAR_POKE_VIAL_CHARGES, 6
+	msgbox gText_UpgradePokeVial, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
+    compare VAR_RESULT, NO
+    goto_if_eq EventScript_PkmnCenterNurse_Goodbye
 	end
 
 EventScript_PkmnCenterNurse_Goodbye::

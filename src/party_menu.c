@@ -94,7 +94,7 @@ enum {
     MENU_TRADE1,
     MENU_TRADE2,
     MENU_TOSS,
-    MENU_FIELD_MOVES
+    MENU_FIELD_MOVES,
 };
 
 // IDs for the action lists that appear when a party mon is selected
@@ -113,6 +113,7 @@ enum {
     ACTIONS_TRADE,
     ACTIONS_SPIN_TRADE,
     ACTIONS_TAKEITEM_TOSS,
+    ACTIONS_CHANGEBALL,
 };
 
 // In CursorCb_FieldMove, field moves <= FIELD_MOVE_WATERFALL are assumed to line up with the badge flags.
@@ -2627,6 +2628,9 @@ static u8 DisplaySelectionWindow(u8 windowType)
         break;
     case SELECTWINDOW_MAIL:
         window = sMailReadTakeWindowTemplate;
+        break;
+    case SELECTWINDOW_CHANGEBALL:
+        window = sChangeBallWindowTemplate;
         break;
     default: // SELECTWINDOW_MOVES
         window = sMoveSelectWindowTemplate;
@@ -5262,14 +5266,13 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId) // Last function that 
         if (gPartyMenu.learnMoveState == 1)
             {
                 Task_TryLearningNextMove(taskId);
-                //Task_ClosePartyMenu(taskId); //Closes party menu after learning a move, rare candy fix
+                Task_ClosePartyMenu(taskId); //Closes party menu after learning a move, rare candy fix
             }
         else
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
-            if (gPartyMenu.learnMoveState == 3)
-                Task_ClosePartyMenu(taskId);
+            Task_ClosePartyMenu(taskId);
         }
     }
 }
@@ -5603,7 +5606,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
 
 static void Task_TryLearningNextMove(u8 taskId)
 {
-    u16 result;
+    /*u16 result;
     for (; sInitialLevel <= sFinalLevel; sInitialLevel++)
     {
         SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
@@ -5630,6 +5633,23 @@ static void Task_TryLearningNextMove(u8 taskId)
         }
         if (result)
             break;
+    }*/
+
+    u16 result = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], FALSE);
+
+    switch (result)
+    {
+    case 0: // No moves to learn
+        PartyMenuTryEvolution(taskId);
+        break;
+    case MON_HAS_MAX_MOVES:
+        DisplayMonNeedsToReplaceMove(taskId);
+        break;
+    case MON_ALREADY_KNOWS_MOVE:
+        return;
+    default:
+        DisplayMonLearnedMove(taskId, result);
+        break;
     }
 }
 
@@ -7142,4 +7162,32 @@ void IsLastMonThatKnowsSurf(void)
 u16 GetTMHMMoves(u16 position)
 {
     return sTMHMMoves[position];
+}
+
+void ItemUseCB_PokeBall(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 currBall = GetMonData(mon, MON_DATA_POKEBALL);
+    u16 newBall = gSpecialVar_ItemId;
+    static const u8 sText_MonBallWasChanged[] = _("{STR_VAR_1} was put in the {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
+
+    if (currBall == newBall)
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        GetMonNickname(mon, gStringVar1);
+        CopyItemName(newBall, gStringVar2);
+        PlaySE(SE_SELECT);
+        gPartyMenuUseExitCallback = TRUE;
+        SetMonData(mon, MON_DATA_POKEBALL, &newBall);
+        StringExpandPlaceholders(gStringVar4, sText_MonBallWasChanged);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
 }

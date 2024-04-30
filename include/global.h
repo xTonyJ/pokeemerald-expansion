@@ -498,6 +498,8 @@ struct RankingHall2P
     u8 language;
     //u8 padding;
 };
+// quest menu
+#include "constants/quests.h"
 
 struct SaveBlock2
 {
@@ -534,7 +536,15 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
-}; // sizeof=0xF2C
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+#define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
+
+    u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
+    u8 subQuests[SUB_FLAGS_COUNT];
+    u16 gameDifficulty:2; // Difficulty ( 0 = Normal, 1 = Hard, 2 = Impossible )
+    u16 grindingMode:1; // Grinding modes ( 0 = default , 1 = Minimum )
+}; 
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 

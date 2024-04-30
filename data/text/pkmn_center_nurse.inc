@@ -75,3 +75,10 @@ gText_ExplainPokeVial::
 	.string "It will now appear on your Secret Menu!\p"
     .string "Now, would you like to rest your\n"
     .string "Pokémon?$"
+
+gText_UpgradePokeVial::
+	.string "Hi! Congratulations on your 4th badge!\p"
+    .string "I'll upgrade your Poké Vial to hold\n"
+    .string "a total of six charges.\p"
+    .string "Now, would you like to rest your\n"
+    .string "Pokémon?$"

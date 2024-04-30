@@ -49,6 +49,7 @@
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
+#include "quests.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "constants/event_objects.h"
@@ -93,6 +94,9 @@ static u8 *const sScriptStringVars[] =
     gStringVar1,
     gStringVar2,
     gStringVar3,
+    gExtraStringVar1,
+    gExtraStringVar2,
+    gExtraStringVar3,
 };
 
 bool8 ScrCmd_nop(struct ScriptContext *ctx)
@@ -1778,7 +1782,7 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext *ctx)
 bool8 ScrCmd_givemon(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
-    u8 level = ScriptReadByte(ctx);
+    u16 level = VarGet(ScriptReadHalfword(ctx));
     u16 item = VarGet(ScriptReadHalfword(ctx));
     u32 unkParam1 = ScriptReadWord(ctx);
     u32 unkParam2 = ScriptReadWord(ctx);
@@ -2422,5 +2426,114 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoWhiteFadeWarp();
     ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 questId = VarGet(ScriptReadByte(ctx));
+
+    switch (caseId)
+    {
+    case QUEST_MENU_OPEN:
+    default:
+        BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+        QuestMenu_Init(0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        ScriptContext_Stop();
+        break;
+    case QUEST_MENU_UNLOCK_QUEST:
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+        break;
+    case QUEST_MENU_SET_ACTIVE:
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_ACTIVE);
+        break;
+    case QUEST_MENU_SET_REWARD:
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_REWARD);
+        QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_ACTIVE);
+        break;
+    case QUEST_MENU_COMPLETE_QUEST:
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_COMPLETED);
+        QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_ACTIVE);
+        QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_REWARD);
+        break;
+    case QUEST_MENU_CHECK_UNLOCKED:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_UNLOCKED))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_ACTIVE:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_REWARD:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_REWARD))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_COMPLETE:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_COMPLETED))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopyQuestName(gStringVar1, questId);
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_returnqueststate(struct ScriptContext *ctx)
+{
+    u8 questId = VarGet(ScriptReadByte(ctx));
+
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_INACTIVE)){
+        gSpecialVar_Result = FLAG_GET_INACTIVE;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE)){
+        gSpecialVar_Result = FLAG_GET_ACTIVE;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_REWARD)){
+        gSpecialVar_Result = FLAG_GET_REWARD;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_COMPLETED)){
+        gSpecialVar_Result = FLAG_GET_COMPLETED;
+        return FALSE;
+    }
+}
+
+bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 parentId = VarGet(ScriptReadHalfword(ctx));
+    u8 childId = VarGet(ScriptReadHalfword(ctx));
+
+    switch (caseId)
+    {
+        case QUEST_MENU_COMPLETE_QUEST:
+            QuestMenu_GetSetSubquestState(parentId ,FLAG_SET_COMPLETED,childId);
+            break;
+        case QUEST_MENU_CHECK_COMPLETE:
+            if (QuestMenu_GetSetSubquestState(parentId ,FLAG_GET_COMPLETED,childId))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopySubquestName(gStringVar1,parentId,childId);
+            break;
+    }
+
     return TRUE;
 }

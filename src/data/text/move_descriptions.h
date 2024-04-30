@@ -65,8 +65,8 @@ static const u8 sSwordsDanceDescription[] = _(
     "sharply raises Attack.");
 
 static const u8 sCutDescription[] = _(
-    "Cuts the foe with sharp\n"
-    "scythes, claws, etc.");
+    "Sharply cuts the foe.\n"
+    "Grass/Bug dual type");
 
 static const u8 sGustDescription[] = _(
     "Strikes the foe with a gust\n"
@@ -89,8 +89,8 @@ static const u8 sBindDescription[] = _(
     "for "BINDING_TURNS" turns.");
 
 static const u8 sSlamDescription[] = _(
-    "Slams the foe with a long\n"
-    "tail, vine, etc.");
+    "Forcefully slams all foes\n"
+    "25% flinch chance");
 
 static const u8 sVineWhipDescription[] = _(
     "Strikes the foe with vines\n"
@@ -281,8 +281,8 @@ static const u8 sCounterDescription[] = _(
     "with double the power.");
 
 static const u8 sSeismicTossDescription[] = _(
-    "Inflicts damage identical\n"
-    "to the user's level.");
+    "Inflicts damage equal to\n"
+    "1.3x the user's level.");
 
 static const u8 sStrengthDescription[] = _(
     "Builds enormous power,\n"
@@ -409,8 +409,8 @@ static const u8 sTeleportDescription[] = _(
     "from battle instantly.");
 
 static const u8 sNightShadeDescription[] = _(
-    "Inflicts damage identical\n"
-    "to the user's level.");
+    "Inflicts damage equal to\n"
+    "1.3x the user's level.");
 
 static const u8 sMimicDescription[] = _(
     "Copies a move used by the\n"
@@ -557,8 +557,8 @@ static const u8 sGlareDescription[] = _(
     "the foe into paralysis.");
 
 static const u8 sDreamEaterDescription[] = _(
-    "Takes one half the damage\n"
-    "inflicted on a sleeping foe.");
+    "Psychic/Dark move, leeches\n"
+    "1/2 damage on a sleeping foe.");
 
 static const u8 sPoisonGasDescription[] = _(
     "Envelops the foe in a toxic\n"
@@ -601,8 +601,8 @@ static const u8 sFlashDescription[] = _(
     "light that cuts accuracy.");
 
 static const u8 sPsywaveDescription[] = _(
-    "Attacks with a psychic\n"
-    "wave of varying intensity.");
+    "Psychic waves deal damage\n"
+    "= 1.3x the user's level.");
 
 static const u8 sSplashDescription[] = _(
     "It's just a splash...\n"
@@ -1689,11 +1689,11 @@ static const u8 sThunderFangDescription[] = _(
     "10% flinch / paralysis chance");
 
 static const u8 sIceFangDescription[] = _(
-    "A blisteringly cold chomp\n"
+    "A glacial chomp\n"
     "10% flinch / brittle chance");
 
 static const u8 sFireFangDescription[] = _(
-    "A scorching nibble\n"
+    "A scorching chomp\n"
     "10% flinch / burn chance");
 
 static const u8 sShadowSneakDescription[] = _(
@@ -1989,8 +1989,8 @@ static const u8 sAllySwitchDescription[] = _(
     "with its partner.");
 
 static const u8 sScaldDescription[] = _(
-    "Shoots boiling water at the\n"
-    "foe. May inflict a burn.");
+    "Shoots boiling water\n"
+    "Fire/Water type. 30% burn");
 
 static const u8 sShellSmashDescription[] = _(
     "Raises offensive stats, but\n"
@@ -2229,8 +2229,8 @@ static const u8 sPetalBlizzardDescription[] = _(
     "of petals to attack.");
 
 static const u8 sFreezeDryDescription[] = _(
-    "Super effective on Water-\n"
-    "types. May cause brittle.");
+    "A bitterly cold frost blast\n"
+    "10% brittle chance.");
 
 static const u8 sDisarmingVoiceDescription[] = _(
     "Lets out a charming cry\n"
@@ -3244,6 +3244,10 @@ static const u8 sHydroSteamDescription[] = _(
     "This move's power increases\n"
     "under harsh sunlight.");
 
+static const u8 sBackflipDescription[] = _(
+    "Backflips off the target and\n"
+    "returns to party after damage.");
+
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
@@ -4083,4 +4087,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MAGICAL_TORQUE - 1] = sMagicalTorqueDescription,
     [MOVE_PSYBLADE - 1] = sPsybladeDescription,
     [MOVE_HYDRO_STEAM - 1] = sHydroSteamDescription,
+    [MOVE_BACKFLIP - 1] = sBackflipDescription,
 };

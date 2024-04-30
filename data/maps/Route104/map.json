@@ -622,10 +622,10 @@
     },
     {
       "type": "hidden_item",
-      "x": 16,
-      "y": 72,
+      "x": 17,
+      "y": 71,
       "elevation": 3,
-      "item": "ITEM_ANTIDOTE",
+      "item": "ITEM_BOTTLE_CAP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_ANTIDOTE"
     },
     {

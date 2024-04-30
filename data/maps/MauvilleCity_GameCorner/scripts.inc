@@ -15,6 +15,7 @@ MauvilleCity_GameCorner_MapScripts::
 	.set SPIRITOMB_COINS,	4500
 	.set BAGON_COINS,		5000
 	.set STARTER_COINS, 	2500
+	.set SHINY_COINS,		20000
 	.set DOLL_COINS,  1000
 
 	.set COINS_PRICE_50,  500
@@ -56,7 +57,7 @@ MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500::
 
 MauvilleCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 50), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS2 + 1 - 50), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
 	checkmoney COINS_PRICE_50
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 50
@@ -72,7 +73,7 @@ MauvilleCity_GameCorner_EventScript_Buy50Coins::
 
 MauvilleCity_GameCorner_EventScript_Buy500Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS2 + 1 - 500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
 	checkmoney COINS_PRICE_500
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 500
@@ -88,7 +89,7 @@ MauvilleCity_GameCorner_EventScript_Buy500Coins::
 
 MauvilleCity_GameCorner_EventScript_Buy2500Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 2500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS2 + 1 - 2500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
 	checkmoney COINS_PRICE_2500
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 2500
@@ -104,7 +105,7 @@ MauvilleCity_GameCorner_EventScript_Buy2500Coins::
 
 MauvilleCity_GameCorner_EventScript_Buy5000Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 5000), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS2 + 1 - 5000), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
 	checkmoney COINS_PRICE_5000
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 5000
@@ -361,6 +362,9 @@ MauvilleCity_GameCorner_EventScript_Bagon::
 	
 MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	bufferspeciesname 0, VAR_TEMP_1
+	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsTheShinyPokemonX, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ConfirmShinyPokemonPrize
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
@@ -368,6 +372,14 @@ MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	compare VAR_0x8007, VAR_0x8006
 	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
 	goto MauvilleCity_GameCorner_EventScript_ReceivePokemon
+
+MauvilleCity_GameCorner_EventScript_ConfirmShinyPokemonPrize::
+	bufferspeciesname 0, VAR_TEMP_1
+	setvar VAR_0x8006, SHINY_COINS
+	checkcoins VAR_0x8007
+	compare VAR_0x8007, VAR_0x8006
+	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
+	goto MauvilleCity_GameCorner_EventScript_ReceiveShinyPokemon
 
 MauvilleCity_GameCorner_EventScript_CancelPokemonSelect::
 	msgbox MauvilleCity_GameCorner_Text_OhIsThatSo, MSGBOX_DEFAULT
@@ -384,6 +396,18 @@ MauvilleCity_GameCorner_EventScript_ReceivePokemon::
 	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	removecoins VAR_0x8006
 	updatecoinsbox 1, 1
+	givemon VAR_TEMP_1, 5, ITEM_LUCKY_EGG
+	compare VAR_RESULT, 0
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
+	compare VAR_RESULT, 1
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+
+MauvilleCity_GameCorner_EventScript_ReceiveShinyPokemon::
+	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
+	removecoins VAR_0x8006
+	updatecoinsbox 1, 1
+	setflag P_FLAG_FORCE_SHINY
 	givemon VAR_TEMP_1, 5, ITEM_LUCKY_EGG
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
@@ -425,6 +449,7 @@ MauvilleCity_GameCorner_EventScript_TakeCareOfPokemon::
 	bufferspeciesname 0, VAR_TEMP_1
 	msgbox MauvilleCity_GameCorner_Text_TakeCareOfPokemon, MSGBOX_DEFAULT
 	hidecoinsbox 0, 0
+	clearflag P_FLAG_FORCE_SHINY
 	release
 	end
 
@@ -607,6 +632,9 @@ MauvilleCity_GameCorner_EventScript_Sobble::
 
 MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
 	bufferspeciesname 0, VAR_TEMP_1
+	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsTheShinyPokemonX, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ConfirmShinyPokemonPrize
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
@@ -614,7 +642,7 @@ MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
 	compare VAR_0x8007, VAR_0x8006
 	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter
 	goto MauvilleCity_GameCorner_EventScript_ReceivePokemon
-	
+
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage
@@ -1037,6 +1065,10 @@ MauvilleCity_GameCorner_Text_WhichPokemon:
 
 MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX:
 	.string "So your choice is {STR_VAR_1}?$"
+
+MauvilleCity_GameCorner_Text_SoYourChoiceIsTheShinyPokemonX:
+	.string "Want to make the {STR_VAR_1} shiny\n"
+	.string "for 20,000 coins?$"
 
 MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon:
 	.string "Thank you!\p"

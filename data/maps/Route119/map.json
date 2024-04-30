@@ -295,7 +295,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemRareCandy",
+      "script": "Route119_EventScript_ItemGoldBottleCap",
       "flag": "FLAG_ITEM_ROUTE_119_RARE_CANDY"
     },
     {
@@ -555,7 +555,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemNugget",
+      "script": "Route119_EventScript_ItemBigNugget",
       "flag": "FLAG_ITEM_ROUTE_119_NUGGET"
     },
     {
@@ -846,7 +846,7 @@
       "x": 17,
       "y": 82,
       "elevation": 3,
-      "item": "ITEM_CALCIUM",
+      "item": "ITEM_BOTTLE_CAP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM"
     },
     {
@@ -854,7 +854,7 @@
       "x": 38,
       "y": 63,
       "elevation": 3,
-      "item": "ITEM_ULTRA_BALL",
+      "item": "ITEM_BOTTLE_CAP",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_ULTRA_BALL"
     },
     {
@@ -897,7 +897,7 @@
       "x": 26,
       "y": 120,
       "elevation": 3,
-      "item": "ITEM_FULL_HEAL",
+      "item": "ITEM_FULL_RESTORE",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_FULL_HEAL"
     },
     {

@@ -204,7 +204,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_ItemGreatBall",
+      "script": "Route117_EventScript_ItemDreamBall",
       "flag": "FLAG_ITEM_ROUTE_117_GREAT_BALL"
     },
     {
@@ -230,7 +230,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_ItemRevive",
+      "script": "Route117_EventScript_ItemElectricSeed",
       "flag": "FLAG_ITEM_ROUTE_117_REVIVE"
     },
     {

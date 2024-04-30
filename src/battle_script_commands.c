@@ -6215,8 +6215,11 @@ static void Cmd_moveend(void)
         case MOVEEND_LIFEORB_SHELLBELL:
                 if (ItemBattleEffects(ITEMEFFECT_LIFEORB_SHELLBELL, 0, FALSE))
                     effect = TRUE;
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_SAP:
                 if (ItemBattleEffects(ITEMEFFECT_SAP, 0, FALSE))
-                    effect = TRUE;
+                effect = TRUE;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_PICKPOCKET:
@@ -7693,11 +7696,11 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
+            moneyReward = 12 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * gTrainerMoneyTable[i].value;
+            moneyReward = 12 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * gTrainerMoneyTable[i].value;
         else
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
+            moneyReward = 12 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
     }
 
     return moneyReward;
@@ -7709,6 +7712,8 @@ static void Cmd_getmoneyreward(void)
 
     u32 money;
     u8 sPartyLevel = 1;
+    u8 y;
+    u16 heldItem;
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -7738,6 +7743,15 @@ static void Cmd_getmoneyreward(void)
         RemoveMoney(&gSaveBlock1Ptr->money, money);
     }
 
+    for (y = 0; y < PARTY_SIZE; y++)
+        {
+            heldItem = GetBoxMonData(&gPlayerParty[y], MON_DATA_HELD_ITEM);
+
+            SetMonData(&gPlayerParty[y],
+                    MON_DATA_HELD_ITEM,
+                    &heldItem);
+        }
+        
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, money);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -12950,8 +12964,9 @@ static void Cmd_tryinfatuating(void)
     }
     else
     {
-        if (GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget)
-            || gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION
+        // Attract will work on same gender, but not genderless
+        if /*(GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget)
+            || */(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION
             || GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == MON_GENDERLESS
             || GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget) == MON_GENDERLESS)
         {

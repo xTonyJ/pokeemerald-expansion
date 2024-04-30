@@ -329,14 +329,16 @@
 #define MOVEEND_RED_CARD                          26
 #define MOVEEND_EJECT_PACK                        27
 #define MOVEEND_LIFEORB_SHELLBELL                 28    // Includes shell bell, throat spray, etc
-#define MOVEEND_CHANGED_ITEMS                     29
-#define MOVEEND_PICKPOCKET                        30
-#define MOVEEND_DANCER                            31
-#define MOVEEND_EMERGENCY_EXIT                    32
-#define MOVEEND_WEATHER_FORM                      33
-#define MOVEEND_SYMBIOSIS                         34
-#define MOVEEND_CLEAR_BITS                        35
-#define MOVEEND_COUNT                             36
+#define MOVEEND_SAP                               29
+#define MOVEEND_CHANGED_ITEMS                     30
+#define MOVEEND_PICKPOCKET                        31
+#define MOVEEND_DANCER                            32
+#define MOVEEND_EMERGENCY_EXIT                    33
+#define MOVEEND_WEATHER_FORM                      34
+#define MOVEEND_SYMBIOSIS                         35
+#define MOVEEND_CLEAR_BITS                        36
+#define MOVEEND_COUNT                             37
+
 
 // switch cases
 #define B_SWITCH_NORMAL     0

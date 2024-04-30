@@ -3592,6 +3592,8 @@ BattleScript_DreamEaterWorked:
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	argumenttomoveeffect
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_DreamEaterTryFaintEnd
 	setdrainedhp
 	manipulatedamage DMG_BIG_ROOT
@@ -7690,6 +7692,10 @@ BattleScript_SelectingNotAllowedStuffCheeks::
 BattleScript_SelectingNotAllowedStuffCheeksInPalace::
 	printstring STRINGID_STUFFCHEEKSCANTSELECT
 	goto BattleScript_SelectingUnusableMoveInPalace
+
+BattleScript_SelectingSleepClauseNotAllowed::
+	printselectionstring STRINGID_SLEEPCLAUSEDISABLESMOVE
+	endselectionscript
 
 BattleScript_SelectingNotAllowedBelch::
 	printselectionstring STRINGID_BELCHCANTSELECT

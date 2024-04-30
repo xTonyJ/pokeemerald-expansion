@@ -396,6 +396,10 @@ LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
 
+LittlerootTown_EventScript_Gorz::
+	msgbox LittlerootTown_Text_Gorz, MSGBOX_SIGN
+	end
+
 LittlerootTown_EventScript_BirchsLabSign::
 	msgbox LittlerootTown_Text_ProfBirchsLab, MSGBOX_SIGN
 	end
@@ -941,7 +945,7 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "It'll put a zip in your step!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: Press L to open the Secret Menu\n"
+	.string "MOM: Press L to open the Secret Menu.\n"
 	.string "It comes with a variety of enhancements!\p"
 	.string "{PLAYER}, I'm so happy for you and\n"
 	.string "your upcoming adventure.\p"
@@ -998,6 +1002,12 @@ LittlerootTown_Text_GoodLuckCatchingPokemon:
 LittlerootTown_Text_TownSign:
 	.string "LITTLEROOT TOWN\n"
 	.string "“A town that can't be shaded any hue.”$"
+
+LittlerootTown_Text_Gorz:
+	.string "Hi {PLAYER}! Tony here, thank you\p"
+	.string "for playing Emerald Classic. \n"
+	.string "I hope you have as much fun\p"
+	.string "playing as I did making it.$"
 
 LittlerootTown_Text_ProfBirchsLab:
 	.string "PROF. BIRCH'S POKéMON LAB$"

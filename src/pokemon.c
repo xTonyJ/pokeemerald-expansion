@@ -4887,7 +4887,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
-        if (gSpeciesInfo[species].flags & SPECIES_FLAG_ALL_PERFECT_IVS)
+        if ((gSpeciesInfo[species].flags & SPECIES_FLAG_ALL_PERFECT_IVS) | (gSaveBlock2Ptr->grindingMode == 1))
         {
             iv = MAX_PER_STAT_IVS;
             SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
@@ -9970,4 +9970,64 @@ u8 GetLevelCap2(void)
     currentLevelCap = sLevelCaps[currentBadge];
     ConvertIntToDecimalStringN(gStringVar2, currentLevelCap, STR_CONV_MODE_LEFT_ALIGN, 5);
     gSpecialVar_0x8005 = currentLevelCap;
+}
+
+bool8 SpeciesHasInnate(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer, bool8 isEnemyMon){
+	u8 i;
+    u16 innate1 = gSpeciesInfo[species].innates[0];
+    u16 innate2 = gSpeciesInfo[species].innates[1];
+    u16 innate3 = gSpeciesInfo[species].innates[2];
+
+    /*if(!disablerandomizer){
+        innate1 = RandomizeInnate(gBaseStats[species].innates[0], species, personality);
+        innate2 = RandomizeInnate(gBaseStats[species].innates[1], species, personality);
+        innate3 = RandomizeInnate(gBaseStats[species].innates[2], species, personality);
+    }*/
+
+    if(innate1 == ability)     //&& (level >= INNATE_1_LEVEL || gSaveBlock2Ptr->gameDifficulty != DIFFICULTY_ELITE || isEnemyMon))
+        return TRUE;
+    else if(innate2 == ability) //&& (level >= INNATE_2_LEVEL || gSaveBlock2Ptr->gameDifficulty != DIFFICULTY_ELITE || isEnemyMon))
+        return TRUE;
+    else if(innate3 == ability) //&& (level >= INNATE_3_LEVEL || gSaveBlock2Ptr->gameDifficulty != DIFFICULTY_ELITE || isEnemyMon))
+        return TRUE;
+	else
+	    return FALSE;
+}
+
+bool8 MonHasInnate(struct Pokemon *mon, u16 ability, bool8 disableRandomizer){
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+
+    return SpeciesHasInnate(species, ability, level, personality, disableRandomizer, disableRandomizer);
+}
+
+bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability, bool8 disableRandomizer){
+    u16 species = GetBoxMonData(boxmon, MON_DATA_SPECIES, NULL);
+    u32 personality = GetBoxMonData(boxmon, MON_DATA_PERSONALITY, NULL);
+    u8 level = GetBoxMonData(boxmon, MON_DATA_LEVEL, NULL);
+
+    return SpeciesHasInnate(species, ability, level, personality, disableRandomizer, disableRandomizer);
+}
+
+u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer){
+	u8 i;
+    u16 innate1 = gSpeciesInfo[species].innates[0];
+    u16 innate2 = gSpeciesInfo[species].innates[1];
+    u16 innate3 = gSpeciesInfo[species].innates[2];
+
+    /*if(!disablerandomizer){
+        innate1 = RandomizeInnate(gBaseStats[species].innates[0], species, personality);
+        innate2 = RandomizeInnate(gBaseStats[species].innates[1], species, personality);
+        innate3 = RandomizeInnate(gBaseStats[species].innates[2], species, personality);
+    }*/
+
+    if(innate1 == ability)
+        return 0;
+    else if (innate2 == ability)
+        return 1;
+    else if(innate3 == ability)
+        return 2;
+    else
+        return 3;
 }
