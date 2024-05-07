@@ -53,7 +53,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
 #define RESOURCE_FLAG_ROOST             0x2
 #define RESOURCE_FLAG_UNBURDEN          0x4
-#define RESOURCE_FLAG_UNUSED            0x8
+#define RESOURCE_FLAG_INTIMIDATED       0x8
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
@@ -171,6 +171,7 @@ struct SpecialStatus
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
     u8 switchInAbilityDone:1;
+    bool8 switchInInnateDone[NUM_INNATE_PER_SPECIES];
     u8 switchInItemDone:1;
     u8 instructedChosenTarget:3;
     u8 berryReduced:1;
@@ -194,6 +195,7 @@ struct SpecialStatus
     u8 emergencyExited:1;
     u8 afterYou:1;
     u8 flashFireRedirected:1;
+    u8 intimidatedMon:1;
 };
 
 struct SideTimer

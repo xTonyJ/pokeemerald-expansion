@@ -35,7 +35,7 @@
 #include "constants/rgb.h"
 #include "constants/items.h"
 
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+//extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 struct EvoInfo
 {
@@ -573,7 +573,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 
         for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
-        for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_UNUSED_RIBBONS; i++)
+        for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_WORLD_RIBBON; i++)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
 
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, &data);

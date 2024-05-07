@@ -127,7 +127,7 @@ extern const u8 *const gMonFootprintTable[];
 extern const u16 gPokedexOrder_Alphabetical[];
 extern const u16 gPokedexOrder_Height[];
 extern const u16 gPokedexOrder_Weight[];
-extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
+//extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 extern const struct PokedexEntry gPokedexEntries[];
 
 

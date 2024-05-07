@@ -59,6 +59,8 @@
 #define BATTLER_INNATE     2
 
 #define IS_WHOLE_SIDE_ALIVE(battler)((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
+#define BATTLER_HAS_ABILITY(battlerId, ability) ((GetBattlerAbility(battlerId) == ability || BattlerHasInnate(battlerId, ability)) && IsBattlerAlive(battlerId))
+#define BATTLER_HAS_ABILITY_FAST(battlerId, abilityToCheck, battlerAbility) ((battlerAbility == abilityToCheck || BattlerHasInnate(battlerId, abilityToCheck))) //Useful to make calculations faster
 
 // for Natural Gift and Fling
 struct TypePower

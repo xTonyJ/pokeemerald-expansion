@@ -1071,8 +1071,9 @@ const struct Item gItems[] =
         .price = 20,
         .description = sLonelyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mint, // Todo
+        .secondaryId = NATURE_LONELY,
         .flingPower = 10,
     },
 

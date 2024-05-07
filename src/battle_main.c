@@ -65,8 +65,7 @@
 #include "cable_club.h"
 #include "constants/spreads.h"
 
-
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+//extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -2363,7 +2362,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_PRESET, 0);
                 }
 
-                SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
+                SetMonData(&party[i], MON_DATA_HIDDEN_NATURE, &gSets[partyData[i].spread].nature);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
 
@@ -2420,7 +2419,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 						CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 31, TRUE, personalityValue, otIdType, fixedOtId);
                 }
                 
-                SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
+                SetMonData(&party[i], MON_DATA_HIDDEN_NATURE, &gSets[partyData[i].spread].nature);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
 
@@ -5053,7 +5052,7 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     u16 ability = GetBattlerAbility(battlerId);
 
     priority = gBattleMoves[move].priority;
-    if (ability == ABILITY_GALE_WINGS
+    if ((ability == ABILITY_GALE_WINGS || BattlerHasInnate(battlerId, ABILITY_GALE_WINGS))
     #if B_GALE_WINGS >= GEN_7
         && BATTLER_MAX_HP(battlerId)
     #endif
@@ -5061,16 +5060,18 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     {
         priority++;
     }
-    else if (ability == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
+    else if ((ability == ABILITY_PRANKSTER || BattlerHasInnate(battlerId, ABILITY_PRANKSTER)) && IS_MOVE_STATUS(move))
     {
         gProtectStructs[battlerId].pranksterElevated = 1;
         priority++;
     }
+
+
     else if (gBattleMoves[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battlerId))
     {
         priority++;
     }
-    else if (ability == ABILITY_TRIAGE)
+    else if (ability == ABILITY_TRIAGE || BattlerHasInnate(battlerId, ABILITY_TRIAGE))
     {
         switch (gBattleMoves[move].effect)
         {
@@ -5089,6 +5090,13 @@ s8 GetMovePriority(u32 battlerId, u16 move)
             priority += 3;
             break;
         }
+    }
+
+    else if ((ability == ABILITY_BLITZ_BOXER || BattlerHasInnate(battlerId, ABILITY_BLITZ_BOXER))
+		&& (gBattleMoves[move].flags & FLAG_IRON_FIST_BOOST)
+        && (B_GALE_WINGS <= GEN_6 || BATTLER_MAX_HP(battlerId)))
+    {
+        priority++;
     }
 
     if (gProtectStructs[battlerId].quash)
@@ -5155,9 +5163,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             strikesFirst = 1;
         else if (holdEffectBattler2 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler1 != HOLD_EFFECT_LAGGING_TAIL)
             strikesFirst = 0;
-        else if (ability1 == ABILITY_STALL && ability2 != ABILITY_STALL)
+        else if (BATTLER_HAS_ABILITY(battler1, ABILITY_STALL) && !BATTLER_HAS_ABILITY(battler2, ABILITY_STALL))
             strikesFirst = 1;
-        else if (ability2 == ABILITY_STALL && ability1 != ABILITY_STALL)
+        else if (BATTLER_HAS_ABILITY(battler2, ABILITY_STALL) && !BATTLER_HAS_ABILITY(battler1, ABILITY_STALL))
             strikesFirst = 0;
         else if (ability1 == ABILITY_MYCELIUM_MIGHT && ability2 != ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove))
             strikesFirst = 1;
@@ -6068,4 +6076,91 @@ u16 HasLevelEvolution(u16 species, u8 level)
 			return gEvolutionTable[species][0].targetSpecies;
 	}
 	return 0;
+}
+
+u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer){
+    u32 moveType, ateType, attackerAbility, tempstuff;
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+    u16 holdEffect = ItemId_GetHoldEffect(item);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+    u8  abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    u16 ability = GetAbilityBySpecies(species, abilityNum);
+    u8 type1 = gSpeciesInfo[species].types[0];
+    u8 type2 = gSpeciesInfo[species].types[1];
+
+    if(!disableRandomizer){
+        //ability =  RandomizeAbility(GetAbilityBySpecies(species, abilityNum), species, personality);
+        type1 = RandomizeType(gSpeciesInfo[species].types[0], species, personality, TRUE);
+        type2 = RandomizeType(gSpeciesInfo[species].types[1], species, personality, FALSE);
+    }
+
+    GET_MOVE_TYPE(move, moveType);
+
+    if (move == MOVE_STRUGGLE)
+        return TYPE_NORMAL;
+
+    if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
+    {
+        u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV, NULL) & 1) << 0)
+                     | ((GetMonData(mon, MON_DATA_ATK_IV, NULL) & 1) << 1)
+                     | ((GetMonData(mon, MON_DATA_DEF_IV, NULL) & 1) << 2)
+                     | ((GetMonData(mon, MON_DATA_SPEED_IV, NULL) & 1) << 3)
+                     | ((GetMonData(mon, MON_DATA_SPATK_IV, NULL) & 1) << 4)
+                     | ((GetMonData(mon, MON_DATA_SPDEF_IV, NULL) & 1) << 5);
+
+        ateType = (15 * typeBits) / 63 + 1;
+        if (ateType >= TYPE_MYSTERY)
+            ateType++;
+
+        return ateType;
+    }
+    else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)
+    {
+        if (holdEffect == gBattleMoves[move].argument)
+            return ItemId_GetSecondaryId(item);
+    }
+    else if (gBattleMoves[move].effect == EFFECT_REVELATION_DANCE)
+    {
+        if (type1 != TYPE_MYSTERY)
+            return type1;
+        else if (type2 != TYPE_MYSTERY)
+            return type2;
+    }
+    else if (gBattleMoves[move].effect == EFFECT_NATURAL_GIFT)
+    {
+        if (ItemId_GetPocket(item) == POCKET_BERRIES)
+            return gNaturalGiftTable[ITEM_TO_BERRY(item)].type;
+    }
+
+   if (gBattleMoves[move].type == TYPE_NORMAL
+             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL
+             && gBattleMoves[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
+             && gBattleMoves[move].effect != EFFECT_NATURAL_GIFT
+             && (   ((ability == ABILITY_PIXILATE        || MonHasInnate(mon, ABILITY_PIXILATE, disableRandomizer))        && (ateType = TYPE_FAIRY))
+                 || ((ability == ABILITY_REFRIGERATE     || MonHasInnate(mon, ABILITY_REFRIGERATE, disableRandomizer))     && (ateType = TYPE_ICE))
+                 || ((ability == ABILITY_AERILATE        || MonHasInnate(mon, ABILITY_AERILATE, disableRandomizer))        && (ateType = TYPE_FLYING))
+                 || (((ability == ABILITY_GALVANIZE)     || MonHasInnate(mon, ABILITY_GALVANIZE, disableRandomizer))       && (ateType = TYPE_ELECTRIC))
+                )
+             ){
+        return ateType;
+    }
+
+    else if (move == MOVE_AURA_WHEEL && species == SPECIES_MORPEKO_HANGRY)
+        return TYPE_DARK;
+	
+    //Normalize
+    if(MonHasInnate(mon, ABILITY_NORMALIZE, disableRandomizer) || ability == ABILITY_NORMALIZE){
+        if (gBattleMoves[move].type != TYPE_NORMAL
+             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL)
+        return TYPE_NORMAL;
+    }
+    //Liquid Voice
+    if(MonHasInnate(mon, ABILITY_LIQUID_VOICE, disableRandomizer) || ability == ABILITY_LIQUID_VOICE){
+        if (gBattleMoves[move].flags & FLAG_SOUND)
+            return TYPE_WATER;
+    }
+    return gBattleMoves[move].type;
 }

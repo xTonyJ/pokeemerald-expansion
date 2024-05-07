@@ -10458,3 +10458,54 @@ BattleScript_CouldntFullyProtect::
 	printstring STRINGID_COULDNTFULLYPROTECT
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_HollowWhispersActivated::
+	sethword sABILITY_OVERWRITE, ABILITY_HOLLOW_WHISPERS
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNLAIDCURSE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TwistedDimensionActivated::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TWISTEDDIMENSIONACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_TwistedDimensionRemoved::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TRICKROOMENDS
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_BattlerAddedTheType::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_BATTLERADDEDTHETYPE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_GatheringWindsActivated::
+	copybyte gBattlerAbility, gBattlerAttacker
+	sethword sABILITY_OVERWRITE, ABILITY_GATHERING_WINDS
+	showabilitypopup BS_ABILITY_BATTLER
+	printstring STRINGID_GATHERINGWINDSACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	sethword sABILITY_OVERWRITE, 0
+	end3
+
+BattleScript_BattlerEnvelopedItselfInAVeil::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSURROUNDEDWITHVEILOFWATER
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_PickUpActivate::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PICKUPACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3

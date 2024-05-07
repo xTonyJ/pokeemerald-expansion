@@ -79,6 +79,7 @@ bool32 IsWildMonSmart(void);
 void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
 s32 GetHighestLevelInPlayerParty(void);
+u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

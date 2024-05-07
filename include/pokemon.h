@@ -25,6 +25,7 @@ enum {
     MON_DATA_SANITY_IS_EGG,
     MON_DATA_OT_NAME,
     MON_DATA_MARKINGS,
+    MON_DATA_HIDDEN_NATURE,
     MON_DATA_CHECKSUM,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_SPECIES,
@@ -148,7 +149,7 @@ struct PokemonSubstruct3
 
  /* 0x02 */ u16 metLevel:7;
  /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 unused1:4;
+ /* 0x03 */ u16 nature:5; // new
  /* 0x03 */ u16 otGender:1;
 
  /* 0x04 */ u32 hpIV:5;
@@ -177,7 +178,7 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 nationalRibbon:1;           // Given to purified Shadow Pokémon in Colosseum/XD.
  /* 0x0B */ u32 earthRibbon:1;              // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
  /* 0x0B */ u32 worldRibbon:1;              // Distributed during Pokémon Festa '04 and '05 to tournament winners.
- /* 0x0B */ u32 unusedRibbons:2;            // Discarded in Gen 4.
+ /* 0x0B */ //u32 unusedRibbons:2;            // Discarded in Gen 4.
  /* 0x0B */ u32 abilityNum:2;
 
  // The functionality of this bit changed in FRLG:
@@ -213,6 +214,7 @@ struct BoxPokemon
     u32 otId;
     u8 nickname[POKEMON_NAME_LENGTH];
     u8 language;
+    u8 hiddenNatureModifier:5;
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
@@ -257,6 +259,21 @@ struct MonSpritesGfxManager
     struct SpriteTemplate *templates;
     struct SpriteFrameImage *frameImages;
 };
+
+struct Unknown_806F160_Struct
+{
+    u32 field_0_0:4;
+    u32 field_0_1:4;
+    u32 field_1:8;
+    u16 magic:8;
+    u32 field_3_0:4;
+    u32 field_3_1:4;
+    void *bytes;
+    u8 **byteArrays;
+    struct SpriteTemplate *templates;
+    struct SpriteFrameImage *frameImages;
+};
+
 
 enum {
     MON_SPR_GFX_MODE_NORMAL,
@@ -419,6 +436,7 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u8 *const gItemEffectTable[ITEMS_COUNT];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
+extern const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
 extern const u16 *const gTeachableLearnsets[];
 extern const u8 gPPUpGetMask[];
@@ -595,5 +613,11 @@ bool8 MonHasInnate(struct Pokemon *mon, u16 ability, bool8 disableRandomizer);
 bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability, bool8 disableRandomizer);
 bool8 SpeciesHasInnate(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer, bool8 isEnemyMon);
 u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer);
+struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
+void sub_806F47C(u8 id);
+u8 *sub_806F4F8(u8 id, u8 arg1);
+u16 getNumberOfUniqueDefeatedTrainers(void);
+bool8 enablePokemonChanges(void);
+u8 RandomizeType(u8 type, u16 species, u32 personality, bool8 isFirstType);
 
 #endif // GUARD_POKEMON_H

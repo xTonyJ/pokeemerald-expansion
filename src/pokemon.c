@@ -68,6 +68,7 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
+static bool8 InEliteFour(void);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -77,6 +78,7 @@ EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA struct Unknown_806F160_Struct *gUnknown_020249B4[2] = {NULL};
 
 #include "data/battle_moves.h"
 
@@ -5419,7 +5421,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {                                                               \
     u8 baseStat = gSpeciesInfo[species].base;                   \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
-    u8 nature = GetNature(mon);                                 \
+    u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, NULL);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
     SetMonData(mon, field, &n);                                 \
 }
@@ -5443,6 +5445,8 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+
+    u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, NULL);
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
@@ -6144,6 +6148,12 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_CHECKSUM:
         retVal = boxMon->checksum;
         break;
+    case MON_DATA_HIDDEN_NATURE:
+        {
+            u32 nature = GetNatureFromPersonality(boxMon->personality);
+            retVal = nature ^ boxMon->hiddenNatureModifier;
+            break;
+        }
     case MON_DATA_ENCRYPT_SEPARATOR:
         retVal = boxMon->unknown;
         break;
@@ -6303,9 +6313,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_WORLD_RIBBON:
         retVal = substruct3->worldRibbon;
         break;
-    case MON_DATA_UNUSED_RIBBONS:
+    /*case MON_DATA_UNUSED_RIBBONS:
         retVal = substruct3->unusedRibbons;
-        break;
+        break;*/
     case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
         retVal = substruct3->modernFatefulEncounter;
         break;
@@ -6321,6 +6331,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
               | (substruct3->speedIV << 15)
               | (substruct3->spAttackIV << 20)
               | (substruct3->spDefenseIV << 25);
+        break;
+    case MON_DATA_NATURE:
+        retVal = substruct3->nature;
         break;
     case MON_DATA_KNOWN_MOVES:
         if (substruct0->species && !substruct3->isEgg)
@@ -6512,6 +6525,14 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_CHECKSUM:
         SET16(boxMon->checksum);
         break;
+    case MON_DATA_HIDDEN_NATURE:
+        {
+            u32 nature = GetNatureFromPersonality(boxMon->personality);
+            u32 hiddenNature;
+            SET8(hiddenNature);
+            boxMon->hiddenNatureModifier = nature ^ hiddenNature;
+            break;
+        }
     case MON_DATA_ENCRYPT_SEPARATOR:
         SET16(boxMon->unknown);
         break;
@@ -6687,11 +6708,14 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_WORLD_RIBBON:
         SET8(substruct3->worldRibbon);
         break;
-    case MON_DATA_UNUSED_RIBBONS:
+    /*case MON_DATA_UNUSED_RIBBONS:
         SET8(substruct3->unusedRibbons);
-        break;
+        break;*/
     case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
         SET8(substruct3->modernFatefulEncounter);
+        break;
+    case MON_DATA_NATURE:
+        SET8(substruct3->nature);
         break;
     case MON_DATA_IVS:
     {
@@ -9903,6 +9927,8 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
     struct PokemonSubstruct3 *old3, *new3;
     struct BoxPokemon old;
 
+    u32 hiddenNature = GetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, NULL);
+
     old = *boxMon;
     old0 = &(GetSubstruct(&old, old.personality, 0)->type0);
     old1 = &(GetSubstruct(&old, old.personality, 1)->type1);
@@ -9922,6 +9948,8 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
     *new3 = *old3;
     boxMon->checksum = CalculateBoxMonChecksum(boxMon);
     EncryptBoxMon(boxMon);
+    
+    SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
 }
 
 // Get the latest badge the player has earned (unless they skipped Winona)
@@ -9979,9 +10007,9 @@ bool8 SpeciesHasInnate(u16 species, u16 ability, u8 level, u32 personality, bool
     u16 innate3 = gSpeciesInfo[species].innates[2];
 
     /*if(!disablerandomizer){
-        innate1 = RandomizeInnate(gBaseStats[species].innates[0], species, personality);
-        innate2 = RandomizeInnate(gBaseStats[species].innates[1], species, personality);
-        innate3 = RandomizeInnate(gBaseStats[species].innates[2], species, personality);
+        innate1 = RandomizeInnate(gSpeciesInfo[species].innates[0], species, personality);
+        innate2 = RandomizeInnate(gSpeciesInfo[species].innates[1], species, personality);
+        innate3 = RandomizeInnate(gSpeciesInfo[species].innates[2], species, personality);
     }*/
 
     if(innate1 == ability)     //&& (level >= INNATE_1_LEVEL || gSaveBlock2Ptr->gameDifficulty != DIFFICULTY_ELITE || isEnemyMon))
@@ -10017,9 +10045,9 @@ u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool
     u16 innate3 = gSpeciesInfo[species].innates[2];
 
     /*if(!disablerandomizer){
-        innate1 = RandomizeInnate(gBaseStats[species].innates[0], species, personality);
-        innate2 = RandomizeInnate(gBaseStats[species].innates[1], species, personality);
-        innate3 = RandomizeInnate(gBaseStats[species].innates[2], species, personality);
+        innate1 = RandomizeInnate(gSpeciesInfo[species].innates[0], species, personality);
+        innate2 = RandomizeInnate(gSpeciesInfo[species].innates[1], species, personality);
+        innate3 = RandomizeInnate(gSpeciesInfo[species].innates[2], species, personality);
     }*/
 
     if(innate1 == ability)
@@ -10030,4 +10058,234 @@ u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool
         return 2;
     else
         return 3;
+}
+
+static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
+{
+    u16 i, j;
+    for (i = 0; i < structPtr->field_0_0; i++)
+    {
+        structPtr->templates[i] = gBattlerSpriteTemplates[i];
+        for (j = 0; j < structPtr->field_1; j++)
+        {
+            structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
+        }
+        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_1];
+    }
+}
+
+static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
+{
+    u16 i, j;
+    for (i = 0; i < structPtr->field_0_0; i++)
+    {
+        structPtr->templates[i] = sSpriteTemplate_64x64;
+        for (j = 0; j < structPtr->field_1; j++)
+        {
+            structPtr->frameImages[i * structPtr->field_0_0 + j].data = &structPtr->byteArrays[i][j * 0x800];
+        }
+        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_0_0];
+        structPtr->templates[i].anims = gAnims_MonPic;
+        structPtr->templates[i].paletteTag = i;
+    }
+}
+
+struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
+{
+    u8 i;
+    u8 flags;
+    struct Unknown_806F160_Struct *structPtr;
+
+    flags = 0;
+    id %= 2;
+    structPtr = AllocZeroed(sizeof(*structPtr));
+    if (structPtr == NULL)
+        return NULL;
+
+    switch (arg1)
+    {
+    case 2:
+        structPtr->field_0_0 = 7;
+        structPtr->field_0_1 = 7;
+        structPtr->field_1 = 4;
+        structPtr->field_3_0 = 1;
+        structPtr->field_3_1 = 2;
+        break;
+    case 0:
+    default:
+        structPtr->field_0_0 = 4;
+        structPtr->field_0_1 = 4;
+        structPtr->field_1 = 4;
+        structPtr->field_3_0 = 1;
+        structPtr->field_3_1 = 0;
+        break;
+    }
+
+    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * 0x800 * 4 * structPtr->field_0_0);
+    structPtr->byteArrays = AllocZeroed(structPtr->field_0_0 * 32);
+    if (structPtr->bytes == NULL || structPtr->byteArrays == NULL)
+    {
+        flags |= 1;
+    }
+    else
+    {
+        for (i = 0; i < structPtr->field_0_0; i++)
+            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
+    }
+
+    structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);
+    structPtr->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * structPtr->field_0_0 * structPtr->field_1);
+    if (structPtr->templates == NULL || structPtr->frameImages == NULL)
+    {
+        flags |= 2;
+    }
+    else
+    {
+        for (i = 0; i < structPtr->field_1 * structPtr->field_0_0; i++)
+            structPtr->frameImages[i].size = 0x800;
+
+        switch (structPtr->field_3_1)
+        {
+        case 2:
+            sub_806F1FC(structPtr);
+            break;
+        case 0:
+        case 1:
+        default:
+            sub_806F160(structPtr);
+            break;
+        }
+    }
+
+    if (flags & 2)
+    {
+        if (structPtr->frameImages != NULL)
+            FREE_AND_SET_NULL(structPtr->frameImages);
+        if (structPtr->templates != NULL)
+            FREE_AND_SET_NULL(structPtr->templates);
+    }
+    if (flags & 1)
+    {
+        if (structPtr->byteArrays != NULL)
+            FREE_AND_SET_NULL(structPtr->byteArrays);
+        if (structPtr->bytes != NULL)
+            FREE_AND_SET_NULL(structPtr->bytes);
+    }
+
+    if (flags)
+    {
+        memset(structPtr, 0, sizeof(*structPtr));
+        Free(structPtr);
+    }
+    else
+    {
+        structPtr->magic = 0xA3;
+        gUnknown_020249B4[id] = structPtr;
+    }
+
+    return gUnknown_020249B4[id];
+}
+
+void sub_806F47C(u8 id)
+{
+    struct Unknown_806F160_Struct *structPtr;
+
+    id %= 2;
+    structPtr = gUnknown_020249B4[id];
+    if (structPtr == NULL)
+        return;
+
+    if (structPtr->magic != 0xA3)
+    {
+        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+    }
+    else
+    {
+
+        if (structPtr->frameImages != NULL)
+            FREE_AND_SET_NULL(structPtr->frameImages);
+        if (structPtr->templates != NULL)
+            FREE_AND_SET_NULL(structPtr->templates);
+        if (structPtr->byteArrays != NULL)
+            FREE_AND_SET_NULL(structPtr->byteArrays);
+        if (structPtr->bytes != NULL)
+            FREE_AND_SET_NULL(structPtr->bytes);
+
+        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+        Free(structPtr);
+    }
+}
+
+u8 *sub_806F4F8(u8 id, u8 arg1)
+{
+    struct Unknown_806F160_Struct *structPtr = gUnknown_020249B4[id % 2];
+    if (structPtr->magic != 0xA3)
+    {
+        return NULL;
+    }
+    else
+    {
+        if (arg1 >= structPtr->field_0_0)
+            arg1 = 0;
+
+        return structPtr->byteArrays[arg1];
+    }
+}
+u16 getNumberOfUniqueDefeatedTrainers(void){
+    u16 defeatedTrainers = 0;
+    u16 i;
+
+    for(i = 0; i < TRAINERS_COUNT; i++){
+        if(i <= MAX_TRAINERS_COUNT || i == TRAINER_OLDPLAYER){
+            if(FlagGet(TRAINER_FLAGS_START + i))
+                defeatedTrainers++;
+        }
+        /*else{
+            if(FlagGet(gTrainers[i].trainerFlag))
+                defeatedTrainers++;
+        }*/
+    }
+
+    return defeatedTrainers;
+}
+
+static bool8 InEliteFour(void)
+{
+    return gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_SIDNEYS_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_PHOEBES_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_GLACIAS_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_DRAKES_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_SHORT_HALL
+        || gMapHeader.mapLayoutId == LAYOUT_EVER_GRANDE_CITY_CHAMPIONS_ROOM;
+}
+
+bool8 enablePokemonChanges(void)
+{
+    bool8 enable = TRUE;
+
+    if(InEliteFour())
+        enable = FALSE;
+        
+    return enable;
+}
+
+u8 RandomizeType(u8 type, u16 species, u32 personality, bool8 isFirstType){
+    if(gSaveBlock2Ptr->typeRandomizedMode == 1 && type != TYPE_MYSTERY){
+        //Only Randomize if you have the Type Randomized Mode Enabled
+        //Exclude form change abilities from being randomized and other mons can't get them either
+        u8 randomizedType = TYPE_MYSTERY;
+        if(isFirstType)
+            randomizedType = (type + species + personality) % NUMBER_OF_MON_TYPES;
+        else
+            randomizedType = (personality - type - species) % NUMBER_OF_MON_TYPES;
+
+        do{
+            randomizedType++;
+            randomizedType = randomizedType % NUMBER_OF_MON_TYPES;
+        }
+        while(randomizedType == TYPE_MYSTERY || randomizedType == type);
+        return randomizedType;
+    }
+    else
+        return type;
 }

@@ -478,4 +478,13 @@ extern const u8 BattleScript_StatUpZMove[];
 extern const u8 BattleScript_HealReplacementZMove[];
 extern const u8 BattleScript_EffectExtremeEvoboost[];
 
+// New ability effects
+extern const u8 BattleScript_TwistedDimensionActivated[];
+extern const u8 BattleScript_TwistedDimensionRemoved[];
+extern const u8 BattleScript_HollowWhispersActivated[];
+extern const u8 BattleScript_BattlerAddedTheType[];
+extern const u8 BattleScript_GatheringWindsActivated[];
+extern const u8 BattleScript_BattlerEnvelopedItselfInAVeil[];
+extern const u8 BattleScript_PickUpActivate[];
+
 #endif // GUARD_BATTLE_SCRIPTS_H

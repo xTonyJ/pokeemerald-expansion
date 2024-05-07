@@ -544,6 +544,11 @@ struct SaveBlock2
     u8 subQuests[SUB_FLAGS_COUNT];
     u16 gameDifficulty:2; // Difficulty ( 0 = Normal, 1 = Hard, 2 = Impossible )
     u16 grindingMode:1; // Grinding modes ( 0 = default , 1 = Minimum )
+    u8 innaterandomizedMode:1;
+    u8 encounterRandomizedMode:1;
+    u8 abilityRandomizedMode:1;
+    u8 moveRandomizedMode:1;
+    u8 typeRandomizedMode:1;
 }; 
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

@@ -15,6 +15,7 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "data.h"
+#include "event_data.h"
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
@@ -41,6 +42,7 @@ void ReshowBattleScreenAfterMenu(void)
 
 static void CB2_ReshowBattleScreenAfterMenu(void)
 {
+    //u8 value = 0;
     switch (gBattleScripting.reshowMainState)
     {
     case 0:
@@ -165,6 +167,9 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         FillAroundBattleWindows();
         break;
     }
+
+    /*value = 1;
+    VarSet(VAR_BATTLE_CONTROLLER_PLAYER_F, value);*/
 
     gBattleScripting.reshowMainState++;
 }

@@ -865,4 +865,6 @@
 #define TRAINERS_COUNT                      855
 #define MAX_TRAINERS_COUNT                  864
 
+#define TRAINER_OLDPLAYER             2000 // For randomizer
+
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

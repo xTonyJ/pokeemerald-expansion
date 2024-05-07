@@ -94,7 +94,7 @@
 #define MEMBERS_7(a, b, c, d, e, f, g) a; b; c; d; e; f; g;
 #define MEMBERS_8(a, b, c, d, e, f, g, h) a; b; c; d; e; f; g; h;
 
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+//extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -354,6 +354,7 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static bool8 IsFinalStrikeEffect(u16 move);
 static void TryUpdateRoundTurnOrder(void);
 static bool32 ChangeOrderTargetAfterAttacker(void);
+static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -1639,18 +1640,18 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    else if (gSpecialStatuses[gBattlerTarget].stormDrainRedirected)
-    {
-        gSpecialStatuses[gBattlerTarget].stormDrainRedirected = FALSE;
-        gLastUsedAbility = ABILITY_STORM_DRAIN;
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_TookAttack;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
     else if (gSpecialStatuses[gBattlerTarget].flashFireRedirected)
     {
         gSpecialStatuses[gBattlerTarget].flashFireRedirected = FALSE;
         gLastUsedAbility = ABILITY_FLASH_FIRE;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_TookAttack;
+        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+    }
+    else if (gSpecialStatuses[gBattlerTarget].stormDrainRedirected)
+    {
+        gSpecialStatuses[gBattlerTarget].stormDrainRedirected = FALSE;
+        gLastUsedAbility = ABILITY_STORM_DRAIN;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
@@ -1856,6 +1857,13 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     // Check Wonder Skin.
     if (defAbility == ABILITY_WONDER_SKIN && IS_MOVE_STATUS(move) && moveAcc > 50)
         moveAcc = 50;
+    //Will-o-Wisp on Fire/Ghost mons
+    if ((gBattleMons[battlerAtk].type1 == TYPE_FIRE
+        || gBattleMons[battlerAtk].type2 == TYPE_FIRE
+        || gBattleMons[battlerAtk].type1 == TYPE_GHOST
+        || gBattleMons[battlerAtk].type2 == TYPE_GHOST) 
+        && gBattleMoves[move].effect == EFFECT_WILL_O_WISP)
+        moveAcc = 100;
 
     calc = gAccuracyStageRatios[buff].dividend * moveAcc;
     calc /= gAccuracyStageRatios[buff].divisor;
@@ -2076,7 +2084,8 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     {
         critChance = -1;
     }
-    else if (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
+    else if (BATTLER_HAS_ABILITY(battlerDef, ABILITY_SHELL_ARMOR) ||
+             BATTLER_HAS_ABILITY(battlerDef, ABILITY_BATTLE_ARMOR))
     {
         if (recordAbility)
             RecordAbilityBattle(battlerDef, abilityDef);
@@ -7164,6 +7173,7 @@ static void Cmd_switchineffects(void)
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD
+        && !BattlerHasInnate(gActiveBattler, ABILITY_MAGIC_GUARD)
         && IsBattlerAffectedByHazards(gActiveBattler, FALSE)
         && IsBattlerGrounded(gActiveBattler))
     {
@@ -7178,7 +7188,8 @@ static void Cmd_switchineffects(void)
     else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK)
         && IsBattlerAffectedByHazards(gActiveBattler, FALSE)
-        && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD)
+        && GetBattlerAbility(gActiveBattler) != ABILITY_MAGIC_GUARD
+        && !BattlerHasInnate(gActiveBattler, ABILITY_MAGIC_GUARD))
     {
         gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_STEALTH_ROCK_DAMAGED;
         gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_STEALTH_ROCK].type, gActiveBattler);
@@ -12121,11 +12132,12 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             gBattlescriptCurrInstr = BattleScript_ButItFailed;
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if ((GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_CLEAR_AMULET
-                  || activeBattlerAbility == ABILITY_CLEAR_BODY
-                  || activeBattlerAbility == ABILITY_FULL_METAL_BODY
-                  || activeBattlerAbility == ABILITY_WHITE_SMOKE)
-                 && (!affectsUser || mirrorArmored) && !certain && gCurrentMove != MOVE_CURSE)
+        else if (((GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_CLEAR_AMULET)
+              || CanAbilityPreventStatLoss(activeBattlerAbility, GetBattlerAbility(gBattlerAttacker) == ABILITY_INTIMIDATE)
+              || CanAbilityPreventStatLoss(activeBattlerAbility, BattlerHasInnate(gActiveBattler, ABILITY_INTIMIDATE)))
+              && ((!affectsUser || mirrorArmored) 
+              && !certain 
+              && gCurrentMove != MOVE_CURSE))
         {
             if (GetBattlerHoldEffect(gActiveBattler, TRUE) == HOLD_EFFECT_CLEAR_AMULET)
             {
@@ -16327,10 +16339,10 @@ static void Cmd_jumpifoppositegenders(void)
     u32 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerAttacker].species, gBattleMons[gBattlerAttacker].personality);
     u32 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerTarget].species, gBattleMons[gBattlerTarget].personality);
 
-    if ((atkGender == MON_MALE && defGender == MON_FEMALE) || (atkGender == MON_FEMALE && defGender == MON_MALE))
+    //if ((atkGender == MON_MALE && defGender == MON_FEMALE) || (atkGender == MON_FEMALE && defGender == MON_MALE))
         gBattlescriptCurrInstr = cmd->jumpInstr;
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
+    /*else
+        gBattlescriptCurrInstr = cmd->nextInstr;*/
 }
 
 static void Cmd_unused(void)
@@ -16528,6 +16540,25 @@ static bool8 IsFinalStrikeEffect(u16 move)
     {
         if (moveEffect == sFinalStrikeOnlyEffects[i])
             return TRUE;
+    }
+    return FALSE;
+}
+
+static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
+{
+    switch (abilityDef)
+    {
+    case ABILITY_CLEAR_BODY:
+    case ABILITY_FULL_METAL_BODY:
+    case ABILITY_WHITE_SMOKE:
+        return TRUE;
+    case ABILITY_INNER_FOCUS:
+    case ABILITY_SCRAPPY:
+    case ABILITY_OWN_TEMPO:
+    case ABILITY_OBLIVIOUS:
+        if (byIntimidate && (B_UPDATED_INTIMIDATE >= GEN_8))
+            return TRUE;
+        break;
     }
     return FALSE;
 }

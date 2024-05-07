@@ -2,82 +2,82 @@
 #define GUARD_CONSTANTS_ABILITIES_H
 
 #define ABILITY_NONE 0
-#define ABILITY_STENCH 1
-#define ABILITY_DRIZZLE 2
-#define ABILITY_SPEED_BOOST 3
-#define ABILITY_BATTLE_ARMOR 4
-#define ABILITY_STURDY 5
-#define ABILITY_DAMP 6
-#define ABILITY_LIMBER 7
-#define ABILITY_SAND_VEIL 8
-#define ABILITY_STATIC 9
-#define ABILITY_VOLT_ABSORB 10
-#define ABILITY_WATER_ABSORB 11
-#define ABILITY_OBLIVIOUS 12
-#define ABILITY_CLOUD_NINE 13
-#define ABILITY_COMPOUND_EYES 14
-#define ABILITY_INSOMNIA 15
-#define ABILITY_COLOR_CHANGE 16
-#define ABILITY_IMMUNITY 17
-#define ABILITY_FLASH_FIRE 18
-#define ABILITY_SHIELD_DUST 19
-#define ABILITY_OWN_TEMPO 20
-#define ABILITY_SUCTION_CUPS 21
-#define ABILITY_INTIMIDATE 22
-#define ABILITY_SHADOW_TAG 23
-#define ABILITY_ROUGH_SKIN 24
-#define ABILITY_WONDER_GUARD 25
-#define ABILITY_LEVITATE 26
-#define ABILITY_EFFECT_SPORE 27
-#define ABILITY_SYNCHRONIZE 28
-#define ABILITY_CLEAR_BODY 29
-#define ABILITY_NATURAL_CURE 30
-#define ABILITY_LIGHTNING_ROD 31
-#define ABILITY_SERENE_GRACE 32
-#define ABILITY_SWIFT_SWIM 33
-#define ABILITY_CHLOROPHYLL 34
-#define ABILITY_ILLUMINATE 35
-#define ABILITY_TRACE 36
-#define ABILITY_HUGE_POWER 37
-#define ABILITY_POISON_POINT 38
-#define ABILITY_INNER_FOCUS 39
-#define ABILITY_MAGMA_ARMOR 40
-#define ABILITY_WATER_VEIL 41
-#define ABILITY_MAGNET_PULL 42
-#define ABILITY_SOUNDPROOF 43
-#define ABILITY_RAIN_DISH 44
-#define ABILITY_SAND_STREAM 45
-#define ABILITY_PRESSURE 46
-#define ABILITY_THICK_FAT 47
-#define ABILITY_EARLY_BIRD 48
-#define ABILITY_FLAME_BODY 49
-#define ABILITY_RUN_AWAY 50
-#define ABILITY_KEEN_EYE 51
-#define ABILITY_HYPER_CUTTER 52
-#define ABILITY_PICKUP 53
-#define ABILITY_TRUANT 54
-#define ABILITY_HUSTLE 55
-#define ABILITY_CUTE_CHARM 56
-#define ABILITY_PLUS 57
-#define ABILITY_MINUS 58
-#define ABILITY_FORECAST 59
-#define ABILITY_STICKY_HOLD 60
-#define ABILITY_SHED_SKIN 61
-#define ABILITY_GUTS 62
-#define ABILITY_MARVEL_SCALE 63
-#define ABILITY_LIQUID_OOZE 64
-#define ABILITY_OVERGROW 65
-#define ABILITY_BLAZE 66
-#define ABILITY_TORRENT 67
-#define ABILITY_SWARM 68
-#define ABILITY_ROCK_HEAD 69
-#define ABILITY_DROUGHT 70
-#define ABILITY_ARENA_TRAP 71
-#define ABILITY_VITAL_SPIRIT 72
-#define ABILITY_WHITE_SMOKE 73
-#define ABILITY_PURE_POWER 74
-#define ABILITY_SHELL_ARMOR 75
-#define ABILITY_AIR_LOCK 76
+#define ABILITY_STENCH 1 // This Pokemon's attacks without a chance to flinch gain a 10% chance to flinch.
+#define ABILITY_DRIZZLE 2 // The Pokémon makes it rain when it enters a battle.
+#define ABILITY_SPEED_BOOST 3 // Its Speed stat is boosted every turn.
+#define ABILITY_BATTLE_ARMOR 4 // Hard armor protects the Pokémon from critical hits. Takes 20% less damage.
+#define ABILITY_STURDY 5 // It cannot be knocked out with one hit. One-hit KO moves cannot knock it out, either.
+#define ABILITY_DAMP 6 // Prevents the use of explosive moves, such as Self-Destruct, by dampening its surroundings.
+#define ABILITY_LIMBER 7 // Its limber body protects the Pokémon from paralysis. Takes 30% less damage from crash damage.
+#define ABILITY_SAND_VEIL 8 // Boosts the Pokémon's evasiveness in a sandstorm by 20%.
+#define ABILITY_STATIC 9 // 30% chance to get paralyzed on contact against this Pokémon.
+#define ABILITY_VOLT_ABSORB 10 // The Pokémon heals up to 1/4 of its maximum Hit Points when hit with Electric-type moves.
+#define ABILITY_WATER_ABSORB 11 // The Pokémon heals up to 1/4 of its maximum Hit Points when hit with Water-type moves.
+#define ABILITY_OBLIVIOUS 12 // The Pokémon is oblivious, and that keeps it from being infatuated or falling for taunts.
+#define ABILITY_CLOUD_NINE 13 // Eliminates the effects of weather.
+#define ABILITY_COMPOUND_EYES 14 // Raises the Pokémon’s accuracy by 30%.
+#define ABILITY_INSOMNIA 15 // The Pokémon is suffering from insomnia and cannot fall asleep.
+#define ABILITY_COLOR_CHANGE 16 // The Pokemon's type become the type that counters the move used on it before hit.
+#define ABILITY_IMMUNITY 17 // The immune system of the Pokémon prevents it from getting poisoned. Halves damage from Poison-type moves.
+#define ABILITY_FLASH_FIRE 18 // This ability makes the Pokémon immune to Fire-type moves and will activate when hit by one. When activated, the power of the Pokémon's Fire-type moves is increased by 50%.
+#define ABILITY_SHIELD_DUST 19 // Damaging moves used by the opponent will not have an additional effect. Now also avoids damage from entry hazards.
+#define ABILITY_OWN_TEMPO 20 // Prevents it from becoming confused.
+#define ABILITY_SUCTION_CUPS 21 // *No innate* This Pokémon uses suction cups to stay in one spot to negate all moves and items that force switching out.
+#define ABILITY_INTIMIDATE 22 // The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.
+#define ABILITY_SHADOW_TAG 23 // This Pokémon steps on the opposing Pokémon's shadow to prevent it from escaping.
+#define ABILITY_ROUGH_SKIN 24 // This Pokémon inflicts 1/8 HP damage on contact.
+#define ABILITY_WONDER_GUARD 25 // *No innate* Its mysterious power only lets supereffective moves hit the Pokémon.
+#define ABILITY_LEVITATE 26 // By floating in the air, the Pokémon receives full immunity to all Ground-type moves. Boosts the power of Flying-type moves by 25%.
+#define ABILITY_EFFECT_SPORE 27 // When a Pokémon with this Ability is hit by a move that makes contact, there is a 10% chance that the attacking Pokémon will become either poisoned, paralyzed, or asleep, with a 3.3% probability each.
+#define ABILITY_SYNCHRONIZE 28 // *No innate* The attacker will receive the same status condition if it inflicts a burn, poison, or paralysis to the Pokémon.
+#define ABILITY_CLEAR_BODY 29 // Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.
+#define ABILITY_NATURAL_CURE 30 // All status conditions heal when the Pokémon switches out.
+#define ABILITY_LIGHTNING_ROD 31 // The Pokémon draws in all Electric-type moves. Instead of being hit by Electric-type moves, it boosts its Attack or Sp. Attack stat (which is higher).
+#define ABILITY_SERENE_GRACE 32 // Doubles the likelihood of additional effects occurring when attacking.
+#define ABILITY_SWIFT_SWIM 33 // Doubles speed in rain.
+#define ABILITY_CHLOROPHYLL 34 // Doubles speed in sunshine.
+#define ABILITY_ILLUMINATE 35 // Boosts accuracy by 1.2x. Also has its existing field effect.
+#define ABILITY_TRACE 36 // *No innate* When it enters a battle, the Pokémon copies an opposing Pokémon's Ability.
+#define ABILITY_HUGE_POWER 37 // Doubles the Pokémon's Attack.
+#define ABILITY_POISON_POINT 38 // 30% chance to get poisoned on contact against this Pokémon.
+#define ABILITY_INNER_FOCUS 39 // The Pokémon's intensely focused, and that protects the Pokémon from flinching, Focus Blast has increased accuracy to 90%.
+#define ABILITY_MAGMA_ARMOR 40 // Prevents the Pokémon from becoming frozen. Takes 30% less damage from Water- and Ice-type moves.
+#define ABILITY_WATER_VEIL 41 // Prevents the Pokémon from getting a burn. Sets Aqua Ring on entry. [Aqua Ring effect: Restore 1/8 HP every turn]
+#define ABILITY_MAGNET_PULL 42 // Traps Steel-type Pokémon.
+#define ABILITY_SOUNDPROOF 43 // Soundproofing gives the Pokémon full immunity to all sound-based moves.
+#define ABILITY_RAIN_DISH 44 // Restores 1/8 HP per turn under rain.
+#define ABILITY_SAND_STREAM 45 // The Pokémon summons a sandstorm when it enters a battle.
+#define ABILITY_PRESSURE 46 // When this Pokémon is hit by a move, the opponent’s PP lowers by 2 rather than 1.
+#define ABILITY_THICK_FAT 47 // The Pokémon is protected by a layer of thick fat, which halves the damage taken from Fire- and Ice-type moves.
+#define ABILITY_EARLY_BIRD 48 // The Pokémon awakens from sleep twice as fast as other Pokémon.
+#define ABILITY_FLAME_BODY 49 // 30% chance to get burned on contact against this Pokémon.
+#define ABILITY_RUN_AWAY 50 // Enables a sure getaway from wild Pokémon. Boosts the Pokémon's Speed stat sharply when its stats are lowered.
+#define ABILITY_KEEN_EYE 51 // Prevents loss of accuracy. Ups accuracy by 20%.
+#define ABILITY_HYPER_CUTTER 52 // Prevents other Pokémon from lowering its Attack stat. Contact moves have its critical hit rate increased by 1.
+#define ABILITY_PICKUP 53 // Removes all hazards on entry. Has a 10% chance of finding and holding an item after battle. Will not work if this Pokémon is already holding an item. From Black & White, it allows for the user to pick up the item of its opponent or ally if they used up the item in battle.
+#define ABILITY_TRUANT 54 // The Pokémon can't use a move if it had used a move on the previous turn.
+#define ABILITY_HUSTLE 55 // Boosts the Attack stat by 40%, but lowers accuracy by 10%.
+#define ABILITY_CUTE_CHARM 56 // The opponent has a 30% chance of being induced with Attract when using an attack, that requires physical contact, against this Pokémon.
+#define ABILITY_PLUS 57 // When battling with Plus or Minus, Special Attack increases by 50%.
+#define ABILITY_MINUS 58 // When battling with Plus or Minus, Special Attack increases by 50%.
+#define ABILITY_FORECAST 59 // *No innate* This Pokémon’ changes its form and type if Harsh Sunlight, Heavy Rain or Hail is in effect.
+#define ABILITY_STICKY_HOLD 60 // Prevents item theft.
+#define ABILITY_SHED_SKIN 61 // Every turn, it has a 1 in 3 chance of healing from a status condition (BURN, PARALYZE, SLEEP, POISON, FREEZE).
+#define ABILITY_GUTS 62 // Attack is increased by 50% when induced with a status (BURN, PARALYZE, SLEEP, POISON, FREEZE). Burn’s effect of lowering Attack is not applied.
+#define ABILITY_MARVEL_SCALE 63 // The Pokémon's marvelous scales boost the Defense stats by 50% if it has a status condition.
+#define ABILITY_LIQUID_OOZE 64 // *No innate* The oozed liquid has a strong stench, which damages attackers using any draining move.
+#define ABILITY_OVERGROW 65 // Now always provides a 20% damage boost to their move types. This increases to 50% while the Pokémon is at or below 1/3 HP. These boosts do not stack (the 50% boost replaces the 20% one while weakened).
+#define ABILITY_BLAZE 66 // // Now always provides a 20% damage boost to their move types. This increases to 50% while the Pokémon is at or below 1/3 HP. These boosts do not stack (the 50% boost replaces the 20% one while weakened).
+#define ABILITY_TORRENT 67 // Now always provides a 20% damage boost to their move types. This increases to 50% while the Pokémon is at or below 1/3 HP. These boosts do not stack (the 50% boost replaces the 20% one while weakened).
+#define ABILITY_SWARM 68 // Now always provides a 20% damage boost to their move types. This increases to 50% while the Pokémon is at or below 1/3 HP. These boosts do not stack (the 50% boost replaces the 20% one while weakened).
+#define ABILITY_ROCK_HEAD 69 // Prevents recoil damage.
+#define ABILITY_DROUGHT 70 // Summons sunshine on entry.
+#define ABILITY_ARENA_TRAP 71 // Prevents fleeing.
+#define ABILITY_VITAL_SPIRIT 72 // Prevents falling asleep.
+#define ABILITY_WHITE_SMOKE 73 // The Pokémon is protected by its white smoke, which prevents other Pokémon from lowering its stats
+#define ABILITY_PURE_POWER 74 // Doubles Attack.
+#define ABILITY_SHELL_ARMOR 75 // A hard shell protects the Pokémon from critical hits. Takes 20% less damage.
+#define ABILITY_AIR_LOCK 76 // Eliminates the effects of weather.
 
 #define ABILITIES_COUNT_GEN3 77
 
@@ -327,6 +327,31 @@
 
 #define ABILITIES_COUNT_GEN9 299
 
-#define ABILITIES_COUNT ABILITIES_COUNT_GEN9
+// IE Custom Abilities
+#define ABILITY_CHLOROPLAST      (ABILITIES_COUNT_GEN9)      // Moves function as if it's sunny, regardless of weather
+#define ABILITY_WHITEOUT         (ABILITIES_COUNT_GEN9 + 1)  // Boosts the power of Ice attacks in Hail by 50%
+#define ABILITY_PYROMANCY        (ABILITIES_COUNT_GEN9 + 2)  // Fire attacks are 5x more likely to inflict a burn
+#define ABILITY_KEEN_EDGE        (ABILITIES_COUNT_GEN9 + 3)  // Cutting moves do 30% more damage
+#define ABILITY_PRISM_SCALES     (ABILITIES_COUNT_GEN9 + 4)  // Reduces special damage taken by 30%
+#define ABILITY_POWER_FISTS      (ABILITIES_COUNT_GEN9 + 5)  // Punching moves do special damage and get 30% boost
+#define ABILITY_SAND_SONG        (ABILITIES_COUNT_GEN9 + 6)  // Sound moves become Ground type. No damage boost.
+#define ABILITY_RAMPAGE          (ABILITIES_COUNT_GEN9 + 7)  // If a recharge move KOs the foe, it doesn't need to recharge.
+#define ABILITY_VENGEANCE        (ABILITIES_COUNT_GEN9 + 8)  // Overgrow for Ghost moves.
+#define ABILITY_BLITZ_BOXER      (ABILITIES_COUNT_GEN9 + 9)  // Punching moves go first.
+
+// Darky's Custom Abilities / Innates - Elite Redux
+#define ABILITY_TWISTED_DIMENSION (ABILITIES_COUNT_GEN9 + 10) // Summons Trick Room on entry.
+
+// Tony's Custom Abilities / Innates
+#define ABILITY_SPECTRE           (ABILITIES_COUNT_GEN9 + 11) // Adds the Ghost-type to the Pokémon on top of its other type(s)
+#define ABILITY_GATHERING_WINDS   (ABILITIES_COUNT_GEN9 + 12)
+
+
+
+#define ABILITY_HOLLOW_WHISPERS   (ABILITIES_COUNT_GEN9 + 40) // When the Pokémon faints by a damaging contact move from an opposing Pokémon, the attacker becomes cursed.
+
+#define ABILITIES_COUNT_CUSTOM   (ABILITY_HOLLOW_WHISPERS + 1)
+
+#define ABILITIES_COUNT ABILITIES_COUNT_CUSTOM
 
 #endif  // GUARD_CONSTANTS_ABILITIES_H

@@ -1305,7 +1305,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             {
                 u8 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[battlerAtk].species, gBattleMons[battlerAtk].personality);
                 u8 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[battlerDef].species, gBattleMons[battlerDef].personality);
-                if (atkGender == MON_GENDERLESS || defGender == MON_GENDERLESS || atkGender == defGender)
+                if (atkGender == MON_GENDERLESS || defGender == MON_GENDERLESS)
                     score -= 10;
             }
             break;
