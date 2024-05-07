@@ -1,4 +1,3 @@
-
 #include "global.h"
 
 // gContestEffectDescriptionPointers
@@ -181,21 +180,6 @@ extern const u8 gText_CouldntImproveItsCondition[];
 extern const u8 gText_BadConditionResultedInWeakAppeal[];
 extern const u8 gText_MonWasUnaffected[];
 extern const u8 gText_AttractedCrowdsAttention[];
-
-// sContestConditions
-extern const u8 gText_Contest_Coolness[];
-extern const u8 gText_Contest_Beauty[];
-extern const u8 gText_Contest_Cuteness[];
-extern const u8 gText_Contest_Smartness[];
-extern const u8 gText_Contest_Toughness[];
-
-// sInvalidContestMoveNames
-extern const u8 gText_CoolMove[];
-extern const u8 gText_BeautyMove[];
-extern const u8 gText_CuteMove[];
-extern const u8 gText_SmartMove[];
-extern const u8 gText_ToughMove[];
-extern const u8 gText_3QuestionMarks[];
 
 // Misc, used directly
 extern const u8 gText_MonAppealedWithMove[];
@@ -417,23 +401,4 @@ static const u8 *const sAppealResultTexts[] =
     [CONTEST_STRING_BAD_CONDITION_WEAK_APPEAL] = gText_BadConditionResultedInWeakAppeal,
     [CONTEST_STRING_UNAFFECTED]                = gText_MonWasUnaffected,
     [CONTEST_STRING_ATTRACTED_ATTENTION]       = gText_AttractedCrowdsAttention
-};
-
-static const u8 *const sContestConditions[] =
-{
-    [CONTEST_CATEGORY_COOL]   = gText_Contest_Coolness,
-    [CONTEST_CATEGORY_BEAUTY] = gText_Contest_Beauty,
-    [CONTEST_CATEGORY_CUTE]   = gText_Contest_Cuteness,
-    [CONTEST_CATEGORY_SMART]  = gText_Contest_Smartness,
-    [CONTEST_CATEGORY_TOUGH]  = gText_Contest_Toughness
-};
-
-static const u8 *const sInvalidContestMoveNames[] =
-{
-    [CONTEST_CATEGORY_COOL]    = gText_CoolMove,
-    [CONTEST_CATEGORY_BEAUTY]  = gText_BeautyMove,
-    [CONTEST_CATEGORY_CUTE]    = gText_CuteMove,
-    [CONTEST_CATEGORY_SMART]   = gText_SmartMove,
-    [CONTEST_CATEGORY_TOUGH]   = gText_ToughMove,
-    [CONTEST_CATEGORIES_COUNT] = gText_3QuestionMarks
 };

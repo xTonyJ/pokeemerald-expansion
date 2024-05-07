@@ -1574,12 +1574,12 @@ static void SpriteCB_Ball_Capture_Step(struct Sprite *sprite)
     if (sprite->sTimer == 40)
     {
         PlaySE(SE_RG_BALL_CLICK);
-        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
+        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB_BLACK);
         MakeCaptureStars(sprite);
     }
     else if (sprite->sTimer == 60)
     {
-        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB(0, 0, 0));
+        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB_BLACK);
     }
     else if (sprite->sTimer == 95)
     {
@@ -1617,7 +1617,7 @@ static void SpriteCB_Ball_FadeOut(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
         paletteIndex = IndexOfSpritePaletteTag(sprite->template->paletteTag);
-        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB(31, 31, 31));
+        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB_WHITE);
         sprite->sState++;
         break;
     case 1:
@@ -2306,7 +2306,7 @@ u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 spritePalNum, u32 selectedPalette
         gTasks[taskId].func = Task_FadeMon_ToNormal;
     }
 
-    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB(31, 31, 31));
+    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB_WHITE);
     return taskId;
 }
 
@@ -2382,7 +2382,7 @@ void AnimTask_SwapMonSpriteToFromSubstitute(u8 taskId)
 
         gTasks[taskId].data[0] &= 0xFF;
         x = gSprites[spriteId].x + gSprites[spriteId].x2 + 32;
-        if (x > 304)
+        if (x > DISPLAY_WIDTH + 64)
             gTasks[taskId].data[10]++;
         break;
     case 1:
@@ -2481,21 +2481,17 @@ void AnimTask_SetTargetToEffectBattler(u8 taskId)
 void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 {
     bool8 isShiny;
-    u32 otId, personality;
-    u32 shinyValue;
     u8 taskCirc, taskDgnl;
+    struct Pokemon* illusionMon;
 
-    isShiny = FALSE;
+    isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = TRUE;
-    otId = GetMonData(mon, MON_DATA_OT_ID);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    illusionMon = GetIllusionMonPtr(battler);
+    if (illusionMon != NULL)
+        mon = illusionMon;
 
-    if (IsBattlerSpriteVisible(battler))
+    if (IsBattlerSpriteVisible(battler) && IsValidForBattle(mon))
     {
-        shinyValue = GET_SHINY_VALUE(otId, personality);
-        if (shinyValue < SHINY_ODDS)
-            isShiny = TRUE;
-
         if (isShiny)
         {
             if (GetSpriteTileStartByTag(ANIM_TAG_GOLD_STARS) == 0xFFFF)
@@ -2651,11 +2647,11 @@ static void SpriteCB_ShinyStars_Diagonal(struct Sprite *sprite)
 
 void AnimTask_LoadPokeblockGfx(u8 taskId)
 {
-    u8 paletteIndex;
+    u8 UNUSED paletteIndex;
 
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK); // unused
+    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -2736,22 +2732,36 @@ void AnimTask_SetAttackerTargetLeftPos(u8 taskId)
 
 void AnimTask_GetTrappedMoveAnimId(u8 taskId)
 {
-    if (gBattleSpritesDataPtr->animationData->animArg == MOVE_FIRE_SPIN)
+    switch (gBattleSpritesDataPtr->animationData->animArg)
+    {
+    case MOVE_FIRE_SPIN:
         gBattleAnimArgs[0] = TRAP_ANIM_FIRE_SPIN;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_WHIRLPOOL)
+        break;
+    case MOVE_WHIRLPOOL:
         gBattleAnimArgs[0] = TRAP_ANIM_WHIRLPOOL;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_CLAMP)
+        break;
+    case MOVE_CLAMP:
         gBattleAnimArgs[0] = TRAP_ANIM_CLAMP;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_SAND_TOMB)
+        break;
+    case MOVE_SAND_TOMB:
         gBattleAnimArgs[0] = TRAP_ANIM_SAND_TOMB;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_MAGMA_STORM)
+        break;
+    case MOVE_MAGMA_STORM:
         gBattleAnimArgs[0] = TRAP_ANIM_MAGMA_STORM;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_INFESTATION)
+        break;
+    case MOVE_INFESTATION:
         gBattleAnimArgs[0] = TRAP_ANIM_INFESTATION;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_SNAP_TRAP)
+        break;
+    case MOVE_SNAP_TRAP:
         gBattleAnimArgs[0] = TRAP_ANIM_SNAP_TRAP;
-    else
+        break;
+    case MOVE_THUNDER_CAGE:
+        gBattleAnimArgs[0] = TRAP_ANIM_THUNDER_CAGE;
+        break;
+    default:
         gBattleAnimArgs[0] = TRAP_ANIM_BIND;
+        break;
+    }
 
     DestroyAnimVisualTask(taskId);
 }

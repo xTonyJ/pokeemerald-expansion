@@ -125,6 +125,7 @@
 #define MULTI_PKMN_CENTER_TUTOR_SETS       114
 #define MULTI_GRASS_FIRE_WATER             116
 #define MULTI_ROTOM_APPLIANCES             117
+#define MULTI_BERRY_PLOT                   118
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -181,6 +182,12 @@
 #define STDSTRING_MEGASTONE        30
 
 // Dynamic Multichoice Callbacks - Credit to SBird
+
+#define DYN_MULTICHOICE_CB_DEBUG      0
+#define DYN_MULTICHOICE_CB_SHOW_ITEM  1
+#define DYN_MULTICHOICE_CB_NONE       255
+
+// Dynamic Multichoice Callbacks
 
 #define DYN_MULTICHOICE_CB_DEBUG      0
 #define DYN_MULTICHOICE_CB_SHOW_ITEM  1

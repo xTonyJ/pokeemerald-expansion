@@ -59,27 +59,31 @@ void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
-void SwitchInClearSetData(void);
-void FaintClearSetData(void);
+void SwitchInClearSetData(u32 battler);
+const u8* FaintClearSetData(u32 battler);
 void BattleTurnPassed(void);
-u8 IsRunningFromBattleImpossible(void);
-void SwitchPartyOrder(u8 battlerId);
+u8 IsRunningFromBattleImpossible(u32 battler);
+void SwitchTwoBattlersInParty(u32 battler, u32 battler2);
+void SwitchPartyOrder(u32 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
-u32 GetBattlerTotalSpeedStat(u8 battlerId);
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
+u32 GetBattlerTotalSpeedStat(u32 battler);
 s8 GetChosenMovePriority(u32 battlerId);
 s8 GetMovePriority(u32 battlerId, u16 move);
-u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
+s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
+                              u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
+s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
-void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk);
 bool32 IsWildMonSmart(void);
 //u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags);
 void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
 s32 GetHighestLevelInPlayerParty(void);
 u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer);
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 
@@ -91,6 +95,7 @@ extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const struct TrainerBall gTrainerBallTable[];
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 extern const u8 *const gAbilityDescriptionPointers[];
+extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

@@ -791,6 +791,13 @@ const struct MenuAction MultichoiceList_RotomAppliances[] =
     {gText_Recall},
 };
 
+static const struct MenuAction MultichoiceList_BerryPlot[] =
+{
+    {gText_Fertilize},
+    {gText_PlantBerry},
+    {gText_Exit},
+};
+
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
@@ -920,6 +927,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
     [MULTI_GRASS_FIRE_WATER]           = MULTICHOICE(MultichoiceList_GrassFireWater),
     [MULTI_ROTOM_APPLIANCES]           = MULTICHOICE(MultichoiceList_RotomAppliances),
+    [MULTI_BERRY_PLOT]                 = MULTICHOICE(MultichoiceList_BerryPlot),
 };
 
 const u8 *const gStdStrings[] =

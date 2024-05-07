@@ -17,6 +17,7 @@ enum {
     ITEMMENULOCATION_APPRENTICE,
     ITEMMENULOCATION_WALLY,
     ITEMMENULOCATION_PCBOX,
+    ITEMMENULOCATION_BERRY_TREE_MULCH,
     ITEMMENULOCATION_LAST,
 };
 
@@ -79,7 +80,7 @@ struct BagMenu
     u8 numShownItems[POCKETS_COUNT];
     s16 graphicsLoadState;
     u8 unused2[14];
-    u8 pocketNameBuffer[32][32];
+    u8 ALIGNED(4) pocketNameBuffer[32][32];
     u8 unused3[4];
 };
 
@@ -102,6 +103,7 @@ void DoWallyTutorialBagMenu(void);
 void ResetBagScrollPositions(void);
 void ChooseBerryForMachine(void (*exitCallback)(void));
 void CB2_ChooseBerry(void);
+void CB2_ChooseMulch(void);
 void Task_FadeAndCloseBagMenu(u8 taskId);
 void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable* funcTable);
 void BagMenu_Rotom(u8 taskId, u8 windowType, const struct RotomFuncTable* funcTable);
@@ -109,5 +111,6 @@ void UpdatePocketItemList(u8 pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId));
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void CloseItemMessage(u8 taskId);
+void ItemMenu_RotomCatalog(u8 taskId);
 
 #endif //GUARD_ITEM_MENU_H

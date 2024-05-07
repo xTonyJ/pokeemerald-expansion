@@ -701,3 +701,8 @@ MirageTower_2F_EventScript_ItemTM33::
 Route120_EventScript_Item_Pidgeotite::
 	finditem ITEM_PIDGEOTITE
 	end
+
+Common_EventScript_FindItem::
+	callnative GetItemBallIdAndAmountFromTemplate
+	finditem VAR_RESULT VAR_0x8009
+	end
