@@ -119,8 +119,8 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
-static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMonCustomized *partyEntry);
-u16 HasLevelEvolution(u16 species, u8 level);
+u16 HasLevelEvolution(u16 species, u16 level);
+u32 GetHighestBaseStatId(u32 species, bool16 secondHighest);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -683,7 +683,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     TRAINER_CLASS(PYRAMID_KING, "PYRAMID KING"),
     TRAINER_CLASS(RS_PROTAG, "{PKMN} TRAINER"),
 };
-#endif
+
 
 // Determines which Poke Ball type is used by each trainer class
 const struct TrainerBall gTrainerBallTable[] =
@@ -2257,6 +2257,126 @@ u32 GeneratePersonalityForGender(u32 gender, u32 species)
         return speciesInfo->genderRatio / 2;
 }
 
+static const u16 sBadgeFlags[NUM_BADGES] = {
+    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
+};
+
+static int GetNumOwnedBadges(void)
+{
+    u32 i;
+
+    for (i = 0; i < NUM_BADGES; i++)
+    {
+        if (!FlagGet(sBadgeFlags[i]))
+            break;
+    }
+
+    return i;
+}
+
+u32 GetHighestBaseStatId(u32 species, bool16 secondHighest)
+{
+    u32 i = 1, highestId = STAT_HP,
+    highestStat = gSpeciesInfo[species].baseHP,
+    secondHighestStat = gSpeciesInfo[species].baseHP,
+    secondHighestId = STAT_HP;
+
+    u32 monStats[6] = {gSpeciesInfo[species].baseHP, gSpeciesInfo[species].baseAttack, gSpeciesInfo[species].baseDefense,
+                        gSpeciesInfo[species].baseSpeed, gSpeciesInfo[species].baseSpAttack, gSpeciesInfo[species].baseSpDefense};
+    do{
+        u16 statVal = monStats[i];
+        if (statVal > highestStat)
+        {   
+            secondHighestId = highestId;
+            secondHighestStat = highestStat;
+            highestStat = statVal;
+            highestId = i;
+        }
+        else if(secondHighest)// if highest is about to be overwritten, copy it
+        {   
+                u16 statVal = monStats[i];
+                if (statVal > secondHighestStat && secondHighestId != highestId)
+                {
+                    secondHighestStat = statVal;
+                    secondHighestId = i;
+                }
+        }i++;
+    }
+    while (i < 6);
+    if (secondHighest)
+        return secondHighestId;
+    else
+        return highestId;
+}
+
+void CustomTrainerPartyAssignEVs(struct Pokemon *mon, const struct TrainerMon *partyEntry)
+{
+    bool32 noSpread = TRUE;
+    u32 j;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u32 highestEV = GetHighestBaseStatId(species, FALSE), secondHighestEV = GetHighestBaseStatId(species, TRUE);
+    u32 maxEVs = 32 * GetNumOwnedBadges(); //Max EVs allowed per badge per stat. 0 32 64 96 128 160 192 224 256
+    if (maxEVs > 255)
+        maxEVs = 252;
+    if (partyEntry->spread != 0)
+            noSpread = FALSE;
+    if (noSpread)
+    {
+        switch(highestEV) //Switch case to add EVs to the highest stat.
+        {
+            case STAT_HP:
+                SetMonData(mon, MON_DATA_HP_EV, &maxEVs); 
+            break;
+            case STAT_ATK:
+                SetMonData(mon, MON_DATA_ATK_EV, &maxEVs);
+            break;
+            case STAT_DEF:
+                SetMonData(mon, MON_DATA_DEF_EV, &maxEVs);
+            break;
+            case STAT_SPEED:
+                SetMonData(mon, MON_DATA_SPEED_EV, &maxEVs);
+            break;
+            case STAT_SPATK:
+                SetMonData(mon, MON_DATA_SPATK_EV, &maxEVs); 
+            break;
+            case STAT_SPDEF: 
+                SetMonData(mon, MON_DATA_SPDEF_EV, &maxEVs);
+            break;
+        }
+        switch(secondHighestEV) //Switch case to add EVs to the second highest stat.
+        {
+            case STAT_HP:
+                SetMonData(mon, MON_DATA_HP_EV, &maxEVs); 
+            break;
+            case STAT_ATK:
+                SetMonData(mon, MON_DATA_ATK_EV, &maxEVs);
+            break;
+            case STAT_DEF:
+                SetMonData(mon, MON_DATA_DEF_EV, &maxEVs);
+            break;
+            case STAT_SPEED:
+                SetMonData(mon, MON_DATA_SPEED_EV, &maxEVs);
+            break;
+            case STAT_SPATK:
+                SetMonData(mon, MON_DATA_SPATK_EV, &maxEVs); 
+            break;
+            case STAT_SPDEF: 
+                SetMonData(mon, MON_DATA_SPDEF_EV, &maxEVs);
+            break;
+        }
+    return;
+    }
+    // Has a spread
+    for (j = 0; j < 6; ++j)
+    {
+            if (maxEVs <= gSets[partyEntry->spread].EVs[j])
+                SetMonData(mon, MON_DATA_HP_EV + j, &maxEVs);
+            else
+                SetMonData(mon, MON_DATA_HP_EV + j, &gSets[partyEntry->spread].EVs[j]);
+    }
+}
+
 void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry)
 {
     bool32 noMoveSet = TRUE;
@@ -2269,10 +2389,10 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
     if (noMoveSet)
     {
-        // TODO: Figure out a default strategy when moves are not set, to generate a good moveset
+        GiveMonInitialMoveset(mon);// TODO: Figure out a default strategy when moves are not set, to generate a good moveset
         return;
     }
-
+    // Has a defined moveset
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
         SetMonData(mon, MON_DATA_MOVE1 + j, &partyEntry->moves[j]);
@@ -2280,11 +2400,10 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
 }
 
-/*
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags)
 {
     u32 personalityValue;
-    s32 i;
+    s32 i, j;
     u8 monsCount;
     if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2310,9 +2429,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
             const struct TrainerMon *partyData = trainer->party;
-            u32 otIdType = OT_ID_RANDOM_NO_SHINY;
+            u32 otIdType = OT_ID_PRESET;
             u32 fixedOtId = 0;
             u32 ability = 0;
+            u16 dynamicLevel = 0;
+            u8 difficultySetting = gSaveBlock2Ptr->gameDifficulty;
 
             if (trainer->doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -2326,18 +2447,60 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
                 personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
-            ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
+            //ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
             if (partyData[i].isShiny)
             {
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
-            CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            //all trainers except a few will use static levels
+            if (partyData[i].staticLevel) // Static level flag to pass the level
+            {
+                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            }  
+            else{ // use dynamic if not static
+            dynamicLevel = GetHighestLevelInPlayerParty(); // Recalc highest level for scaling
+            if (dynamicLevel + partyData[i].lvl > 100)
+                {
+                    dynamicLevel = 100; // edge cases
+                }
+				else if (dynamicLevel + partyData[i].lvl < 1)
+                {
+                    dynamicLevel = 1;  // edge cases
+                }
+                else
+                {
+                    dynamicLevel = dynamicLevel + partyData[i].lvl; //pass this with Createmon instead of the .lvl
+                }
+           
+            if(HasLevelEvolution(partyData[i].species, dynamicLevel))
+				    CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                else
+                    CreateMon(&party[i], partyData[i].species, dynamicLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            }    
+              
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[i]);
-            SetMonData(&party[i], MON_DATA_IVS, &(partyData[i].iv));
-            if (partyData[i].ev != NULL)
+            //SetMonData(&party[i], MON_DATA_IVS, &(partyData[i].iv));
+            //using premade spreads for now
+            SetMonData(&party[i], MON_DATA_HIDDEN_NATURE, &gSets[partyData[i].spread].nature);
+            for (j = 0; j < 6; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
+                }
+            if (difficultySetting > DIFFICULTY_NORMAL)
+                {
+                    CustomTrainerPartyAssignEVs(&party[i], &partyData[i]);
+                    /*for (j = 0; j < 6; j++)
+                    {
+                        // reads highest base stat of mon and adds EVs to it
+                        // read badges and assign a max of ~60 pts per badge
+                        
+                        SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
+                    }*/
+                }
+            /*if (partyData[i].ev != NULL)
             {
                 SetMonData(&party[i], MON_DATA_HP_EV, &(partyData[i].ev[0]));
                 SetMonData(&party[i], MON_DATA_ATK_EV, &(partyData[i].ev[1]));
@@ -2345,7 +2508,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 SetMonData(&party[i], MON_DATA_SPATK_EV, &(partyData[i].ev[3]));
                 SetMonData(&party[i], MON_DATA_SPDEF_EV, &(partyData[i].ev[4]));
                 SetMonData(&party[i], MON_DATA_SPEED_EV, &(partyData[i].ev[5]));
-            }
+            }*/
             if (partyData[i].ability != ABILITY_NONE)
             {
                 const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[i].species];
@@ -2405,287 +2568,22 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
     return trainer->partySize;
 }
-*/
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
-    u32 nameHash = 0;
-    u32 personalityValue;
-    u8 fixedIV;
-    s32 i, j;
-    u8 monsCount;
-    u8 friendship;
-    u16 dynamicLevel = 0;
-    u8 difficultySetting = gSaveBlock2Ptr->gameDifficulty;
+    u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                                                        | BATTLE_TYPE_EREADER_TRAINER
-                                                                        | BATTLE_TYPE_TRAINER_HILL)))
-    {
-        if (firstTrainer == TRUE)
-            ZeroEnemyPartyMons();
-
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        {
-            if (gTrainers[trainerNum].partySize > 3)
-                monsCount = 3;
-            else
-                monsCount = gTrainers[trainerNum].partySize;
-        }
-        else
-        {
-            monsCount = gTrainers[trainerNum].partySize;
-        }
-
-        for (i = 0; i < monsCount; i++)
-        {
-
-            if (gTrainers[trainerNum].doubleBattle == TRUE)
-                personalityValue = 0x80;
-            else if (gTrainers[trainerNum].encounterMusic_gender & 0x80)
-                personalityValue = 0x78;
-            else
-                personalityValue = 0x88;
-
-            for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
-                nameHash += gTrainers[trainerNum].trainerName[j];
-
-            switch (gTrainers[trainerNum].partyFlags)
-            {
-            case 0:
-            {
-                const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
-
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
-
-                personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * 31 / 255;
-                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
-                if (dynamicLevel + partyData[i].lvl > 100)
-                {
-                    dynamicLevel = 100;
-                }
-				else if (dynamicLevel + partyData[i].lvl < 1)
-                {
-                    dynamicLevel = 1;
-                }
-                else
-                {
-                    dynamicLevel = dynamicLevel + partyData[i].lvl;
-                }
-				{
-					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
-                }
-				break;
-            }
-            case F_TRAINER_PARTY_CUSTOM_MOVESET:
-            {
-                const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
-
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
-
-                personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * 31 / 255;
-                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
-                if (dynamicLevel + partyData[i].lvl > 100)
-                {
-                    dynamicLevel = 100;
-                }
-				else if (dynamicLevel + partyData[i].lvl < 1)
-                {
-                    dynamicLevel = 1;
-                }
-                else
-                {
-                    dynamicLevel = dynamicLevel + partyData[i].lvl;
-                }
-				{
-					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
-					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
-                }
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
-                break;
-            }
-            case F_TRAINER_PARTY_HELD_ITEM:
-            {
-                const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
-
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
-
-                personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * 31 / 255;
-                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
-                if (dynamicLevel + partyData[i].lvl > 100)
-                {
-                    dynamicLevel = 100;
-                }
-				else if (dynamicLevel + partyData[i].lvl < 1)
-                {
-                    dynamicLevel = 1;
-                }
-                else
-                {
-                    dynamicLevel = dynamicLevel + partyData[i].lvl;
-                }
-				{
-					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, fixedIV, TRUE, personalityValue, OT_ID_PRESET, 0);
-                }
-
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-                break;
-            }
-            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM: //Scaling trainers may evolve pokemon during boss encounters, fix later
-            {
-                const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
-
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
-
-                personalityValue += nameHash << 8;
-                dynamicLevel = GetHighestLevelInPlayerParty(); //Function to recalculate level for bosses
-                if (dynamicLevel + partyData[i].lvl > 100)
-                {
-                    dynamicLevel = 100;
-                }
-				else if (dynamicLevel + partyData[i].lvl < 1)
-                {
-                    dynamicLevel = 1;
-                }
-                else
-                {
-                    dynamicLevel = dynamicLevel + partyData[i].lvl;
-                }
-				{
-					if(HasLevelEvolution(partyData[i].species, dynamicLevel))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, dynamicLevel), dynamicLevel, 31, TRUE, personalityValue, OT_ID_PRESET, 0);
-					else
-						CreateMon(&party[i], partyData[i].species, dynamicLevel, 31, TRUE, personalityValue, OT_ID_PRESET, 0);
-                }
-
-                SetMonData(&party[i], MON_DATA_HIDDEN_NATURE, &gSets[partyData[i].spread].nature);
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-                SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
-
-                // Set IVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                for (j = 0; j < 6; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
-                }
-
-                // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                // Separate loops so that difficulty is not checked in each loop
-                if (difficultySetting > DIFFICULTY_NORMAL)
-                {
-                    for (j = 0; j < 6; j++)
-                    {
-                        SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
-                    }
-                }
-
-                CalculateMonStats(&party[i]);
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
-                // Set max friendship if trainer mon knows Return
-                if (MonKnowsMove(&party[i], MOVE_RETURN))
-                {
-                    friendship = MAX_FRIENDSHIP;
-                    SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
-                }
-                break;
-            }
-            case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED: //Bosses use static levels
-            {
-                const struct TrainerMonCustomized *partyData = gTrainers[trainerNum].party.EverythingCustomized;
-                u32 otIdType = OT_ID_RANDOM_NO_SHINY;
-                u32 fixedOtId = 0;
-                
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
-                
-                personalityValue += nameHash << 8;
-				{
-                    if (partyData[i].isShiny)
-                    {
-                        otIdType = OT_ID_PRESET;
-                        fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
-                    }
-					if(HasLevelEvolution(partyData[i].species, partyData[i].lvl))
-						CreateMon(&party[i], HasLevelEvolution(partyData[i].species, partyData[i].lvl), partyData[i].lvl, 31, TRUE, personalityValue, otIdType, fixedOtId);
-					else
-						CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 31, TRUE, personalityValue, otIdType, fixedOtId);
-                }
-                
-                SetMonData(&party[i], MON_DATA_HIDDEN_NATURE, &gSets[partyData[i].spread].nature);
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-                SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
-
-                // Set IVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                for (j = 0; j < 6; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
-                }
-
-                // Set EVs from premade spreads. Shoutout to Buffel Saft from Inclement Emerald for this awesome snippet
-                // Separate loops so that difficulty is not checked in each loop. 
-                if (difficultySetting > DIFFICULTY_NORMAL)
-                {
-                    for (j = 0; j < 6; j++)
-                    {
-                        SetMonData(&party[i], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
-                    }
-                }
-
-                CalculateMonStats(&party[i]);
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
-                // Set max friendship if trainer mon knows Return
-                if (MonKnowsMove(&party[i], MOVE_RETURN))
-                {
-                    friendship = MAX_FRIENDSHIP;
-                    SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
-                }
-                break;
-            }
-            }
-            for (j = 0; gTrainerBallTable[j].classId != 0xFF; j++)
-            {
-                if (gTrainerBallTable[j].classId == gTrainers[trainerNum].trainerClass)
-                    break;
-            }
-            SetMonData(&party[i], MON_DATA_POKEBALL, &gTrainerBallTable[j].Ball);
-        }
-        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
-    }
-    return gTrainers[trainerNum].partySize;
+    retVal = CreateNPCTrainerPartyFromTrainer(party, GetTrainerStructFromId(trainerNum), firstTrainer, gBattleTypeFlags);
+    return retVal;
 }
 
-
+void CreateTrainerPartyForPlayer(void)
+{
+    ZeroPlayerPartyMons();
+    gPartnerTrainerId = gSpecialVar_0x8004;
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, GetTrainerStructFromId(gSpecialVar_0x8004), TRUE, BATTLE_TYPE_TRAINER);
+}
 
 void VBlankCB_Battle(void)
 {
@@ -4857,11 +4755,11 @@ static void HandleTurnActionSelectionState(void)
                                             || gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
                         FlagToggle(B_FLAG_NO_BAG_USE);
-                        RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
-                        gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
-                        gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
-                        *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
-                        *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+                        RecordedBattle_ClearBattlerAction(battler, 1);
+                        gSelectionBattleScripts[battler] = BattleScript_ActionSelectionItemsCantBeUsed;
+                        gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
+                        *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
+                        *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_BEFORE_ACTION_CHOSEN;
                         FlagToggle(B_FLAG_NO_BAG_USE);
                         return;
                     }
@@ -5289,26 +5187,26 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     // weather abilities
     if (WEATHER_HAS_EFFECT)
     {
-        if (ability == ABILITY_SWIFT_SWIM       && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_RAIN)
+        if ((ability == ABILITY_SWIFT_SWIM || BattlerHasInnate(battler, ABILITY_SWIFT_SWIM))       && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_RAIN)
             speed *= 2;
-        else if (ability == ABILITY_CHLOROPHYLL && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
+        else if ((ability == ABILITY_CHLOROPHYLL || BattlerHasInnate(battler, ABILITY_CHLOROPHYLL)) && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
             speed *= 2;
-        else if (ability == ABILITY_SAND_RUSH   && gBattleWeather & B_WEATHER_SANDSTORM)
+        else if ((ability == ABILITY_SAND_RUSH || BattlerHasInnate(battler, ABILITY_SAND_RUSH))   && gBattleWeather & B_WEATHER_SANDSTORM)
             speed *= 2;
-        else if (ability == ABILITY_SLUSH_RUSH  && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
+        else if ((ability == ABILITY_SLUSH_RUSH || BattlerHasInnate(battler, ABILITY_SLUSH_RUSH))  && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
             speed *= 2;
     }
 
     // other abilities
-    if (ability == ABILITY_QUICK_FEET && gBattleMons[battler].status1 & STATUS1_ANY)
+    if ((ability == ABILITY_QUICK_FEET || BattlerHasInnate(battler, ABILITY_QUICK_FEET)) && gBattleMons[battler].status1 & STATUS1_ANY)
         speed = (speed * 150) / 100;
-    else if (ability == ABILITY_SURGE_SURFER && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+    else if ((ability == ABILITY_SURGE_SURFER || BattlerHasInnate(battler, ABILITY_SURGE_SURFER)) && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
         speed *= 2;
-    else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer != 0)
+    else if ((ability == ABILITY_SLOW_START || BattlerHasInnate(battler, ABILITY_SLOW_START)) && gDisableStructs[battler].slowStartTimer != 0)
         speed /= 2;
-    else if (ability == ABILITY_PROTOSYNTHESIS && gBattleWeather & B_WEATHER_SUN && highestStat == STAT_SPEED)
+    else if ((ability == ABILITY_PROTOSYNTHESIS || BattlerHasInnate(battler, ABILITY_PROTOSYNTHESIS)) && gBattleWeather & B_WEATHER_SUN && highestStat == STAT_SPEED)
         speed = (speed * 150) / 100;
-    else if (ability == ABILITY_QUARK_DRIVE && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && highestStat == STAT_SPEED)
+    else if ((ability == ABILITY_QUARK_DRIVE || BattlerHasInnate(battler, ABILITY_QUARK_DRIVE)) && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && highestStat == STAT_SPEED)
         speed = (speed * 150) / 100;
 
     // stat stages
@@ -5332,7 +5230,7 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
         speed *= 2;
 
     // paralysis drop
-    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && ability != ABILITY_QUICK_FEET)
+    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && (ability != ABILITY_QUICK_FEET || !BattlerHasInnate(battler, ABILITY_QUICK_FEET)))
         speed /= B_PARALYSIS_SPEED >= GEN_7 ? 2 : 4;
 
     if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SWAMP)
@@ -5375,29 +5273,29 @@ s8 GetMovePriority(u32 battler, u16 move)
     if (gBattleStruct->dynamax.usingMaxMove[battler] && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         return gMovesInfo[MOVE_MAX_GUARD].priority;
 
-    priority = gBattleMoves[move].priority;
-    if ((ability == ABILITY_GALE_WINGS || BattlerHasInnate(battlerId, ABILITY_GALE_WINGS))
+    priority = gMovesInfo[move].priority;
+    if ((ability == ABILITY_GALE_WINGS || BattlerHasInnate(battler, ABILITY_GALE_WINGS))
     #if B_GALE_WINGS >= GEN_7
-        && BATTLER_MAX_HP(battlerId)
+        && BATTLER_MAX_HP(battler)
     #endif
-        && gBattleMoves[move].type == TYPE_FLYING)
+        && gMovesInfo[move].type == TYPE_FLYING)
     {
         priority++;
     }
-    else if ((ability == ABILITY_PRANKSTER || BattlerHasInnate(battlerId, ABILITY_PRANKSTER)) && IS_MOVE_STATUS(move))
+    else if ((ability == ABILITY_PRANKSTER || BattlerHasInnate(battler, ABILITY_PRANKSTER)) && IS_MOVE_STATUS(move))
     {
         gProtectStructs[battler].pranksterElevated = 1;
         priority++;
     }
 
 
-    else if (gBattleMoves[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battlerId))
+    else if (gMovesInfo[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battler))
     {
         priority++;
     }
-    else if (ability == ABILITY_TRIAGE || BattlerHasInnate(battlerId, ABILITY_TRIAGE))
+    else if (ability == ABILITY_TRIAGE || BattlerHasInnate(battler, ABILITY_TRIAGE))
     {
-        switch (gBattleMoves[move].effect)
+        switch (gMovesInfo[move].effect)
         {
         case EFFECT_RESTORE_HP:
         case EFFECT_REST:
@@ -5416,14 +5314,14 @@ s8 GetMovePriority(u32 battler, u16 move)
         }
     }
 
-    else if ((ability == ABILITY_BLITZ_BOXER || BattlerHasInnate(battlerId, ABILITY_BLITZ_BOXER))
-		&& (gBattleMoves[move].flags & FLAG_IRON_FIST_BOOST)
-        && (B_GALE_WINGS <= GEN_6 || BATTLER_MAX_HP(battlerId)))
+    else if ((ability == ABILITY_BLITZ_BOXER || BattlerHasInnate(battler, ABILITY_BLITZ_BOXER))
+		&& (gMovesInfo[move].punchingMove)
+        && (B_GALE_WINGS <= GEN_6 || BATTLER_MAX_HP(battler)))
     {
         priority++;
     }
 
-    if (gProtectStructs[battlerId].quash)
+    if (gProtectStructs[battler].quash)
         priority = -8;
 
     return priority;
@@ -5453,9 +5351,9 @@ s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMov
             strikesFirst = -1;
         else if (holdEffectBattler2 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler1 != HOLD_EFFECT_LAGGING_TAIL)
             strikesFirst = 1;
-        else if (ability1 == ABILITY_STALL && ability2 != ABILITY_STALL)
+        else if ((ability1 == ABILITY_STALL || BattlerHasInnate(battler1, ability1)) && ability2 != ABILITY_STALL)
             strikesFirst = -1;
-        else if (ability2 == ABILITY_STALL && ability1 != ABILITY_STALL)
+        else if ((ability2 == ABILITY_STALL || BattlerHasInnate(battler2, ability2)) && ability1 != ABILITY_STALL)
             strikesFirst = 1;
         else if (ability1 == ABILITY_MYCELIUM_MIGHT && ability2 != ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gChosenMoveByBattler[battler1]))
             strikesFirst = -1;
@@ -5514,66 +5412,8 @@ s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves)
             priority2 = GetChosenMovePriority(battler2);
     }
 
-    if (priority1 == priority2)
-    {
-        // QUICK CLAW / CUSTAP - always first
-        // LAGGING TAIL - always last
-        // STALL - always last
-
-        if (gProtectStructs[battler1].quickDraw && !gProtectStructs[battler2].quickDraw)
-            strikesFirst = 0;
-        else if (!gProtectStructs[battler1].quickDraw && gProtectStructs[battler2].quickDraw)
-            strikesFirst = 1;
-        else if (gProtectStructs[battler1].usedCustapBerry && !gProtectStructs[battler2].usedCustapBerry)
-            strikesFirst = 0;
-        else if (gProtectStructs[battler2].usedCustapBerry && !gProtectStructs[battler1].usedCustapBerry)
-            strikesFirst = 1;
-        else if (holdEffectBattler1 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler2 != HOLD_EFFECT_LAGGING_TAIL)
-            strikesFirst = 1;
-        else if (holdEffectBattler2 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler1 != HOLD_EFFECT_LAGGING_TAIL)
-            strikesFirst = 0;
-        else if (BATTLER_HAS_ABILITY(battler1, ABILITY_STALL) && !BATTLER_HAS_ABILITY(battler2, ABILITY_STALL))
-            strikesFirst = 1;
-        else if (BATTLER_HAS_ABILITY(battler2, ABILITY_STALL) && !BATTLER_HAS_ABILITY(battler1, ABILITY_STALL))
-            strikesFirst = 0;
-        else if (ability1 == ABILITY_MYCELIUM_MIGHT && ability2 != ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove))
-            strikesFirst = 1;
-        else if (ability2 == ABILITY_MYCELIUM_MIGHT && ability1 != ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove))
-            strikesFirst = 0;
-        else
-        {
-            if (speedBattler1 == speedBattler2 && Random() & 1)
-            {
-                strikesFirst = 2; // same speeds, same priorities
-            }
-            else if (speedBattler1 < speedBattler2)
-            {
-                // battler2 has more speed
-                if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
-                    strikesFirst = 0;
-                else
-                    strikesFirst = 1;
-            }
-            else
-            {
-                // battler1 has more speed
-                if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
-                    strikesFirst = 1;
-                else
-                    strikesFirst = 0;
-            }
-        }
-    }
-    else if (priority1 < priority2)
-    {
-        strikesFirst = 1; // battler2's move has greater priority
-    }
-    else
-    {
-        strikesFirst = 0; // battler1's move has greater priority
-    }
-
-    return strikesFirst;
+    return GetWhichBattlerFasterArgs(battler1, battler2, ignoreChosenMoves, ability1, ability2,
+                                     holdEffectBattler1, holdEffectBattler2, speedBattler1, speedBattler2, priority1, priority2);
 }
 
 static void SetActionsAndBattlersTurnOrder(void)
@@ -6004,7 +5844,6 @@ static void HandleEndTurn_BattleWon(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         BattleStopLowHpSound();
-        ReturnBattleItems();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
 
         switch (GetTrainerClassFromId(gTrainerBattleOpponent_A))
@@ -6532,20 +6371,23 @@ bool32 IsWildMonSmart(void)
 #endif
 }
 
-u16 HasLevelEvolution(u16 species, u8 level)
+u16 HasLevelEvolution(u16 species, u16 level)
 {
-	if(gEvolutionTable[species][0].param && gEvolutionTable[species][0].param <= level)
-	{
-		if(HasLevelEvolution(gEvolutionTable[species][0].targetSpecies, level))
-			return HasLevelEvolution(gEvolutionTable[species][0].targetSpecies, level);
-		else
-			return gEvolutionTable[species][0].targetSpecies;
-	}
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+    if (evolutions == NULL)
+        return 0;
+            if(evolutions[0].method == EVO_LEVEL && evolutions[0].param <= level)
+            {
+                if(HasLevelEvolution(evolutions[0].targetSpecies, level))
+                    return HasLevelEvolution(evolutions[0].targetSpecies, level);
+                else
+                    return evolutions[0].targetSpecies;
+            }
 	return 0;
 }
 
 u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer){
-    u32 moveType, ateType, attackerAbility, tempstuff;
+    u32 ateType;
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     u16 holdEffect = ItemId_GetHoldEffect(item);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
@@ -6561,12 +6403,12 @@ u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer){
         type2 = RandomizeType(gSpeciesInfo[species].types[1], species, personality, FALSE);
     }
 
-    GET_MOVE_TYPE(move, moveType);
+    //GET_MOVE_TYPE(move, moveType);
 
     if (move == MOVE_STRUGGLE)
         return TYPE_NORMAL;
 
-    if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
+    if (gMovesInfo[move].effect == EFFECT_HIDDEN_POWER)
     {
         u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV, NULL) & 1) << 0)
                      | ((GetMonData(mon, MON_DATA_ATK_IV, NULL) & 1) << 1)
@@ -6581,29 +6423,29 @@ u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer){
 
         return ateType;
     }
-    else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)
+    else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)
     {
-        if (holdEffect == gBattleMoves[move].argument)
+        if (holdEffect == gMovesInfo[move].argument)
             return ItemId_GetSecondaryId(item);
     }
-    else if (gBattleMoves[move].effect == EFFECT_REVELATION_DANCE)
+    else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE)
     {
         if (type1 != TYPE_MYSTERY)
             return type1;
         else if (type2 != TYPE_MYSTERY)
             return type2;
     }
-    else if (gBattleMoves[move].effect == EFFECT_NATURAL_GIFT)
+    else if (gMovesInfo[move].effect == EFFECT_NATURAL_GIFT)
     {
         if (ItemId_GetPocket(item) == POCKET_BERRIES)
             return gNaturalGiftTable[ITEM_TO_BERRY(item)].type;
     }
 
-   if (gBattleMoves[move].type == TYPE_NORMAL
-             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
-             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL
-             && gBattleMoves[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
-             && gBattleMoves[move].effect != EFFECT_NATURAL_GIFT
+   if (gMovesInfo[move].type == TYPE_NORMAL
+             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
+             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
+             && gMovesInfo[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
+             && gMovesInfo[move].effect != EFFECT_NATURAL_GIFT
              && (   ((ability == ABILITY_PIXILATE        || MonHasInnate(mon, ABILITY_PIXILATE, disableRandomizer))        && (ateType = TYPE_FAIRY))
                  || ((ability == ABILITY_REFRIGERATE     || MonHasInnate(mon, ABILITY_REFRIGERATE, disableRandomizer))     && (ateType = TYPE_ICE))
                  || ((ability == ABILITY_AERILATE        || MonHasInnate(mon, ABILITY_AERILATE, disableRandomizer))        && (ateType = TYPE_FLYING))
@@ -6618,15 +6460,15 @@ u8 GetMonMoveType(u16 move, struct Pokemon *mon, bool8 disableRandomizer){
 	
     //Normalize
     if(MonHasInnate(mon, ABILITY_NORMALIZE, disableRandomizer) || ability == ABILITY_NORMALIZE){
-        if (gBattleMoves[move].type != TYPE_NORMAL
-             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
-             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL)
+        if (gMovesInfo[move].type != TYPE_NORMAL
+             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
+             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL)
         return TYPE_NORMAL;
     }
     //Liquid Voice
     if(MonHasInnate(mon, ABILITY_LIQUID_VOICE, disableRandomizer) || ability == ABILITY_LIQUID_VOICE){
-        if (gBattleMoves[move].flags & FLAG_SOUND)
+        if (gMovesInfo[move].soundMove)
             return TYPE_WATER;
     }
-    return gBattleMoves[move].type;
+    return gMovesInfo[move].type;
 }

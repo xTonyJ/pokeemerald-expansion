@@ -140,9 +140,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_B2F_EventScript_ItemTM28",
-      "flag": "FLAG_ITEM_GRANITECAVE_B2F_TM28"
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_DIG",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_GRANITECAVE_B2F_TM_DIG"
     }
   ],
   "warp_events": [
@@ -199,7 +199,7 @@
       "x": 15,
       "y": 11,
       "elevation": 3,
-      "item": "ITEM_EVIOLITE",
+      "item": "ITEM_EVERSTONE",
       "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_2"
     }
   ]

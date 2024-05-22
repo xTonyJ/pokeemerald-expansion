@@ -362,7 +362,9 @@ OldaleTown_Text_ThisIsAPokemonMart:
 OldaleTown_Text_PotionExplanation:
 	.string "Look for items that Pokémon can hold.\n"
 	.string "Some have special effects during battle,\l"
-	.string "they can give you an edge!$"
+	.string "they can give you an edge!\p"
+	.string "Remember, all held items get restored\n"
+	.string "at the end of battle, so use them!$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "Aaaaah! Wait!\n"

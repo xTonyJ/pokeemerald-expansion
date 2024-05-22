@@ -2,30 +2,27 @@
 
 // Wally
 
-static const struct TrainerMonNoItemDefaultMoves sParty_WallyMauville[] = {
+static const struct TrainerMon sParty_WallyMauville[] = {
     {
-    .iv = 30,
+    .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
     .lvl = -1,
     .species = SPECIES_RALTS,
     },
     {
-    .iv = 30,
     .lvl = -3,
     .species = SPECIES_ZIGZAGOON,
     },
     {
-    .iv = 30,
     .lvl = -3,
     .species = SPECIES_AZUMARILL,
     },
     {
-    .iv = 30,
     .lvl = -3,
     .species = SPECIES_MAWILE,
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_WallyVR2[] = {
+static const struct TrainerMon sParty_WallyVR2[] = {
     {
     .iv = 150,
     .lvl = 47,
@@ -58,7 +55,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_WallyVR2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_WallyVR3[] = {
+static const struct TrainerMon sParty_WallyVR3[] = {
     {
     .iv = 150,
     .lvl = 50,
@@ -91,7 +88,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_WallyVR3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_WallyVR4[] = {
+static const struct TrainerMon sParty_WallyVR4[] = {
     {
     .iv = 150,
     .lvl = 53,
@@ -124,7 +121,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_WallyVR4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_WallyVR5[] = {
+static const struct TrainerMon sParty_WallyVR5[] = {
     {
     .iv = 150,
     .lvl = 56,
@@ -159,7 +156,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_WallyVR5[] = {
 
 // Mudkip = Trainer's starters are Riolu/Ralts > rival is Houndour/Gastly
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Mudkip[] = {
+static const struct TrainerMon sParty_BrendanRoute103Mudkip[] = {
     {
     .lvl = -1,
     .species = SPECIES_HOUNDOUR,
@@ -172,7 +169,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Mudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute103Mudkip[] = {
+static const struct TrainerMon sParty_MayRoute103Mudkip[] = {
     {
     .lvl = -1,
     .species = SPECIES_HOUNDOUR,
@@ -185,7 +182,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute103Mudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRustboroMudkip[] = {
+static const struct TrainerMon sParty_MayRustboroMudkip[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -220,7 +217,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRustboroMudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroMudkip[] = {
+static const struct TrainerMon sParty_BrendanRustboroMudkip[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -255,7 +252,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroMudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Mudkip[] = {
+static const struct TrainerMon sParty_BrendanRoute110Mudkip[] = {
     {
     .spread = SPREAD_HP_GRASS_MODEST,
     .lvl = 0,
@@ -298,7 +295,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Mudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute110Mudkip[] = {
+static const struct TrainerMon sParty_MayRoute110Mudkip[] = {
     {
     .spread = SPREAD_HP_GRASS_MODEST,
     .lvl = 0,
@@ -341,7 +338,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute110Mudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Mudkip[] = {
+static const struct TrainerMon sParty_BrendanRoute119Mudkip[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = -1,
@@ -392,7 +389,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Mudkip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute119Mudkip[] = {
+static const struct TrainerMon sParty_MayRoute119Mudkip[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = -1,
@@ -443,7 +440,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute119Mudkip[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_BrendanLilycoveMudkip[] = {
+static const struct TrainerMon sParty_BrendanLilycoveMudkip[] = {
     {
     .spread = SPREAD_31_IV_SPATK_SPEED_MODEST,
     .lvl = 1,
@@ -495,7 +492,7 @@ static const struct TrainerMonCustomized sParty_BrendanLilycoveMudkip[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_MayLilycoveMudkip[] = {
+static const struct TrainerMon sParty_MayLilycoveMudkip[] = {
     {
     .spread = SPREAD_31_IV_SPATK_SPEED_MODEST,
     .lvl = 1,
@@ -549,7 +546,7 @@ static const struct TrainerMonCustomized sParty_MayLilycoveMudkip[] = {
 
 // Treecko = Trainer's starters are Houndour/Gastly > rival is Aron/Gible
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Treecko[] = {
+static const struct TrainerMon sParty_BrendanRoute103Treecko[] = {
     {
     .lvl = -1,
     .species = SPECIES_ARON,
@@ -562,7 +559,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Treecko[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute103Treecko[] = {
+static const struct TrainerMon sParty_MayRoute103Treecko[] = {
     {
     .lvl = -1,
     .species = SPECIES_ARON,
@@ -575,7 +572,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute103Treecko[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRustboroTreecko[] = {
+static const struct TrainerMon sParty_MayRustboroTreecko[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -610,7 +607,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRustboroTreecko[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroTreecko[] = {
+static const struct TrainerMon sParty_BrendanRustboroTreecko[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -645,7 +642,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroTreecko[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Treecko[] = {
+static const struct TrainerMon sParty_BrendanRoute110Treecko[] = {
     {
     .spread = SPREAD_BRAWLY_ONE_MON,
     .lvl = 0,
@@ -688,7 +685,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Treecko[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute110Treecko[] = {
+static const struct TrainerMon sParty_MayRoute110Treecko[] = {
     {
     .spread = SPREAD_BRAWLY_ONE_MON,
     .lvl = 0,
@@ -731,7 +728,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute110Treecko[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Treecko[] = {
+static const struct TrainerMon sParty_BrendanRoute119Treecko[] = {
     {
     .spread = SPREAD_BRAWLY_ONE_MON,
     .lvl = 0,
@@ -782,7 +779,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Treecko[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute119Treecko[] = {
+static const struct TrainerMon sParty_MayRoute119Treecko[] = {
     {
     .spread = SPREAD_BRAWLY_ONE_MON,
     .lvl = 0,
@@ -833,7 +830,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute119Treecko[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_MayLilycoveTreecko[] = {
+static const struct TrainerMon sParty_MayLilycoveTreecko[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 2,
@@ -885,7 +882,7 @@ static const struct TrainerMonCustomized sParty_MayLilycoveTreecko[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_BrendanLilycoveTreecko[] = {
+static const struct TrainerMon sParty_BrendanLilycoveTreecko[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 2,
@@ -939,7 +936,7 @@ static const struct TrainerMonCustomized sParty_BrendanLilycoveTreecko[] = {
 
 // Torchic = Trainer's starters are Aron/Gible > rival is Riolu/Ralts
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Torchic[] = {
+static const struct TrainerMon sParty_BrendanRoute103Torchic[] = {
     {
     .lvl = -1,
     .species = SPECIES_RIOLU,
@@ -952,7 +949,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute103Torchic[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute103Torchic[] = {
+static const struct TrainerMon sParty_MayRoute103Torchic[] = {
     {
     .lvl = -1,
     .species = SPECIES_RIOLU,
@@ -965,7 +962,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute103Torchic[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRustboroTorchic[] = {
+static const struct TrainerMon sParty_MayRustboroTorchic[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -1000,7 +997,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRustboroTorchic[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroTorchic[] = {
+static const struct TrainerMon sParty_BrendanRustboroTorchic[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -1035,7 +1032,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRustboroTorchic[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Torchic[] = {
+static const struct TrainerMon sParty_BrendanRoute110Torchic[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -1078,7 +1075,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute110Torchic[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute110Torchic[] = {
+static const struct TrainerMon sParty_MayRoute110Torchic[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -1121,7 +1118,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute110Torchic[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Torchic[] = {
+static const struct TrainerMon sParty_BrendanRoute119Torchic[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -1172,7 +1169,7 @@ static const struct TrainerMonItemCustomMoves sParty_BrendanRoute119Torchic[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MayRoute119Torchic[] = {
+static const struct TrainerMon sParty_MayRoute119Torchic[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -1223,7 +1220,7 @@ static const struct TrainerMonItemCustomMoves sParty_MayRoute119Torchic[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_BrendanLilycoveTorchic[] = {
+static const struct TrainerMon sParty_BrendanLilycoveTorchic[] = {
     {
     .spread = SPREAD_31_IV_SPATK_SPEED_MODEST,
     .lvl = 2,
@@ -1275,7 +1272,7 @@ static const struct TrainerMonCustomized sParty_BrendanLilycoveTorchic[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_MayLilycoveTorchic[] = {
+static const struct TrainerMon sParty_MayLilycoveTorchic[] = {
     {
     .spread = SPREAD_31_IV_SPATK_SPEED_MODEST,
     .lvl = 2,
@@ -1329,7 +1326,7 @@ static const struct TrainerMonCustomized sParty_MayLilycoveTorchic[] = {
 
 // Grunts
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntAquaHideout1[] = {
+static const struct TrainerMon sParty_GruntAquaHideout1[] = {
     {
     .lvl = 32,
     .species = SPECIES_POOCHYENA,
@@ -1384,7 +1381,7 @@ static const struct TrainerMon sParty_GruntSeafloorCavern3[] = {
 
 // Route 102
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Calvin1[] = {
+static const struct TrainerMon sParty_Calvin1[] = {
     {
     .iv = 0,
     .lvl = -4,
@@ -1397,7 +1394,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Calvin1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Calvin2[] = {
+static const struct TrainerMon sParty_Calvin2[] = {
     {
     .iv = 10,
     .lvl = 27,
@@ -1405,7 +1402,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Calvin2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Calvin3[] = {
+static const struct TrainerMon sParty_Calvin3[] = {
     {
     .iv = 20,
     .lvl = 28,
@@ -1418,7 +1415,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Calvin3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Calvin4[] = {
+static const struct TrainerMon sParty_Calvin4[] = {
     {
     .iv = 30,
     .lvl = 31,
@@ -1436,7 +1433,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Calvin4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Calvin5[] = {
+static const struct TrainerMon sParty_Calvin5[] = {
     {
     .iv = 40,
     .lvl = 34,
@@ -1454,7 +1451,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Calvin5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Rick[] = {
+static const struct TrainerMon sParty_Rick[] = {
     {
     .iv = 0,
     .lvl = -4,
@@ -1467,7 +1464,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Rick[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Allen[] = {
+static const struct TrainerMon sParty_Allen[] = {
     {
     .iv = 0,
     .lvl = -4,
@@ -1480,7 +1477,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Allen[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tiana[] = {
+static const struct TrainerMon sParty_Tiana[] = {
     {
     .iv = 0,
     .lvl = -4,
@@ -1495,7 +1492,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tiana[] = {
 
 // Route 104 South 
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Billy[] = {
+static const struct TrainerMon sParty_Billy[] = {
     {
     .iv = 0,
     .lvl = -4,
@@ -1508,7 +1505,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Billy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Darian[] = {
+static const struct TrainerMon sParty_Darian[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -1521,26 +1518,26 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Darian[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Cindy1[] = {
+static const struct TrainerMon sParty_Cindy1[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
-    .lvl = 0,
+    .lvl = -1,
     .species = SPECIES_ZIGZAGOON,
-    .heldItem = ITEM_TOXIC_ORB,
+    .heldItem = ITEM_ORAN_BERRY,
     .ability = 2, //Quick Feet
     .moves = {MOVE_RETURN, MOVE_WATER_PULSE, MOVE_ICY_WIND, MOVE_GRASS_KNOT}
     },
     {
     .spread = SPREAD_31_IV_0_EV,
-    .lvl = 1,
-    .species = SPECIES_ZIGZAGOON,
-    .heldItem = ITEM_LEFTOVERS,
+    .lvl = -1,
+    .species = SPECIES_ZIGZAGOON_GALARIAN,
+    .heldItem = ITEM_ORAN_BERRY,
     .ability = 2, //Quick Feet
     .moves = {MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_RETURN, MOVE_THUNDER_WAVE}
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Cindy2[] = {
+static const struct TrainerMon sParty_Cindy2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 11,
@@ -1550,7 +1547,7 @@ static const struct TrainerMonItemCustomMoves sParty_Cindy2[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Cindy3[] = {
+static const struct TrainerMon sParty_Cindy3[] = {
     {
     .iv = 10,
     .lvl = 27,
@@ -1559,7 +1556,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Cindy3[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Cindy4[] = {
+static const struct TrainerMon sParty_Cindy4[] = {
     {
     .iv = 20,
     .lvl = 30,
@@ -1568,7 +1565,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Cindy4[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Cindy5[] = {
+static const struct TrainerMon sParty_Cindy5[] = {
     {
     .iv = 30,
     .lvl = 33,
@@ -1577,7 +1574,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Cindy5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Cindy6[] = {
+static const struct TrainerMon sParty_Cindy6[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 36,
@@ -1589,7 +1586,7 @@ static const struct TrainerMonItemCustomMoves sParty_Cindy6[] = {
 
  // Route 104 North
 
-static const struct TrainerMonItemCustomMoves sParty_Winston1[] = {
+static const struct TrainerMon sParty_Winston1[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -4,
@@ -1606,7 +1603,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winston1[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Winston2[] = {
+static const struct TrainerMon sParty_Winston2[] = {
     {
     .iv = 0,
     .lvl = 27,
@@ -1615,7 +1612,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Winston2[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Winston3[] = {
+static const struct TrainerMon sParty_Winston3[] = {
     {
     .iv = 0,
     .lvl = 30,
@@ -1624,7 +1621,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Winston3[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Winston4[] = {
+static const struct TrainerMon sParty_Winston4[] = {
     {
     .iv = 0,
     .lvl = 33,
@@ -1633,7 +1630,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Winston4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Winston5[] = {
+static const struct TrainerMon sParty_Winston5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 36,
@@ -1643,7 +1640,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winston5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Haley1[] = {
+static const struct TrainerMon sParty_Haley1[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -1660,7 +1657,7 @@ static const struct TrainerMonItemCustomMoves sParty_Haley1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Haley2[] = {
+static const struct TrainerMon sParty_Haley2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -1673,7 +1670,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Haley2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Haley3[] = {
+static const struct TrainerMon sParty_Haley3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -1686,7 +1683,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Haley3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Haley4[] = {
+static const struct TrainerMon sParty_Haley4[] = {
     {
     .iv = 30,
     .lvl = 32,
@@ -1699,7 +1696,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Haley4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Haley5[] = {
+static const struct TrainerMon sParty_Haley5[] = {
     {
     .iv = 40,
     .lvl = 34,
@@ -1717,7 +1714,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Haley5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GinaAndMia1[] = {
+static const struct TrainerMon sParty_GinaAndMia1[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -1736,7 +1733,7 @@ static const struct TrainerMonItemCustomMoves sParty_GinaAndMia1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_GinaAndMia2[] = {
+static const struct TrainerMon sParty_GinaAndMia2[] = {
     {
     .iv = 0,
     .lvl = 10,
@@ -1751,7 +1748,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_GinaAndMia2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Ivan[] = {
+static const struct TrainerMon sParty_Ivan[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -1780,7 +1777,7 @@ static const struct TrainerMonItemCustomMoves sParty_Ivan[] = {
 
 //Petalburg Woods
 
-static const struct TrainerMonItemCustomMoves sParty_GruntPetalburgWoods[] = {
+static const struct TrainerMon sParty_GruntPetalburgWoods[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -3,
@@ -1813,7 +1810,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntPetalburgWoods[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Lyle[] = {
+static const struct TrainerMon sParty_Lyle[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -1844,7 +1841,7 @@ static const struct TrainerMonItemCustomMoves sParty_Lyle[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_James1[] = {
+static const struct TrainerMon sParty_James1[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -1861,7 +1858,7 @@ static const struct TrainerMonItemCustomMoves sParty_James1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_James2[] = {
+static const struct TrainerMon sParty_James2[] = {
     {
     .iv = 10,
     .lvl = 27,
@@ -1869,7 +1866,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_James2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_James3[] = {
+static const struct TrainerMon sParty_James3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -1882,7 +1879,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_James3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_James4[] = {
+static const struct TrainerMon sParty_James4[] = {
     {
     .iv = 30,
     .lvl = 31,
@@ -1900,7 +1897,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_James4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_James5[] = {
+static const struct TrainerMon sParty_James5[] = {
     {
     .iv = 40,
     .lvl = 33,
@@ -1925,7 +1922,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_James5[] = {
 
 // Route 116
 
-static const struct TrainerMonItemCustomMoves sParty_Joey[] = {
+static const struct TrainerMon sParty_Joey[] = {
     {
     .lvl = -4,
     .species = SPECIES_MACHOP,
@@ -1938,7 +1935,7 @@ static const struct TrainerMonItemCustomMoves sParty_Joey[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jose[] = {
+static const struct TrainerMon sParty_Jose[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -1965,7 +1962,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jose[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Karen1[] = {
+static const struct TrainerMon sParty_Karen1[] = {
     {
     .lvl = -1,
     .species = SPECIES_CYNDAQUIL,
@@ -1978,7 +1975,7 @@ static const struct TrainerMonItemCustomMoves sParty_Karen1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Karen2[] = {
+static const struct TrainerMon sParty_Karen2[] = {
     {
     .iv = 20,
     .lvl = -3,
@@ -1991,7 +1988,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Karen2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Karen3[] = {
+static const struct TrainerMon sParty_Karen3[] = {
     {
     .iv = 30,
     .lvl = 29,
@@ -2004,7 +2001,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Karen3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Karen4[] = {
+static const struct TrainerMon sParty_Karen4[] = {
     {
     .iv = 40,
     .lvl = 32,
@@ -2017,7 +2014,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Karen4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Karen5[] = {
+static const struct TrainerMon sParty_Karen5[] = {
     {
     .iv = 50,
     .lvl = 35,
@@ -2030,7 +2027,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Karen5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Clark[] = {
+static const struct TrainerMon sParty_Clark[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -4,
@@ -2047,7 +2044,7 @@ static const struct TrainerMonItemCustomMoves sParty_Clark[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Johnson[] = {
+static const struct TrainerMon sParty_Johnson[] = {
     {
     .lvl = -4,
     .species = SPECIES_JOLTIK,
@@ -2060,7 +2057,7 @@ static const struct TrainerMonItemCustomMoves sParty_Johnson[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Devan[] = {
+static const struct TrainerMon sParty_Devan[] = {
     {
     .lvl = -4,
     .species = SPECIES_MAGNEMITE,
@@ -2075,7 +2072,7 @@ static const struct TrainerMonItemCustomMoves sParty_Devan[] = {
 
 // Route 116: Requires Cut
 
-static const struct TrainerMonItemCustomMoves sParty_Sarah[] = {
+static const struct TrainerMon sParty_Sarah[] = {
     {
     .lvl = -3,
     .species = SPECIES_LOMBRE,
@@ -2090,21 +2087,21 @@ static const struct TrainerMonItemCustomMoves sParty_Sarah[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Dawson[] = {
+static const struct TrainerMon sParty_Dawson[] = {
     {
     .lvl = -4,
     .species = SPECIES_PANSAGE,
     .heldItem = ITEM_NUGGET,
-    .moves = MOVE_LEECH_SEED, MOVE_VINE_WHIP, MOVE_LEER
+    .moves = {MOVE_LEECH_SEED, MOVE_VINE_WHIP, MOVE_LEER}
     },
     {
     .lvl = -4,
     .species = SPECIES_PANSEAR,
-    .moves = MOVE_INCINERATE, MOVE_BITE, MOVE_YAWN, MOVE_PLAY_NICE
+    .moves = {MOVE_INCINERATE, MOVE_BITE, MOVE_YAWN, MOVE_PLAY_NICE}
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerry1[] = {
+static const struct TrainerMon sParty_Jerry1[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -2117,7 +2114,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerry1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerry2[] = {
+static const struct TrainerMon sParty_Jerry2[] = {
     {
     .iv = 20,
     .lvl = -3,
@@ -2130,7 +2127,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerry2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerry3[] = {
+static const struct TrainerMon sParty_Jerry3[] = {
     {
     .iv = 30,
     .lvl = 29,
@@ -2143,7 +2140,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerry3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerry4[] = {
+static const struct TrainerMon sParty_Jerry4[] = {
     {
     .iv = 40,
     .lvl = 32,
@@ -2156,7 +2153,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerry4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerry5[] = {
+static const struct TrainerMon sParty_Jerry5[] = {
     {
     .iv = 50,
     .lvl = 34,
@@ -2174,7 +2171,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerry5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Janice[] = {
+static const struct TrainerMon sParty_Janice[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -2189,7 +2186,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Janice[] = {
 
 // Rusturf Tunnel
 
-static const struct TrainerMonItemCustomMoves sParty_GruntRusturfTunnel[] = {
+static const struct TrainerMon sParty_GruntRusturfTunnel[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -3,
@@ -2223,7 +2220,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntRusturfTunnel[] = {
     }
 };
 // From Verdanturf
-static const struct TrainerMonNoItemCustomMoves sParty_Mike1[] = {
+static const struct TrainerMon sParty_Mike1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -2238,7 +2235,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Mike1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Mike2[] = {
+static const struct TrainerMon sParty_Mike2[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -2253,7 +2250,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Mike2[] = {
 
 // Rustboro gym
 
-static const struct TrainerMonItemCustomMoves sParty_Josh[] = {
+static const struct TrainerMon sParty_Josh[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -2,
@@ -2272,7 +2269,7 @@ static const struct TrainerMonItemCustomMoves sParty_Josh[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Tommy[] = {
+static const struct TrainerMon sParty_Tommy[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -3,
@@ -2291,7 +2288,7 @@ static const struct TrainerMonItemCustomMoves sParty_Tommy[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Marc[] = {
+static const struct TrainerMon sParty_Marc[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -3,
@@ -2310,10 +2307,11 @@ static const struct TrainerMonItemCustomMoves sParty_Marc[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_Roxanne1[] = {
+static const struct TrainerMon sParty_Roxanne1[] = {
     {
     .spread = SPREAD_ROXANNE_ONE_MON,
-    .lvl = 15,
+    .lvl = 14,
+    .staticLevel = 1,
     .species = SPECIES_ONIX,
     .heldItem = ITEM_CHESTO_BERRY,
     .ability = 2, //Weak Armor
@@ -2322,6 +2320,7 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     {
     .spread = SPREAD_ROXANNE_ONE_MON,
     .lvl = 14,
+    .staticLevel = 1,
     .species = SPECIES_LILEEP,
     .heldItem = ITEM_ORAN_BERRY,
     .ability = 2, //Storm Drain
@@ -2329,7 +2328,8 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     },
     {
     .spread = SPREAD_ROXANNE_ONE_MON,
-    .lvl = 14,
+    .lvl = 15,
+    .staticLevel = 1,
     .species = SPECIES_SOLROCK,
     .heldItem = ITEM_ORAN_BERRY,
     .ability = 0, //Levitate
@@ -2337,7 +2337,8 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     },
     {
     .spread = SPREAD_ROXANNE_ONE_MON,
-    .lvl = 15,
+    .lvl = 14,
+    .staticLevel = 1,
     .species = SPECIES_CARBINK,
     .heldItem = ITEM_ORAN_BERRY,
     .ability = 2, //Sturdy
@@ -2346,6 +2347,7 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     {
     .spread = SPREAD_ROXANNE_NOSEPASS,
     .lvl = 16,
+    .staticLevel = 1,
     .species = SPECIES_NOSEPASS,
     .heldItem = ITEM_BERRY_JUICE,
     .ability = 0, // Sturdy
@@ -2355,6 +2357,7 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     {
     .spread = SPREAD_ROXANNE_ONE_MON,
     .lvl = 15,
+    .staticLevel = 1,
     .species = SPECIES_SUDOWOODO,
     .heldItem = ITEM_ORAN_BERRY,
     .ability = 1, //Rock Head
@@ -2362,7 +2365,7 @@ static const struct TrainerMonCustomized sParty_Roxanne1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Roxanne2[] = {
+static const struct TrainerMon sParty_Roxanne2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 32,
@@ -2393,7 +2396,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Roxanne3[] = {
+static const struct TrainerMon sParty_Roxanne3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 37,
@@ -2431,7 +2434,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Roxanne4[] = {
+static const struct TrainerMon sParty_Roxanne4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 42,
@@ -2469,7 +2472,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Roxanne5[] = {
+static const struct TrainerMon sParty_Roxanne5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 47,
@@ -2516,7 +2519,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne5[] = {
 
 // Route 106
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ned[] = {
+static const struct TrainerMon sParty_Ned[] = {
     {
     .iv = 50,
     .lvl = -3,
@@ -2529,7 +2532,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ned[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elliot1[] = {
+static const struct TrainerMon sParty_Elliot1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -2542,7 +2545,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elliot1[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elliot2[] = {
+static const struct TrainerMon sParty_Elliot2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -2560,7 +2563,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elliot2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elliot3[] = {
+static const struct TrainerMon sParty_Elliot3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -2583,7 +2586,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elliot3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elliot4[] = {
+static const struct TrainerMon sParty_Elliot4[] = {
     {
     .iv = 30,
     .lvl = 31,
@@ -2606,7 +2609,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elliot4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elliot5[] = {
+static const struct TrainerMon sParty_Elliot5[] = {
     {
     .iv = 40,
     .lvl = 33,
@@ -2629,7 +2632,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elliot5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kyla[] = {
+static const struct TrainerMon sParty_Kyla[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -2642,7 +2645,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kyla[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Douglas[] = {
+static const struct TrainerMon sParty_Douglas[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -2657,7 +2660,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Douglas[] = {
 
 // Dewford Gym
 
-static const struct TrainerMonItemCustomMoves sParty_Jocelyn[] = {
+static const struct TrainerMon sParty_Jocelyn[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -3,
@@ -2676,7 +2679,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jocelyn[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Laura[] = {
+static const struct TrainerMon sParty_Laura[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -4,
@@ -2695,7 +2698,7 @@ static const struct TrainerMonItemCustomMoves sParty_Laura[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Takao[] = {
+static const struct TrainerMon sParty_Takao[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -4,
@@ -2714,7 +2717,7 @@ static const struct TrainerMonItemCustomMoves sParty_Takao[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Brenden[] = {
+static const struct TrainerMon sParty_Brenden[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -4,
@@ -2733,7 +2736,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brenden[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Lilith[] = {
+static const struct TrainerMon sParty_Lilith[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -4,
@@ -2752,10 +2755,10 @@ static const struct TrainerMonItemCustomMoves sParty_Lilith[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Cristian[] = {
+static const struct TrainerMon sParty_Cristian[] = {
     {
     .spread = SPREAD_31_IV_HP_ATK_BRAVE,
-    .lvl = -4,
+    .lvl = -3,
     .species = SPECIES_HITMONTOP,
     .heldItem = ITEM_IRON_BALL,
     .ability = 1, //Technician
@@ -2771,59 +2774,65 @@ static const struct TrainerMonItemCustomMoves sParty_Cristian[] = {
     },
 };
 
-static const struct TrainerMonCustomized sParty_Brawly1[] = {
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 23,
-.species = SPECIES_MEDITITE,
-.ability = 0, //Pure Power
-.heldItem = ITEM_LIGHT_CLAY,
-.moves = {MOVE_ZEN_HEADBUTT, MOVE_LIGHT_SCREEN, MOVE_BULK_UP, MOVE_FORCE_PALM}
-},
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 23,
-.species = SPECIES_HITMONCHAN,
-.heldItem = ITEM_MUSCLE_BAND,
-.ability = 1, //Iron Fist
-.moves = {MOVE_BULLET_PUNCH, MOVE_DRAIN_PUNCH, MOVE_BULK_UP, MOVE_THUNDER_PUNCH}
-},
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 23,
-.species = SPECIES_BRELOOM,
-.heldItem = ITEM_TOXIC_ORB,
-.ability = 1, //Poison Heal
-.moves = {MOVE_DRAIN_PUNCH, MOVE_SUBSTITUTE, MOVE_BULLET_SEED, MOVE_BULK_UP}
-},
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 24,
-.species = SPECIES_HAWLUCHA,
-.heldItem = ITEM_SITRUS_BERRY,
-.ability = 1, //Unburden
-.moves = {MOVE_BACKFLIP, MOVE_BULK_UP, MOVE_ROOST, MOVE_AERIAL_ACE}
-},
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 23,
-.species = SPECIES_CROAGUNK,
-.heldItem = ITEM_FOCUS_SASH,
-.ability = 2, //Poison Touch
-.moves = {MOVE_VENOSHOCK, MOVE_BULK_UP, MOVE_LOW_SWEEP, MOVE_ICE_PUNCH}
-},
-{
-.spread = SPREAD_BRAWLY_ONE_MON,
-.lvl = 25,
-.species = SPECIES_HARIYAMA,
-.heldItem = ITEM_FLAME_ORB,
-.isShiny = 1,
-.ability = 1, //Guts
-.moves = {MOVE_KNOCK_OFF, MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_BULK_UP}
-}
+static const struct TrainerMon sParty_Brawly1[] = {
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 24,
+    .staticLevel = 1,
+    .species = SPECIES_MEDITITE,
+    .ability = 0, // Huge Power
+    .heldItem = ITEM_LIGHT_CLAY,
+    .moves = {MOVE_ZEN_HEADBUTT, MOVE_LIGHT_SCREEN, MOVE_BULK_UP, MOVE_FORCE_PALM}
+    },
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 24,
+    .staticLevel = 1,
+    .species = SPECIES_HITMONCHAN,
+    .heldItem = ITEM_MUSCLE_BAND,
+    .ability = 1, //Iron Fist
+    .moves = {MOVE_BULLET_PUNCH, MOVE_DRAIN_PUNCH, MOVE_BULK_UP, MOVE_THUNDER_PUNCH}
+    },
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 24,
+    .staticLevel = 1,
+    .species = SPECIES_BRELOOM,
+    .heldItem = ITEM_TOXIC_ORB,
+    .ability = 1, //Poison Heal
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_SUBSTITUTE, MOVE_BULLET_SEED, MOVE_BULK_UP}
+    },
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 25,
+    .staticLevel = 1,
+    .species = SPECIES_HAWLUCHA,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .ability = 1, //Unburden
+    .moves = {MOVE_BACKFLIP, MOVE_BULK_UP, MOVE_ROOST, MOVE_AERIAL_ACE}
+    },
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 24,
+    .staticLevel = 1,
+    .species = SPECIES_CROAGUNK,
+    .heldItem = ITEM_FOCUS_SASH,
+    .ability = 2, //Poison Touch
+    .moves = {MOVE_VENOSHOCK, MOVE_BULK_UP, MOVE_LOW_SWEEP, MOVE_ICE_PUNCH}
+    },
+    {
+    .spread = SPREAD_BRAWLY_ONE_MON,
+    .lvl = 27,
+    .staticLevel = 1,
+    .species = SPECIES_HARIYAMA,
+    .heldItem = ITEM_FLAME_ORB,
+    .isShiny = 1,
+    .ability = 1, //Guts
+    .moves = {MOVE_KNOCK_OFF, MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_BULK_UP}
+    }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Brawly2[] = {
+static const struct TrainerMon sParty_Brawly2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 33,
@@ -2854,7 +2863,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Brawly3[] = {
+static const struct TrainerMon sParty_Brawly3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 38,
@@ -2885,7 +2894,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Brawly4[] = {
+static const struct TrainerMon sParty_Brawly4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 40,
@@ -2923,7 +2932,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Brawly5[] = {
+static const struct TrainerMon sParty_Brawly5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 46,
@@ -2970,7 +2979,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly5[] = {
 
 // Route 109 Beach
 
-static const struct TrainerMonItemCustomMoves sParty_Huey[] = {
+static const struct TrainerMon sParty_Huey[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -3,
@@ -2986,7 +2995,7 @@ static const struct TrainerMonItemCustomMoves sParty_Huey[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Edmond[] = {
+static const struct TrainerMon sParty_Edmond[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3002,24 +3011,24 @@ static const struct TrainerMonItemCustomMoves sParty_Edmond[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Hailey[] = {
+static const struct TrainerMon sParty_Hailey[] = {
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -2,
     .species = SPECIES_AZUMARILL,
     .heldItem = ITEM_NUGGET,
-    .moves = MOVE_ROLLOUT, MOVE_AQUA_JET, MOVE_DISARMING_VOICE, MOVE_NONE
+    .moves = {MOVE_ROLLOUT, MOVE_AQUA_JET, MOVE_DISARMING_VOICE, MOVE_NONE}
     },
     {
     .spread = SPREAD_15_IV_0_EV,
     .lvl = -4,
     .species = SPECIES_DIGLETT,
     .heldItem = ITEM_NUGGET,
-    .moves = MOVE_DIG, MOVE_ROCK_THROW, MOVE_MAGNITUDE, MOVE_NONE
+    .moves = {MOVE_DIG, MOVE_ROCK_THROW, MOVE_MAGNITUDE, MOVE_NONE}
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Chandler[] = {
+static const struct TrainerMon sParty_Chandler[] = {
     {
     .lvl = -2,
     .species = SPECIES_TENTACOOL,
@@ -3034,7 +3043,7 @@ static const struct TrainerMonItemCustomMoves sParty_Chandler[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Ricky1[] = {
+static const struct TrainerMon sParty_Ricky1[] = {
     {
     .lvl = 0,
     .species = SPECIES_ZIGZAGOON,
@@ -3047,7 +3056,7 @@ static const struct TrainerMonItemCustomMoves sParty_Ricky1[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Ricky2[] = {
+static const struct TrainerMon sParty_Ricky2[] = {
     {
     .iv = 10,
     .lvl = 27,
@@ -3056,7 +3065,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Ricky2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Ricky3[] = {
+static const struct TrainerMon sParty_Ricky3[] = {
     {
     .iv = 20,
     .lvl = 30,
@@ -3065,7 +3074,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Ricky3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Ricky4[] = {
+static const struct TrainerMon sParty_Ricky4[] = {
     {
     .iv = 30,
     .lvl = 33,
@@ -3074,7 +3083,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Ricky4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Ricky5[] = {
+static const struct TrainerMon sParty_Ricky5[] = {
     {
     .iv = 40,
     .lvl = 36,
@@ -3083,7 +3092,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Ricky5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Lola1[] = {
+static const struct TrainerMon sParty_Lola1[] = {
     {
     .lvl = -2,
     .species = SPECIES_AZURILL,
@@ -3096,7 +3105,7 @@ static const struct TrainerMonItemCustomMoves sParty_Lola1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lola2[] = {
+static const struct TrainerMon sParty_Lola2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -3109,7 +3118,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lola2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lola3[] = {
+static const struct TrainerMon sParty_Lola3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -3122,7 +3131,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lola3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lola4[] = {
+static const struct TrainerMon sParty_Lola4[] = {
     {
     .iv = 30,
     .lvl = 32,
@@ -3135,7 +3144,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lola4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lola5[] = {
+static const struct TrainerMon sParty_Lola5[] = {
     {
     .iv = 40,
     .lvl = 35,
@@ -3150,7 +3159,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lola5[] = {
 
 // Seashore House
 
-static const struct TrainerMonItemCustomMoves sParty_Simon[] = {
+static const struct TrainerMon sParty_Simon[] = {
     {
     .lvl = 1,
     .species = SPECIES_CLEFAIRY,
@@ -3163,7 +3172,7 @@ static const struct TrainerMonItemCustomMoves sParty_Simon[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Johanna[] = {
+static const struct TrainerMon sParty_Johanna[] = {
     {
     .lvl = -2,
     .species = SPECIES_GOLDEEN,
@@ -3176,7 +3185,7 @@ static const struct TrainerMonItemCustomMoves sParty_Johanna[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Dwayne[] = {
+static const struct TrainerMon sParty_Dwayne[] = {
     {
     .lvl = -3,
     .species = SPECIES_WINGULL,
@@ -3211,7 +3220,7 @@ static const struct TrainerMonItemCustomMoves sParty_Dwayne[] = {
 
 // Slateport Museum
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMuseum1[] = {
+static const struct TrainerMon sParty_GruntMuseum1[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3230,7 +3239,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMuseum1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMuseum2[] = {
+static const struct TrainerMon sParty_GruntMuseum2[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -3,
@@ -3251,7 +3260,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMuseum2[] = {
 
 // Route 110
 
-static const struct TrainerMonItemCustomMoves sParty_Isabel1[] = {
+static const struct TrainerMon sParty_Isabel1[] = {
     {
     .lvl = 2,
     .species = SPECIES_PLUSLE,
@@ -3266,7 +3275,7 @@ static const struct TrainerMonItemCustomMoves sParty_Isabel1[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Isabel2[] = {
+static const struct TrainerMon sParty_Isabel2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -3281,7 +3290,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Isabel2[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Isabel3[] = {
+static const struct TrainerMon sParty_Isabel3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -3296,7 +3305,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Isabel3[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Isabel4[] = {
+static const struct TrainerMon sParty_Isabel4[] = {
     {
     .iv = 30,
     .lvl = 32,
@@ -3311,7 +3320,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Isabel4[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Isabel5[] = {
+static const struct TrainerMon sParty_Isabel5[] = {
     {
     .iv = 40,
     .lvl = 35,
@@ -3326,7 +3335,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Isabel5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Kaleb[] = {
+static const struct TrainerMon sParty_Kaleb[] = {
     {
     .lvl = -1,
     .species = SPECIES_PIKACHU,
@@ -3341,50 +3350,50 @@ static const struct TrainerMonItemCustomMoves sParty_Kaleb[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Joseph[] = {
+static const struct TrainerMon sParty_Joseph[] = {
     {
     .lvl = -2,
     .species = SPECIES_ELECTRIKE,
     .spread = SPREAD_10_IV_0_EV,
-    .moves = MOVE_DISCHARGE, MOVE_BITE, MOVE_QUICK_ATTACK, MOVE_ODOR_SLEUTH
+    .moves = {MOVE_DISCHARGE, MOVE_BITE, MOVE_QUICK_ATTACK, MOVE_ODOR_SLEUTH}
     },
     {
     .lvl = -2,
     .species = SPECIES_LUXIO,
     .spread = SPREAD_10_IV_0_EV,
-    .moves = MOVE_BITE, MOVE_SPARK, MOVE_HOWL, MOVE_ROAR
+    .moves = {MOVE_BITE, MOVE_SPARK, MOVE_HOWL, MOVE_ROAR}
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Timmy[] = {
+static const struct TrainerMon sParty_Timmy[] = {
     {
     .lvl = -1,
     .species = SPECIES_PIKACHU,
-    .moves = MOVE_THUNDERBOLT, MOVE_NUZZLE, MOVE_NASTY_PLOT, MOVE_SWEET_KISS
+    .moves = {MOVE_THUNDERBOLT, MOVE_NUZZLE, MOVE_NASTY_PLOT, MOVE_SWEET_KISS}
     },
     {
     .lvl = -2,
     .species = SPECIES_GEODUDE_ALOLAN,
-    .moves = MOVE_THUNDER_PUNCH, MOVE_ROCK_THROW, MOVE_SELF_DESTRUCT, MOVE_ROCK_POLISH
+    .moves = {MOVE_THUNDER_PUNCH, MOVE_ROCK_THROW, MOVE_SELF_DESTRUCT, MOVE_ROCK_POLISH}
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Edwin1[] = {
+static const struct TrainerMon sParty_Edwin1[] = {
     {
     .spread = SPREAD_10_IV_0_EV,
     .lvl = -2,
     .species = SPECIES_LOMBRE,
-    .moves = MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_MEGA_DRAIN, MOVE_BUBBLE_BEAM
+    .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_MEGA_DRAIN, MOVE_BUBBLE_BEAM}
     },
     {
     .spread = SPREAD_10_IV_0_EV,
     .lvl = -2,
     .species = SPECIES_NUZLEAF,
-    .moves = MOVE_FEINT_ATTACK, MOVE_LEAF_BLADE, MOVE_AIR_CUTTER, MOVE_GROWTH
+    .moves = {MOVE_FEINT_ATTACK, MOVE_LEAF_BLADE, MOVE_AIR_CUTTER, MOVE_GROWTH}
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Edwin2[] = {
+static const struct TrainerMon sParty_Edwin2[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3397,7 +3406,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Edwin2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Edwin3[] = {
+static const struct TrainerMon sParty_Edwin3[] = {
     {
     .iv = 0,
     .lvl = 29,
@@ -3410,7 +3419,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Edwin3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Edwin4[] = {
+static const struct TrainerMon sParty_Edwin4[] = {
     {
     .iv = 0,
     .lvl = 32,
@@ -3423,7 +3432,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Edwin4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Edwin5[] = {
+static const struct TrainerMon sParty_Edwin5[] = {
     {
     .iv = 0,
     .lvl = 35,
@@ -3436,16 +3445,16 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Edwin5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Dale[] = {
+static const struct TrainerMon sParty_Dale[] = {
     {
     .lvl = -2,
     .species = SPECIES_TENTACOOL,
-    .moves = MOVE_WRAP, MOVE_ACID_SPRAY, MOVE_WATER_PULSE, MOVE_BARRIER
+    .moves = {MOVE_WRAP, MOVE_ACID_SPRAY, MOVE_WATER_PULSE, MOVE_BARRIER}
     },
     {
     .lvl = -2,
     .species = SPECIES_WAILMER,
-    .moves = MOVE_BRINE, MOVE_ROLLOUT, MOVE_DEFENSE_CURL, MOVE_WHIRLPOOL
+    .moves = {MOVE_BRINE, MOVE_ROLLOUT, MOVE_DEFENSE_CURL, MOVE_WHIRLPOOL}
     },
     {
     .lvl = -3,
@@ -3454,13 +3463,13 @@ static const struct TrainerMonItemCustomMoves sParty_Dale[] = {
     {
     .lvl = -2,
     .species = SPECIES_AZUMARILL,
-    .moves = MOVE_BRINE, MOVE_ROLLOUT, MOVE_PLAY_ROUGH, MOVE_WHIRLPOOL
+    .moves = {MOVE_BRINE, MOVE_ROLLOUT, MOVE_PLAY_ROUGH, MOVE_WHIRLPOOL}
     }
 };
 
 // Route 110 Cycling Road
 
-static const struct TrainerMonItemCustomMoves sParty_Edward[] = {
+static const struct TrainerMon sParty_Edward[] = {
     {
     .spread = SPREAD_HP_GRASS_MODEST,
     .lvl = -2,
@@ -3474,7 +3483,7 @@ static const struct TrainerMonItemCustomMoves sParty_Edward[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jacob[] = {
+static const struct TrainerMon sParty_Jacob[] = {
     {
     .lvl = -1,
     .species = SPECIES_DEDENNE,
@@ -3492,34 +3501,34 @@ static const struct TrainerMonItemCustomMoves sParty_Jacob[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jasmine[] = {
+static const struct TrainerMon sParty_Jasmine[] = {
     {
     .lvl = -2,
     .species = SPECIES_YAMPER,
     .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_SPARK, MOVE_BITE, MOVE_ROAR, MOVE_THUNDER_WAVE
+    .moves = {MOVE_SPARK, MOVE_BITE, MOVE_ROAR, MOVE_THUNDER_WAVE}
     },
     {
     .lvl = -2,
     .species = SPECIES_PINCURCHIN,
     .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_THUNDER_SHOCK, MOVE_BUBBLE_BEAM, MOVE_SPARK, MOVE_THUNDER_WAVE
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_BUBBLE_BEAM, MOVE_SPARK, MOVE_THUNDER_WAVE}
     },
     {
     .lvl = -2,
     .species = SPECIES_EMOLGA,
     .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_PARABOLIC_CHARGE, MOVE_AIR_CUTTER, MOVE_THUNDER_WAVE, MOVE_QUICK_ATTACK
+    .moves = {MOVE_PARABOLIC_CHARGE, MOVE_AIR_CUTTER, MOVE_THUNDER_WAVE, MOVE_QUICK_ATTACK}
     },
     {
     .lvl = -1,
     .species = SPECIES_HELIOPTILE,
     .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_PARABOLIC_CHARGE, MOVE_MUD_SLAP, MOVE_THUNDER_WAVE, MOVE_RAZOR_WIND
+    .moves = {MOVE_PARABOLIC_CHARGE, MOVE_MUD_SLAP, MOVE_THUNDER_WAVE, MOVE_RAZOR_WIND}
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Benjamin1[] = {
+static const struct TrainerMon sParty_Benjamin1[] = {
     {
     .lvl = -1,
     .species = SPECIES_LUXIO,
@@ -3532,7 +3541,7 @@ static const struct TrainerMonItemCustomMoves sParty_Benjamin1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin2[] = {
+static const struct TrainerMon sParty_Benjamin2[] = {
     {
     .iv = 10,
     .lvl = 30,
@@ -3540,7 +3549,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin3[] = {
+static const struct TrainerMon sParty_Benjamin3[] = {
     {
     .iv = 20,
     .lvl = 33,
@@ -3548,7 +3557,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin4[] = {
+static const struct TrainerMon sParty_Benjamin4[] = {
     {
     .iv = 30,
     .lvl = 36,
@@ -3556,7 +3565,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin5[] = {
+static const struct TrainerMon sParty_Benjamin5[] = {
     {
     .iv = 40,
     .lvl = 39,
@@ -3564,7 +3573,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Benjamin5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Alyssa[] = {
+static const struct TrainerMon sParty_Alyssa[] = {
     {
     .lvl = -2,
     .species = SPECIES_MAGNEMITE,
@@ -3577,7 +3586,7 @@ static const struct TrainerMonItemCustomMoves sParty_Alyssa[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Anthony[] = {
+static const struct TrainerMon sParty_Anthony[] = {
     {
     .lvl = -1,
     .species = SPECIES_VOLTORB,
@@ -3590,7 +3599,7 @@ static const struct TrainerMonItemCustomMoves sParty_Anthony[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Abigail1[] = {
+static const struct TrainerMon sParty_Abigail1[] = {
     {
     .lvl = -1,
     .species = SPECIES_MAGNEMITE,
@@ -3603,7 +3612,7 @@ static const struct TrainerMonItemCustomMoves sParty_Abigail1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Abigail2[] = {
+static const struct TrainerMon sParty_Abigail2[] = {
     {
     .iv = 10,
     .lvl = 28,
@@ -3611,7 +3620,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Abigail2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Abigail3[] = {
+static const struct TrainerMon sParty_Abigail3[] = {
     {
     .iv = 20,
     .lvl = 31,
@@ -3619,7 +3628,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Abigail3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Abigail4[] = {
+static const struct TrainerMon sParty_Abigail4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -3627,7 +3636,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Abigail4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Abigail5[] = {
+static const struct TrainerMon sParty_Abigail5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -3635,7 +3644,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Abigail5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jaclyn[] = {
+static const struct TrainerMon sParty_Jaclyn[] = {
     {
     .spread = SPREAD_HP_FIGHTING_TIMID,
     .lvl = -1,
@@ -3651,7 +3660,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jaclyn[] = {
 
 // Route 103 East
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Daisy[] = {
+static const struct TrainerMon sParty_Daisy[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3664,7 +3673,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Daisy[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv1[] = {
+static const struct TrainerMon sParty_AmyAndLiv1[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3693,7 +3702,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv2[] = {
+static const struct TrainerMon sParty_AmyAndLiv2[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3722,7 +3731,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv3[] = {
+static const struct TrainerMon sParty_AmyAndLiv3[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3751,7 +3760,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv4[] = {
+static const struct TrainerMon sParty_AmyAndLiv4[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3780,7 +3789,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv5[] = {
+static const struct TrainerMon sParty_AmyAndLiv5[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3809,7 +3818,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv6[] = {
+static const struct TrainerMon sParty_AmyAndLiv6[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3838,7 +3847,7 @@ static const struct TrainerMonItemCustomMoves sParty_AmyAndLiv6[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel1[] = {
+static const struct TrainerMon sParty_Miguel1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3853,7 +3862,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel1[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel2[] = {
+static const struct TrainerMon sParty_Miguel2[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3862,7 +3871,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel2[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel3[] = {
+static const struct TrainerMon sParty_Miguel3[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3871,7 +3880,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel3[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel4[] = {
+static const struct TrainerMon sParty_Miguel4[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -3880,7 +3889,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel4[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel5[] = {
+static const struct TrainerMon sParty_Miguel5[] = {
     {
     .iv = 0,
     .lvl = 38,
@@ -3889,7 +3898,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andrew[] = {
+static const struct TrainerMon sParty_Andrew[] = {
     {
     .iv = 0,
     .lvl = 0,
@@ -3902,7 +3911,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Andrew[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Marcos[] = {
+static const struct TrainerMon sParty_Marcos[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -3915,7 +3924,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Marcos[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Rhett[] = {
+static const struct TrainerMon sParty_Rhett[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -3928,7 +3937,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Rhett[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Pete[] = {
+static const struct TrainerMon sParty_Pete[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = -2,
@@ -3946,7 +3955,7 @@ static const struct TrainerMonItemCustomMoves sParty_Pete[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Isabelle[] = {
+static const struct TrainerMon sParty_Isabelle[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -3967,7 +3976,7 @@ static const struct TrainerMonItemCustomMoves sParty_Isabelle[] = {
 
 // Mawville Gym
 
-static const struct TrainerMonItemCustomMoves sParty_Angelo[] = {
+static const struct TrainerMon sParty_Angelo[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -3985,7 +3994,7 @@ static const struct TrainerMonItemCustomMoves sParty_Angelo[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Vivian[] = {
+static const struct TrainerMon sParty_Vivian[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -4002,7 +4011,7 @@ static const struct TrainerMonItemCustomMoves sParty_Vivian[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Ben[] = {
+static const struct TrainerMon sParty_Ben[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -4020,7 +4029,7 @@ static const struct TrainerMonItemCustomMoves sParty_Ben[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Kirk[] = {
+static const struct TrainerMon sParty_Kirk[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -4038,7 +4047,7 @@ static const struct TrainerMonItemCustomMoves sParty_Kirk[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Shawn[] = {
+static const struct TrainerMon sParty_Shawn[] = {
     {
     .spread = SPREAD_25_IV_0_EV,
     .lvl = -2,
@@ -4056,10 +4065,11 @@ static const struct TrainerMonItemCustomMoves sParty_Shawn[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_Wattson1[] = {
+static const struct TrainerMon sParty_Wattson1[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_QUIET,
-    .lvl = 34,
+    .lvl = 35,
+    .staticLevel = 1,
     .species = SPECIES_MAGNETON,
     .heldItem = ITEM_TERRAIN_EXTENDER,
     .ability = 2, //Analytic
@@ -4067,7 +4077,8 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     },
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
-    .lvl = 34,
+    .lvl = 35,
+    .staticLevel = 1,
     .species = SPECIES_VIKAVOLT,
     .heldItem = ITEM_EJECT_BUTTON,
     .ability = 0, //Levitate
@@ -4075,7 +4086,8 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     },
     {
     .spread = SPREAD_WATTSON_SPECIAL,
-    .lvl = 34,
+    .lvl = 35,
+    .staticLevel = 1,
     .species = SPECIES_RAICHU_ALOLAN,
     .heldItem = ITEM_WHITE_HERB,
     .ability = 0, //Surge Surfer
@@ -4083,7 +4095,8 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     },
     {
     .spread = SPREAD_WATTSON_SPECIAL,
-    .lvl = 34,
+    .lvl = 35,
+    .staticLevel = 1,
     .species = SPECIES_LANTURN,
     .heldItem = ITEM_SALAC_BERRY,
     .ability = 2, //Water Absorb
@@ -4091,7 +4104,8 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     },
     {
     .spread = SPREAD_WATTSON_SPECIAL,
-    .lvl = 35,
+    .lvl = 36,
+    .staticLevel = 1,
     .species = SPECIES_ELECTRODE_HISUIAN,
     .heldItem = ITEM_NORMAL_GEM,
     .ability = 1, //Static
@@ -4099,7 +4113,8 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     },
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
-    .lvl = 36,
+    .lvl = 39,
+    .staticLevel = 1,
     .species = SPECIES_MANECTRIC,
     .heldItem = ITEM_SITRUS_BERRY,
     .isShiny = 1,
@@ -4108,7 +4123,7 @@ static const struct TrainerMonCustomized sParty_Wattson1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Wattson2[] = {
+static const struct TrainerMon sParty_Wattson2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 36,
@@ -4139,7 +4154,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Wattson3[] = {
+static const struct TrainerMon sParty_Wattson3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 39,
@@ -4177,7 +4192,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Wattson4[] = {
+static const struct TrainerMon sParty_Wattson4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 44,
@@ -4215,7 +4230,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Wattson5[] = {
+static const struct TrainerMon sParty_Wattson5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 50,
@@ -4262,7 +4277,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson5[] = {
 
 // Route 117, West Mauville
 
-static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg1[] = {
+static const struct TrainerMon sParty_AnnaAndMeg1[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -4285,11 +4300,11 @@ static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg1[] = {
     .iv = 0,
     .lvl = -3,
     .species = SPECIES_TOGETIC,
-    .moves = MOVE_AIR_CUTTER, MOVE_ANCIENT_POWER, MOVE_SOFT_BOILED, MOVE_MAGICAL_LEAF
+    .moves = {MOVE_AIR_CUTTER, MOVE_ANCIENT_POWER, MOVE_SOFT_BOILED, MOVE_MAGICAL_LEAF}
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg2[] = {
+static const struct TrainerMon sParty_AnnaAndMeg2[] = {
     {
     .iv = 10,
     .lvl = 28,
@@ -4304,7 +4319,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg3[] = {
+static const struct TrainerMon sParty_AnnaAndMeg3[] = {
     {
     .iv = 20,
     .lvl = 31,
@@ -4319,7 +4334,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg4[] = {
+static const struct TrainerMon sParty_AnnaAndMeg4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -4334,7 +4349,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg5[] = {
+static const struct TrainerMon sParty_AnnaAndMeg5[] = {
     {
     .iv = 40,
     .lvl = 36,
@@ -4349,7 +4364,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_AnnaAndMeg5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Derek[] = {
+static const struct TrainerMon sParty_Derek[] = {
     {
     .iv = 150,
     .lvl = -2,
@@ -4362,7 +4377,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Derek[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dylan1[] = {
+static const struct TrainerMon sParty_Dylan1[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -4375,7 +4390,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dylan1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dylan2[] = {
+static const struct TrainerMon sParty_Dylan2[] = {
     {
     .iv = 10,
     .lvl = 28,
@@ -4383,7 +4398,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dylan2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dylan3[] = {
+static const struct TrainerMon sParty_Dylan3[] = {
     {
     .iv = 20,
     .lvl = 31,
@@ -4391,7 +4406,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dylan3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dylan4[] = {
+static const struct TrainerMon sParty_Dylan4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -4399,7 +4414,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dylan4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dylan5[] = {
+static const struct TrainerMon sParty_Dylan5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -4407,7 +4422,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dylan5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Maria1[] = {
+static const struct TrainerMon sParty_Maria1[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -4420,7 +4435,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Maria1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Maria2[] = {
+static const struct TrainerMon sParty_Maria2[] = {
     {
     .iv = 10,
     .lvl = 28,
@@ -4428,7 +4443,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Maria2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Maria3[] = {
+static const struct TrainerMon sParty_Maria3[] = {
     {
     .iv = 20,
     .lvl = 31,
@@ -4436,7 +4451,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Maria3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Maria4[] = {
+static const struct TrainerMon sParty_Maria4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -4444,7 +4459,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Maria4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Maria5[] = {
+static const struct TrainerMon sParty_Maria5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -4452,7 +4467,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Maria5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaac1[] = {
+static const struct TrainerMon sParty_Isaac1[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -4485,7 +4500,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Isaac1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaac2[] = {
+static const struct TrainerMon sParty_Isaac2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -4518,7 +4533,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Isaac2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaac3[] = {
+static const struct TrainerMon sParty_Isaac3[] = {
     {
     .iv = 20,
     .lvl = -3,
@@ -4551,7 +4566,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Isaac3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaac4[] = {
+static const struct TrainerMon sParty_Isaac4[] = {
     {
     .iv = 30,
     .lvl = 28,
@@ -4584,7 +4599,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Isaac4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaac5[] = {
+static const struct TrainerMon sParty_Isaac5[] = {
     {
     .iv = 40,
     .lvl = 31,
@@ -4617,7 +4632,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Isaac5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lydia1[] = {
+static const struct TrainerMon sParty_Lydia1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -4650,7 +4665,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lydia1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lydia2[] = {
+static const struct TrainerMon sParty_Lydia2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -4683,7 +4698,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lydia2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lydia3[] = {
+static const struct TrainerMon sParty_Lydia3[] = {
     {
     .iv = 20,
     .lvl = -3,
@@ -4716,7 +4731,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lydia3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lydia4[] = {
+static const struct TrainerMon sParty_Lydia4[] = {
     {
     .iv = 30,
     .lvl = 28,
@@ -4749,7 +4764,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lydia4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lydia5[] = {
+static const struct TrainerMon sParty_Lydia5[] = {
     {
     .iv = 40,
     .lvl = 31,
@@ -4782,7 +4797,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lydia5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Melina[] = {
+static const struct TrainerMon sParty_Melina[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4795,7 +4810,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Melina[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brandi[] = {
+static const struct TrainerMon sParty_Brandi[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4808,7 +4823,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brandi[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Aisha[] = {
+static const struct TrainerMon sParty_Aisha[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4823,7 +4838,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Aisha[] = {
 
 // Route 111, North Mauville
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tyron[] = {
+static const struct TrainerMon sParty_Tyron[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4836,7 +4851,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tyron[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Celina[] = {
+static const struct TrainerMon sParty_Celina[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -4849,7 +4864,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Celina[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bianca[] = {
+static const struct TrainerMon sParty_Bianca[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4862,7 +4877,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bianca[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hayden[] = {
+static const struct TrainerMon sParty_Hayden[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -4875,7 +4890,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Hayden[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wilton1[] = {
+static const struct TrainerMon sParty_Wilton1[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -4898,7 +4913,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wilton1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wilton2[] = {
+static const struct TrainerMon sParty_Wilton2[] = {
     {
     .iv = 110,
     .lvl = -3,
@@ -4916,7 +4931,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wilton2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wilton3[] = {
+static const struct TrainerMon sParty_Wilton3[] = {
     {
     .iv = 120,
     .lvl = 29,
@@ -4934,7 +4949,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wilton3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wilton4[] = {
+static const struct TrainerMon sParty_Wilton4[] = {
     {
     .iv = 130,
     .lvl = 32,
@@ -4952,7 +4967,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wilton4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wilton5[] = {
+static const struct TrainerMon sParty_Wilton5[] = {
     {
     .iv = 140,
     .lvl = 35,
@@ -4970,7 +4985,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wilton5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brooke1[] = {
+static const struct TrainerMon sParty_Brooke1[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -4988,7 +5003,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brooke1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brooke2[] = {
+static const struct TrainerMon sParty_Brooke2[] = {
     {
     .iv = 110,
     .lvl = -3,
@@ -5006,7 +5021,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brooke2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brooke3[] = {
+static const struct TrainerMon sParty_Brooke3[] = {
     {
     .iv = 120,
     .lvl = 29,
@@ -5024,7 +5039,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brooke3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brooke4[] = {
+static const struct TrainerMon sParty_Brooke4[] = {
     {
     .iv = 130,
     .lvl = 32,
@@ -5042,7 +5057,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brooke4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brooke5[] = {
+static const struct TrainerMon sParty_Brooke5[] = {
     {
     .iv = 140,
     .lvl = 34,
@@ -5060,7 +5075,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brooke5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Daisuke[] = {
+static const struct TrainerMon sParty_Daisuke[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -5073,7 +5088,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Daisuke[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Travis[] = {
+static const struct TrainerMon sParty_Travis[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5086,7 +5101,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Travis[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Irene[] = {
+static const struct TrainerMon sParty_Irene[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5101,7 +5116,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Irene[] = {
 
 // Route 111 Desert
 
-static const struct TrainerMonNoItemCustomMoves sParty_Drew[] = {
+static const struct TrainerMon sParty_Drew[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5116,7 +5131,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Drew[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Beau[] = {
+static const struct TrainerMon sParty_Beau[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5131,7 +5146,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Beau[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Heidi[] = {
+static const struct TrainerMon sParty_Heidi[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5146,7 +5161,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Heidi[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Becky[] = {
+static const struct TrainerMon sParty_Becky[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5161,7 +5176,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Becky[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Dusty1[] = {
+static const struct TrainerMon sParty_Dusty1[] = {
     {
     .iv = 50,
     .lvl = -3,
@@ -5176,7 +5191,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Dusty2[] = {
+static const struct TrainerMon sParty_Dusty2[] = {
     {
     .iv = 60,
     .lvl = 27,
@@ -5185,7 +5200,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Dusty3[] = {
+static const struct TrainerMon sParty_Dusty3[] = {
     {
     .iv = 70,
     .lvl = 30,
@@ -5194,7 +5209,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Dusty4[] = {
+static const struct TrainerMon sParty_Dusty4[] = {
     {
     .iv = 80,
     .lvl = 33,
@@ -5203,7 +5218,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Dusty5[] = {
+static const struct TrainerMon sParty_Dusty5[] = {
     {
     .iv = 90,
     .lvl = 36,
@@ -5212,7 +5227,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Celia[] = {
+static const struct TrainerMon sParty_Celia[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5225,7 +5240,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Celia[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bryan[] = {
+static const struct TrainerMon sParty_Bryan[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5238,7 +5253,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bryan[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Branden[] = {
+static const struct TrainerMon sParty_Branden[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5253,7 +5268,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Branden[] = {
 
 // Winstrates
 
-static const struct TrainerMonItemCustomMoves sParty_Victor[] = {
+static const struct TrainerMon sParty_Victor[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -2,
@@ -5272,7 +5287,7 @@ static const struct TrainerMonItemCustomMoves sParty_Victor[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Victoria[] = {
+static const struct TrainerMon sParty_Victoria[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -2,
@@ -5291,7 +5306,7 @@ static const struct TrainerMonItemCustomMoves sParty_Victoria[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Vivi[] = {
+static const struct TrainerMon sParty_Vivi[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -1,
@@ -5310,7 +5325,7 @@ static const struct TrainerMonItemCustomMoves sParty_Vivi[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Vicky[] = {
+static const struct TrainerMon sParty_Vicky[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -5331,7 +5346,7 @@ static const struct TrainerMonItemCustomMoves sParty_Vicky[] = {
 
 // Route 112
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Carol[] = {
+static const struct TrainerMon sParty_Carol[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5344,7 +5359,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Carol[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brice[] = {
+static const struct TrainerMon sParty_Brice[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5357,7 +5372,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brice[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Trent1[] = {
+static const struct TrainerMon sParty_Trent1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5375,7 +5390,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Trent1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Trent2[] = {
+static const struct TrainerMon sParty_Trent2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -5398,7 +5413,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Trent2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Trent3[] = {
+static const struct TrainerMon sParty_Trent3[] = {
     {
     .iv = 20,
     .lvl = 27,
@@ -5421,7 +5436,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Trent3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Trent4[] = {
+static const struct TrainerMon sParty_Trent4[] = {
     {
     .iv = 30,
     .lvl = 30,
@@ -5444,7 +5459,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Trent4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Trent5[] = {
+static const struct TrainerMon sParty_Trent5[] = {
     {
     .iv = 40,
     .lvl = 33,
@@ -5467,7 +5482,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Trent5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bryant[] = {
+static const struct TrainerMon sParty_Bryant[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5480,7 +5495,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bryant[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shayla[] = {
+static const struct TrainerMon sParty_Shayla[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5493,7 +5508,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shayla[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Larry[] = {
+static const struct TrainerMon sParty_Larry[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5508,7 +5523,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Larry[] = {
 
 // Route 113
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lung[] = {
+static const struct TrainerMon sParty_Lung[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5521,7 +5536,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lung[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lawrence[] = {
+static const struct TrainerMon sParty_Lawrence[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5534,7 +5549,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lawrence[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Wyatt[] = {
+static const struct TrainerMon sParty_Wyatt[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5547,7 +5562,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Wyatt[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jaylen[] = {
+static const struct TrainerMon sParty_Jaylen[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5560,7 +5575,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jaylen[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Madeline1[] = {
+static const struct TrainerMon sParty_Madeline1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -5575,7 +5590,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Madeline1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Madeline2[] = {
+static const struct TrainerMon sParty_Madeline2[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -5590,7 +5605,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Madeline2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Madeline3[] = {
+static const struct TrainerMon sParty_Madeline3[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -5605,7 +5620,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Madeline3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Madeline4[] = {
+static const struct TrainerMon sParty_Madeline4[] = {
     {
     .iv = 30,
     .lvl = 0,
@@ -5620,7 +5635,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Madeline4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Madeline5[] = {
+static const struct TrainerMon sParty_Madeline5[] = {
     {
     .iv = 40,
     .lvl = 0,
@@ -5635,7 +5650,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Madeline5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_ToriAndTia[] = {
+static const struct TrainerMon sParty_ToriAndTia[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -5670,7 +5685,7 @@ static const struct TrainerMonItemCustomMoves sParty_ToriAndTia[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Lao1[] = {
+static const struct TrainerMon sParty_Lao1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5691,7 +5706,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Lao1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Lao2[] = {
+static const struct TrainerMon sParty_Lao2[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5718,7 +5733,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Lao2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Lao3[] = {
+static const struct TrainerMon sParty_Lao3[] = {
     {
     .iv = 20,
     .lvl = 27,
@@ -5745,7 +5760,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Lao3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Lao4[] = {
+static const struct TrainerMon sParty_Lao4[] = {
     {
     .iv = 30,
     .lvl = 30,
@@ -5772,7 +5787,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Lao4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Lao5[] = {
+static const struct TrainerMon sParty_Lao5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 33,
@@ -5803,7 +5818,7 @@ static const struct TrainerMonItemCustomMoves sParty_Lao5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dillon[] = {
+static const struct TrainerMon sParty_Dillon[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5816,7 +5831,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dillon[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sophie[] = {
+static const struct TrainerMon sParty_Sophie[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5829,7 +5844,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sophie[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Coby[] = {
+static const struct TrainerMon sParty_Coby[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5844,7 +5859,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Coby[] = {
 
 // Route 114
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nolan[] = {
+static const struct TrainerMon sParty_Nolan[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5857,7 +5872,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nolan[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kai[] = {
+static const struct TrainerMon sParty_Kai[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5870,7 +5885,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kai[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Charlotte[] = {
+static const struct TrainerMon sParty_Charlotte[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -5883,7 +5898,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Charlotte[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Claude[] = {
+static const struct TrainerMon sParty_Claude[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -5901,7 +5916,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Claude[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nancy[] = {
+static const struct TrainerMon sParty_Nancy[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5914,7 +5929,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nancy[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_TyraAndIvy[] = {
+static const struct TrainerMon sParty_TyraAndIvy[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5941,7 +5956,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_TyraAndIvy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shane[] = {
+static const struct TrainerMon sParty_Shane[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5954,7 +5969,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shane[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Steve1[] = {
+static const struct TrainerMon sParty_Steve1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -5967,7 +5982,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Steve1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Steve2[] = {
+static const struct TrainerMon sParty_Steve2[] = {
     {
     .iv = 10,
     .lvl = 27,
@@ -5975,7 +5990,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Steve2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Steve3[] = {
+static const struct TrainerMon sParty_Steve3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -5988,7 +6003,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Steve3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Steve4[] = {
+static const struct TrainerMon sParty_Steve4[] = {
     {
     .iv = 30,
     .lvl = 32,
@@ -6001,7 +6016,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Steve4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Steve5[] = {
+static const struct TrainerMon sParty_Steve5[] = {
     {
     .iv = 40,
     .lvl = 35,
@@ -6014,7 +6029,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Steve5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bernie1[] = {
+static const struct TrainerMon sParty_Bernie1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6027,7 +6042,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bernie1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bernie2[] = {
+static const struct TrainerMon sParty_Bernie2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -6040,7 +6055,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bernie2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bernie3[] = {
+static const struct TrainerMon sParty_Bernie3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -6053,7 +6068,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bernie3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bernie4[] = {
+static const struct TrainerMon sParty_Bernie4[] = {
     {
     .iv = 30,
     .lvl = 32,
@@ -6066,7 +6081,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bernie4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Bernie5[] = {
+static const struct TrainerMon sParty_Bernie5[] = {
     {
     .iv = 40,
     .lvl = 35,
@@ -6079,7 +6094,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Bernie5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lenny[] = {
+static const struct TrainerMon sParty_Lenny[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6092,7 +6107,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lenny[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lucas1[] = {
+static const struct TrainerMon sParty_Lucas1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6105,7 +6120,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lucas1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Lucas2[] = {
+static const struct TrainerMon sParty_Lucas2[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6114,7 +6129,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Lucas2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Angelina[] = {
+static const struct TrainerMon sParty_Angelina[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6129,7 +6144,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Angelina[] = {
 
 // Route 115
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nob1[] = {
+static const struct TrainerMon sParty_Nob1[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -6142,7 +6157,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nob1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nob2[] = {
+static const struct TrainerMon sParty_Nob2[] = {
     {
     .iv = 110,
     .lvl = 27,
@@ -6150,7 +6165,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nob2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nob3[] = {
+static const struct TrainerMon sParty_Nob3[] = {
     {
     .iv = 120,
     .lvl = 29,
@@ -6163,7 +6178,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nob3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Nob4[] = {
+static const struct TrainerMon sParty_Nob4[] = {
     {
     .iv = 130,
     .lvl = 31,
@@ -6181,7 +6196,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Nob4[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Nob5[] = {
+static const struct TrainerMon sParty_Nob5[] = {
     {
     .iv = 140,
     .lvl = 33,
@@ -6208,7 +6223,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Nob5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy1[] = {
+static const struct TrainerMon sParty_Cyndy1[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -6221,7 +6236,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy2[] = {
+static const struct TrainerMon sParty_Cyndy2[] = {
     {
     .iv = 110,
     .lvl = -3,
@@ -6234,7 +6249,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy3[] = {
+static const struct TrainerMon sParty_Cyndy3[] = {
     {
     .iv = 120,
     .lvl = 29,
@@ -6247,7 +6262,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy4[] = {
+static const struct TrainerMon sParty_Cyndy4[] = {
     {
     .iv = 130,
     .lvl = 32,
@@ -6260,7 +6275,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy5[] = {
+static const struct TrainerMon sParty_Cyndy5[] = {
     {
     .iv = 140,
     .lvl = 35,
@@ -6273,7 +6288,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cyndy5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hector[] = {
+static const struct TrainerMon sParty_Hector[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6286,7 +6301,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Hector[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Marlene[] = {
+static const struct TrainerMon sParty_Marlene[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6301,7 +6316,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Marlene[] = {
 
 // Mt Chimney Magma
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtChimney1[] = {
+static const struct TrainerMon sParty_GruntMtChimney1[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -6318,7 +6333,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtChimney1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtChimney2[] = {
+static const struct TrainerMon sParty_GruntMtChimney2[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -6335,7 +6350,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtChimney2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_TabithaMtChimney[] = {
+static const struct TrainerMon sParty_TabithaMtChimney[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -2,
@@ -6370,7 +6385,7 @@ static const struct TrainerMonItemCustomMoves sParty_TabithaMtChimney[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MaxieMtChimney[] = {
+static const struct TrainerMon sParty_MaxieMtChimney[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -1,
@@ -6423,7 +6438,7 @@ static const struct TrainerMonItemCustomMoves sParty_MaxieMtChimney[] = {
 
 // Mt Chimney
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Melissa[] = {
+static const struct TrainerMon sParty_Melissa[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6436,7 +6451,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Melissa[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sheila[] = {
+static const struct TrainerMon sParty_Sheila[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6449,7 +6464,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sheila[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shirley[] = {
+static const struct TrainerMon sParty_Shirley[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6462,7 +6477,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shirley[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shelby1[] = {
+static const struct TrainerMon sParty_Shelby1[] = {
     {
     .iv = 200,
     .lvl = -1,
@@ -6475,7 +6490,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shelby2[] = {
+static const struct TrainerMon sParty_Shelby2[] = {
     {
     .iv = 210,
     .lvl = 30,
@@ -6488,7 +6503,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shelby3[] = {
+static const struct TrainerMon sParty_Shelby3[] = {
     {
     .iv = 220,
     .lvl = 33,
@@ -6501,7 +6516,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shelby4[] = {
+static const struct TrainerMon sParty_Shelby4[] = {
     {
     .iv = 230,
     .lvl = 36,
@@ -6514,7 +6529,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Shelby5[] = {
+static const struct TrainerMon sParty_Shelby5[] = {
     {
     .iv = 240,
     .lvl = 39,
@@ -6529,7 +6544,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby5[] = {
 
 // Jagged Pass
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Eric[] = {
+static const struct TrainerMon sParty_Eric[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -6542,7 +6557,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Eric[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Diana1[] = {
+static const struct TrainerMon sParty_Diana1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6560,7 +6575,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Diana1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Diana2[] = {
+static const struct TrainerMon sParty_Diana2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -6578,7 +6593,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Diana2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Diana3[] = {
+static const struct TrainerMon sParty_Diana3[] = {
     {
     .iv = 20,
     .lvl = 28,
@@ -6596,7 +6611,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Diana3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Diana4[] = {
+static const struct TrainerMon sParty_Diana4[] = {
     {
     .iv = 30,
     .lvl = 31,
@@ -6614,7 +6629,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Diana4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Diana5[] = {
+static const struct TrainerMon sParty_Diana5[] = {
     {
     .iv = 40,
     .lvl = 40,
@@ -6632,7 +6647,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Diana5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ethan1[] = {
+static const struct TrainerMon sParty_Ethan1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6645,7 +6660,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ethan1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ethan2[] = {
+static const struct TrainerMon sParty_Ethan2[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -6658,7 +6673,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ethan2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ethan3[] = {
+static const struct TrainerMon sParty_Ethan3[] = {
     {
     .iv = 20,
     .lvl = 29,
@@ -6671,7 +6686,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ethan3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ethan4[] = {
+static const struct TrainerMon sParty_Ethan4[] = {
     {
     .iv = 30,
     .lvl = 31,
@@ -6689,7 +6704,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ethan4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ethan5[] = {
+static const struct TrainerMon sParty_Ethan5[] = {
     {
     .iv = 40,
     .lvl = 34,
@@ -6707,7 +6722,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ethan5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Autumn[] = {
+static const struct TrainerMon sParty_Autumn[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6720,7 +6735,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Autumn[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Julio[] = {
+static const struct TrainerMon sParty_Julio[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -6733,7 +6748,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Julio[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntJaggedPass[] = {
+static const struct TrainerMon sParty_GruntJaggedPass[] = {
     {
     .iv = 50,
     .lvl = 0,
@@ -6748,7 +6763,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntJaggedPass[] = {
 
 // Lavaridge Gym
 
-static const struct TrainerMonItemCustomMoves sParty_Cole[] = {
+static const struct TrainerMon sParty_Cole[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -1,
@@ -6767,7 +6782,7 @@ static const struct TrainerMonItemCustomMoves sParty_Cole[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jeff[] = {
+static const struct TrainerMon sParty_Jeff[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -1,
@@ -6786,7 +6801,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jeff[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Eli[] = {
+static const struct TrainerMon sParty_Eli[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -6805,7 +6820,7 @@ static const struct TrainerMonItemCustomMoves sParty_Eli[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jace[] = {
+static const struct TrainerMon sParty_Jace[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -6824,7 +6839,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jace[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Keegan[] = {
+static const struct TrainerMon sParty_Keegan[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -2,
@@ -6843,7 +6858,7 @@ static const struct TrainerMonItemCustomMoves sParty_Keegan[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Danielle[] = {
+static const struct TrainerMon sParty_Danielle[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -1,
@@ -6862,7 +6877,7 @@ static const struct TrainerMonItemCustomMoves sParty_Danielle[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Axle[] = {
+static const struct TrainerMon sParty_Axle[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -6881,7 +6896,7 @@ static const struct TrainerMonItemCustomMoves sParty_Axle[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Gerald[] = {
+static const struct TrainerMon sParty_Gerald[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -3,
@@ -6899,10 +6914,11 @@ static const struct TrainerMonItemCustomMoves sParty_Gerald[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_Flannery1[] = {
+static const struct TrainerMon sParty_Flannery1[] = {
     {
     .spread = SPREAD_CHANSEY,
     .lvl = 47,
+    .staticLevel = 1,
     .species = SPECIES_TORKOAL,
     .heldItem = ITEM_LEFTOVERS,
     .ability = 1, //Drought
@@ -6911,7 +6927,8 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     },
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
-    .lvl = 44,
+    .lvl = 45,
+    .staticLevel = 1,
     .species = SPECIES_BLAZIKEN,
     .heldItem = ITEM_LUM_BERRY,
     .ability = 2, //Speed Boost
@@ -6919,7 +6936,8 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     },
     {
     .spread = SPREAD_FLANNERY_SPECIAL,
-    .lvl = 44,
+    .lvl = 45,
+    .staticLevel = 1,
     .species = SPECIES_TURTONATOR,
     .heldItem = ITEM_WEAKNESS_POLICY,
     .ability = 0, //Shell Armor
@@ -6927,7 +6945,8 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     },
     {
     .spread = SPREAD_31_IV_HP_ATK_BRAVE,
-    .lvl = 44,
+    .lvl = 45,
+    .staticLevel = 1,
     .species = SPECIES_CAMERUPT,
     .heldItem = ITEM_WHITE_HERB,
     .ability = 1, //Solid Rock
@@ -6935,7 +6954,8 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     },
     {
     .spread = SPREAD_31_IV_HP_ATK_BRAVE,
-    .lvl = 44,
+    .lvl = 45,
+    .staticLevel = 1,
     .species = SPECIES_DARMANITAN,
     .heldItem = ITEM_CHESTO_BERRY,
     .ability = 2, //Zen Mode
@@ -6944,6 +6964,7 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     {
     .spread = SPREAD_31_IV_HP_SPEED_JOLLY,
     .lvl = 46,
+    .staticLevel = 1,
     .species = SPECIES_CHARIZARD,
     .heldItem = ITEM_LIFE_ORB,
     .ability = 2, //Solar Power 
@@ -6951,7 +6972,7 @@ static const struct TrainerMonCustomized sParty_Flannery1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Flannery2[] = {
+static const struct TrainerMon sParty_Flannery2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 38,
@@ -6982,7 +7003,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Flannery3[] = {
+static const struct TrainerMon sParty_Flannery3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 41,
@@ -7020,7 +7041,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Flannery4[] = {
+static const struct TrainerMon sParty_Flannery4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 46,
@@ -7065,7 +7086,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Flannery5[] = {
+static const struct TrainerMon sParty_Flannery5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 51,
@@ -7113,7 +7134,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery5[] = {
 // Petalburg Gym
 
 // Accuracy room
-static const struct TrainerMonItemCustomMoves sParty_Mary[] = {
+static const struct TrainerMon sParty_Mary[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -7132,7 +7153,7 @@ static const struct TrainerMonItemCustomMoves sParty_Mary[] = {
     }
 };
 // Speed Room
-static const struct TrainerMonItemCustomMoves sParty_Randall[] = {
+static const struct TrainerMon sParty_Randall[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -7151,7 +7172,7 @@ static const struct TrainerMonItemCustomMoves sParty_Randall[] = {
     }
 };
 // Confusion Room
-static const struct TrainerMonItemCustomMoves sParty_Parker[] = {
+static const struct TrainerMon sParty_Parker[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -7170,7 +7191,7 @@ static const struct TrainerMonItemCustomMoves sParty_Parker[] = {
     }
 };
 // Defense
-static const struct TrainerMonItemCustomMoves sParty_Alexia[] = {
+static const struct TrainerMon sParty_Alexia[] = {
     {
     .spread = SPREAD_31_IV_HP_DEF_IMPISH,
     .lvl = 0,
@@ -7189,7 +7210,7 @@ static const struct TrainerMonItemCustomMoves sParty_Alexia[] = {
     }
 };
 // Recovery
-static const struct TrainerMonItemCustomMoves sParty_George[] = {
+static const struct TrainerMon sParty_George[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -7208,7 +7229,7 @@ static const struct TrainerMonItemCustomMoves sParty_George[] = {
     }
 };
 // OHKO
-static const struct TrainerMonItemCustomMoves sParty_Berke[] = {
+static const struct TrainerMon sParty_Berke[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -7226,7 +7247,7 @@ static const struct TrainerMonItemCustomMoves sParty_Berke[] = {
     }
 };
 // Strength
-static const struct TrainerMonItemCustomMoves sParty_Jody[] = {
+static const struct TrainerMon sParty_Jody[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -7245,10 +7266,11 @@ static const struct TrainerMonItemCustomMoves sParty_Jody[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_Norman1[] = {
+static const struct TrainerMon sParty_Norman1[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 54,
+    .staticLevel = 1,
     .species = SPECIES_TAUROS,
     .heldItem = ITEM_LIFE_ORB,
     .ability = 1, //Sheer Force
@@ -7257,6 +7279,7 @@ static const struct TrainerMonCustomized sParty_Norman1[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_NAUGHTY,
     .lvl = 54,
+    .staticLevel = 1,
     .species = SPECIES_SNORLAX,
     .heldItem = ITEM_LEFTOVERS,
     .ability = 1, //Thick Fat
@@ -7264,24 +7287,28 @@ static const struct TrainerMonCustomized sParty_Norman1[] = {
     },
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
-    .lvl = 56,
+    .lvl = 58,
+    .staticLevel = 1,
     .species = SPECIES_SLAKING,
     .heldItem = ITEM_LUM_BERRY,
     .isShiny = 1,
-    .ability = 0, //truant
-    .moves = {MOVE_FACADE, MOVE_HAMMER_ARM, MOVE_EARTHQUAKE, MOVE_ZEN_HEADBUTT}
+    .ability = 0, // Truant
+    .moves = {MOVE_FACADE, MOVE_BRICK_BREAK, MOVE_SLACK_OFF, MOVE_PLAY_ROUGH}
     },
     {
     .spread = SPREAD_CHANSEY,
     .lvl = 55,
+    .staticLevel = 1,
     .species = SPECIES_BLISSEY,
     .heldItem = ITEM_ROCKY_HELMET,
-    .ability = 1, //Serene Grace
+    .ability = 2, // Healer
     .moves = {MOVE_HELPING_HAND, MOVE_SKILL_SWAP, MOVE_FACADE, MOVE_SOFT_BOILED}
     },
+    
     {
     .spread = SPREAD_31_IV_HP_SPATK_QUIET,
     .lvl = 55,
+    .staticLevel = 1,
     .species = SPECIES_PORYGON2,
     .heldItem = ITEM_EXPERT_BELT,
     .ability = 2, //Analytic
@@ -7289,7 +7316,8 @@ static const struct TrainerMonCustomized sParty_Norman1[] = {
     },
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
-    .lvl = 55,
+    .lvl = 56,
+    .staticLevel = 1,
     .species = SPECIES_LOPUNNY,
     .heldItem = ITEM_LOPUNNITE,
     .ability = 2, //Limber
@@ -7297,7 +7325,7 @@ static const struct TrainerMonCustomized sParty_Norman1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Norman2[] = {
+static const struct TrainerMon sParty_Norman2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 42,
@@ -7328,7 +7356,7 @@ static const struct TrainerMonItemCustomMoves sParty_Norman2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Norman3[] = {
+static const struct TrainerMon sParty_Norman3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 47,
@@ -7366,7 +7394,7 @@ static const struct TrainerMonItemCustomMoves sParty_Norman3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Norman4[] = {
+static const struct TrainerMon sParty_Norman4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 52,
@@ -7404,7 +7432,7 @@ static const struct TrainerMonItemCustomMoves sParty_Norman4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Norman5[] = {
+static const struct TrainerMon sParty_Norman5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 57,
@@ -7452,7 +7480,7 @@ static const struct TrainerMonItemCustomMoves sParty_Norman5[] = {
 // Player can now use Mega Evolutions
 // Route 115 North - Surf
 
-static const struct TrainerMonItemCustomMoves sParty_Koichi[] = { // Guardian of the Charizardite Y
+static const struct TrainerMon sParty_Koichi[] = { // Guardian of the Charizardite Y
     {
     .spread = SPREAD_31_IV_80_EV,
     .lvl = -1,
@@ -7494,7 +7522,7 @@ static const struct TrainerMonItemCustomMoves sParty_Koichi[] = { // Guardian of
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Timothy1[] = {
+static const struct TrainerMon sParty_Timothy1[] = {
     {
     .iv = 200,
     .lvl = 27,
@@ -7502,7 +7530,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Timothy1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Timothy2[] = {
+static const struct TrainerMon sParty_Timothy2[] = {
     {
     .iv = 210,
     .lvl = 33,
@@ -7511,7 +7539,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Timothy2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Timothy3[] = {
+static const struct TrainerMon sParty_Timothy3[] = {
     {
     .iv = 220,
     .lvl = 36,
@@ -7520,7 +7548,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Timothy3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Timothy4[] = {
+static const struct TrainerMon sParty_Timothy4[] = {
     {
     .iv = 230,
     .lvl = 39,
@@ -7529,7 +7557,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Timothy4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Timothy5[] = {
+static const struct TrainerMon sParty_Timothy5[] = {
     {
     .iv = 240,
     .lvl = 42,
@@ -7538,7 +7566,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Timothy5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jaiden[] = {
+static const struct TrainerMon sParty_Jaiden[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7551,7 +7579,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jaiden[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kyra[] = {
+static const struct TrainerMon sParty_Kyra[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7564,7 +7592,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kyra[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alix[] = {
+static const struct TrainerMon sParty_Alix[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7577,7 +7605,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alix[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Helene[] = {
+static const struct TrainerMon sParty_Helene[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7592,7 +7620,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Helene[] = {
 
 // Route 105
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Imani[] = {
+static const struct TrainerMon sParty_Imani[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7605,7 +7633,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Imani[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Dominik[] = {
+static const struct TrainerMon sParty_Dominik[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7618,7 +7646,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Dominik[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Foster[] = {
+static const struct TrainerMon sParty_Foster[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -7635,7 +7663,7 @@ static const struct TrainerMonItemCustomMoves sParty_Foster[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Luis[] = {
+static const struct TrainerMon sParty_Luis[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7648,7 +7676,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Luis[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Beverly[] = {
+static const struct TrainerMon sParty_Beverly[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7661,7 +7689,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Beverly[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Josue[] = {
+static const struct TrainerMon sParty_Josue[] = {
     {
     .iv = 50,
     .lvl = -3,
@@ -7674,7 +7702,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Josue[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Andres1[] = { // Guardian of Swampertite
+static const struct TrainerMon sParty_Andres1[] = { // Guardian of Swampertite
     {
     .spread = SPREAD_31_IV_80_EV,
     .lvl = 1,
@@ -7716,7 +7744,7 @@ static const struct TrainerMonItemCustomMoves sParty_Andres1[] = { // Guardian o
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andres2[] = {
+static const struct TrainerMon sParty_Andres2[] = {
     {
     .iv = 10,
     .lvl = 31,
@@ -7729,7 +7757,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Andres2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andres3[] = {
+static const struct TrainerMon sParty_Andres3[] = {
     {
     .iv = 20,
     .lvl = 33,
@@ -7747,7 +7775,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Andres3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andres4[] = {
+static const struct TrainerMon sParty_Andres4[] = {
     {
     .iv = 30,
     .lvl = 35,
@@ -7765,7 +7793,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Andres4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andres5[] = {
+static const struct TrainerMon sParty_Andres5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -7785,7 +7813,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Andres5[] = {
 
 // Route 107
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Denise[] = {
+static const struct TrainerMon sParty_Denise[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7798,7 +7826,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Denise[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tony1[] = {
+static const struct TrainerMon sParty_Tony1[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7812,7 +7840,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tony1[] = {
 
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tony2[] = {
+static const struct TrainerMon sParty_Tony2[] = {
     {
     .iv = 10,
     .lvl = 30,
@@ -7820,7 +7848,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tony2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tony3[] = {
+static const struct TrainerMon sParty_Tony3[] = {
     {
     .iv = 20,
     .lvl = 33,
@@ -7828,7 +7856,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tony3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tony4[] = {
+static const struct TrainerMon sParty_Tony4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -7841,7 +7869,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tony4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tony5[] = {
+static const struct TrainerMon sParty_Tony5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -7854,7 +7882,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tony5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_LisaAndRay[] = { // Gives Damp Rock
+static const struct TrainerMon sParty_LisaAndRay[] = { // Gives Damp Rock
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = -3,
@@ -7889,7 +7917,7 @@ static const struct TrainerMonItemCustomMoves sParty_LisaAndRay[] = { // Gives D
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Darrin[] = {
+static const struct TrainerMon sParty_Darrin[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -7902,7 +7930,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Darrin[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Beth[] = {
+static const struct TrainerMon sParty_Beth[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7915,7 +7943,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Beth[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Camron[] = {
+static const struct TrainerMon sParty_Camron[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7930,7 +7958,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Camron[] = {
 
 // Route 108
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Missy[] = {
+static const struct TrainerMon sParty_Missy[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7943,7 +7971,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Missy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Matthew[] = {
+static const struct TrainerMon sParty_Matthew[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7956,7 +7984,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Matthew[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tara[] = {
+static const struct TrainerMon sParty_Tara[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -7969,7 +7997,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tara[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Carolina[] = { // Guardian of Blastoisinite
+static const struct TrainerMon sParty_Carolina[] = { // Guardian of Blastoisinite
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 0,
@@ -7995,7 +8023,7 @@ static const struct TrainerMonItemCustomMoves sParty_Carolina[] = { // Guardian 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Cory1[] = { // Guardian of Blastoisinite 
+static const struct TrainerMon sParty_Cory1[] = { // Guardian of Blastoisinite 
     {
     .spread = SPREAD_31_IV_HP_SPDEF_CALM,
     .lvl = 0,
@@ -8022,7 +8050,7 @@ static const struct TrainerMonItemCustomMoves sParty_Cory1[] = { // Guardian of 
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cory2[] = {
+static const struct TrainerMon sParty_Cory2[] = {
     {
     .iv = 10,
     .lvl = 30,
@@ -8040,7 +8068,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cory2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cory3[] = {
+static const struct TrainerMon sParty_Cory3[] = {
     {
     .iv = 20,
     .lvl = 32,
@@ -8058,7 +8086,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cory3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cory4[] = {
+static const struct TrainerMon sParty_Cory4[] = {
     {
     .iv = 30,
     .lvl = 34,
@@ -8076,7 +8104,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cory4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cory5[] = {
+static const struct TrainerMon sParty_Cory5[] = {
     {
     .iv = 40,
     .lvl = 36,
@@ -8094,7 +8122,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cory5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jerome[] = {
+static const struct TrainerMon sParty_Jerome[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8109,7 +8137,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jerome[] = {
 
 // Abandoned Ship 1F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Charlie[] = {
+static const struct TrainerMon sParty_Charlie[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8122,7 +8150,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Charlie[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Demetrius[] = {
+static const struct TrainerMon sParty_Demetrius[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8140,7 +8168,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Demetrius[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Thalia1[] = {
+static const struct TrainerMon sParty_Thalia1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -8158,7 +8186,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Thalia1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Thalia2[] = {
+static const struct TrainerMon sParty_Thalia2[] = {
     {
     .iv = 10,
     .lvl = 34,
@@ -8171,7 +8199,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Thalia2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Thalia3[] = {
+static const struct TrainerMon sParty_Thalia3[] = {
     {
     .iv = 20,
     .lvl = 36,
@@ -8189,7 +8217,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Thalia3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Thalia4[] = {
+static const struct TrainerMon sParty_Thalia4[] = {
     {
     .iv = 30,
     .lvl = 38,
@@ -8207,7 +8235,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Thalia4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Thalia5[] = {
+static const struct TrainerMon sParty_Thalia5[] = {
     {
     .iv = 40,
     .lvl = 40,
@@ -8225,7 +8253,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Thalia5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_KiraAndDan1[] = {// Gives Choice Band
+static const struct TrainerMon sParty_KiraAndDan1[] = {// Gives Choice Band
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -8272,11 +8300,11 @@ static const struct TrainerMonItemCustomMoves sParty_KiraAndDan1[] = {// Gives C
     .species = SPECIES_SCIZOR,
     .heldItem = ITEM_CHOICE_BAND,
     .ability = 1, // Technician
-    .moves = {MOVE_AERIAL_ACE, MOVE_X_SCISSOR, MOVE_DOUBLE_HIT, MOVE_BULLET_PUNCH}
+    .moves = {MOVE_AERIAL_ACE, MOVE_X_SCISSOR, MOVE_CUT, MOVE_BULLET_PUNCH}
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan2[] = {
+static const struct TrainerMon sParty_KiraAndDan2[] = {
     {
     .iv = 10,
     .lvl = 30,
@@ -8289,7 +8317,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan3[] = {
+static const struct TrainerMon sParty_KiraAndDan3[] = {
     {
     .iv = 20,
     .lvl = 33,
@@ -8302,7 +8330,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan4[] = {
+static const struct TrainerMon sParty_KiraAndDan4[] = {
     {
     .iv = 30,
     .lvl = 36,
@@ -8315,7 +8343,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan5[] = {
+static const struct TrainerMon sParty_KiraAndDan5[] = {
     {
     .iv = 40,
     .lvl = 39,
@@ -8328,7 +8356,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_KiraAndDan5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Garrison[] = {
+static const struct TrainerMon sParty_Garrison[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8341,7 +8369,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Garrison[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jani[] = {
+static const struct TrainerMon sParty_Jani[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8356,7 +8384,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jani[] = {
 
 // Abandoned Ship B1F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Duncan[] = {
+static const struct TrainerMon sParty_Duncan[] = {
     {
     .iv = 0,
     .lvl = 0,
@@ -8371,7 +8399,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Duncan[] = {
 
 // Route 109 Water
 
-static const struct TrainerMonNoItemCustomMoves sParty_MelAndPaul[] = {
+static const struct TrainerMon sParty_MelAndPaul[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8398,7 +8426,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_MelAndPaul[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Elijah[] = {
+static const struct TrainerMon sParty_Elijah[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8411,7 +8439,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Elijah[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Carter[] = {
+static const struct TrainerMon sParty_Carter[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -8424,7 +8452,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Carter[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alice[] = {
+static const struct TrainerMon sParty_Alice[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8442,7 +8470,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alice[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_David[] = {
+static const struct TrainerMon sParty_David[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8455,7 +8483,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_David[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gwen[] = {
+static const struct TrainerMon sParty_Gwen[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8468,7 +8496,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gwen[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Austina[] = {
+static const struct TrainerMon sParty_Austina[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8484,7 +8512,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Austina[] = {
 
 // Route 118 - East - Surf
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Barny[] = {
+static const struct TrainerMon sParty_Barny[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8497,7 +8525,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Barny[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Chester[] = {
+static const struct TrainerMon sParty_Chester[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8510,7 +8538,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Chester[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Perry[] = {
+static const struct TrainerMon sParty_Perry[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8525,7 +8553,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Perry[] = {
 
 // Route 123 from Route 118
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Davis[] = {
+static const struct TrainerMon sParty_Davis[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8538,7 +8566,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Davis[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jazmyn[] = {
+static const struct TrainerMon sParty_Jazmyn[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8551,7 +8579,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jazmyn[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_MiuAndYuki[] = {
+static const struct TrainerMon sParty_MiuAndYuki[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8566,7 +8594,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MiuAndYuki[] = {
 
 // Route 119
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kent[] = {
+static const struct TrainerMon sParty_Kent[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8580,7 +8608,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kent[] = {
 
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Donald[] = {
+static const struct TrainerMon sParty_Donald[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -8593,7 +8621,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Donald[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Greg[] = {
+static const struct TrainerMon sParty_Greg[] = {
     {
     .iv = 0,
     .lvl = 0,
@@ -8606,7 +8634,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Greg[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Taylor[] = {
+static const struct TrainerMon sParty_Taylor[] = {
     {
     .iv = 100,
     .lvl = 0,
@@ -8619,7 +8647,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Taylor[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brent[] = {
+static const struct TrainerMon sParty_Brent[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -8632,7 +8660,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brent[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Doug[] = {
+static const struct TrainerMon sParty_Doug[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -8645,7 +8673,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Doug[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Chris[] = {
+static const struct TrainerMon sParty_Chris[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 0,
@@ -8680,7 +8708,7 @@ static const struct TrainerMonItemCustomMoves sParty_Chris[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Catherine1[] = {
+static const struct TrainerMon sParty_Catherine1[] = {
     {
     .iv = 150,
     .lvl = -3,
@@ -8703,7 +8731,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Catherine1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Catherine2[] = {
+static const struct TrainerMon sParty_Catherine2[] = {
     {
     .iv = 60,
     .lvl = 30,
@@ -8716,7 +8744,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Catherine2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Catherine3[] = {
+static const struct TrainerMon sParty_Catherine3[] = {
     {
     .iv = 70,
     .lvl = 33,
@@ -8729,7 +8757,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Catherine3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Catherine4[] = {
+static const struct TrainerMon sParty_Catherine4[] = {
     {
     .iv = 80,
     .lvl = 36,
@@ -8742,7 +8770,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Catherine4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Catherine5[] = {
+static const struct TrainerMon sParty_Catherine5[] = {
     {
     .iv = 90,
     .lvl = 39,
@@ -8755,7 +8783,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Catherine5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jackson1[] = {
+static const struct TrainerMon sParty_Jackson1[] = {
     {
     .iv = 50,
     .lvl = -3,
@@ -8768,7 +8796,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jackson1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jackson2[] = {
+static const struct TrainerMon sParty_Jackson2[] = {
     {
     .iv = 60,
     .lvl = 31,
@@ -8776,7 +8804,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jackson2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jackson3[] = {
+static const struct TrainerMon sParty_Jackson3[] = {
     {
     .iv = 70,
     .lvl = 34,
@@ -8784,7 +8812,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jackson3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jackson4[] = {
+static const struct TrainerMon sParty_Jackson4[] = {
     {
     .iv = 80,
     .lvl = 37,
@@ -8792,7 +8820,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jackson4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jackson5[] = {
+static const struct TrainerMon sParty_Jackson5[] = {
     {
     .iv = 90,
     .lvl = 39,
@@ -8805,7 +8833,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jackson5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Rachel[] = {
+static const struct TrainerMon sParty_Rachel[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8818,7 +8846,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Rachel[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Phil[] = {
+static const struct TrainerMon sParty_Phil[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -8831,7 +8859,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Phil[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Dayton[] = { // Guardian of Sceptilite
+static const struct TrainerMon sParty_Dayton[] = { // Guardian of Sceptilite
     {
     .spread = SPREAD_31_IV_HP_SPATK_QUIET,
     .lvl = -1,
@@ -8882,7 +8910,7 @@ static const struct TrainerMonItemCustomMoves sParty_Dayton[] = { // Guardian of
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Takashi[] = {
+static const struct TrainerMon sParty_Takashi[] = {
     {
     .iv = 200,
     .lvl = 5,
@@ -8895,7 +8923,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Takashi[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hugh[] = {
+static const struct TrainerMon sParty_Hugh[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8908,7 +8936,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Hugh[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fabian[] = {
+static const struct TrainerMon sParty_Fabian[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -8921,7 +8949,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fabian[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Yasu[] = {
+static const struct TrainerMon sParty_Yasu[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -8934,7 +8962,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Yasu[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Hideo[] = {
+static const struct TrainerMon sParty_Hideo[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -8951,7 +8979,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Hideo[] = {
 
 // Weather Institute Grunts
 
-static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst1[] = {
+static const struct TrainerMon sParty_GruntWeatherInst1[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = -2,
@@ -8970,7 +8998,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst2[] = {
+static const struct TrainerMon sParty_GruntWeatherInst2[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 0,
@@ -8989,7 +9017,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst3[] = {
+static const struct TrainerMon sParty_GruntWeatherInst3[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 1,
@@ -9009,7 +9037,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst3[] = {
 
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst4[] = {
+static const struct TrainerMon sParty_GruntWeatherInst4[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 2,
@@ -9028,7 +9056,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst5[] = {
+static const struct TrainerMon sParty_GruntWeatherInst5[] = {
     {
     .spread = SPREAD_31_IV_0_EV,
     .lvl = 1,
@@ -9047,7 +9075,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntWeatherInst5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_ShellyWeatherInstitute[] = {
+static const struct TrainerMon sParty_ShellyWeatherInstitute[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -9100,7 +9128,7 @@ static const struct TrainerMonItemCustomMoves sParty_ShellyWeatherInstitute[] = 
 
 // Fortree Gym
 
-static const struct TrainerMonItemCustomMoves sParty_Humberto[] = {
+static const struct TrainerMon sParty_Humberto[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 1,
@@ -9119,7 +9147,7 @@ static const struct TrainerMonItemCustomMoves sParty_Humberto[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Ashley[] = {
+static const struct TrainerMon sParty_Ashley[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = -1,
@@ -9138,7 +9166,7 @@ static const struct TrainerMonItemCustomMoves sParty_Ashley[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jared[] = {
+static const struct TrainerMon sParty_Jared[] = {
     {
     .spread = SPREAD_31_IV_HP_SPEED_JOLLY,
     .lvl = -1,
@@ -9157,7 +9185,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jared[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Flint[] = {
+static const struct TrainerMon sParty_Flint[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = -1,
@@ -9176,7 +9204,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flint[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Edwardo[] = {
+static const struct TrainerMon sParty_Edwardo[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = -1,
@@ -9195,7 +9223,7 @@ static const struct TrainerMonItemCustomMoves sParty_Edwardo[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Darius[] = {
+static const struct TrainerMon sParty_Darius[] = {
      {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 1,
@@ -9230,10 +9258,11 @@ static const struct TrainerMonItemCustomMoves sParty_Darius[] = {
     }
 };
 
-static const struct TrainerMonCustomized sParty_Winona1[] = {
+static const struct TrainerMon sParty_Winona1[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 65,
+    .staticLevel = 1,
     .species = SPECIES_GLISCOR,
     .ability = 2, // Poison Heal 
     .heldItem = ITEM_TOXIC_ORB,
@@ -9242,6 +9271,7 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 65,
+    .staticLevel = 1,
     .species = SPECIES_DRIFBLIM,
     .ability = 1, // Unburden
     .heldItem = ITEM_RED_CARD,
@@ -9250,6 +9280,7 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 66,
+    .staticLevel = 1,
     .species = SPECIES_ORICORIO_POM_POM,
     .ability = 0, // Dancer
     .heldItem = ITEM_PROTECTIVE_PADS,
@@ -9258,6 +9289,7 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 65,
+    .staticLevel = 1,
     .species = SPECIES_HONCHKROW,
     .ability = 1, // Super Luck
     .heldItem = ITEM_WEAKNESS_POLICY,
@@ -9266,6 +9298,7 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     {
     .spread = SPREAD_31_IV_SPATK_SPEED_HASTY,
     .lvl = 66,
+    .staticLevel = 1,
     .species = SPECIES_ALTARIA,
     .ability = 2, // Cloud Nine > Pixilate
     .heldItem = ITEM_ALTARIANITE,
@@ -9273,7 +9306,8 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     },
     {
     .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
-    .lvl = 67,
+    .lvl = 70,
+    .staticLevel = 1,
     .species = SPECIES_SWELLOW,
     .ability = 1, // Guts
     .heldItem = ITEM_SAFETY_GOGGLES,
@@ -9282,7 +9316,7 @@ static const struct TrainerMonCustomized sParty_Winona1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Winona2[] = {
+static const struct TrainerMon sParty_Winona2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 40,
@@ -9320,7 +9354,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winona2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Winona3[] = {
+static const struct TrainerMon sParty_Winona3[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 43,
@@ -9365,7 +9399,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winona3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Winona4[] = {
+static const struct TrainerMon sParty_Winona4[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 48,
@@ -9410,7 +9444,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winona4[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Winona5[] = {
+static const struct TrainerMon sParty_Winona5[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 53,
@@ -9457,7 +9491,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winona5[] = {
 
 // Route 120
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Clarissa[] = {
+static const struct TrainerMon sParty_Clarissa[] = {
     {
     .iv = 200,
     .lvl = -3,
@@ -9470,7 +9504,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Clarissa[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Robert1[] = {
+static const struct TrainerMon sParty_Robert1[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -9483,7 +9517,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Robert1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Robert2[] = {
+static const struct TrainerMon sParty_Robert2[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -9496,7 +9530,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Robert2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Robert3[] = {
+static const struct TrainerMon sParty_Robert3[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -9509,7 +9543,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Robert3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Robert4[] = {
+static const struct TrainerMon sParty_Robert4[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -9522,7 +9556,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Robert4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Robert5[] = {
+static const struct TrainerMon sParty_Robert5[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -9535,7 +9569,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Robert5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Colin[] = {
+static const struct TrainerMon sParty_Colin[] = {
     {
     .iv = 200,
     .lvl = 0,
@@ -9548,7 +9582,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Colin[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Riley[] = {
+static const struct TrainerMon sParty_Riley[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -9563,7 +9597,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Riley[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Leonel[] = {
+static const struct TrainerMon sParty_Leonel[] = {
     {
     .iv = 100,
     .lvl = -1,
@@ -9578,7 +9612,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Leonel[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Angelica[] = {
+static const struct TrainerMon sParty_Angelica[] = {
     {
     .iv = 250,
     .lvl = -2,
@@ -9593,7 +9627,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Angelica[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Callie[] = {
+static const struct TrainerMon sParty_Callie[] = {
     {
     .iv = 220,
     .lvl = -1,
@@ -9606,7 +9640,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Callie[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jennifer[] = {
+static const struct TrainerMon sParty_Jennifer[] = {
     {
     .iv = 200,
     .lvl = -1,
@@ -9619,7 +9653,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jennifer[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jenna[] = {
+static const struct TrainerMon sParty_Jenna[] = {
     {
     .iv = 250,
     .lvl = -2,
@@ -9637,7 +9671,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jenna[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Lorenzo[] = {
+static const struct TrainerMon sParty_Lorenzo[] = {
     {
     .iv = 250,
     .lvl = -3,
@@ -9655,7 +9689,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Lorenzo[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey1[] = {
+static const struct TrainerMon sParty_Jeffrey1[] = {
     {
     .iv = 150,
     .lvl = -2,
@@ -9678,7 +9712,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey2[] = {
+static const struct TrainerMon sParty_Jeffrey2[] = {
     {
     .iv = 10,
     .lvl = 31,
@@ -9696,7 +9730,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey3[] = {
+static const struct TrainerMon sParty_Jeffrey3[] = {
     {
     .iv = 20,
     .lvl = 34,
@@ -9714,7 +9748,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey4[] = {
+static const struct TrainerMon sParty_Jeffrey4[] = {
     {
     .iv = 30,
     .lvl = 36,
@@ -9737,7 +9771,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jeffrey4[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Jeffrey5[] = {
+static const struct TrainerMon sParty_Jeffrey5[] = {
     {
     .iv = 40,
     .lvl = 38,
@@ -9770,7 +9804,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Jeffrey5[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Chip[] = {
+static const struct TrainerMon sParty_Chip[] = {
     {
     .iv = 250,
     .lvl = -2,
@@ -9791,7 +9825,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Chip[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Keigo[] = { // Guardian of Pidgeotite
+static const struct TrainerMon sParty_Keigo[] = { // Guardian of Pidgeotite
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -9837,14 +9871,14 @@ static const struct TrainerMonItemCustomMoves sParty_Keigo[] = { // Guardian of 
     .lvl = 2,
     .species = SPECIES_SCIZOR,
     .heldItem = ITEM_SCIZORITE,
-    .ability = 0, // Speed Boost
+    .ability = 0, // Swarm
     .moves = {MOVE_AERIAL_ACE, MOVE_BUG_BITE, MOVE_KNOCK_OFF, MOVE_BULLET_PUNCH}
     }
 };
 
 //Route 121
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cale[] = {
+static const struct TrainerMon sParty_Cale[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -9857,7 +9891,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cale[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tammy[] = {
+static const struct TrainerMon sParty_Tammy[] = {
     {
     .iv = 200,
     .lvl = -3,
@@ -9870,7 +9904,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tammy[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jessica1[] = {
+static const struct TrainerMon sParty_Jessica1[] = {
     {
     .iv = 220,
     .lvl = 0,
@@ -9885,7 +9919,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jessica2[] = {
+static const struct TrainerMon sParty_Jessica2[] = {
     {
     .iv = 220,
     .lvl = 0,
@@ -9900,7 +9934,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jessica3[] = {
+static const struct TrainerMon sParty_Jessica3[] = {
     {
     .iv = 20,
     .lvl = 38,
@@ -9915,7 +9949,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jessica4[] = {
+static const struct TrainerMon sParty_Jessica4[] = {
     {
     .iv = 30,
     .lvl = 41,
@@ -9930,7 +9964,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jessica5[] = {
+static const struct TrainerMon sParty_Jessica5[] = {
     {
     .iv = 40,
     .lvl = 44,
@@ -9945,7 +9979,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jessica5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_KateAndJoy[] = { //Guardian of BEEDRILLITE 
+static const struct TrainerMon sParty_KateAndJoy[] = { //Guardian of BEEDRILLITE 
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 3,
@@ -9996,7 +10030,7 @@ static const struct TrainerMonItemCustomMoves sParty_KateAndJoy[] = { //Guardian
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Pat[] = {
+static const struct TrainerMon sParty_Pat[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -10029,7 +10063,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Pat[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Myles[] = {
+static const struct TrainerMon sParty_Myles[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -10062,7 +10096,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Myles[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Walter1[] = {
+static const struct TrainerMon sParty_Walter1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -10075,7 +10109,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Walter1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Walter2[] = {
+static const struct TrainerMon sParty_Walter2[] = {
     {
     .iv = 10,
     .lvl = 34,
@@ -10083,7 +10117,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Walter2[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Walter3[] = {
+static const struct TrainerMon sParty_Walter3[] = {
     {
     .iv = 20,
     .lvl = 36,
@@ -10098,7 +10132,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Walter3[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Walter4[] = {
+static const struct TrainerMon sParty_Walter4[] = {
     {
     .iv = 30,
     .lvl = 39,
@@ -10113,7 +10147,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Walter4[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Walter5[] = {
+static const struct TrainerMon sParty_Walter5[] = {
     {
     .iv = 40,
     .lvl = 41,
@@ -10134,7 +10168,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Walter5[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Vanessa[] = {
+static const struct TrainerMon sParty_Vanessa[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -10162,7 +10196,7 @@ static const struct TrainerMon sParty_Marcel[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cristin1[] = {
+static const struct TrainerMon sParty_Cristin1[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -10175,7 +10209,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cristin1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cristin2[] = {
+static const struct TrainerMon sParty_Cristin2[] = {
     {
     .iv = 110,
     .lvl = 35,
@@ -10188,7 +10222,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cristin2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cristin3[] = {
+static const struct TrainerMon sParty_Cristin3[] = {
     {
     .iv = 120,
     .lvl = 37,
@@ -10206,7 +10240,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cristin3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cristin4[] = {
+static const struct TrainerMon sParty_Cristin4[] = {
     {
     .iv = 130,
     .lvl = 39,
@@ -10224,7 +10258,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cristin4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cristin5[] = {
+static const struct TrainerMon sParty_Cristin5[] = {
     {
     .iv = 140,
     .lvl = 41,
@@ -10246,7 +10280,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cristin5[] = {
 
 // 2F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Mark[] = {
+static const struct TrainerMon sParty_Mark[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -10259,7 +10293,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Mark[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Leah[] = {
+static const struct TrainerMon sParty_Leah[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -10272,7 +10306,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Leah[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Zander[] = {
+static const struct TrainerMon sParty_Zander[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -10285,7 +10319,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Zander[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_DezAndLuke[] = {
+static const struct TrainerMon sParty_DezAndLuke[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -10322,7 +10356,7 @@ static const struct TrainerMonItemCustomMoves sParty_DezAndLuke[] = {
 
 // 3F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kayla[] = {
+static const struct TrainerMon sParty_Kayla[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -10335,7 +10369,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kayla[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_William[] = {
+static const struct TrainerMon sParty_William[] = {
     {
     .iv = 60,
     .lvl = -2,
@@ -10348,7 +10382,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_William[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle1[] = {
+static const struct TrainerMon sParty_Gabrielle1[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -10361,7 +10395,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle2[] = {
+static const struct TrainerMon sParty_Gabrielle2[] = {
     {
     .iv = 10,
     .lvl = 31,
@@ -10394,7 +10428,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle3[] = {
+static const struct TrainerMon sParty_Gabrielle3[] = {
     {
     .iv = 20,
     .lvl = 33,
@@ -10427,7 +10461,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle4[] = {
+static const struct TrainerMon sParty_Gabrielle4[] = {
     {
     .iv = 30,
     .lvl = 35,
@@ -10460,7 +10494,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle5[] = {
+static const struct TrainerMon sParty_Gabrielle5[] = {
     {
     .iv = 40,
     .lvl = 37,
@@ -10495,7 +10529,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Gabrielle5[] = {
 
 // 4F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Tasha[] = {
+static const struct TrainerMon sParty_Tasha[] = {
     {
     .iv = 200,
     .lvl = -2,
@@ -10510,7 +10544,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Tasha[] = {
 
 // 5F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Atsushi[] = {
+static const struct TrainerMon sParty_Atsushi[] = {
     {
     .iv = 100,
     .lvl = 1,
@@ -10525,7 +10559,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Atsushi[] = {
 
 // 6F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Valerie1[] = {
+static const struct TrainerMon sParty_Valerie1[] = {
     {
     .iv = 210,
     .lvl = 3,
@@ -10538,7 +10572,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Valerie1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Valerie2[] = {
+static const struct TrainerMon sParty_Valerie2[] = {
     {
     .iv = 10,
     .lvl = 31,
@@ -10551,7 +10585,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Valerie2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Valerie3[] = {
+static const struct TrainerMon sParty_Valerie3[] = {
     {
     .iv = 20,
     .lvl = 35,
@@ -10564,7 +10598,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Valerie3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Valerie4[] = {
+static const struct TrainerMon sParty_Valerie4[] = {
     {
     .iv = 30,
     .lvl = 40,
@@ -10577,7 +10611,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Valerie4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Valerie5[] = {
+static const struct TrainerMon sParty_Valerie5[] = {
     {
     .iv = 40,
     .lvl = 42,
@@ -10595,7 +10629,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Valerie5[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Cedric[] = {
+static const struct TrainerMon sParty_Cedric[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -10624,7 +10658,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Cedric[] = {
 
 // Mt Pyre Summit
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre1[] = {
+static const struct TrainerMon sParty_GruntMtPyre1[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -10643,7 +10677,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre1[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre2[] = {
+static const struct TrainerMon sParty_GruntMtPyre2[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 0,
@@ -10662,7 +10696,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre2[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre3[] = {
+static const struct TrainerMon sParty_GruntMtPyre3[] = {
     {
     .spread = SPREAD_31_IV_HP_SPATK_MODEST,
     .lvl = 0,
@@ -10681,7 +10715,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre3[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre4[] = {
+static const struct TrainerMon sParty_GruntMtPyre4[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 1,
@@ -10702,7 +10736,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMtPyre4[] = {
 
 // Route 123 from MT Pyre
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cameron1[] = {
+static const struct TrainerMon sParty_Cameron1[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -10715,7 +10749,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cameron1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cameron2[] = {
+static const struct TrainerMon sParty_Cameron2[] = {
     {
     .iv = 10,
     .lvl = 33,
@@ -10728,7 +10762,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cameron2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cameron3[] = {
+static const struct TrainerMon sParty_Cameron3[] = {
     {
     .iv = 20,
     .lvl = 38,
@@ -10741,7 +10775,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cameron3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cameron4[] = {
+static const struct TrainerMon sParty_Cameron4[] = {
     {
     .iv = 30,
     .lvl = 41,
@@ -10754,7 +10788,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cameron4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cameron5[] = {
+static const struct TrainerMon sParty_Cameron5[] = {
     {
     .iv = 40,
     .lvl = 45,
@@ -10767,7 +10801,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Cameron5[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Jonas[] = {
+static const struct TrainerMon sParty_Jonas[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -10782,7 +10816,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Jonas[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Kayley[] = {
+static const struct TrainerMon sParty_Kayley[] = {
     {
     .iv = 0,
     .lvl = 3,
@@ -10797,7 +10831,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Kayley[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Kindra[] = {
+static const struct TrainerMon sParty_Kindra[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -10810,7 +10844,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kindra[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ed[] = {
+static const struct TrainerMon sParty_Ed[] = {
     {
     .iv = 0,
     .lvl = 3,
@@ -10823,7 +10857,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ed[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Wendy[] = {
+static const struct TrainerMon sParty_Wendy[] = {
     {
     .iv = 200,
     .lvl = 5,
@@ -10850,7 +10884,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Wendy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alberto[] = {
+static const struct TrainerMon sParty_Alberto[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -10863,7 +10897,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alberto[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fernando1[] = {
+static const struct TrainerMon sParty_Fernando1[] = {
     {
     .iv = 0,
     .lvl = 4,
@@ -10876,7 +10910,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fernando1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fernando2[] = {
+static const struct TrainerMon sParty_Fernando2[] = {
     {
     .iv = 10,
     .lvl = 35,
@@ -10894,7 +10928,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fernando2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fernando3[] = {
+static const struct TrainerMon sParty_Fernando3[] = {
     {
     .iv = 20,
     .lvl = 37,
@@ -10912,7 +10946,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fernando3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fernando4[] = {
+static const struct TrainerMon sParty_Fernando4[] = {
     {
     .iv = 30,
     .lvl = 39,
@@ -10930,7 +10964,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fernando4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fernando5[] = {
+static const struct TrainerMon sParty_Fernando5[] = {
     {
     .iv = 40,
     .lvl = 41,
@@ -10948,7 +10982,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fernando5[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Braxton[] = {
+static const struct TrainerMon sParty_Braxton[] = {
     {
     .iv = 100,
     .lvl = 2,
@@ -10981,7 +11015,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Braxton[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fredrick[] = {
+static const struct TrainerMon sParty_Fredrick[] = {
     {
     .iv = 100,
     .lvl = 1,
@@ -10994,7 +11028,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Fredrick[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Jacki1[] = {//Lopunnite
+static const struct TrainerMon sParty_Jacki1[] = {//Lopunnite
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 1,
@@ -11045,7 +11079,7 @@ static const struct TrainerMonItemCustomMoves sParty_Jacki1[] = {//Lopunnite
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jacki2[] = {
+static const struct TrainerMon sParty_Jacki2[] = {
     {
     .iv = 10,
     .lvl = 34,
@@ -11058,7 +11092,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jacki2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jacki3[] = {
+static const struct TrainerMon sParty_Jacki3[] = {
     {
     .iv = 20,
     .lvl = 37,
@@ -11071,7 +11105,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jacki3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jacki4[] = {
+static const struct TrainerMon sParty_Jacki4[] = {
     {
     .iv = 30,
     .lvl = 40,
@@ -11084,7 +11118,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jacki4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jacki5[] = {
+static const struct TrainerMon sParty_Jacki5[] = {
     {
     .iv = 40,
     .lvl = 43,
@@ -11101,7 +11135,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jacki5[] = {
 
 // Floor 1
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout1[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout1[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -11114,7 +11148,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout2[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout2[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -11129,7 +11163,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout2[] = {
 
 // Floor 2F 1R
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout14[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout14[] = {
     {
     .iv = 200,
     .lvl = 2,
@@ -11147,7 +11181,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout14[] = 
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout3[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout3[] = {
     {
     .iv = 200,
     .lvl = 2,
@@ -11165,7 +11199,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout4[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout4[] = {
     {
     .iv = 0,
     .lvl = 1,
@@ -11178,7 +11212,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout5[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout5[] = {
     {
     .iv = 0,
     .lvl = 2,
@@ -11193,7 +11227,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout5[] = {
 
 // Floor 2F 2R
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout6[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout6[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
     .lvl = 2,
@@ -11220,7 +11254,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout6[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout15[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout15[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
     .lvl = 0,
@@ -11239,7 +11273,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout15[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout7[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout7[] = {
     {
     .spread = SPREAD_31_IV_ATK_SPEED_NAUGHTY,
     .lvl = 2,
@@ -11258,7 +11292,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout7[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout8[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout8[] = {
      {
     .spread = SPREAD_31_IV_SPATK_SPEED_HASTY,
     .lvl = 3,
@@ -11279,7 +11313,7 @@ static const struct TrainerMonItemCustomMoves sParty_GruntMagmaHideout8[] = {
 
 // Floor 3F 1R
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout9[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout9[] = {
     {
     .iv = 220,
     .lvl = 3,
@@ -11292,7 +11326,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout9[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout16[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout16[] = {
     {
     .iv = 210,
     .lvl = 2,
@@ -11307,7 +11341,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout16[] = 
 
 // Floor 3F 2R
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout10[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout10[] = {
     {
     .iv = 210,
     .lvl = 2,
@@ -11322,7 +11356,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout10[] = 
 
 // Floor 4F
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout11[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout11[] = {
     {
     .iv = 200,
     .lvl = 1,
@@ -11335,7 +11369,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout11[] = 
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout12[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout12[] = {
     {
     .iv = 200,
     .lvl = 2,
@@ -11348,7 +11382,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout12[] = 
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout13[] = {
+static const struct TrainerMon sParty_GruntMagmaHideout13[] = {
     {
     .iv = 200,
     .lvl = 2,
@@ -11361,7 +11395,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout13[] = 
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_TabithaMagmaHideout[] = {
+static const struct TrainerMon sParty_TabithaMagmaHideout[] = {
     {
     .spread = SPREAD_31_IV_HP_SPEED_TIMID,
     .lvl = 0,
@@ -11404,7 +11438,7 @@ static const struct TrainerMonItemCustomMoves sParty_TabithaMagmaHideout[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_MaxieMagmaHideout[] = {
+static const struct TrainerMon sParty_MaxieMagmaHideout[] = {
     {
     .spread = SPREAD_31_IV_HP_DEF_SPDEF_SASSY,
     .lvl = 2,
@@ -11459,7 +11493,7 @@ static const struct TrainerMonItemCustomMoves sParty_MaxieMagmaHideout[] = {
 
 //todo - the rest of the mess
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntSeafloorCavern4[] = {
+static const struct TrainerMon sParty_GruntSeafloorCavern4[] = {
     {
     .lvl = 36,
     .species = SPECIES_CARVANHA,
@@ -11473,14 +11507,14 @@ static const struct TrainerMon sParty_Declan[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntSpaceCenter1[] = {
+static const struct TrainerMon sParty_GruntSpaceCenter1[] = {
     {
     .lvl = 32,
     .species = SPECIES_NUMEL,
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntAquaHideout5[] = {
+static const struct TrainerMon sParty_GruntAquaHideout5[] = {
     {
     .lvl = 32,
     .species = SPECIES_CARVANHA,
@@ -11494,7 +11528,7 @@ static const struct TrainerMon sParty_GruntAquaHideout6[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Matt[] = {
+static const struct TrainerMon sParty_Matt[] = {
     {
     .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
     .lvl = 34,
@@ -11507,7 +11541,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Matt[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_ShellySeafloorCavern[] = {
+static const struct TrainerMon sParty_ShellySeafloorCavern[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 37,
@@ -11538,7 +11572,7 @@ static const struct TrainerMon sParty_Archie[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Rose1[] = {
+static const struct TrainerMon sParty_Rose1[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -11649,7 +11683,7 @@ static const struct TrainerMon sParty_Rose5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy1[] = {
+static const struct TrainerMon sParty_GabbyAndTy1[] = {
     {
     .iv = 50,
     .lvl = -3,
@@ -11729,7 +11763,7 @@ static const struct TrainerMon sParty_GabbyAndTy6[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Vincent[] = {
+static const struct TrainerMon sParty_Vincent[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 44,
@@ -11760,7 +11794,7 @@ static const struct TrainerMon sParty_Leroy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Edgar[] = {
+static const struct TrainerMon sParty_Edgar[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 43,
@@ -11845,7 +11879,7 @@ static const struct TrainerMon sParty_Owen[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Warren[] = {
+static const struct TrainerMon sParty_Warren[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 33,
@@ -11858,7 +11892,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Warren[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Keira[] = {
+static const struct TrainerMon sParty_Keira[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 45,
@@ -11871,7 +11905,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Keira[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hope[] = {
+static const struct TrainerMon sParty_Hope[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 45,
@@ -11936,7 +11970,7 @@ static const struct TrainerMon sParty_Julie[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Patricia[] = {
+static const struct TrainerMon sParty_Patricia[] = {
     {
     .lvl = 41,
     .species = SPECIES_BANETTE,
@@ -11947,7 +11981,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Patricia[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Daphne[] = {
+static const struct TrainerMon sParty_Daphne[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 39,
@@ -11980,7 +12014,7 @@ static const struct TrainerMon sParty_GruntSpaceCenter2[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Brianna[] = {
+static const struct TrainerMon sParty_Brianna[] = {
     {
     .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
     .lvl = 40,
@@ -11998,7 +12032,7 @@ static const struct TrainerMon sParty_Naomi[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Connie[] = {
+static const struct TrainerMon sParty_Connie[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 40,
@@ -12048,7 +12082,7 @@ static const struct TrainerMon sParty_Tiffany[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Mollie[] = {
+static const struct TrainerMon sParty_Mollie[] = {
     {
     .lvl = 33,
     .species = SPECIES_WHISCASH,
@@ -12068,7 +12102,7 @@ static const struct TrainerMon sParty_Garret[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
+static const struct TrainerMon sParty_Sawyer1[] = {
     {
     .iv = 0,
     .lvl = 0,
@@ -12081,7 +12115,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer2[] = {
+static const struct TrainerMon sParty_Sawyer2[] = {
     {
     .iv = 10,
     .lvl = 0,
@@ -12094,7 +12128,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer3[] = {
+static const struct TrainerMon sParty_Sawyer3[] = {
     {
     .iv = 20,
     .lvl = 0,
@@ -12112,7 +12146,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer3[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer4[] = {
+static const struct TrainerMon sParty_Sawyer4[] = {
     {
     .iv = 30,
     .lvl = 0,
@@ -12130,7 +12164,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer4[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer5[] = {
+static const struct TrainerMon sParty_Sawyer5[] = {
     {
     .iv = 40,
     .lvl = 0,
@@ -12292,7 +12326,7 @@ static const struct TrainerMon sParty_Chad[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hitoshi[] = {
+static const struct TrainerMon sParty_Hitoshi[] = {
     {
     .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
     .lvl = 32,
@@ -12313,7 +12347,7 @@ static const struct TrainerMon sParty_Kiyo[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Yuji[] = {
+static const struct TrainerMon sParty_Yuji[] = {
     {
     .iv = 100,
     .lvl = -3,
@@ -12326,7 +12360,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Yuji[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntAquaHideout7[] = {
+static const struct TrainerMon sParty_GruntAquaHideout7[] = {
     {
     .lvl = 31,
     .species = SPECIES_POOCHYENA,
@@ -12344,7 +12378,7 @@ static const struct TrainerMon sParty_GruntAquaHideout8[] = {
     }
 };
  // Route 118
-static const struct TrainerMonNoItemDefaultMoves sParty_Dalton1[] = {
+static const struct TrainerMon sParty_Dalton1[] = {
     {
     .iv = 0,
     .lvl = -2,
@@ -12429,7 +12463,7 @@ static const struct TrainerMon sParty_Dalton5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Justin[] = {
+static const struct TrainerMon sParty_Justin[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -12437,7 +12471,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Justin[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Preston[] = {
+static const struct TrainerMon sParty_Preston[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 36,
@@ -12461,7 +12495,7 @@ static const struct TrainerMon sParty_Blake[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Joshua[] = {
+static const struct TrainerMon sParty_Joshua[] = {
     {
     .lvl = 41,
     .species = SPECIES_KADABRA,
@@ -12472,7 +12506,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Joshua[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Hannah[] = {
+static const struct TrainerMon sParty_Hannah[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 36,
@@ -12496,7 +12530,7 @@ static const struct TrainerMon sParty_Maura[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alexis[] = {
+static const struct TrainerMon sParty_Alexis[] = {
     {
     .lvl = 41,
     .species = SPECIES_KIRLIA,
@@ -12507,7 +12541,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alexis[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Micah[] = {
+static const struct TrainerMon sParty_Micah[] = {
     {
     .lvl = 44,
     .species = SPECIES_MANECTRIC,
@@ -12525,7 +12559,7 @@ static const struct TrainerMon sParty_Thomas[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Sidney[] = {
+static const struct TrainerMon sParty_Sidney[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 46,
@@ -12677,7 +12711,7 @@ static const struct TrainerMon sParty_Drake[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_TateAndLiza1[] = {
+static const struct TrainerMon sParty_TateAndLiza1[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 41,
@@ -12746,7 +12780,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ted[] = {
+static const struct TrainerMon sParty_Ted[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -12772,7 +12806,7 @@ static const struct TrainerMon sParty_Paul[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Georgia[] = {
+static const struct TrainerMon sParty_Georgia[] = {
     {
     .iv = 10,
     .lvl = -3,
@@ -12785,7 +12819,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Georgia[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Colton[] = {
+static const struct TrainerMon sParty_Colton[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = -3,
@@ -12830,7 +12864,7 @@ static const struct TrainerMonItemCustomMoves sParty_Colton[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Bethany[] = {
+static const struct TrainerMon sParty_Bethany[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 35,
@@ -12851,7 +12885,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Bethany[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Quincy[] = {
+static const struct TrainerMon sParty_Quincy[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 43,
@@ -12881,7 +12915,7 @@ static const struct TrainerMon sParty_Katelynn[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Eddie[] = {
+static const struct TrainerMon sParty_Eddie[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -12894,7 +12928,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Eddie[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Wallace[] = {
+static const struct TrainerMon sParty_Wallace[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 57,
@@ -12939,7 +12973,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wallace[] = {
     }
 };
  // Route 118
-static const struct TrainerMonNoItemDefaultMoves sParty_Wade[] = {
+static const struct TrainerMon sParty_Wade[] = {
     {
     .iv = 0,
     .lvl = -1,
@@ -12983,7 +13017,7 @@ static const struct TrainerMon sParty_Ronald[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Camden[] = {
+static const struct TrainerMon sParty_Camden[] = {
     {
     .lvl = 33,
     .species = SPECIES_STARYU,
@@ -12994,7 +13028,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Camden[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Isaiah1[] = {
+static const struct TrainerMon sParty_Isaiah1[] = {
     {
     .lvl = 35,
     .species = SPECIES_STARYU,
@@ -13222,7 +13256,7 @@ static const struct TrainerMon sParty_Aaron[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Presley[] = {
+static const struct TrainerMon sParty_Presley[] = {
     {
     .lvl = 33,
     .species = SPECIES_TROPIUS,
@@ -13233,7 +13267,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Presley[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Benny[] = {
+static const struct TrainerMon sParty_Benny[] = {
     {
     .lvl = 36,
     .species = SPECIES_SWELLOW,
@@ -13248,7 +13282,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Benny[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alex[] = {
+static const struct TrainerMon sParty_Alex[] = {
     {
     .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
     .lvl = 33,
@@ -13268,7 +13302,7 @@ static const struct TrainerMon sParty_Beck[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Dianne[] = {
+static const struct TrainerMon sParty_Dianne[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 43,
@@ -13285,7 +13319,7 @@ static const struct TrainerMonItemCustomMoves sParty_Dianne[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Cora[] = {
+static const struct TrainerMon sParty_Cora[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 27,
@@ -13301,7 +13335,7 @@ static const struct TrainerMon sParty_Paula[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jenny1[] = {
+static const struct TrainerMon sParty_Jenny1[] = {
     {
     .lvl = 34,
     .species = SPECIES_WAILMER,
@@ -13477,7 +13511,7 @@ static const struct TrainerMon sParty_Jenny5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Martha[] = {
+static const struct TrainerMon sParty_Martha[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -13490,7 +13524,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Martha[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ernest1[] = {
+static const struct TrainerMon sParty_Ernest1[] = {
     {
     .lvl = 33,
     .species = SPECIES_WINGULL,
@@ -13501,7 +13535,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Ernest1[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Phillip[] = {
+static const struct TrainerMon sParty_Phillip[] = {
     {
     .lvl = 44,
     .species = SPECIES_TENTACRUEL,
@@ -13527,7 +13561,7 @@ static const struct TrainerMon sParty_Leonard[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Ernest2[] = {
+static const struct TrainerMon sParty_Ernest2[] = {
     {
     .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
     .lvl = 36,
@@ -13599,7 +13633,7 @@ static const struct TrainerMon sParty_Ernest5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Annika[] = {
+static const struct TrainerMon sParty_Annika[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 39,
@@ -13616,7 +13650,7 @@ static const struct TrainerMonItemCustomMoves sParty_Annika[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Auron[] = {
+static const struct TrainerMon sParty_Auron[] = {
     {
     .lvl = 33,
     .species = SPECIES_MANECTRIC,
@@ -13682,7 +13716,7 @@ static const struct TrainerMon sParty_Conor[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_TabithaMossdeep[] = {
+static const struct TrainerMon sParty_TabithaMossdeep[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 36,
@@ -13700,7 +13734,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TabithaMossdeep[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_WallyVR1[] = {
+static const struct TrainerMon sParty_WallyVR1[] = {
     {
     .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
     .lvl = 44,
@@ -13733,7 +13767,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_WallyVR1[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Mitchell[] = {
+static const struct TrainerMon sParty_Mitchell[] = {
     {
     .lvl = 43,
     .species = SPECIES_LUNATONE,
@@ -13746,7 +13780,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Mitchell[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Halle[] = {
+static const struct TrainerMon sParty_Halle[] = {
     {
     .lvl = 43,
     .species = SPECIES_SABLEYE,
@@ -13757,7 +13791,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Halle[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sebastian[] = {
+static const struct TrainerMon sParty_Sebastian[] = {
     {
     .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
     .lvl = 39,
@@ -13765,7 +13799,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sebastian[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sophia[] = {
+static const struct TrainerMon sParty_Sophia[] = {
     {
     .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
     .lvl = 38,
@@ -13778,7 +13812,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sophia[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntSeafloorCavern5[] = {
+static const struct TrainerMon sParty_GruntSeafloorCavern5[] = {
     {
     .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
     .lvl = 35,
@@ -13802,7 +13836,7 @@ static const struct TrainerMon sParty_GruntUnused[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Sylvia[] = {
+static const struct TrainerMon sParty_Sylvia[] = {
     {
     .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
     .lvl = 36,
@@ -13841,7 +13875,7 @@ static const struct TrainerMon sParty_Harrison[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Clarence[] = {
+static const struct TrainerMon sParty_Clarence[] = {
     {
     .lvl = 34,
     .species = SPECIES_SHARPEDO,
@@ -13931,7 +13965,7 @@ static const struct TrainerMon sParty_Macey[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Paxton[] = {
+static const struct TrainerMon sParty_Paxton[] = {
     {
     .lvl = 33,
     .species = SPECIES_SWELLOW,
@@ -13949,7 +13983,7 @@ static const struct TrainerMon sParty_Isabella[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jonathan[] = {
+static const struct TrainerMon sParty_Jonathan[] = {
     {
     .lvl = 33,
     .species = SPECIES_KECLEON,
@@ -14008,7 +14042,7 @@ static const struct TrainerMon sParty_Crissy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Alan[] = {
+static const struct TrainerMon sParty_Alan[] = {
     {
     .iv = 0,
     .lvl = -3,
@@ -14026,7 +14060,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alan[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_LeaAndJed[] = {
+static const struct TrainerMon sParty_LeaAndJed[] = {
     {
     .lvl = 45,
     .species = SPECIES_LUVDISC,
@@ -14037,7 +14071,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_LeaAndJed[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Jonah[] = {
+static const struct TrainerMon sParty_Jonah[] = {
     {
     .lvl = 30,
     .species = SPECIES_WAILMER,
@@ -14157,7 +14191,7 @@ static const struct TrainerMon sParty_Tisha[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_KimAndIris[] = {
+static const struct TrainerMon sParty_KimAndIris[] = {
     {
     .lvl = 32,
     .species = SPECIES_SWABLU,
@@ -14170,7 +14204,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_KimAndIris[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_JohnAndJay1[] = {
+static const struct TrainerMon sParty_JohnAndJay1[] = {
     {
     .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
     .lvl = 39,
@@ -14311,20 +14345,20 @@ static const struct TrainerMon sParty_LilaAndRoy5[] = {
     }
 };
  // Route 118
-static const struct TrainerMonNoItemDefaultMoves sParty_Deandre[] = {
+static const struct TrainerMon sParty_Deandre[] = {
     {
     .iv = 0,
-    .lvl = -2,
+    .lvl = 0,
     .species = SPECIES_ZUBAT,
     },
     {
     .iv = 0,
-    .lvl = -2,
+    .lvl = 0,
     .species = SPECIES_DUGTRIO,
     },
     {
     .iv = 0,
-    .lvl = -3,
+    .lvl = 1,
     .species = SPECIES_DUGTRIO_ALOLAN,
     }
 };
@@ -14369,7 +14403,7 @@ static const struct TrainerMon sParty_Makayla[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_TateAndLiza2[] = {
+static const struct TrainerMon sParty_TateAndLiza2[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 48,
@@ -14708,7 +14742,7 @@ static const struct TrainerMon sParty_Juan5[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Steven[] = {
+static const struct TrainerMon sParty_Steven[] = {
     {
     .spread = SPREAD_0_IV_EV,
     .lvl = 77,
@@ -14802,7 +14836,7 @@ static const struct TrainerMon sParty_Brandon[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Pablo2[] = {
+static const struct TrainerMon sParty_Pablo2[] = {
     {
     .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
     .lvl = 37,
@@ -14936,7 +14970,7 @@ static const struct TrainerMon sParty_Koji5[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Mariela[] = {
+static const struct TrainerMon sParty_Mariela[] = {
     {
     .lvl = 41,
     .species = SPECIES_CHIMECHO,

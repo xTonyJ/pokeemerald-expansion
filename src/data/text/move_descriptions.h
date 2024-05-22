@@ -1,4 +1,4 @@
-
+/*
 #if B_BINDING_TURNS >= GEN_5
 #define BINDING_TURNS "4 or 5"
 #else
@@ -3236,21 +3236,9 @@ static const u8 sCombatTorqueDescription[] = _(
 static const u8 sMagicalTorqueDescription[] = _(
     "---");
 
-static const u8 sPsybladeDescription[] = _(
-    "This move's power increases\n"
-    "when on Electric Terrain.");
-
-static const u8 sHydroSteamDescription[] = _(
-    "This move's power increases\n"
-    "under harsh sunlight.");
-
 static const u8 sBackflipDescription[] = _(
     "Backflips off the target and\n"
     "returns to party after damage.");
-
-const u8 gNotDoneYetDescription[] = _(
-    "This move can't be used. Its\n"
-    "effect is in development.");
 
 #undef BINDING_TURNS
 
@@ -5651,4 +5639,4 @@ const u8 *const gMoveFourLineDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_ASTRAL_BARRAGE    - 1] = sMoveFourLineDescription_AstralBarrage,
     [MOVE_EERIE_SPELL       - 1] = sMoveFourLineDescription_EerieSpell,
     [MOVE_BACKFLIP          - 1] = sMoveFourLineDescription_Backflip,
-};
+};*/

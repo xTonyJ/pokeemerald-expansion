@@ -540,8 +540,6 @@ gSpecials::
 	def_special ScriptMenu_CreatePKMNCenterMoveTutorMultichoice
 	def_special GetPKMNCenterMoveListMultichoice
 	def_special GetBattleFrontierTutorMoveIndex
-	@def_special ChangePokemonNature
-	@def_special BufferChosenMonNature
 	def_special ChangeChosenMonIVs
 	def_special IncreaseChosenMonEVs
 	def_special BufferChosenMonIV
@@ -560,14 +558,6 @@ gSpecials::
 	def_special SecretMenu_Grinding
 	def_special GetLevelCap
 	def_special GetLevelCap2
-	def_special CountRotomInParty
-	def_special GetRotomState
-	def_special RotomForgetSpecialMove
-	def_special ChangeRotomForm
-	def_special TeachRotomMove
-	def_special IsSelectedMonRotom
-	def_special DoesRotomKnowSpecialMove
-	def_special GetRotomNewSpecialMove
 	def_special GetHighestLevelInPlayerParty
 	def_special GetNumberSprayStrength
 	def_special GetSprayId
@@ -587,3 +577,5 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveEVs
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
+	def_special PokeVialCharges
+	def_special ScriptGetPartyMonSpeciesRegional

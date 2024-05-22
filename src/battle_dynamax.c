@@ -513,7 +513,7 @@ static u32 GetMaxMoveStatusEffect(u16 move)
         case MAX_EFFECT_MEAN_LOOK:
             return STATUS2_ESCAPE_PREVENTION;
         case MAX_EFFECT_TORMENT_FOES:
-            return STATUS2_TORMENT;
+            return STATUS4_TORMENT;
         default:
             return STATUS1_NONE;
     }
@@ -960,7 +960,6 @@ void BS_TrySetStatus2(void)
             if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
                 && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
                 && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
-                && atkGender != defGender
                 && atkGender != MON_GENDERLESS
                 && defGender != MON_GENDERLESS)
             {
@@ -980,11 +979,11 @@ void BS_TrySetStatus2(void)
                 effect++;
             }
             break;
-        case STATUS2_TORMENT:
-            if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT)
+        case STATUS4_TORMENT:
+            if (!(gBattleMons[gBattlerTarget].status2 & STATUS4_TORMENT)
                 && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL))
             {
-                gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
+                gBattleMons[gBattlerTarget].status2 |= STATUS4_TORMENT;
                 gDisableStructs[gBattlerTarget].tormentTimer = 3; // 3 turns excluding current turn
                 gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                 effect++;

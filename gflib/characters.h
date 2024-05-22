@@ -268,6 +268,10 @@
 #define PLACEHOLDER_ID_MAXIE                0xE
 #define PLACEHOLDER_ID_KYOGRE               0xF
 #define PLACEHOLDER_ID_GROUDON              0x10
+// Fixed-case placeholders
+// These behave the same as their (id & 0x7F),
+// but prepend CHAR_FIXED_CASE
+#define PLACEHOLDER_FIXED_MASK       0x80
 
 // battle placeholders are located in battle_message.h
 

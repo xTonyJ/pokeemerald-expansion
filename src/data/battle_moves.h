@@ -1,4 +1,4 @@
-const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
+/*const struct BattleMove gMovesInfo[MOVES_COUNT_Z] =
 {
     [MOVE_NONE] =
     {
@@ -14162,4 +14162,4 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
     },
-};
+};*/

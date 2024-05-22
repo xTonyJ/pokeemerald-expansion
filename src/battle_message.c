@@ -819,7 +819,7 @@ static const u8 sText_StockpiledEffectWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX}'s 
 static const u8 sText_MoveBlockedByDynamax[] = _("The move was blocked by\nthe power of Dynamax!");
 static const u8 sText_PkmnRevivedReadyToFight[] = _("{B_BUFF1} was revived and\nis ready to fight again!");
 // Sapped
-static const u8 sText_PkmnWasSapped[] = _("{B_ATK_NAME_WITH_PREFIX} was sapped by {B_DEF_NAME_WITH_PREFIX}!\nAll attackers will leech a bit of health");
+static const u8 sText_PkmnWasSapped[] = _("{B_DEF_NAME_WITH_PREFIX} was sapped by {B_ATK_NAME_WITH_PREFIX}!\nAll attackers will leech a bit of health");
 // New Ability Strings
 static const u8 sText_BattlerAbilitySetUpTrickRoom[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s Twisted Dimension\nset up Trick Room!");
 static const u8 sText_BattlerAbilitySetUpTailwind[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s Gathering Winds\nsummoned Tailwind!");
@@ -2491,7 +2491,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .fgColor = 1,
         .shadowColor = 6,
     },
-    { // 24 "type" super-effective
+    [B_WIN_TYPE_SUPER_EFF] = { // 24 "type" super-effective
 	.fillValue = PIXEL_FILL(0xE),
 	.fontId = 7,
 	.x = 0,
@@ -2501,9 +2501,9 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 	.speed = 0,
 	.fgColor = 6,
 	.bgColor = 14,
-	.shadowColor = 5,
-},
-{ // 25 "type" not very effective
+    .shadowColor = 5,
+    },
+    [B_WIN_TYPE_NOT_VERY_EFF] = { // 25 "type" not very effective
 	.fillValue = PIXEL_FILL(0xE),
 	.fontId = 7,
 	.x = 0,
@@ -2514,8 +2514,8 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 	.fgColor = 1,
 	.bgColor = 14,
 	.shadowColor = 3,
-},
-{ // 26 "type" no effect
+    },
+    [B_WIN_TYPE_NO_EFF] = { // 26 "type" no effect
 	.fillValue = PIXEL_FILL(0xE),
 	.fontId = 7,
 	.x = 0,
@@ -2525,8 +2525,8 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 	.speed = 0,
 	.fgColor = 11,
 	.bgColor = 14,
-	.shadowColor = 11,
-},
+	.shadowColor = 15,
+    },
 };
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
@@ -2759,6 +2759,42 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .fgColor = 2,
         .bgColor = 1,
         .shadowColor = 3,
+    },
+    [B_WIN_TYPE_SUPER_EFF] = { // 24 "type" super-effective
+	.fillValue = PIXEL_FILL(0xE),
+	.fontId = 7,
+	.x = 0,
+	.y = 1,
+	.letterSpacing = 0,
+	.lineSpacing = 0,
+	.speed = 0,
+	.fgColor = 6,
+	.bgColor = 14,
+    .shadowColor = 5,
+    },
+    [B_WIN_TYPE_NOT_VERY_EFF] = { // 25 "type" not very effective
+	.fillValue = PIXEL_FILL(0xE),
+	.fontId = 7,
+	.x = 0,
+	.y = 1,
+	.letterSpacing = 0,
+	.lineSpacing = 0,
+	.speed = 0,
+	.fgColor = 1,
+	.bgColor = 14,
+	.shadowColor = 3,
+    },
+    [B_WIN_TYPE_NO_EFF] = { // 26 "type" no effect
+	.fillValue = PIXEL_FILL(0xE),
+	.fontId = 7,
+	.x = 0,
+	.y = 1,
+	.letterSpacing = 0,
+	.lineSpacing = 0,
+	.speed = 0,
+	.fgColor = 11,
+	.bgColor = 14,
+	.shadowColor = 15,
     },
 };
 

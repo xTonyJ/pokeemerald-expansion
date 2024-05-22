@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
 #define GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
-
+/*
 #define EFFECT_HIT                          0
 #define EFFECT_SLEEP                        1
 #define EFFECT_POISON_HIT                   2
@@ -407,7 +407,7 @@
 #define EFFECT_REVIVAL_BLESSING             401
 #define EFFECT_SAP_HIT                      402
 
-#define NUM_BATTLE_MOVE_EFFECTS             403
+#define NUM_BATTLE_MOVE_EFFECTS             403*/
 enum {
     EFFECT_PLACEHOLDER,
     EFFECT_HIT,

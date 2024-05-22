@@ -343,6 +343,7 @@ Route120_EventScript_Angelica::
 	end
 
 Route120_EventScript_Keigo::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_KEIGO, Route120_Text_KeigoIntro, Route120_Text_KeigoDefeat
 	msgbox Route120_Text_KeigoPostBattle, MSGBOX_AUTOCLOSE
 	end

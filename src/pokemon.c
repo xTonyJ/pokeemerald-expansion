@@ -418,7 +418,6 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
     [NATURE_QUIRKY]  = {    0,      0,      0,      0,      0   },
 };
 
-#include "data/pokemon/tmhm_learnsets.h"
 #include "data/graphics/pokemon.h"
 #include "data/pokemon_graphics/front_pic_anims.h"
 
@@ -944,7 +943,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
-        if (gSpeciesInfo[species].allPerfectIVs | gSaveBlock2Ptr->grindingMode == 1)
+        if (gSpeciesInfo[species].allPerfectIVs || gSaveBlock2Ptr->grindingMode == 1)
         {
             iv = MAX_PER_STAT_IVS;
             SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
@@ -1506,8 +1505,6 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
 
-    u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, NULL);
-
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
     if (species == SPECIES_SHEDINJA)
@@ -1856,45 +1853,9 @@ u8 GetDefaultMoveTarget(u8 battlerId)
 {
     u8 opposing = BATTLE_OPPOSITE(GetBattlerSide(battlerId));
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBattlerAtPosition(opposing);
-    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, battlerId) > 1)
-    {
-        u8 position;
-
-        if ((Random() & 1) == 0)
-            position = BATTLE_PARTNER(opposing);
-        else
-            position = opposing;
-
-        return GetBattlerAtPosition(position);
-    }
-    else
-    {
-        if ((gAbsentBattlerFlags & gBitTable[opposing]))
-            return GetBattlerAtPosition(BATTLE_PARTNER(opposing));
-        else
-            return GetBattlerAtPosition(opposing);
-    }
-}
-
-u8 GetDefaultMoveTarget2(u8 battlerId)// Function to fix move color effectiveness from showing in double battles when 1 pokemon remained
-{
-    u8 opposing = BATTLE_OPPOSITE(GET_BATTLER_SIDE(battlerId));
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBattlerAtPosition(opposing);
-    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) == 1)
-    {
-        u8 position;
-
-        if ((Random() & 1) == 0)
-            position = BATTLE_PARTNER(opposing);
-        else
-            position = opposing;
-
-        return GetBattlerAtPosition(position);
-    }
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) 
+        || (CountAliveMonsInBattle(BATTLE_ALIVE_SIDE, opposing) > 1)) // checks for single battle or more than 2 mons alive in a double battle
+        return GetBattlerAtPosition(opposing);                        // default target will always be right-side with 2 mons alive in a double battle
     else
     {
         if ((gAbsentBattlerFlags & gBitTable[opposing]))
@@ -4920,8 +4881,8 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         }
     }
 }
-
-void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+//Mons don't gain EVs normally
+/*void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 {
     u8 evs[NUM_STATS];
     u16 evIncrease = 0;
@@ -5023,9 +4984,10 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
         evs[i] += evIncrease;
         totalEVs += evIncrease;
-        SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+        //SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
     }
 }
+*/
 
 u16 GetMonEVCount(struct Pokemon *mon)
 {
@@ -5291,35 +5253,6 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
                 return TRUE;
         }
         return FALSE;
-    }
-}
-
-u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
-{
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    if (species == SPECIES_EGG)
-    {
-        return 0;
-    }
-    else if (tm < 32)
-    {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
-    }
-    else if (tm > 31 && tm < 64)
-    {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
-    }
-	else if (tm > 63 && tm < 96)
-    {
-        u32 mask = 1 << (tm - 64);
-        return gTMHMLearnsets[species][2] & mask;
-    }
-	else
-    {
-        u32 mask = 1 << (tm - 96);
-        return gTMHMLearnsets[species][3] & mask;
     }
 }
 
@@ -6657,7 +6590,7 @@ u8 GetLevelCap(void)
     return currentLevelCap;
 }
 
-u8 GetLevelCap2(void)
+void GetLevelCap2(void)
 {
     u16 currentLevelCap;
     u16 currentBadge = getHighestBadge();
@@ -6669,7 +6602,6 @@ u8 GetLevelCap2(void)
 }
 
 bool8 SpeciesHasInnate(u32 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer, bool8 isEnemyMon){
-	u8 i;
     u16 innate1 = gSpeciesInfo[species].innates[0];
     u16 innate2 = gSpeciesInfo[species].innates[1];
     u16 innate3 = gSpeciesInfo[species].innates[2];
@@ -6706,8 +6638,7 @@ bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability, bool8 disableRando
     return SpeciesHasInnate(species, ability, level, personality, disableRandomizer, disableRandomizer);
 }
 
-u8 GetSpeciesInnateNum(u16 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer){
-	u8 i;
+u8 GetSpeciesInnateNum(u32 species, u16 ability, u8 level, u32 personality, bool8 disablerandomizer){
     u16 innate1 = gSpeciesInfo[species].innates[0];
     u16 innate2 = gSpeciesInfo[species].innates[1];
     u16 innate3 = gSpeciesInfo[species].innates[2];

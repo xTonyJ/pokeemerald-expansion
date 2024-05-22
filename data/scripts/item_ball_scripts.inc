@@ -215,7 +215,7 @@ Route120_EventScript_ItemRevive::
 	end
 
 Route121_EventScript_ItemTM53EnergyBall::
-	finditem ITEM_TM53_ENERGY_BALL
+	finditem ITEM_TM_ENERGY_BALL
 	end
 
 Route121_EventScript_ItemBeedrillite::

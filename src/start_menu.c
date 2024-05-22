@@ -48,6 +48,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "quests.h"
+#include "level_caps.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
 #define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
@@ -97,6 +98,7 @@ EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
+EWRAM_DATA static bool8 canSave = FALSE;
 
 // Menu action callbacks
 static bool8 StartMenuPokedexCallback(void);
@@ -147,6 +149,8 @@ static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
+static void ShowGameVersionWindow(void);
+
 static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .bg = 0,
     .tilemapLeft = 1,
@@ -155,6 +159,16 @@ static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .height = 4,
     .paletteNum = 15,
     .baseBlock = 0x8
+};
+
+static const struct WindowTemplate sExtraWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop  = 1,
+    .width  = 13,
+    .height = 5,
+    .paletteNum = 0xF,
+    .baseBlock = 8
 };
 
 static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
@@ -174,6 +188,16 @@ static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
     .tilemapLeft = 1,
     .tilemapTop = 1,
     .width = 10,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x8
+};
+
+static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 12,
     .height = 4,
     .paletteNum = 15,
     .baseBlock = 0x8
@@ -323,6 +347,8 @@ static void AddStartMenuAction(u8 action)
 
 static void BuildNormalStartMenu(void)
 {
+    canSave = TRUE;
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
@@ -342,13 +368,15 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
         AddStartMenuAction(MENU_ACTION_QUEST_MENU);
-    AddStartMenuAction(MENU_ACTION_SAVE);
+    //AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 static void BuildDebugStartMenu(void)
 {
+    canSave = TRUE;
+
     AddStartMenuAction(MENU_ACTION_DEBUG);
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
@@ -358,12 +386,13 @@ static void BuildDebugStartMenu(void)
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     AddStartMenuAction(MENU_ACTION_PLAYER);
-    AddStartMenuAction(MENU_ACTION_SAVE);
+    //AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
 }
 
 static void BuildSafariZoneStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
     AddStartMenuAction(MENU_ACTION_POKEDEX);
     AddStartMenuAction(MENU_ACTION_POKEMON);
@@ -375,6 +404,7 @@ static void BuildSafariZoneStartMenu(void)
 
 static void BuildLinkModeStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
 
@@ -390,6 +420,7 @@ static void BuildLinkModeStartMenu(void)
 
 static void BuildUnionRoomStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
 
@@ -405,6 +436,7 @@ static void BuildUnionRoomStartMenu(void)
 
 static void BuildBattlePikeStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_POKEDEX);
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -414,6 +446,7 @@ static void BuildBattlePikeStartMenu(void)
 
 static void BuildBattlePyramidStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PYRAMID_BAG);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -425,6 +458,7 @@ static void BuildBattlePyramidStartMenu(void)
 
 static void BuildMultiPartnerRoomStartMenu(void)
 {
+    canSave = FALSE;
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -470,6 +504,12 @@ static void RemoveExtraStartMenuWindows(void)
         ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
     }
+    else 
+	{
+	    ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
+        CopyWindowToVram(sSafariBallsWindowId, 2);
+        RemoveWindow(sSafariBallsWindowId);
+	}
 }
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
@@ -527,6 +567,8 @@ static bool32 InitStartMenuStep(void)
             ShowSafariBallsWindow();
         if (InBattlePyramid())
             ShowPyramidFloorWindow();
+        else
+            ShowGameVersionWindow();    
         sInitStartMenuData[0]++;
         break;
     case 4:
@@ -628,6 +670,13 @@ static bool8 HandleStartMenuInput(void)
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(1);
+    }
+
+    if (JOY_NEW(SELECT_BUTTON) && canSave)
+    {
+        gMenuCallback = StartMenuSaveCallback;
+        PlaySE(SE_SELECT);
+        return FALSE;
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -1489,4 +1538,38 @@ static bool8 QuestMenuCallback(void)
 {
     CreateTask(Task_QuestMenu_OpenFromStartMenu, 0);
     return TRUE;
+}
+
+static void ShowGameVersionWindow(void)
+{
+	//static const u8 sText_cantSave[]    =  _("You can't save here$");
+	//static const u8 sText_GameVersion[]     =  _("{STR_VAR_1}\nGame Version {STR_VAR_2}$");
+	static const u8 sText_Message_Save[]    =  _("{COLOR GREEN}Press SELECT to save{COLOR DARK_GRAY}\nLevel Cap: {STR_VAR_1}\nTrainers Defeated: {STR_VAR_2}$");
+    static const u8 sText_Message_No_Save[] =  _("You can't save here\nLevel Cap: {STR_VAR_1}\nTrainers Defeated: {STR_VAR_2}$");
+    u16 levelCap = GetCurrentLevelCap();
+    u16 wins   = getNumberOfUniqueDefeatedTrainers();
+    //u16 losses = 0 + VarGet(VAR_TIMES_WHITED_OUT);
+	sSafariBallsWindowId = AddWindow(&sExtraWindowTemplate);
+    PutWindowTilemap(sSafariBallsWindowId);
+    DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
+
+    if(levelCap > MAX_LEVEL)
+        levelCap = MAX_LEVEL;
+
+    //Level Cap
+    ConvertIntToDecimalStringN(gStringVar1, levelCap, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    //Number of trainers defeated
+    ConvertIntToDecimalStringN(gStringVar2, wins, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    //Number of Losses
+    //ConvertIntToDecimalStringN(gStringVar3, losses, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    if(canSave)
+        StringExpandPlaceholders(gStringVar4, sText_Message_Save);
+    else
+        StringExpandPlaceholders(gStringVar4, sText_Message_No_Save);
+
+    AddTextPrinterParameterized(sSafariBallsWindowId, FONT_SMALL, gStringVar4, 0, 0, 0xFF, NULL);
+    CopyWindowToVram(sSafariBallsWindowId, 2);
 }

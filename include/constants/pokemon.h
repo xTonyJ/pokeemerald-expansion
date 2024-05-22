@@ -295,6 +295,8 @@
 #define EVO_LEVEL_RECOIL_DAMAGE_MALE      48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
 #define EVO_LEVEL_RECOIL_DAMAGE_FEMALE    49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
 
+#define EVOS_PER_MON 10
+
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
 #define EVO_MODE_TRADE             1
@@ -324,20 +326,12 @@
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 #define NUM_INNATE_PER_SPECIES 3
 
+// Used as a signal for givemon to generate a default ability by personality.
+#define NUM_ABILITY_PERSONALITY 0xFF
+
 #define INNATE_1_LEVEL 1
 #define INNATE_2_LEVEL 20 // eg. 17
 #define INNATE_3_LEVEL 30 // eg 24
-// Species Flags
-#define SPECIES_FLAG_LEGENDARY          (1 << 0)
-#define SPECIES_FLAG_MYTHICAL           (1 << 1)
-#define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
-#define SPECIES_FLAG_ULTRA_BEAST        (1 << 3)
-#define SPECIES_FLAG_ALOLAN_FORM        (1 << 4)
-#define SPECIES_FLAG_GALARIAN_FORM      (1 << 5)
-#define SPECIES_FLAG_HISUIAN_FORM       (1 << 6)
-#define SPECIES_FLAG_GENDER_DIFFERENCE  (1 << 7)
-#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 8)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 9)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

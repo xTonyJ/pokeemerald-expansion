@@ -65,9 +65,90 @@ DewfordTown_EventScript_SailBackToPetalburg::
 	goto DewfordTown_EventScript_SailToPetalburg
 	end
 
-DewfordTown_EventScript_Woman::
-	msgbox DewfordTown_Text_TinyIslandCommunity, MSGBOX_NPC
+DewfordTown_EventScript_ScientistQuest::
+	lockall
+	faceplayer
+	waitmovement 0
+	questmenu QUEST_MENU_CHECK_COMPLETE QUEST_3
+	goto_if_eq VAR_RESULT, TRUE, DewfordTown_EventScript_ScientistQuestComplete
+	goto_if_quest_active QUEST_3, DewfordTown_EventScript_Quest3Progress
+	goto DewfordTown_EventScript_ScientistStartQuest3
+	releaseall
 	end
+
+DewfordTown_EventScript_ScientistStartQuest3::
+	msgbox DewfordTown_Text_StartQuest3, MSGBOX_DEFAULT
+	startquest QUEST_3
+	end
+
+DewfordTown_Text_StartQuest3:
+	.string "Oh, a trainer! Hi! I'm Ian, and I'm \n"
+	.string "hoping you'll be able to help me out.\p"
+	.string "See, I've travelled far and wide in\n"
+	.string "search of Regional variant Pokémon.\p"
+	.string "If you could show me one that you've\n"
+	.string "caught, even for a moment,\l"
+	.string "I would greatly appreciate it.$"
+
+DewfordTown_EventScript_Quest3Progress::
+	lockall
+	faceplayer
+	msgbox DewfordTown_Text_ChoosePokemon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge Regional_Refuse
+	specialvar VAR_RESULT, ScriptGetPartyMonSpeciesRegional
+	compare VAR_RESULT, TRUE
+	goto_if_eq DewfordTown_EventScript_Quest3Complete
+	goto Not_Regional
+	releaseall
+	end
+
+DewfordTown_Text_ChoosePokemon:
+	.string "Ian: Which Pokémon would you like\n"
+	.string "to show me?$"
+
+Regional_Refuse::
+	msgbox DewfordTown_Text_SomeOtherTime, MSGBOX_DEFAULT
+	releaseall
+	end
+DewfordTown_Text_SomeOtherTime:
+	.string "Oh, OK.\n"
+	.string "Some other time, then?$"
+
+Not_Regional::
+	msgbox FallarborTown_Text_Not_Regional, MSGBOX_DEFAULT
+	releaseall
+	end
+FallarborTown_Text_Not_Regional:
+	.string "Oh... I don't think that's\n"
+	.string "what I'm looking for.$"
+
+DewfordTown_EventScript_Quest3Complete::
+	msgbox DewfordTown_Text_CompleteQuest3, MSGBOX_DEFAULT
+	completequest QUEST_3
+	releaseall
+	end
+DewfordTown_Text_CompleteQuest3:
+	.string "YES! Thank you! This is exactly\n"
+	.string "what I've been looking to research.\p"
+	.string "As a reward, I will teach you how\n"
+	.string "to change your Pokémon's Nature\p"
+	.string "Simply press {A_BUTTON} and {DPAD_LEFTRIGHT} on the\n"
+	.string "Trainer Memo page of the summary screen.$"
+
+DewfordTown_EventScript_ScientistQuestComplete::
+	msgbox DewfordTown_Text_CompletedQuest3, MSGBOX_DEFAULT
+	releaseall
+	end
+DewfordTown_Text_CompletedQuest3:
+	.string "Ian: Thank you again! That was exactly\n"
+	.string "what I've been looking to research.\p"
+	.string "As a reminder, I will teach you how\n"
+	.string "to change your Pokémon's Nature\p"
+	.string "Simply press {A_BUTTON} and {DPAD_LEFTRIGHT} on the\n"
+	.string "Trainer Memo page of the summary screen.$"
 
 DewfordTown_EventScript_TownSign::
 	msgbox DewfordTown_Text_TownSign, MSGBOX_SIGN

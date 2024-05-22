@@ -616,8 +616,6 @@ extern const u8 EventScript_TerminateLink[];
 extern const u8 EventScript_SecretMenu[];
 // Ball Changer
 extern const u8 EventScript_ChangeBall[];
-// Rotom Menu
-extern const u8 EventScript_Rotom[];
 extern const u8 Rotom_Appliances_CheckForSpecialMove[];
 
 extern const u8 VSSeeker_Text_BatteryNotChargedNeedXSteps[];

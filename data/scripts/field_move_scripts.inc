@@ -491,11 +491,19 @@ RepelEnabled:
 	.string "Resets when entering new map.$"
 
 EventScript_PokeVialNoCharges::
-    msgbox NoCharges MSGBOX_SIGN
+    msgbox Text_NoCharges MSGBOX_SIGN
     end
-NoCharges:
+Text_NoCharges:
     .string "The Poké Vial is empty.\n"
 	.string "Refill it at a Pokémon Center.$"
+
+EventScript_PokeVialChargesLeft::
+	special PokeVialCharges
+    msgbox Text_ChargesLeft MSGBOX_SIGN
+    end
+Text_ChargesLeft:
+	.string "Your party has been fully healed.\n"
+	.string "The Poké Vial has {STR_VAR_2} charge(s) left.$"
 
 EventScript_Normal::
     msgbox NormalMode MSGBOX_SIGN

@@ -26,6 +26,7 @@
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/layouts.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
@@ -36,7 +37,10 @@ void HealPlayerParty(void)
     u32 i;
     for (i = 0; i < gPlayerPartyCount; i++)
         HealPokemon(&gPlayerParty[i]);
-    if (OW_PC_HEAL >= GEN_8)
+    if (OW_PC_HEAL >= GEN_8 
+    && (gMapHeader.mapLayoutId == LAYOUT_POKEMON_CENTER_1F 
+    || gMapHeader.mapLayoutId == LAYOUT_POKEMON_CENTER_1F 
+    || gMapHeader.mapLayoutId == LAYOUT_LAVARIDGE_TOWN_POKEMON_CENTER_1F)) // only heal boxes if in Pokecenter
         HealPlayerBoxes();
 }
 

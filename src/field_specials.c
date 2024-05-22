@@ -1,3 +1,4 @@
+#include "global.h"
 #include "debug.h"
 #include "malloc.h"
 #include "battle.h"
@@ -86,10 +87,6 @@ static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
-<<<<<<< HEAD
-=======
-
->>>>>>> 7e43916e57ca98a077ac3ac46acde1ca0fb0d5b4
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
 static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
 static EWRAM_DATA u8 sBattlePointsWindowId = 0;
@@ -99,10 +96,6 @@ static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
-<<<<<<< HEAD
-=======
-
->>>>>>> 7e43916e57ca98a077ac3ac46acde1ca0fb0d5b4
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
@@ -1567,6 +1560,22 @@ u8 GetLeadMonIndex(void)
 u16 ScriptGetPartyMonSpecies(void)
 {
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
+}
+
+u16 ScriptGetPartyMonSpeciesRegional(void)
+{
+    u32 species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
+        
+    if ((species >= SPECIES_RATTATA_ALOLAN && species <= SPECIES_MAROWAK_ALOLAN)          //Alolan
+    || (species >= SPECIES_MEOWTH_GALARIAN && species <= SPECIES_STUNFISK_GALARIAN)        //Galarian
+    || (species >= SPECIES_GROWLITHE_HISUIAN && species <= SPECIES_DECIDUEYE_HISUIAN)       //Hisuian
+    || (species >= SPECIES_TAUROS_PALDEAN_COMBAT_BREED && species <= SPECIES_WOOPER_PALDEAN) //Paldean
+    || (species >= SPECIES_OBSTAGOON && species <= SPECIES_RUNERIGUS)                   //misc evos
+    || species == SPECIES_SNEASLER // misc
+    || species == SPECIES_OVERQWIL) //misc
+        return TRUE;    
+    else
+    return FALSE;
 }
 
 // Removed for Emerald
@@ -3544,7 +3553,6 @@ void BufferBattleFrontierTutorMoveName(void)
     StringCopy(gStringVar1, GetMoveName(gSpecialVar_0x8005));
 }
 
-
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 {
     static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate =
@@ -4967,26 +4975,48 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
-// Changes the selected Pokemon's nature.
-// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose nature should be changed
-// Set gSpecialVar_0x8005 to the stat to icrease, and gSpecialVar_0x8006 to the stat to decrease
-void ChangePokemonNature (void)
+void TrySkyBattle(void)
 {
-    u8 newNature = 0;
+    int i;
 
-    newNature = (gSpecialVar_0x8005 * (NUM_STATS - 1)) + gSpecialVar_0x8006;
-	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, &newNature);
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+    if (B_VAR_SKY_BATTLE == 0 || B_FLAG_SKY_BATTLE == 0)
+    {
+        LockPlayerFieldControls();
+        ScriptContext_SetupScript(Debug_FlagsAndVarNotSetBattleConfigMessage);
+        return;
+    }
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        struct Pokemon* pokemon = &gPlayerParty[i];
+        if (CanMonParticipateInSkyBattle(pokemon) && GetMonData(pokemon, MON_DATA_HP, NULL) > 0)
+        {
+            PreparePartyForSkyBattle();
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+    gSpecialVar_Result = FALSE;
 }
 
-// Buffers the nature of a Pokemon chosen by the player.
-// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
-void BufferChosenMonNature (void)
+void PreparePartyForSkyBattle(void)
 {
-    u8 nature = 0;
+    int i, participatingPokemonSlot = 0;
+    u8 partyCount = CalculatePlayerPartyCount();
 
-    nature = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, NULL);
-    StringCopy (gStringVar2, gNatureNamePointers[nature]);
+    FlagSet(B_FLAG_SKY_BATTLE);
+    SavePlayerParty();
+
+    for (i = 0; i < partyCount; i++)
+    {
+        struct Pokemon* pokemon = &gPlayerParty[i];
+
+        if (CanMonParticipateInSkyBattle(pokemon))
+            participatingPokemonSlot += 1 << i;
+        else
+            ZeroMonData(pokemon);
+    }
+    VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
+    CompactPartySlots();
 }
 
 // Changes one of the selected Pokemon's IVs.
@@ -5025,8 +5055,8 @@ void IncreaseChosenMonEVs (void)
 {
     u8 statToChange = gSpecialVar_0x8005;
     u8 increment = gSpecialVar_0x8006;
-    u8 oldEV;
-    u8 newEV;
+    u8 oldEV = 0;
+    u8 newEV = 0;
 
     // Get the number of EVs currently in the chosen stat
     switch (statToChange)
@@ -5046,9 +5076,9 @@ void IncreaseChosenMonEVs (void)
     }
 
     // Should replace 252 here with symbol for max EVs in a stat
-    if ((oldEV + increment) > 252)
+    if ((oldEV + increment) > MAX_PER_STAT_EVS)
     {
-        newEV = 252;
+        newEV = MAX_PER_STAT_EVS;
     }
     else
     {
@@ -5248,188 +5278,4 @@ bool8 AreChosenMonEVsMaxedOut(void)
         return TRUE;
     }
     return FALSE;
-}
-
-// Checks how many Rotom player has with them
-// Stores the party position of the last Rotom found in gSpecialVar_0x8004
-// (Useful if there's only one Rotom in the party)
-u8 CountRotomInParty (void)
-{
-    u8 partyCount, rotomCount = 0;
-    u16 i;
-    u32 species;
-
-    partyCount = CalculatePlayerPartyCount();
-
-    for (i = 0; i < partyCount; i++)
-    {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
-        {
-            gSpecialVar_0x8004 = i;
-            rotomCount++;
-        }
-    }
-    return rotomCount;
-}
-
-// Rotom form change specials
-// Vars used:
-// gSpecialVar_0x8004: set to the party slot of the chosen Rotom, or the first Rotom found if there's only one
-// gSpecialVar_0x8005: set to the form to change Rotom to (e.g. SPECIES_ROTOM_WASH)
-// gSpecialVar_0x8006: special move learned by Rotom after form change (set by ChangeRotomForm)
-// gSpecialVar_0x8007: Rotom's initial form
-// gSpecialVar_0x8008: Rotom's initial special move (set by RotomForgetSpecialMove)
-
-// Takes a Rotom form as input and returns its special move
-u16 RotomFormToMove (u16 species)
-{
-    u16 move;
-
-    switch (species)
-    {
-        case SPECIES_ROTOM_HEAT:
-            move = MOVE_OVERHEAT;
-            break;
-        case SPECIES_ROTOM_WASH:
-            move = MOVE_HYDRO_PUMP;
-            break;
-        case SPECIES_ROTOM_FROST:
-            move = MOVE_FREEZE_DRY;
-            break;
-        case SPECIES_ROTOM_FAN:
-            move = MOVE_HURRICANE;
-            break;
-        case SPECIES_ROTOM_MOW:
-            move = MOVE_LEAF_STORM;
-            break;
-        case SPECIES_ROTOM:
-            move = MOVE_THUNDER_SHOCK;
-            break;
-    }
-    return move;
-}
-
-// Stores the special move of the Rotom form in gSpecialVar_0x8005 in gSpecialVar_0x8006
-void GetRotomNewSpecialMove (void)
-{
-    gSpecialVar_0x8006 = RotomFormToMove(gSpecialVar_0x8005);
-}
-
-// Gets Rotom's current form and the matching move, stores them in gSpecialVar_0x8007 and gSpecialVar_0x8008
-void GetRotomState (void)
-{
-    gSpecialVar_0x8007 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
-    gSpecialVar_0x8008 = RotomFormToMove(gSpecialVar_0x8007);
-}
-
-// If Rotom is an appliance form, delete its special move
-// Rotom's initial form must be loaded into gSpecialVar_0x8007 before use.
-// Returns TRUE if the moove was forgotten, false if not
-void RotomForgetSpecialMove (void)
-{
-    u8 i, forgotSpecialMove = 0;
-    u16 currentMove;
-    u16 moveNone = MOVE_NONE;
-
-    currentMove = RotomFormToMove(gSpecialVar_0x8007);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, NULL) == currentMove)
-        {
-            RemoveMonPPBonus (&gPlayerParty[gSpecialVar_0x8004], i);
-            SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, &moveNone);
-            forgotSpecialMove = TRUE;
-            break;
-        }
-    }
-}
-
-// Changes Rotom's form
-void ChangeRotomForm (void)
-{
-    u16 currentForm, newForm;
-
-    currentForm = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
-    newForm = gSpecialVar_0x8005;
-
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &newForm);
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, &newForm);
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-}
-
-// Teaches Rotom's forms their special moves
-// Rotom MUST have an empty moveslot first
-// Move to teach must be stored in gSpecialVar_0x8006
-void TeachRotomMove (void)
-{
-    GiveMoveToMon(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8006);
-}
-
-// Checks if the species stored in gSpecialVar_0x8004 is a Rotom form
-bool8 IsSelectedMonRotom (void)
-{
-    u32 species;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
-    if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-// Checks if Rotom knows its special move
-bool8 DoesRotomKnowSpecialMove(void)
-{
-    u16 initialMove, initialSpecies;
-
-    initialSpecies = gSpecialVar_0x8007;
-    initialMove = RotomFormToMove(initialSpecies);
-    return MonKnowsMove(&gPlayerParty[gSpecialVar_0x8004], initialMove);
-}
-
-void TrySkyBattle(void)
-{
-    int i;
-
-    if (B_VAR_SKY_BATTLE == 0 || B_FLAG_SKY_BATTLE == 0)
-    {
-        LockPlayerFieldControls();
-        ScriptContext_SetupScript(Debug_FlagsAndVarNotSetBattleConfigMessage);
-        return;
-    }
-    for (i = 0; i < CalculatePlayerPartyCount(); i++)
-    {
-        struct Pokemon* pokemon = &gPlayerParty[i];
-        if (CanMonParticipateInSkyBattle(pokemon) && GetMonData(pokemon, MON_DATA_HP, NULL) > 0)
-        {
-            PreparePartyForSkyBattle();
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
-    gSpecialVar_Result = FALSE;
-}
-
-void PreparePartyForSkyBattle(void)
-{
-    int i, participatingPokemonSlot = 0;
-    u8 partyCount = CalculatePlayerPartyCount();
-
-    FlagSet(B_FLAG_SKY_BATTLE);
-    SavePlayerParty();
-
-    for (i = 0; i < partyCount; i++)
-    {
-        struct Pokemon* pokemon = &gPlayerParty[i];
-
-        if (CanMonParticipateInSkyBattle(pokemon))
-            participatingPokemonSlot += 1 << i;
-        else
-            ZeroMonData(pokemon);
-    }
-    VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
-    CompactPartySlots();
 }

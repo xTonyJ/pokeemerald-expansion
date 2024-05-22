@@ -1051,8 +1051,6 @@ extern const u8 gText_ThrowInPremierBalls[];
 extern const u8 gText_ShopBuy[];
 extern const u8 gText_ShopSell[];
 extern const u8 gText_ShopQuit[];
-extern const u8 gText_SoldOut[];
-extern const u8 gText_SoldOut2[];
 extern const u8 gText_ThatItemIsSoldOut[];
 extern const u8 gText_SoldOut[];
 
@@ -3606,13 +3604,6 @@ extern const u8 gText_GrassType[];
 extern const u8 gText_FireType[];
 extern const u8 gText_WaterType[];
 
-extern const u8 gText_MicrowaveOven[];
-extern const u8 gText_WashingMachine[];
-extern const u8 gText_Refrigerator[];
-extern const u8 gText_ElectricFan[];
-extern const u8 gText_Lawnmower[];
-extern const u8 gText_Recall[];
-
 // Form Change
 extern const u8 gTextPokemonTransformed[];
 
@@ -3629,6 +3620,7 @@ extern const u8 gText_Contact[];
 extern const u8 gText_Target[];
 extern const u8 gText_Priority[];
 extern const u8 gText_Critical[];
+extern const u8 gText_IVs[];
 extern const u8 gText_EVs[];
 extern const u8 gText_Stats[];
 extern const u8 gText_BaseStats[];
@@ -3650,10 +3642,13 @@ extern const u8 gText_Effect_Three_Hits[];
 extern const u8 gText_Effect_Two_Hits[];
 //Status
 extern const u8 gText_Effect_Burn_Hit[];
+extern const u8 gText_Effect_Sleep_Hit[];
 extern const u8 gText_Effect_Poison_Hit[];
 extern const u8 gText_Effect_Paralyze_Hit[];
 extern const u8 gText_Effect_Freeze_Hit[];
 extern const u8 gText_Effect_Confuse_Hit[];
+extern const u8 gText_Effect_Sap_Hit[];
+extern const u8 gText_Toxic[];
 //Stat Up/Down
 extern const u8 gText_Effect_All_Stats_Up[];
 extern const u8 gText_Effect_Attack_Up[];
@@ -3668,6 +3663,7 @@ extern const u8 gText_Effect_Speed_Up[];
 extern const u8 gText_Effect_Speed_Down[];
 extern const u8 gText_Effect_Accuracy_Up[];
 extern const u8 gText_Effect_Accuracy_Down[];
+extern const u8 gText_Effect_Wrap[];
 extern const u8 gText_Effect_Heal_HP[];
 extern const u8 gText_Effect_Heal[];
 extern const u8 gText_Effect_HP_Drain[];
@@ -3678,6 +3674,64 @@ extern const u8 gText_Effect_Flinch[];
 extern const u8 gText_Effect_Recoil[];
 extern const u8 gText_Effect_Always_Crit[];
 extern const u8 gText_Effect_Protect[];
+extern const u8 gText_Effect_Status[];
+
+//Summary Screen Evo/Forms
+
+extern const u8 sText_EVO_Buttons[];
+extern const u8 sText_EVO_Buttons_Decapped[];
+extern const u8 sText_EVO_Buttons_PE[];
+extern const u8 sText_EVO_Buttons_Decapped_PE[];
+extern const u8 sText_EVO_Name[];
+extern const u8 sText_EVO_PreEvo[];
+extern const u8 sText_EVO_PreEvo_PE_Mega[];
+extern const u8 sText_EVO_FRIENDSHIP[];
+extern const u8 sText_EVO_FRIENDSHIP_DAY[];
+extern const u8 sText_EVO_FRIENDSHIP_NIGHT[];
+extern const u8 sText_EVO_FRIENDSHIP_MOVE_TYPE[];
+extern const u8 sText_EVO_LEVEL[];
+extern const u8 sText_EVO_TRADE[];
+extern const u8 sText_EVO_TRADE_ITEM[];
+extern const u8 sText_EVO_ITEM[];
+extern const u8 sText_EVO_LEVEL_ATK_GT_DEF[];
+extern const u8 sText_EVO_LEVEL_ATK_EQ_DEF[];
+extern const u8 sText_EVO_LEVEL_ATK_LT_DEF[];
+extern const u8 sText_EVO_LEVEL_SILCOON[];
+extern const u8 sText_EVO_LEVEL_CASCOON[];
+extern const u8 sText_EVO_LEVEL_NINJASK[];
+extern const u8 sText_EVO_LEVEL_SHEDINJA[];
+extern const u8 sText_EVO_BEAUTY[];
+extern const u8 sText_EVO_LEVEL_FEMALE[];
+extern const u8 sText_EVO_LEVEL_MALE[];
+extern const u8 sText_EVO_LEVEL_NIGHT[];
+extern const u8 sText_EVO_LEVEL_DAY[];
+extern const u8 sText_EVO_LEVEL_DUSK[];
+extern const u8 sText_EVO_ITEM_HOLD_DAY[];
+extern const u8 sText_EVO_ITEM_HOLD_NIGHT[];
+extern const u8 sText_EVO_MOVE[];
+extern const u8 sText_EVO_MAPSEC[];
+extern const u8 sText_EVO_ITEM_MALE[];
+extern const u8 sText_EVO_ITEM_FEMALE[];
+extern const u8 sText_EVO_LEVEL_RAIN[];
+extern const u8 sText_EVO_SPECIFIC_MON_IN_PARTY[];
+extern const u8 sText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[];
+extern const u8 sText_EVO_TRADE_SPECIFIC_MON[];
+extern const u8 sText_EVO_SPECIFIC_MAP[];
+extern const u8 sText_EVO_LEVEL_NATURE_AMPED[];
+extern const u8 sText_EVO_LEVEL_NATURE_LOW_KEY[];
+extern const u8 sText_EVO_CRITICAL_HITS[];
+extern const u8 sText_EVO_SCRIPT_TRIGGER_DMG[];
+extern const u8 sText_EVO_DARK_SCROLL[];
+extern const u8 sText_EVO_WATER_SCROLL[];
+extern const u8 sText_EVO_ITEM_NIGHT[];
+extern const u8 sText_EVO_ITEM_DAY[];
+extern const u8 sText_EVO_ITEM_HOLD[];
+extern const u8 sText_EVO_LEVEL_MOVE_TWENTY_TIMES[];
+extern const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_MALE[];
+extern const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE[];
+extern const u8 sText_EVO_UNKNOWN[];
+extern const u8 sText_EVO_NONE[];
+
 // Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];

@@ -3994,9 +3994,6 @@ u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality)
         taskId = CreateTask(Task_DisplayCaughtMonDexPage, 0);
 
     gTasks[taskId].tState = 0;
-    gTasks[taskId].tDexNum = dexNum;
-    gTasks[taskId].tOtIdLo = otId;
-    gTasks[taskId].tOtIdHi = otId >> 16;
     gTasks[taskId].tSpecies = species;
     gTasks[taskId].tIsShiny = isShiny;
     gTasks[taskId].tPersonalityLo = personality;

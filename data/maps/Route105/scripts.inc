@@ -56,6 +56,7 @@ Route105_EventScript_Josue::
 	end
 
 Route105_EventScript_Andres::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, Route105_EventScript_AndresRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route105_EventScript_AndresRematch

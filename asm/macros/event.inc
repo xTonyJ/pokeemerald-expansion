@@ -1789,8 +1789,8 @@
 
 .macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
 	.byte 0xe3
-	.byte \left
-	.byte \top
+	.2byte \left
+	.2byte \top
 	.byte \ignoreBPress
 	.byte \maxBeforeScroll
 	.byte \shouldSort
@@ -1817,16 +1817,6 @@
 
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
-	.endm
-
-	.macro checkPartyHasSpecies species:req
-	.byte 0xe3
-	.2byte \species
-	.endm
-
-	.macro isChosenMonSpecies species:req
-	.byte 0xe4
-	.2byte \species
 	.endm
 
 @ Supplementary

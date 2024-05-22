@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
+/*ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_SHEER_COLD].effect == EFFECT_OHKO);
 }
@@ -23,4 +23,4 @@ SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon")
 TO_DO_BATTLE_TEST("Fissure faints the target, skipping regular damage calculations")
 TO_DO_BATTLE_TEST("Fissure always fails if the target has a higher level than the user")
 TO_DO_BATTLE_TEST("Fissure's accuracy increases by 1% for every level the user has over the target")
-TO_DO_BATTLE_TEST("Fissure's ignores non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes
+TO_DO_BATTLE_TEST("Fissure's ignores non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes*/

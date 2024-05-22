@@ -47,7 +47,6 @@ static void Task_DeclineStarter(u8 taskId);
 static void Task_MoveStarterChooseCursor(u8 taskId);
 static void Task_CreateStarterLabel(u8 taskId);
 static void CreateStarterPokemonLabel(u8 selection);
-static void CreateStarterPokemonLabel2(u8 selection);
 static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
 static u8 CreatePokemonFrontSprite2(u16 species, u8 x, u8 y);
 static void SpriteCB_SelectionHand(struct Sprite *sprite);
@@ -57,7 +56,6 @@ static void SpriteCB_StarterPokemon2(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon3(struct Sprite *sprite);
 
 static u16 sStarterLabelWindowId;
-static u16 sStarterLabelWindowId2;
 
 const u16 gBirchBagGrass_Pal[] = INCBIN_U16("graphics/starter_choose/tiles.gbapal");
 static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
@@ -141,16 +139,16 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 static const sStarterPair sStarterMon[STARTER_MON_COUNT] =
 {
     {
-        .pokemon1 = SPECIES_HOUNDOUR, //DarkFire  
-        .pokemon2 = SPECIES_GASTLY //GhostPoison - Evolves at 16 and then 38 OR link cable
+        .pokemon1 = SPECIES_HOUNDOUR, //Dark Fire  
+        .pokemon2 = SPECIES_GASTLY //Ghost Poison - Evolves at 16 and then 38 OR link cable
     },
     {
-        .pokemon1 = SPECIES_ARON, //SteelRock - Evolves at 16 then 38
-        .pokemon2 = SPECIES_GIBLE //DragonGround - Evolves at 24 then 45
+        .pokemon1 = SPECIES_ARON, // Steel Rock - Evolves at 16 then 38
+        .pokemon2 = SPECIES_GIBLE // Dragon Ground - Evolves at 24 then 45
     },
     {
-        .pokemon1 = SPECIES_RIOLU, //Fighting -> FightingSteel
-        .pokemon2 = SPECIES_RALTS  //PsychicFairy
+        .pokemon1 = SPECIES_RIOLU, // Fighting -> Fighting Steel
+        .pokemon2 = SPECIES_RALTS  // Psychic Fairy
     }
 };
 
@@ -630,7 +628,6 @@ static void Task_DeclineStarter(u8 taskId)
 
 static void CreateStarterPokemonLabel(u8 selection)
 {
-    u8 categoryText[32];
     struct WindowTemplate winTemplate;
     const u8 *speciesName;
     const u8 *speciesName2;
@@ -640,8 +637,8 @@ static void CreateStarterPokemonLabel(u8 selection)
     u16 species = GetStarterPokemon(selection).pokemon1;
     u16 species2 = GetStarterPokemon(selection).pokemon2;
     //CopyMonCategoryText(SpeciesToNationalPokedexNum(species), categoryText);
-    speciesName = gSpeciesNames[species];
-    speciesName2 = gSpeciesNames[species2];
+    speciesName = GetSpeciesName(species);
+    speciesName2 = GetSpeciesName(species2);
 
     winTemplate = sWindowTemplate_StarterLabel;
     winTemplate.tilemapLeft = 1;
@@ -667,41 +664,6 @@ static void CreateStarterPokemonLabel(u8 selection)
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
 }
 
-static void CreateStarterPokemonLabel2(u8 selection)
-{
-    u8 categoryText[32];
-    struct WindowTemplate winTemplate;
-    const u8 *speciesName;
-    s32 width;
-    u8 labelLeft, labelRight, labelTop, labelBottom;
-
-    u16 species = GetStarterPokemon(selection).pokemon2;
-    CopyMonCategoryText(SpeciesToNationalPokedexNum(species), categoryText);
-    speciesName = gSpeciesNames[species];
-
-    winTemplate = sWindowTemplate_StarterLabel;
-    winTemplate.tilemapLeft = 16;
-    winTemplate.tilemapTop = 10;
-
-    sStarterLabelWindowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
-
-    width = GetStringCenterAlignXOffset(FONT_NARROW, categoryText, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NARROW, width, 1, sTextColors, 0, categoryText);
-
-    width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName);
-
-    PutWindowTilemap(sStarterLabelWindowId);
-    ScheduleBgCopyTilemapToVram(0);
-
-    labelLeft = 16 * 8 - 4;
-    labelRight = (16 + 13) * 8 + 4;
-    labelTop = 16 * 8;
-    labelBottom = (16 + 4) * 8;
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(labelLeft, labelRight));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
-}
 static void ClearStarterLabel(void)
 {
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
@@ -738,7 +700,7 @@ static u8 CreatePokemonFrontSprite2(u16 species, u8 x, u8 y)
 {
     u8 spriteId2;
 
-    spriteId2 = CreateMonPicSprite_Affine2(species, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 15, TAG_NONE);
+    spriteId2 = CreateMonPicSprite_Affine2(species, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 15, TAG_NONE);
     gSprites[spriteId2].oam.priority = 0;
     return spriteId2;
 }

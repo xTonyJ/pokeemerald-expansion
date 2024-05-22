@@ -781,16 +781,6 @@ static const struct MenuAction MultichoiceList_GrassFireWater[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_RotomAppliances[] = 
-{
-    {gText_MicrowaveOven},
-    {gText_WashingMachine},
-    {gText_Refrigerator},
-    {gText_ElectricFan},
-    {gText_Lawnmower},
-    {gText_Recall},
-};
-
 static const struct MenuAction MultichoiceList_BerryPlot[] =
 {
     {gText_Fertilize},
@@ -926,7 +916,6 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
     [MULTI_GRASS_FIRE_WATER]           = MULTICHOICE(MultichoiceList_GrassFireWater),
-    [MULTI_ROTOM_APPLIANCES]           = MULTICHOICE(MultichoiceList_RotomAppliances),
     [MULTI_BERRY_PLOT]                 = MULTICHOICE(MultichoiceList_BerryPlot),
 };
 

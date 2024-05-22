@@ -856,8 +856,6 @@ gBattleAnims_Moves::
 	.4byte Move_MAGICAL_TORQUE
 	.4byte Move_PSYBLADE
 	.4byte Move_HYDRO_STEAM
-@@@@ Custom Moves
-	.4byte Move_BACKFLIP
 	.4byte Move_BLOOD_MOON
 	.4byte Move_MATCHA_GOTCHA
 	.4byte Move_SYRUP_BOMB
@@ -877,6 +875,8 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHIC_NOISE
 	.4byte Move_UPPER_HAND
 	.4byte Move_MALIGNANT_CHAIN
+@@@@ Custom Moves
+	.4byte Move_BACKFLIP
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -34319,7 +34319,9 @@ SoulStealingSevenStarStrikeExplosion:
 	delay 0x6
 	return
 
-Move_BACKFLIP:
+@@@@@@@@@@ CUSTOM MOVES @@@@@@@@@@
+
+Move_BACKFLIP::
 	loadspritegfx ANIM_TAG_ROUND_SHADOW
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	loadspritegfx ANIM_TAG_IMPACT

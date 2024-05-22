@@ -44,6 +44,7 @@ u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex);
 #define TestRunner_Battle_CheckBattleRecordActionType(...) (void)0
 
 #define TestRunner_Battle_GetForcedAbility(...) (u32)0
+#define TestRunner_Battle_GetForcedInnates(...) (u32)0
 
 #endif
 

@@ -4,6 +4,100 @@
 FallarborTown_MoveRelearnersHouse_MapScripts::
 	.byte 0
 
+FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
+	lockall
+	applymovement LOCALID_ETHAN, Common_Movement_FacePlayer
+	waitmovement 0
+	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_1
+	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
+	checkitem ITEM_HEART_SCALE
+	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO
+	switch VAR_RESULT
+	case NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
+	special ChooseMonForMoveRelearner
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
+	goto_if_eq VAR_0x8005, 0, FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
+	special TeachMoveRelearnerMove
+	waitstate
+	goto_if_eq VAR_0x8004, 0, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	msgbox FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT
+	removeitem ITEM_HEART_SCALE
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
+	.string "I'm the MOVE TUTOR.\p"
+	.string "I know all the moves that POKéMON\n"
+	.string "learn--every one of them--and I can\l"
+	.string "teach POKéMON those moves.\p"
+	.string "I can teach a move to a POKéMON\n"
+	.string "of yours if you'd like.\p"
+	.string "I'll do it for a HEART SCALE.\n"
+	.string "I'm collecting those now.$"
+
+FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
+	.string "Oh! That's it! That's an honest to\n"
+	.string "goodness HEART SCALE!\p"
+	.string "Let me guess, you want me to teach\n"
+	.string "a move?$"
+
+FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
+	.string "Which POKéMON needs tutoring?$"
+
+FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove:
+	.string "Which move should I teach?$"
+
+FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
+	.string "Sorry…\p"
+	.string "It doesn't appear as if I have any move\n"
+	.string "I can teach that POKéMON.$"
+
+FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
+	.string "{PLAYER} handed over one HEART SCALE\n"
+	.string "in exchange.$"
+
+FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
+	.string "If your POKéMON need to learn a move,\n"
+	.string "come back with a HEART SCALE.$"
+
+FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
+	.string "Hunh? There isn't a single move that\n"
+	.string "I can teach an EGG.$"
+
 FallarborTown_MoveRelearnersHouse_EventScript_IVTraining::
 	lockall
 	applymovement LOCALID_ETHAN, Common_Movement_FacePlayer
@@ -69,7 +163,8 @@ MoveRelearnersHouse_Text_NoCaps:
 	.string "Ok! Come back whenever!$"
 
 MoveRelearnersHouse_Text_Thanks:
-	.string "Thank you so much!$"
+	.string "Thank you so much! Talk to us\n"
+	.string "anytime if you need our services.$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_EVTraining::
 	lockall
@@ -103,40 +198,30 @@ FallarborTown_MoveRelearnersHouse_Text_StartQuest5Nate:
 FallarborTown_MoveRelearnersHouse_EventScript_Quest5CompleteNateEV::
 	lock
 	faceplayer
-	msgbox SuperTraining_Text_ChoosePokemon, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	waitstate
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge SuperTraining_Refuse
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq SuperTraining_Egg
-	bufferpartymonnick 0, VAR_0x8004
-	msgbox SuperTraining_Text_TakeALookatEVs, MSGBOX_DEFAULT
 	goto FallarborTown_SuperMainMenu
 
 FallarborTown_SuperMainMenu::
 	bufferpartymonnick 0, VAR_0x8004
 	msgbox SuperTraining_Text_HowCanIHelp, MSGBOX_DEFAULT
-	dynmultipush Super_Modify, 0
-	dynmultipush Super_Reset, 1
+	dynmultipush Super_Abilities, 0
+	dynmultipush Super_Innates, 1
 	dynmultipush Super_Explain, 2
 	dynmultipush Super_Nevermind, 3
 	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
 	switch VAR_RESULT
-	case 0, FallarborTown_ChangeEV
-	case 1, FallarborTown_ResetEVs
+	case 0, Call_FallarborTown_Explain_Abilities
+	case 1, Call_FallarborTown_Explain_Innates
 	case 2, Call_FallarborTown_Explain_EVs
 	case 3, HyperTraining_EventScript_DoNothing
 	case 127, HyperTraining_EventScript_DoNothing
 	releaseall
 	end
 
-Super_Modify:
-	.string "Add EVs$"
+Super_Abilities:
+	.string "Explain Abilities$"
 
-Super_Reset:
-	.string "Reset EVs$"
+Super_Innates:
+	.string "Explain Innates$"
 
 Super_Explain:
 	.string "Explain EVs$"
@@ -144,9 +229,25 @@ Super_Explain:
 Super_Nevermind:
 	.string "Nevermind$"
 
+Call_FallarborTown_Explain_Abilities::
+	call FallarborTown_Explain_Abilities
+	goto FallarborTown_SuperMainMenu
+
+Call_FallarborTown_Explain_Innates::
+	call FallarborTown_Explain_Innates
+	goto FallarborTown_SuperMainMenu
+
 Call_FallarborTown_Explain_EVs::
 	call FallarborTown_Explain_EVs
 	goto FallarborTown_SuperMainMenu
+
+FallarborTown_Explain_Abilities::
+	msgbox FallarborTown_Text_ExplainAbilities, MSGBOX_DEFAULT
+	return
+
+FallarborTown_Explain_Innates::
+	msgbox FallarborTown_Text_ExplainInnates, MSGBOX_DEFAULT
+	return
 
 FallarborTown_Explain_EVs::
 	msgbox FallarborTown_Text_ExplainEvs, MSGBOX_DEFAULT
@@ -386,19 +487,33 @@ FallarborTown_Text_SomeOtherTime:
 SuperTraining_Text_RememberEvs:
 	.string "And you remember how EVs work, right?$"
 
+FallarborTown_Text_ExplainAbilities:
+	.string "Nate: Abilities are core to Pokémon and\n"
+	.string "can be found on the summary screen.\p"
+	.string "Once you find the ability master,\n"
+	.string "they can be changed from the\l"
+	.string "summary screen with {A_BUTTON} and {DPAD_LEFTRIGHT}$"
+
+FallarborTown_Text_ExplainInnates:
+	.string "Nate: Innates are part of every Pokémon\n"
+	.string "and can be found on the summary screen.\p"
+	.string "Unlike abilities, they can't be changed.\n"
+	.string "Also, they might be modified slightly.\p"
+	.string "For example, Shell Armor will now\n"
+	.string "also reduce damage taken by 20%.\p"
+	.string "So make sure you look out for new\n"
+	.string "powerful combinations of Pokémon!$"
+
 FallarborTown_Text_ExplainEvs:
 	.string "Nate: EVs are part of every stat a\n"
 	.string "a Pokémon has.\p"
 	.string "They can have HP EVs, Attack EVs,\n"
 	.string "Defense EVs… you get the idea.\p"
-	.string "Every time your Pokémon gains\n"
-	.string "experience in battle, it also gains EVs.\p"
-	.string "The kind of EVs gained depends on the\n"
-	.string "kind of Pokémon you defeated.\p"
-	.string "For example, beating a Zubat will give\n"
-	.string "your Pokémon one Speed EV.\p"
-	.string "Once you have enough EVs in a stat,\n"
-	.string "that stat will go up!\p"
+	.string "Every time you earn a badge, the\n"
+	.string "total number of EVs you can assign\p"
+	.string "will increase by 64.\p"
+	.string "EVs can be assigned right on your\n"
+	.string "Pokémon within the summary screen.\p"
 	.string "You can have up to 252 EVs in one stat,\n"
 	.string "but you can only have 510 EVs in total.\p"
 	.string "It's normally good to put 252 EVs in\n"
@@ -452,7 +567,7 @@ SuperTraining_Text_ICanResetEVs:
 	.string "{STR_VAR_1}'s EVs?$"
 
 SuperTraining_Text_HowCanIHelp:
-	.string "How can I help {STR_VAR_1} today?$"
+	.string "Hey! Need anything?$"
 	
 SuperTraining_Text_EVsReset::
 	.string "{STR_VAR_1}'s EVs have been reset!$"

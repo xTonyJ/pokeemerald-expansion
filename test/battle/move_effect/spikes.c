@@ -14,9 +14,12 @@ SINGLE_BATTLE_TEST("Spikes damage on switch in")
     PARAMETRIZE { layers = 2; divisor = 6; }
     PARAMETRIZE { layers = 3; divisor = 4; }
     GIVEN {
+        PLAYER(SPECIES_WOBBUFFET){ Ability(ABILITY_SHIELD_DUST);}
+        PLAYER(SPECIES_WOBBUFFET){ Ability(ABILITY_SHIELD_DUST);}
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET){ Ability(ABILITY_SHIELD_DUST);}
+        OPPONENT(SPECIES_WOBBUFFET){ Ability(ABILITY_SHIELD_DUST);}
+        OPPONENT(SPECIES_WYNAUT){ Ability(ABILITY_SHIELD_DUST);}
     } WHEN {
         u32 count;
         for (count = 0; count < layers; ++count) {

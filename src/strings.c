@@ -357,8 +357,8 @@ const u8 gText_Var1DisdainfullyAteVar2[] = _("{STR_VAR_1} disdainfully ate the\n
 const u8 gText_ShopBuy[] = _("BUY");
 const u8 gText_ShopSell[] = _("SELL");
 const u8 gText_ShopQuit[] = _("QUIT");
-const u8 gText_SoldOut[] = _("I'm sorry, but that item is sold out.\p");
-const u8 gText_SoldOut2[] = _("SOLD OUT");
+const u8 gText_ThatItemIsSoldOut[] = _("I'm sorry, but that item is sold out.{PAUSE_UNTIL_PRESS}");
+const u8 gText_SoldOut[] = _("SOLD OUT");
 const u8 gText_InBagVar1[] = _("IN BAG: {STR_VAR_1}");
 const u8 gText_QuitShopping[] = _("Quit shopping.");
 const u8 gText_Var1CertainlyHowMany[] = _("{STR_VAR_1}? Certainly.\nHow many would you like?");
@@ -656,7 +656,7 @@ const u8 gText_Par[] = _("PAR");
 const u8 gText_Slp[] = _("SLP");
 const u8 gText_Brn[] = _("BRN");
 const u8 gText_Frz[] = _("FRZ");
-const u8 gText_Toxic[] = _("TOXIC"); // Unused
+const u8 gText_Toxic[] = _("TOXIC");
 const u8 gText_Ok3[] = _("OK"); // Unused
 const u8 gText_Quit[] = _("QUIT"); // Unused
 const u8 gText_SawIt[] = _("Saw it");
@@ -1782,12 +1782,6 @@ const u8 gText_TrainerHill1F[] = _("1F");
 const u8 gText_TrainerHill2F[] = _("2F");
 const u8 gText_TrainerHill3F[] = _("3F");
 const u8 gText_TrainerHill4F[] = _("4F");
-const u8 gText_LightBulb[] = _("Light bulb");
-const u8 gText_MicrowaveOven[] = _("Microwave oven");
-const u8 gText_WashingMachine[] = _("Washing machine");
-const u8 gText_Refrigerator[] = _("Refrigerator");
-const u8 gText_ElectricFan[] = _("Electric fan");
-const u8 gText_LawnMower[] = _("Lawn mower");
 const u8 gText_ChangeForm[] = _("Change form");
 const u8 gText_ChangeAbility[] = _("Change Ability");
 const u8 gText_TeachWhichMoveToPkmn[] = _("Teach which move to {STR_VAR_1}?");
@@ -1877,11 +1871,11 @@ const u8 gText_QuestActive[] =_("active");
 //names
 const u8 gText_SideQuestName_1[] = _("Side Quest 1");
 const u8 gText_SideQuestName_2[] = _("Top of the World");
-const u8 gText_SideQuestName_3[] = _("Side Quest 3");
-const u8 gText_SideQuestName_4[] = _("Side Quest 4");
+const u8 gText_SideQuestName_3[] = _("Regional Research");
+const u8 gText_SideQuestName_4[] = _("Ability Academics");
 const u8 gText_SideQuestName_5[] = _("One Man's Trash");
-const u8 gText_SideQuestName_6[] = _("Side Quest 6");
-const u8 gText_SideQuestName_7[] = _("Side Quest 7");
+const u8 gText_SideQuestName_6[] = _("Legend of Lugia");
+const u8 gText_SideQuestName_7[] = _("Uber Arrival");
 const u8 gText_SideQuestName_8[] = _("Side Quest 8");
 const u8 gText_SideQuestName_9[] = _("Side Quest 9");
 const u8 gText_SideQuestName_10[] = _("Side Quest 10");
@@ -1909,11 +1903,11 @@ const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 //descriptions
 const u8 gText_SideQuestDesc_1[] = _("Description 1");
 const u8 gText_SideQuestDesc_2[] = _("Obtain all 8 badges and \ndefeat the Champion");
-const u8 gText_SideQuestDesc_3[] = _("Description 3");
-const u8 gText_SideQuestDesc_4[] = _("Description 4");
-const u8 gText_SideQuestDesc_5[] = _("Find 10 bottle caps for Ethan \nin Fallarbor Town");
-const u8 gText_SideQuestDesc_6[] = _("Description 6");
-const u8 gText_SideQuestDesc_7[] = _("Description 7");
+const u8 gText_SideQuestDesc_3[] = _("Show the scientist in Dewford Town \na regional Pokémon form");
+const u8 gText_SideQuestDesc_4[] = _("Defeat the Ability Master\nin ");
+const u8 gText_SideQuestDesc_5[] = _("Find 10 bottle caps for Ethan \nand Nate in Fallarbor Town");
+const u8 gText_SideQuestDesc_6[] = _("Lugia Quest");
+const u8 gText_SideQuestDesc_7[] = _("Defeat your rival at thier \nstrongest potential");
 const u8 gText_SideQuestDesc_8[] = _("Description 8");
 const u8 gText_SideQuestDesc_9[] = _("Description 9");
 const u8 gText_SideQuestDesc_10[] = _("Description 10");
@@ -1940,10 +1934,10 @@ const u8 gText_SideQuestDesc_30[] = _("Description 30");
 
 //completed quest description
 const u8 gText_SideQuestDoneDesc_1[] = _("Completed Quest 1");
-const u8 gText_SideQuestDoneDesc_2[] = _("Became the Champion.\n Uber gym refights unlocked.");
-const u8 gText_SideQuestDoneDesc_3[] = _("Completed Quest 3");
-const u8 gText_SideQuestDoneDesc_4[] = _("Completed Quest 4");
-const u8 gText_SideQuestDoneDesc_5[] = _("Bottle Caps found.\nIV and EV training unlocked.");
+const u8 gText_SideQuestDoneDesc_2[] = _("Became the Champion.\nUber gym refights unlocked.");
+const u8 gText_SideQuestDoneDesc_3[] = _("Regional Pokémon form shown. Nature \nchanging via the summary screen\nunlocked.");
+const u8 gText_SideQuestDoneDesc_4[] = _("Ability Master defeated. Ability \nchanging via the summary screen\nunlocked.");
+const u8 gText_SideQuestDoneDesc_5[] = _("Bottle Caps found.\nIV training unlocked.");
 const u8 gText_SideQuestDoneDesc_6[] = _("Completed Quest 6");
 const u8 gText_SideQuestDoneDesc_7[] = _("Completed Quest 7");
 const u8 gText_SideQuestDoneDesc_8[] = _("Completed Quest 8");
@@ -1972,10 +1966,10 @@ const u8 gText_SideQuestDoneDesc_30[] = _("Completed Quest 30");
 
 //map
 const u8 gText_SideQuestMap1[] = _("Map 1");
-const u8 gText_SideQuestMap2[] = _("Hoenn");
-const u8 gText_SideQuestMap3[] = _("Map 3");
+const u8 gText_SideQuestMap2[] = _("Rustboro Gym");
+const u8 gText_SideQuestMap3[] = _("Dewford Town");
 const u8 gText_SideQuestMap4[] = _("Map 4");
-const u8 gText_SideQuestMap5[] = _("Hoenn");
+const u8 gText_SideQuestMap5[] = _("Fallarbor Town");
 const u8 gText_SideQuestMap6[] = _("Map 6");
 const u8 gText_SideQuestMap7[] = _("Map 7");
 const u8 gText_SideQuestMap8[] = _("Map 8");
@@ -2036,7 +2030,7 @@ const u8 gText_SubQuest2_Name19[] = _("Part 19");
 const u8 gText_SubQuest2_Name20[] = _("Part 20");
 
 const u8 gText_SubQuest1_Desc1[] = _("dESC 1");
-const u8 gText_SubQuest1_Desc2[] = _("Become the Pokemon world champion");
+const u8 gText_SubQuest1_Desc2[] = _("Become the Pokémon world champion");
 const u8 gText_SubQuest1_Desc3[] = _("Description Sub 3");
 const u8 gText_SubQuest1_Desc4[] = _("Description Sub 4");
 const u8 gText_SubQuest1_Desc5[] = _("Description Sub 5");
@@ -2186,7 +2180,7 @@ const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alte
 const u8 gText_Modify_Pss[]             = _("Modify");
 
 //Summary Screen Move Effects
-const u8 gText_Effect[]                 = _("Effect");
+const u8 gText_Effect[]                 = _("Effect(s)");
 const u8 gText_Chance[]                 = _("Chance");
 const u8 gText_Contact[]                = _("Contact");
 const u8 gText_Target[]                 = _("Target");
@@ -2199,11 +2193,13 @@ const u8 gText_Effect_Multi_Hit[]                = _("Multi Hit");
 const u8 gText_Effect_Three_Hits[]               = _("Three Hits");
 const u8 gText_Effect_Two_Hits[]                 = _("Two Hits");
 
+const u8 gText_Effect_Sleep_Hit[]                = _("Sleep");
 const u8 gText_Effect_Burn_Hit[]                 = _("Burn");
 const u8 gText_Effect_Poison_Hit[]               = _("Poison");
 const u8 gText_Effect_Paralyze_Hit[]             = _("Paralyze");
-const u8 gText_Effect_Freeze_Hit[]               = _("Freeze");
+const u8 gText_Effect_Freeze_Hit[]               = _("Brittle");
 const u8 gText_Effect_Confuse_Hit[]              = _("Confuse");
+const u8 gText_Effect_Sap_Hit[]                  = _("Sap");
 
 const u8 gText_Effect_All_Stats_Up[]             = _("All+");
 const u8 gText_Effect_Attack_Up[]                = _("Atk+");
@@ -2218,6 +2214,7 @@ const u8 gText_Effect_Speed_Up[]                 = _("Spd+");
 const u8 gText_Effect_Speed_Down[]               = _("Spd-");
 const u8 gText_Effect_Accuracy_Up[]              = _("Acc-");
 const u8 gText_Effect_Accuracy_Down[]            = _("Acc-");
+const u8 gText_Effect_Wrap[]                     = _("Wrap");
 
 const u8 gText_Effect_Heal_HP[]                  = _("Heal HP");
 const u8 gText_Effect_Heal[]                     = _("Heal");
@@ -2229,6 +2226,7 @@ const u8 gText_Effect_Recoil[]                   = _("Recoil");
 const u8 gText_Effect_Misc[]                     = _("Other");
 const u8 gText_Effect_Always_Crit[]              = _("Crit");
 const u8 gText_Effect_Protect[]                  = _("Protect");
+const u8 gText_Effect_Status[]                   = _("Status");
 
 //Summary Screen Target
 const u8 gText_Effect_FoeAndAlly[]            = _("All");
@@ -2244,6 +2242,64 @@ const u8 gText_Effect_ContactNo[]             = _("No");
 const u8 gText_Stats[]               = _("Stats");
 const u8 gText_BaseStats[]           = _("BS");
 const u8 gText_EVs[]                 = _("EVs");
+const u8 gText_IVs[]                 = _("IVs");
+
+//Summary Screen Evo/Forms
+
+const u8 sText_EVO_Buttons[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK");
+const u8 sText_EVO_Buttons_Decapped[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check");
+const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK  {START_BUTTON}FORMs");
+const u8 sText_EVO_Buttons_Decapped_PE[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check  {START_BUTTON}Forms");
+const u8 sText_EVO_Name[] = _("{STR_VAR_3}:");
+const u8 sText_EVO_PreEvo[] = _("{STR_VAR_1} evolves from {STR_VAR_2}");
+const u8 sText_EVO_PreEvo_PE_Mega[] = _("{STR_VAR_1} Mega Evolves with {STR_VAR_2}");
+const u8 sText_EVO_FRIENDSHIP[] = _("{LV}{UP_ARROW}, high friendship");
+const u8 sText_EVO_FRIENDSHIP_DAY[] = _("{LV}{UP_ARROW}, high friendship, day");
+const u8 sText_EVO_FRIENDSHIP_NIGHT[] = _("{LV}{UP_ARROW}, high friendship, night");
+const u8 sText_EVO_FRIENDSHIP_MOVE_TYPE[] = _("{LV}{UP_ARROW}, high friendship, {STR_VAR_2} move");
+const u8 sText_EVO_LEVEL[] = _("{LV}{UP_ARROW} to {STR_VAR_2}");
+const u8 sText_EVO_TRADE[] = _("Trading");
+const u8 sText_EVO_TRADE_ITEM[] = _("Trading, holding {STR_VAR_2}");
+const u8 sText_EVO_ITEM[] = _("{STR_VAR_2} is used");
+const u8 sText_EVO_LEVEL_ATK_GT_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk > Def");
+const u8 sText_EVO_LEVEL_ATK_EQ_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk = Def");
+const u8 sText_EVO_LEVEL_ATK_LT_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk < Def");
+const u8 sText_EVO_LEVEL_SILCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Silcoon persona");
+const u8 sText_EVO_LEVEL_CASCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Cascoon persona");
+const u8 sText_EVO_LEVEL_NINJASK[] = _("{LV}{UP_ARROW} to {STR_VAR_2}");
+const u8 sText_EVO_LEVEL_SHEDINJA[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, party<6, 1x POKéBALL");
+const u8 sText_EVO_BEAUTY[] = _("{LV}{UP_ARROW}, high beauty");
+const u8 sText_EVO_LEVEL_FEMALE[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, is female");
+const u8 sText_EVO_LEVEL_MALE[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, is male");
+const u8 sText_EVO_LEVEL_NIGHT[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, night");
+const u8 sText_EVO_LEVEL_DAY[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, day");
+const u8 sText_EVO_LEVEL_DUSK[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, dusk (5-6PM)");
+const u8 sText_EVO_ITEM_HOLD_DAY[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}, day");
+const u8 sText_EVO_ITEM_HOLD_NIGHT[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}, night");
+const u8 sText_EVO_MOVE[] = _("{LV}{UP_ARROW}, knows {STR_VAR_2}");
+const u8 sText_EVO_MAPSEC[] = _("{LV}{UP_ARROW} on {STR_VAR_2}");
+const u8 sText_EVO_ITEM_MALE[] = _("{STR_VAR_2} used on male");
+const u8 sText_EVO_ITEM_FEMALE[] = _("{STR_VAR_2} used on female");
+const u8 sText_EVO_LEVEL_RAIN[] = _("{LV}{UP_ARROW} to {STR_VAR_2} while raining");
+const u8 sText_EVO_SPECIFIC_MON_IN_PARTY[] = _("{LV}{UP_ARROW} with {STR_VAR_2} in party");
+const u8 sText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[] = _("{LV}{UP_ARROW} with dark type in party");
+const u8 sText_EVO_TRADE_SPECIFIC_MON[] = _("Traded for {STR_VAR_2}");
+const u8 sText_EVO_SPECIFIC_MAP[] = _("{LV}{UP_ARROW} on {STR_VAR_2}");
+const u8 sText_EVO_LEVEL_NATURE_AMPED[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Amped natures");
+const u8 sText_EVO_LEVEL_NATURE_LOW_KEY[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Low Key natures");
+const u8 sText_EVO_CRITICAL_HITS[] = _("Land {STR_VAR_2} critical hits in\nsingle battle");
+const u8 sText_EVO_SCRIPT_TRIGGER_DMG[] = _("Takes at least {STR_VAR_2} HP in damage");
+const u8 sText_EVO_DARK_SCROLL[] = _("ScrllOfDrknss is used");
+const u8 sText_EVO_WATER_SCROLL[] = _("ScrollOfWatrs is used");
+const u8 sText_EVO_ITEM_NIGHT[] = _("{STR_VAR_2} is used, night");
+const u8 sText_EVO_ITEM_DAY[] = _("{STR_VAR_2} is used, day");
+const u8 sText_EVO_ITEM_HOLD[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}");
+const u8 sText_EVO_LEVEL_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW} after 20x {STR_VAR_2}");
+const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, male");
+const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, female");
+const u8 sText_EVO_UNKNOWN[] = _("Method unknown");
+const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution/forms.");
+
 // New Strings
 // Move Tutors
 // Unlocked after beating Roxanne
@@ -2457,11 +2513,12 @@ const u8 gText_BlastBurn[] = _("Blast Burn");
 const u8 gText_HydroCannon[] = _("Hydro Cannon");
 
 // Rotom Form Options
-const u8 gText_MicrowaveOven[] = _("Microwave Oven");
-const u8 gText_WashingMachine[] = _("Washing Machine");
+const u8 gText_LightBulb[] = _("Light bulb");
+const u8 gText_MicrowaveOven[] = _("Microwave oven");
+const u8 gText_WashingMachine[] = _("Washing machine");
 const u8 gText_Refrigerator[] = _("Refrigerator");
-const u8 gText_ElectricFan[] = _("Electric Fan");
-const u8 gText_Lawnmower[] = _("Lawnmower");
+const u8 gText_ElectricFan[] = _("Electric fan");
+const u8 gText_LawnMower[] = _("Lawn mower");
 const u8 gText_Recall[] = _("Recall");
 const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");

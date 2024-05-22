@@ -79,6 +79,7 @@ Route123_EventScript_RematchCameron::
 	end
 
 Route123_EventScript_Jacki::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, Route123_EventScript_RegisterJacki
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchJacki

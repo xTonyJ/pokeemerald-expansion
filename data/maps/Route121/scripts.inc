@@ -101,11 +101,13 @@ Route121_EventScript_Tammy::
 	end
 
 Route121_EventScript_Kate::
+	special HealPlayerParty
 	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_KateIntro, Route121_Text_KateDefeat, Route121_Text_KateNotEnoughMons
 	msgbox Route121_Text_KatePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Joy::
+	special HealPlayerParty
 	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_JoyIntro, Route121_Text_JoyDefeat, Route121_Text_JoyNotEnoughMons
 	msgbox Route121_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
 	end

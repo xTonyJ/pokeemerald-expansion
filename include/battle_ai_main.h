@@ -49,6 +49,9 @@
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
 
+// Checking innates fast for AI
+#define BATTLER_HAS_ABILITY_FAST_AI(battlerId, abilityToCheck) ((AI_DATA->abilities[battlerId] == abilityToCheck || BattlerHasInnate(battlerId, abilityToCheck))) //Useful to make calculations faster, used only for AI stuff
+
 #include "test_runner.h"
 
 // Logs for debugging AI tests.
@@ -94,10 +97,9 @@ void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);
 void GetAiLogicData(void);
-void ReturnBattleItems(void);
 
-bool8 BattlerHasInnate(u8 battlerId, u16 ability);
-bool8 GetBattlerInnateNum(u8 battlerId, u16 ability);
+bool8 BattlerHasInnate(u32 battlerId, u16 ability);
+bool8 GetBattlerInnateNum(u32 battlerId, u16 ability);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 
 extern u8 sBattler_AI;

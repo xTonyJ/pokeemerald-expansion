@@ -179,37 +179,6 @@ void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKey
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, gText_DadsAdvice);
 }
 
-void ItemUseOutOfBattle_ExpShare(u8 taskId)
-{
-    bool8  expShareOn = FlagGet(FLAG_EXP_SHARE);
-    if (!expShareOn)
-    {
-        FlagSet(FLAG_EXP_SHARE);
-        PlaySE(SE_EXP_MAX);
-        if (gTasks[taskId].tUsingRegisteredKeyItem) // to account for pressing select in the overworld
-            DisplayItemMessageOnField(taskId, gText_ExpShareTurnOn, Task_CloseCantUseKeyItemMessage);
-        else
-            DisplayItemMessage(taskId, 1, gText_ExpShareTurnOn, CloseItemMessage);
-    }
-    else
-    {
-        FlagClear(FLAG_EXP_SHARE);
-        PlaySE(SE_PC_OFF);
-        if (gTasks[taskId].tUsingRegisteredKeyItem) // to account for pressing select in the overworld
-            DisplayItemMessageOnField(taskId, gText_ExpShareTurnOff, Task_CloseCantUseKeyItemMessage);
-        else
-            DisplayItemMessage(taskId, 1, gText_ExpShareTurnOff, CloseItemMessage);
-    }
-}
-
-void ItemUseOutOfBattle_RotomCatalog(u8 taskId)
-{
-    SetMainCallback2(CB2_ReturnToFieldContinueScript);
-    Task_FadeAndCloseBagMenu(taskId);
-    ScriptContext_SetupScript(EventScript_Rotom);
-    FreezeObjectEvents();
-}
-
 static void DisplayCannotDismountBikeMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField)
 {
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, gText_CantDismountBike);
@@ -860,12 +829,6 @@ void ItemUseOutOfBattle_Mint(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
-void ItemUseOutOfBattle_Mint(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_Mint;
-    SetUpItemUseCallback(taskId);
-}
-
 void ItemUseOutOfBattle_ResetEVs(u8 taskId)
 {
     gItemUseCB = ItemUseCB_ResetEVs;
@@ -1170,6 +1133,7 @@ static void ItemUseOnFieldCB_PokeVial(u8 taskId)
 }
 //Poke Vial in the secret menu
 extern const u8 EventScript_PokeVialNoCharges[];
+extern const u8 EventScript_PokeVialChargesLeft[];
 void SecretMenu_PokeVial(void)
 {
     if (VarGet(VAR_POKE_VIAL_CHARGES) == 0)
@@ -1181,7 +1145,15 @@ void SecretMenu_PokeVial(void)
         PlaySE(SE_USE_ITEM);
         HealPlayerParty();
         VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+        ScriptContext_SetupScript(EventScript_PokeVialChargesLeft);
     }
+}
+
+void PokeVialCharges(void)
+{
+    u16 currentVialCharges = VarGet(VAR_POKE_VIAL_CHARGES);
+    ConvertIntToDecimalStringN(gStringVar2, currentVialCharges, STR_CONV_MODE_LEFT_ALIGN, 5);
+    //gSpecialVar_0x8005 = VarGet(VAR_POKE_VIAL_CHARGES); //STR_VAR_2
 }
 
 static u32 GetBallThrowableState(void)

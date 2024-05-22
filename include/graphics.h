@@ -1970,7 +1970,6 @@ extern const u32 gSummaryPage_InfoEgg_Tilemap[];
 extern const u32 gSummaryPage_Skills_Tilemap[];
 extern const u32 gSummaryPage_BattleMoves_Tilemap[];
 extern const u32 gSummaryPage_ContestMoves_Tilemap[];*/
-//extern const u16 gPPTextPalette[];
 extern const u32 gMoveTypes_Pal[];
 
 extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
@@ -3422,7 +3421,7 @@ extern const u32 gSummaryScreenPageContestNewMoveTilemap[];
 extern const u32 gSummaryScreenPageConditionTilemap[];
 extern const u32 gSummaryScreenPageAbilityTilemap[];
 extern const u32 gSummaryScreenPageEvolutionTilemap[];
-extern const u32 gPPTextPalette[];
-extern const u16 gPPTextPalette2[];
+extern const u32 gSummaryPP[];
+extern const u16 gPPTextPalette[];
 
 #endif //GUARD_GRAPHICS_H

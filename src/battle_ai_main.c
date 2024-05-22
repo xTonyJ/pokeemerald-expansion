@@ -471,41 +471,6 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     }
 }
 
-void ReturnBattleItems(void)
-{
-    u8 y;
-    u16 heldItem;
-    for 
-    (y = 0; y < PARTY_SIZE; y++)
-        {
-            heldItem = GetBoxMonData(&gPlayerParty[y], MON_DATA_HELD_ITEM);
-
-            SetMonData(&gPlayerParty[y],
-                    MON_DATA_HELD_ITEM,
-                    &heldItem);
-        }
-
-}
-
-static u8 ChooseMoveOrAction_Singles(void)
-{
-    u8 currentMoveArray[MAX_MON_MOVES];
-    u8 consideredMoveArray[MAX_MON_MOVES];
-    u32 numOfBestMoves;
-    s32 i, id;
-    u32 flags = AI_THINKING_STRUCT->aiFlags;
-
-    AI_DATA->partnerMove = 0;   // no ally
-    while (flags != 0)
-    {
-        if (!IsBattlerAlive(battlerAtk))
-            continue;
-
-        SetBattlerAiData(battlerAtk, aiData);
-        SetBattlerAiMovesData(aiData, battlerAtk, battlersCount);
-    }
-}
-
 static bool32 AI_SwitchMonIfSuitable(u32 battler, bool32 doubleBattle)
 {
     u32 monToSwitchId = AI_DATA->mostSuitableMonId[battler];
@@ -532,7 +497,7 @@ static bool32 AI_ShouldSwitchIfBadMoves(u32 battler, bool32 doubleBattle)
 {
     u32 i, j;
     // If can switch.
-    if ((AI_THINKING_STRUCT->aiFlags & ~(AI_SCRIPT_DO_NOT_SWITCH | AI_SCRIPT_PRESERVE_ORDER)) && CountUsablePartyMons(battler) > 0
+    if ((AI_THINKING_STRUCT->aiFlags[battler] & ~(AI_SCRIPT_DO_NOT_SWITCH | AI_SCRIPT_PRESERVE_ORDER)) && CountUsablePartyMons(battler) > 0
         && !IsBattlerTrapped(battler, TRUE)
         && !(gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_PALACE))
         && AI_THINKING_STRUCT->aiFlags[battler] & (AI_FLAG_CHECK_VIABILITY | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_BATON_PASS))
@@ -857,12 +822,38 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         RETURN_SCORE_MINUS(10);
         break;
     }
+    // Innate checks like Lightning Rod and the various absorbs
 
+    if (moveType == TYPE_ELECTRIC
+        && (AI_DATA->abilities[battlerDef] == ABILITY_LIGHTNING_ROD || BattlerHasInnate(battlerDef, ABILITY_LIGHTNING_ROD) || 
+            (gBattleMons[BATTLE_PARTNER(battlerDef)].ability == ABILITY_LIGHTNING_ROD && IsBattlerAlive(BATTLE_PARTNER(battlerDef))) || 
+            (BattlerHasInnate(BATTLE_PARTNER(battlerDef), ABILITY_LIGHTNING_ROD) && IsBattlerAlive(BATTLE_PARTNER(battlerDef)))))
+    {
+            RETURN_SCORE_MINUS(20);
+    }
+
+    if (moveType == TYPE_ELECTRIC
+        && (AI_DATA->abilities[battlerDef] == ABILITY_VOLT_ABSORB || BattlerHasInnate(battlerDef, ABILITY_VOLT_ABSORB)))
+    {
+        RETURN_SCORE_MINUS(20);
+    }
+
+    if (moveType == TYPE_GRASS
+        && (AI_DATA->abilities[battlerDef] == ABILITY_SAP_SIPPER || BattlerHasInnate(battlerDef, ABILITY_SAP_SIPPER)))
+    {
+        RETURN_SCORE_MINUS(20);
+    }
+
+    if (moveType == TYPE_WATER
+        && (AI_DATA->abilities[battlerDef] == ABILITY_WATER_ABSORB || BattlerHasInnate(battlerDef, ABILITY_WATER_ABSORB)))
+    {
+        RETURN_SCORE_MINUS(20);
+    }
     // check non-user target
     if (!(moveTarget & MOVE_TARGET_USER))
     {
         // target ability checks
-        if (!DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move))
+        if (!DoesBattlerIgnoreAbilityChecks(battlerAtk, move))
         {
             switch (aiData->abilities[battlerDef])
             {
@@ -968,6 +959,17 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // target partner ability checks & not attacking partner
             if (isDoubleBattle)
             {
+                //Magic Bounce for the partner
+                if(BATTLER_HAS_ABILITY_FAST_AI(BATTLE_PARTNER(battlerDef), ABILITY_MAGIC_BOUNCE)){
+                    if((gMovesInfo[move].magicCoatAffected) && moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY | MOVE_TARGET_OPPONENTS_FIELD)){
+                        RETURN_SCORE_MINUS(20);
+                    }
+                }
+
+                //Sweet Veil for the partner
+                if(BATTLER_HAS_ABILITY_FAST_AI(BATTLE_PARTNER(battlerDef), ABILITY_SWEET_VEIL) && (moveEffect == EFFECT_SLEEP || moveEffect == EFFECT_YAWN))
+                    RETURN_SCORE_MINUS(10);
+
                 switch (aiData->abilities[BATTLE_PARTNER(battlerDef)])
                 {
                 case ABILITY_LIGHTNING_ROD:
@@ -1004,11 +1006,172 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             } // def partner ability checks
         } // ignore def ability check
 
+        //check for def innates
+        //Soundproof
+        if(BattlerHasInnate(battlerDef, ABILITY_SOUNDPROOF) && gMovesInfo[move].soundMove)
+            RETURN_SCORE_MINUS(20);
+
+        //Queenly Majesty
+        if(BattlerHasInnate(battlerDef, ABILITY_QUEENLY_MAJESTY) && atkPriority > 0)
+            RETURN_SCORE_MINUS(20);
+
+        //Magic Guard
+        if(BattlerHasInnate(battlerDef, ABILITY_MAGIC_GUARD)){
+            switch (moveEffect)
+            {
+            case EFFECT_POISON:
+            case EFFECT_WILL_O_WISP:
+            case EFFECT_TOXIC:
+            case EFFECT_LEECH_SEED:
+                score -= 5;
+                break;
+            case EFFECT_CURSE:
+                if (IS_BATTLER_OF_TYPE(battlerAtk, TYPE_GHOST)) // Don't use Curse if you're a ghost type vs a Magic Guard user, they'll take no damage.
+                    score -= 5;
+                break;
+            }
+        }
+
+        //Oblivious
+        if(BattlerHasInnate(battlerDef, ABILITY_OBLIVIOUS)){
+            switch (moveEffect)
+            {
+            case EFFECT_TAUNT:
+                score -= 20;
+                break;
+            }
+        }
+
+        //Volt Absorb, Motor Drive and Lighting Rod
+        if((BattlerHasInnate(battlerDef, ABILITY_VOLT_ABSORB)  || 
+            BattlerHasInnate(battlerDef, ABILITY_MOTOR_DRIVE)  || 
+            BattlerHasInnate(battlerDef, ABILITY_LIGHTNING_ROD)) && 
+            moveType == TYPE_ELECTRIC)
+            RETURN_SCORE_MINUS(20);
+
+        //Water Absorb, Dry skin and Storm Drain
+        if((BattlerHasInnate(battlerDef, ABILITY_WATER_ABSORB)  || 
+            BattlerHasInnate(battlerDef, ABILITY_DRY_SKIN)  || 
+            BattlerHasInnate(battlerDef, ABILITY_STORM_DRAIN)) && 
+            moveType == TYPE_WATER)
+            RETURN_SCORE_MINUS(20);
+
+        //Flash Fire
+        if(BattlerHasInnate(battlerDef, ABILITY_FLASH_FIRE) && 
+            moveType == TYPE_FIRE)
+            RETURN_SCORE_MINUS(20);
+        
+        //Wonder Guard
+        if(BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_WONDER_GUARD)){
+            if(effectiveness > AI_EFFECTIVENESS_x2 && gMovesInfo[move].power > 0)
+                RETURN_SCORE_MINUS(20);
+        }
+        
+        //Sap Sipper
+        if(BattlerHasInnate(battlerDef, ABILITY_SAP_SIPPER) && 
+            moveType == TYPE_GRASS)
+            RETURN_SCORE_MINUS(20);
+
+        //Justified
+        if(BattlerHasInnate(battlerDef, ABILITY_JUSTIFIED) && 
+            moveType == TYPE_DARK && !IS_MOVE_STATUS(move))
+            RETURN_SCORE_MINUS(10);
+
+        //Rattled
+        if(BattlerHasInnate(battlerDef, ABILITY_RATTLED) && !IS_MOVE_STATUS(move) &&
+            (moveType == TYPE_DARK || moveType == TYPE_GHOST || moveType == TYPE_BUG))
+            RETURN_SCORE_MINUS(10);
+
+        //Bulletproof
+        if(BattlerHasInnate(battlerDef, ABILITY_BULLETPROOF) &&
+           gMovesInfo[move].ballisticMove)
+            RETURN_SCORE_MINUS(20);
+
+        //Dazzling and Queenly Majesty
+        if((BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_DAZZLING)                 ||
+            BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_QUEENLY_MAJESTY)          ||
+            BATTLER_HAS_ABILITY_FAST_AI(BATTLE_PARTNER(battlerDef), ABILITY_DAZZLING) ||
+            BATTLER_HAS_ABILITY_FAST_AI(BATTLE_PARTNER(battlerDef), ABILITY_QUEENLY_MAJESTY)) &&
+           atkPriority > 0)
+            RETURN_SCORE_MINUS(20);
+
+        //Aroma Veil
+        if(BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_AROMA_VEIL) &&
+           IsAromaVeilProtectedMove(move))
+            RETURN_SCORE_MINUS(20);
+
+        //Sweet Veil
+        if(BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_SWEET_VEIL) &&
+           (moveEffect == EFFECT_SLEEP || moveEffect == EFFECT_YAWN))
+            RETURN_SCORE_MINUS(10);
+
+        //Magic Bounce
+        if(BATTLER_HAS_ABILITY_FAST_AI(battlerDef, ABILITY_MAGIC_BOUNCE) &&
+           gMovesInfo[move].magicCoatAffected)
+            RETURN_SCORE_MINUS(20);
+
+        //Contrary
+        if(BattlerHasInnate(battlerDef, ABILITY_CONTRARY) &&
+           IsStatLoweringEffect(moveEffect))
+            RETURN_SCORE_MINUS(20);
+
+        //Clear Body, Full Metal Body and White Smoke
+        if((BattlerHasInnate(battlerDef, ABILITY_CLEAR_BODY) ||
+            BattlerHasInnate(battlerDef, ABILITY_FULL_METAL_BODY) ||
+            BattlerHasInnate(battlerDef, ABILITY_WHITE_SMOKE)) &&
+           IsStatLoweringEffect(moveEffect))
+            RETURN_SCORE_MINUS(10);
+
+        //Hyper Cutter
+        if(BattlerHasInnate(battlerDef, ABILITY_HYPER_CUTTER) &&
+           (moveEffect == EFFECT_ATTACK_DOWN ||  moveEffect == EFFECT_ATTACK_DOWN_2) &&
+            move != MOVE_PLAY_NICE && move != MOVE_NOBLE_ROAR && move != MOVE_TEARFUL_LOOK && move != MOVE_VENOM_DRENCH)
+            RETURN_SCORE_MINUS(10);
+
+        //Keen Eye
+        if(BattlerHasInnate(battlerDef, ABILITY_KEEN_EYE) &&
+          (moveEffect == EFFECT_ACCURACY_DOWN || moveEffect == EFFECT_ACCURACY_DOWN_2))
+            RETURN_SCORE_MINUS(10);
+
+        //Defiant and Competitive
+        if((BattlerHasInnate(battlerDef, ABILITY_DEFIANT) ||
+            BattlerHasInnate(battlerDef, ABILITY_COMPETITIVE)) &&
+            IsStatLoweringEffect(moveEffect) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))
+            RETURN_SCORE_MINUS(8);
+
+        //Comatose
+        if(BattlerHasInnate(battlerDef, ABILITY_COMATOSE) &&
+           IsNonVolatileStatusMoveEffect(moveEffect))
+            RETURN_SCORE_MINUS(10);
+
         // gen7+ dark type mons immune to priority->elevated moves from prankster
         if (B_PRANKSTER_DARK_TYPES >= GEN_7 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK)
           && aiData->abilities[battlerAtk] == ABILITY_PRANKSTER && IS_MOVE_STATUS(move)
           && !(moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_USER)))
             RETURN_SCORE_MINUS(10);
+    //Partner Innates
+    if(isDoubleBattle){
+        //Lighting Rod for the partner
+        if(BattlerHasInnate(BATTLE_PARTNER(battlerDef), ABILITY_LIGHTNING_ROD)){
+            if(moveType == TYPE_ELECTRIC && !IsMoveRedirectionPrevented(move, AI_DATA->abilities[battlerAtk])){
+                RETURN_SCORE_MINUS(20);
+            }
+        }
+
+        //Storm Drain for the partner
+        if(BattlerHasInnate(BATTLE_PARTNER(battlerDef), ABILITY_STORM_DRAIN)){
+            if(moveType == TYPE_WATER && !IsMoveRedirectionPrevented(move, AI_DATA->abilities[battlerAtk])){
+                RETURN_SCORE_MINUS(20);
+            }
+        }
+
+        //Flower Veil
+        if(BattlerHasInnate(BATTLE_PARTNER(battlerDef), ABILITY_FLOWER_VEIL)){
+            if((IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)) && (IsNonVolatileStatusMoveEffect(moveEffect) || IsStatLoweringEffect(moveEffect))){
+                RETURN_SCORE_MINUS(20);
+            }
+        }
+    }
 
         // terrain & effect checks
         if (AI_IsTerrainAffected(battlerDef, STATUS_FIELD_ELECTRIC_TERRAIN))
@@ -1087,7 +1250,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             {
                 ADJUST_SCORE(-10);
             }
-            else if (IsAbilityOnField(ABILITY_DAMP) && !DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move))
+            else if (IsAbilityOnField(ABILITY_DAMP) && !DoesBattlerIgnoreAbilityChecks(battlerAtk, move))
             {
                 ADJUST_SCORE(-10);
             }
@@ -2796,7 +2959,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
     {
         // partner ability checks
-        if (!partnerProtecting && moveTarget != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move))
+        if (!partnerProtecting && moveTarget != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(battlerAtk, move))
         {
             switch (atkPartnerAbility)
             {
@@ -3202,6 +3365,10 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
     // The AI should understand that while Dynamaxed, status moves function like Protect.
     if (IsDynamaxed(battlerAtk) && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         moveEffect = EFFECT_PROTECT;
+    
+    // Only here for Norman gym battle with the new Truant
+    if(AI_DATA->abilities[battlerAtk] == ABILITY_TRUANT && gDisableStructs[battlerAtk].truantCounter != 0 && IS_MOVE_STATUS(move))
+        ADJUST_SCORE(100);
 
     // check status move preference
     if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_PREFER_STATUS_MOVES && IS_MOVE_STATUS(move) && effectiveness != AI_EFFECTIVENESS_x0)
@@ -3212,9 +3379,12 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         ADJUST_SCORE(10);
 
     // check burn / frostbite
-    if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_SMART_SWITCHING && AI_DATA->abilities[battlerAtk] == ABILITY_NATURAL_CURE)
+    if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_SMART_SWITCHING 
+    && (BattlerHasInnate(battlerAtk, ABILITY_NATURAL_CURE) || AI_DATA->abilities[battlerAtk] == ABILITY_NATURAL_CURE))
     {
-        if ((gBattleMons[battlerAtk].status1 & STATUS1_BURN && HasOnlyMovesWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL, TRUE))
+        if ((gBattleMons[battlerAtk].status1 & STATUS1_BURN && HasOnlyMovesWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL, TRUE)
+        && !BATTLER_HAS_ABILITY_FAST_AI(battlerAtk, ABILITY_GUTS)
+        && gMovesInfo[move].effect != EFFECT_FACADE)
         || (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && HasOnlyMovesWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL, TRUE)))
             ADJUST_SCORE(-20); // Force switch if all your attacking moves are physical and you have Natural Cure.
     }
@@ -3557,9 +3727,6 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         {
             if (CountUsablePartyMons(battlerAtk) == 0)
                 break; // Can't switch
-
-            if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
-                ADJUST_SCORE(7);
         }
         break;
     case EFFECT_BATON_PASS:
@@ -4302,7 +4469,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_SOAK:
-        if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS) || HasMoveEffect(battlerAtk, EFFECT_FREEZE_DRY))
+        if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS))
             ADJUST_SCORE(DECENT_EFFECT); // Get some super effective moves
         break;
     case EFFECT_THIRD_TYPE:
@@ -5242,7 +5409,7 @@ static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
-bool8 BattlerHasInnate(u8 battlerId, u16 ability){
+bool8 BattlerHasInnate(u32 battlerId, u16 ability){
     bool8 isEnemyMon = GetBattlerSide(battlerId) == B_SIDE_OPPONENT;
 
     /*if(BattlerIgnoresAbility(gBattlerAttacker, battlerId, ability) && B_MOLD_BREAKER_WORKS_ON_INNATES == TRUE)
@@ -5253,7 +5420,7 @@ bool8 BattlerHasInnate(u8 battlerId, u16 ability){
         return SpeciesHasInnate(gBattleMons[battlerId].species, ability, gBattleMons[battlerId].level, gBattleMons[battlerId].personality, isEnemyMon, isEnemyMon);
 }
 
-bool8 GetBattlerInnateNum(u8 battlerId, u16 ability){
+bool8 GetBattlerInnateNum(u32 battlerId, u16 ability){
     bool8 isEnemyMon = GetBattlerSide(battlerId) == B_SIDE_OPPONENT;
 
     return GetSpeciesInnateNum(gBattleMons[battlerId].species, ability, gBattleMons[battlerId].level, gBattleMons[battlerId].personality, isEnemyMon);

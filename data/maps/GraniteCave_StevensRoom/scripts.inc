@@ -86,7 +86,7 @@ GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
 	.string "I'm interested in rare stones,\n"
 	.string "so I travel here and there.\p"
 	.string "Oh?\n"
-	.string "A LETTER for me?$"
+	.string "A letter for me?$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "STEVEN: Okay, thank you.\p"
@@ -95,7 +95,10 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "Let me see…\n"
 	.string "I'll give you this TM.\p"
 	.string "It contains my favorite move,\n"
-	.string "STEEL WING.$"
+	.string "STEEL WING.\p"
+	.string "Also, take my Infinite Repel.\p"
+	.string "It'll help you navigate caves\n"
+	.string "like this. Check your secret menu.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "STEVEN: Your POKéMON appear quite\n"

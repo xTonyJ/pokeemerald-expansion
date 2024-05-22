@@ -1020,10 +1020,9 @@ EventScript_SecretMenu::
 	dynmultipush EventScript_Secret_AutoRun_Text_0, 0
 	dynmultipush EventScript_Secret_Options_Text_5, 5
 	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_Secret_PokeVial_1
-	call_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, EventScript_Secret_Repel_2
+	call_if_set FLAG_DELIVERED_STEVEN_LETTER, EventScript_Secret_Repel_2
 	call_if_set FLAG_RIVAL_ROUTE_110, EventScript_Secret_Fly_3
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_Secret_PC_4
-@EventScript_MultichoiceTests:
 	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
 	switch VAR_RESULT
 	case 0, EventScript_AutoRun
@@ -1032,8 +1031,8 @@ EventScript_SecretMenu::
 	case 3, EventScript_Fly
 	case 4, EventScript_PC2
 	case 5, EventScript_SecretOptions
+	releaseall
 	end
-	return
 
 EventScript_Secret_PokeVial_1:
 	dynmultipush EventScript_Secret_PokeVial_Text_1, 1
@@ -1144,259 +1143,6 @@ EventScript_DifficultyChangeFinal::
 EventScript_GrindingModeChange::
 	special SecretMenu_Grinding
 	end
-
-EventScript_Rotom::	
-	dynmultipush EventScript_Multichoice_Rotom_0, 0
-	dynmultipush EventScript_Multichoice_Rotom_1, 1
-	dynmultipush EventScript_Multichoice_Rotom_2, 2
-	dynmultipush EventScript_Multichoice_Rotom_3, 3
-	dynmultipush EventScript_Multichoice_Rotom_4, 4
-	dynmultipush EventScript_Multichoice_Rotom_5, 5
-	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
-	@switch VAR_RESULT
-	@case 0, EventScript_MicrowaveOven
-	@case 1, EventScript_WashingMachine
-	@case 2, EventScript_Refrigerator
-	@case 3, EventScript_ElectricFan
-	@case 4, EventScript_Lawnmower
-	@case 5, EventScript_LightBulb
-	end
-	return
-
-EventScript_Multichoice_Rotom_0:
-	.string "Microwave Oven$"
-
-EventScript_Multichoice_Rotom_1:
-	.string "Washing Machine$"
-
-EventScript_Multichoice_Rotom_2:
-	.string "Refrigerator$"
-
-EventScript_Multichoice_Rotom_3:
-	.string "Electric Fan$"
-
-EventScript_Multichoice_Rotom_4:
-	.string "Lawnmower$"
-
-EventScript_Multichoice_Rotom_5:
-	.string "Light bulb$"
-
-@EventScript_MicrowaveOven::
-	@special RotomMicrowaveOven
-	@end
-
-@EventScript_WashingMachine::
-	@special RotomWashingMachine
-	@end
-
-@EventScript_Refrigerator::
-	@special RotomRefrigerator
-	@end
-
-@EventScript_ElectricFan::
-	@special RotomElectricFan
-	@end
-
-@EventScript_Lawnmower::
-	@special RotomLawnmower
-	@end
-
-@EventScript_LightBulb::
-	@special RotomLightbulb
-	@end
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-EventScript_SecretMenu::
-	dynmultipush EventScript_Secret_AutoRun_Text_0, 0
-	dynmultipush EventScript_Secret_Options_Text_5, 5
-	call_if_set FLAG_RECEIVED_POKE_VIAL, EventScript_Secret_PokeVial_1
-	call_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, EventScript_Secret_Repel_2
-	call_if_set FLAG_RIVAL_ROUTE_110, EventScript_Secret_Fly_3
-	call_if_set FLAG_SYS_PC_LANETTE, EventScript_Secret_PC_4
-@EventScript_MultichoiceTests:
-	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-	switch VAR_RESULT
-	case 0, EventScript_AutoRun
-	case 1, EventScript_PokeVial
-	case 2, EventScript_InfiniteRepel
-	case 3, EventScript_Fly
-	case 4, EventScript_PC2
-	case 5, EventScript_SecretOptions
-	end
-	return
-
-EventScript_Secret_PokeVial_1:
-	dynmultipush EventScript_Secret_PokeVial_Text_1, 1
-	return
-
-EventScript_Secret_Repel_2:
-	dynmultipush EventScript_Secret_Repel_Text_2, 2
-	return
-
-EventScript_Secret_Fly_3:
-	dynmultipush EventScript_Secret_Fly_Text_3, 3
-	return
-
-EventScript_Secret_PC_4:
-	dynmultipush EventScript_Secret_PC_Text_4, 4
-	return
-
-EventScript_Secret_AutoRun_Text_0:
-	.string "Auto Run$"
-
-EventScript_Secret_PokeVial_Text_1:
-	.string "Poké Vial$"
-
-EventScript_Secret_Repel_Text_2:
-	.string "Infinite Repel$"
-
-EventScript_Secret_Fly_Text_3:
-	.string "Fly$"
-
-EventScript_Secret_PC_Text_4:
-	.string "PC$"
-
-EventScript_Secret_Options_Text_5:
-	.string "Options 2$"
-
-EventScript_AutoRun::
-	special AutoRun
-	end
-
-EventScript_PokeVial::
-	special SecretMenu_PokeVial
-	end
-
-EventScript_InfiniteRepel::
-	special DebugAction_Flags_EncounterOnOff
-	end
-
-EventScript_Fly::
-	special SecretMenu_Fly
-	end
-
-EventScript_PC2::
-	special SecretMenu_PC
-	end
-
-EventScript_SecretOptions::
-	dynmultipush EventScript_MultichoiceDifficulty_Text_0, 0
-	dynmultipush EventScript_MultichoiceDifficulty_Text_1, 1
-	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
-	switch VAR_RESULT
-	case 0, EventScript_DifficultyChange
-	case 1, EventScript_GrindingModeChange
-	end
-	return
-
-EventScript_MultichoiceDifficulty_Text_0:
-	.string "Difficulty$"
-
-EventScript_MultichoiceDifficulty_Text_1:
-	.string "Min. Grinding$"
-
-EventScript_DifficultyChange::
-	dynmultipush EventScript_Normal_Text_0, 0
-	dynmultipush EventScript_Hard_Text_1, 1
-	dynmultipush EventScript_Impossible_Text_1, 2
-	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
-	switch VAR_RESULT
-	case 0, EventScript_DifficultyChangeNormal
-	case 1, EventScript_DifficultyChangeHard
-	case 2, EventScript_DifficultyChangeImpossible
-	end
-
-EventScript_Normal_Text_0:
-	.string "Normal$"
-
-EventScript_Hard_Text_1:
-	.string "Hard$"
-
-EventScript_Impossible_Text_1:
-	.string "Impossible$"
-
-EventScript_DifficultyChangeNormal::
-	setvar VAR_0x8006, 0
-	goto EventScript_DifficultyChangeFinal
-
-EventScript_DifficultyChangeHard::
-	setvar VAR_0x8006, 1
-	goto EventScript_DifficultyChangeFinal
-
-EventScript_DifficultyChangeImpossible::
-	setvar VAR_0x8006, 2
-	goto EventScript_DifficultyChangeFinal
-	
-EventScript_DifficultyChangeFinal::
-	special SecretMenu_Difficulty
-	end
-
-EventScript_GrindingModeChange::
-	special SecretMenu_Grinding
-	end
-
-EventScript_Rotom::	
-	dynmultipush EventScript_Multichoice_Rotom_0, 0
-	dynmultipush EventScript_Multichoice_Rotom_1, 1
-	dynmultipush EventScript_Multichoice_Rotom_2, 2
-	dynmultipush EventScript_Multichoice_Rotom_3, 3
-	dynmultipush EventScript_Multichoice_Rotom_4, 4
-	dynmultipush EventScript_Multichoice_Rotom_5, 5
-	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
-	@switch VAR_RESULT
-	@case 0, EventScript_MicrowaveOven
-	@case 1, EventScript_WashingMachine
-	@case 2, EventScript_Refrigerator
-	@case 3, EventScript_ElectricFan
-	@case 4, EventScript_Lawnmower
-	@case 5, EventScript_LightBulb
-	end
-	return
-
-EventScript_Multichoice_Rotom_0:
-	.string "Microwave Oven$"
-
-EventScript_Multichoice_Rotom_1:
-	.string "Washing Machine$"
-
-EventScript_Multichoice_Rotom_2:
-	.string "Refrigerator$"
-
-EventScript_Multichoice_Rotom_3:
-	.string "Electric Fan$"
-
-EventScript_Multichoice_Rotom_4:
-	.string "Lawnmower$"
-
-EventScript_Multichoice_Rotom_5:
-	.string "Light bulb$"
-
-@EventScript_MicrowaveOven::
-	@special RotomMicrowaveOven
-	@end
-
-@EventScript_WashingMachine::
-	@special RotomWashingMachine
-	@end
-
-@EventScript_Refrigerator::
-	@special RotomRefrigerator
-	@end
-
-@EventScript_ElectricFan::
-	@special RotomElectricFan
-	@end
-
-@EventScript_Lawnmower::
-	@special RotomLawnmower
-	@end
-
-@EventScript_LightBulb::
-	@special RotomLightbulb
-	@end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -1462,6 +1208,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
-	.include "data/scripts/rotom.inc"
-
+	@.include "data/scripts/rotom.inc"
 	.include "data/maps/DewfordGardens/scripts.inc"

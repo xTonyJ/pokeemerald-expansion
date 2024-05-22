@@ -53,6 +53,7 @@ Route115_EventScript_RematchTimothy::
 	end
 
 Route115_EventScript_Koichi::
+	special HealPlayerParty
 	trainerbattle_single TRAINER_KOICHI, Route115_Text_KoichiIntro, Route115_Text_KoichiDefeat
 	msgbox Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE
 	end

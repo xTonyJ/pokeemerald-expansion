@@ -963,6 +963,7 @@ static bool8 BuyMenuCheckForOverlapWithMenuBg(int x, int y)
     return FALSE;
 }
 
+
 static void Task_BuyMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;

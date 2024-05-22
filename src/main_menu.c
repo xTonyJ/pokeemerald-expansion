@@ -503,14 +503,14 @@ static const struct MenuAction sMenuActions_Gender[] = {
 };
 
 static const struct MenuAction sMenuActions_Difficulty[] = {
-    {gText_BirchNormalMode, NULL},
-    {gText_BirchHardMode, NULL},
-    {gText_BirchImpossibleMode, NULL},
+    {gText_BirchNormalMode, {NULL}},
+    {gText_BirchHardMode, {NULL}},
+    {gText_BirchImpossibleMode, {NULL}},
 };
 
 static const struct MenuAction sMenuActions_GrindingMode[] = {
-    {gText_BirchMinGrinding, NULL},
-    {gText_BirchDefault, NULL},
+    {gText_BirchMinGrinding, {NULL}},
+    {gText_BirchDefault, {NULL}},
 };
 
 static const u8 *const sMalePresetNames[] = {
